@@ -1,0 +1,8 @@
+
+
+SIGNALS
+#SIGNALNAME #ARGS #DESCRIPTION
+
+CTS1 = CommandTriggerSignal1 || "CommandID", "Target", "Actor" ||  Is triggered at the beggining of a command, before any of the data is being set up.
+CTS2 = CommandTriggerSignal2 || "CommandID", "Modification", "Implementation", "Target", "Actor", {TargetDict}, {ActorDict} ||  Is triggered once the data of the command has been set up, but before processing.
+CTS3 = CommandTriggerSignal3 || "Modification", "Implementation", {OriginalData}, {FinalData} ||  Is triggered at the end of a command, post processing, and before returning FinalData

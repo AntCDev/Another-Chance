@@ -1,0 +1,4 @@
+Please make sure you have Python 3, and you have correctly set the PATH.
+Run:
+
+pIp3 install PyQt5

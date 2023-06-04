@@ -1,0 +1,3 @@
+Removing a character pops their data from any other character.
+Idle action when the PC moves
+Random NPC created when moving, deleted when not interacted after moving
