@@ -37,7 +37,7 @@ class MainWindow(QMainWindow):
         DisclaimerAgreed = 0
 
         Globals.Layouts["MainF"] = self
-        self.setWindowTitle('A Unnamed Project')
+        self.setWindowTitle('Another Chance')
         self.setWindowIcon(QtGui.QIcon('logo.jpg'))
         self.setFixedSize(1600, 1024)
         self.LayoutsBox = QHBoxLayout()
