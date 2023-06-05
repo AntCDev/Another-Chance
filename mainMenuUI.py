@@ -62,7 +62,7 @@ class UiLayoutMainMenu(QWidget):
         self.labelDiscord.setGeometry(529,522,30,26)
         self.labelDiscord.setScaledContents(True)
 
-        self.buttonPatreon = QPushButton('Patreon', self.GUI)
+        self.buttonPatreon = QPushButton('Patreon', self.GUI, clicked = lambda: webbrowser.open("https://patreon.com/AntCDev"))
         self.buttonPatreon.setGeometry(715, 520, 180, 30)
         self.buttonPatreon.setStyleSheet('''color:rgb(249, 104, 84);''')
         self.labelPatreon = QLabel(self.GUI)
