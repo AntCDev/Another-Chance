@@ -749,7 +749,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while {AName} caersses {TPPos} belly.''', "LongFluff": f'''{TName} is trying to focus while {AName} caresses {TPPos} belly.'''}],
+                    "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while {AName} caresses {TPPos} belly.''', "LongFluff": f'''{TName} is trying to focus while {AName} caresses {TPPos} belly.'''}],
                     "InterruptionPenalty": -20,
                     "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
                     },
@@ -944,7 +944,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Trying to caerss {TName}'s {Desc("AssSize", TargetData, "P")}.''', "LongFluff": f'''{AName} is trying to focus on caressing {TName}'s {Desc("AssSize", TargetData, "P")}.'''}],
+                    "Task": ["Skinship", {"BriefFluff": f'''Trying to caress {TName}'s {Desc("AssSize", TargetData, "P")}.''', "LongFluff": f'''{AName} is trying to focus on caressing {TName}'s {Desc("AssSize", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
                     "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
                     },
@@ -1187,7 +1187,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Failing to caerss {TName}'s {Desc("ChestSize", TargetData, "P")}. ''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("ChestSize", TargetData, "P")}, but fails to do so.'''}],
+                    "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("ChestSize", TargetData, "P")}. ''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("ChestSize", TargetData, "P")}, but fails to do so.'''}],
                     "InterruptionPenalty": -20,
                     "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
                     },
@@ -1267,7 +1267,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Failing to caerss {TName}'s {Desc("ATightness", TargetData, "P")}. ''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("ATightness", TargetData, "P")}, but fails to do so.'''}],
+                    "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("ATightness", TargetData, "P")}. ''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("ATightness", TargetData, "P")}, but fails to do so.'''}],
                     "InterruptionPenalty": -20,
                     "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
                     },
@@ -1349,7 +1349,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Failing to caerss {TName}'s {Desc("VTightness", TargetData, "P")}. ''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("VTightness", TargetData, "P")}, but fails to do so.'''}],
+                    "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("VTightness", TargetData, "P")}. ''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("VTightness", TargetData, "P")}, but fails to do so.'''}],
                     "InterruptionPenalty": -20,
                     "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
                     },
@@ -1431,7 +1431,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Failing to caerss {TName}'s {Desc("PenisSize", TargetData, "P")}. ''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("PenisSize", TargetData, "P")}, but fails to do so.'''}],
+                    "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("PenisSize", TargetData, "P")}. ''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("PenisSize", TargetData, "P")}, but fails to do so.'''}],
                     "InterruptionPenalty": -20,
                     "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
                     },
@@ -1847,7 +1847,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Failing to caerss {TName}'s {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("VTightness", TargetData, "P")}, but fails to do so.'''}],
+                    "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("VTightness", TargetData, "P")}, but fails to do so.'''}],
                     "InterruptionPenalty": -20,
                     "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
                     },
@@ -2436,7 +2436,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Trying to focus as {TName} caresses {APPos} {Desc("PenisSize", ActorData, "P")}''', "LongFluff": f'''{AName} is trying to focus as {TName} caersses {APPos} {Desc("PenisSize", ActorData, "DSP")}.'''}],
+                    "Task": ["Skinship", {"BriefFluff": f'''Trying to focus as {TName} caresses {APPos} {Desc("PenisSize", ActorData, "P")}''', "LongFluff": f'''{AName} is trying to focus as {TName} caresses {APPos} {Desc("PenisSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
                     "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
                     },
@@ -3330,7 +3330,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Failing to caerss {TName}'s {Desc("ATightness", TargetData, "P")}''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("ATightness", TargetData, "P")}, but fails to do so. '''}],
+                    "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("ATightness", TargetData, "P")}''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("ATightness", TargetData, "P")}, but fails to do so. '''}],
                     "InterruptionPenalty": -20,
                     "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
                     },

@@ -1181,172 +1181,17 @@ class UiLayoutImportMenu(object):
         MainWindow = Globals.Layouts["MainF"]
 
         self.GUI = QWidget(MainWindow)
-        # mainwindow.setWindowIcon(QtGui.QIcon('PhotoIcon.png'))
-        # self.GUI.setStyleSheet('''
-        # QWidget{
-    	# background-color:rgb(35, 35, 35);
-        # }
-        # QPushButton{
-        # 	color:rgb(255, 255, 255)
-        # }
-        # QPushButton:hover{
-        # 	color:rgb(255, 255, 0)
-        # }
-        # QLabel{
-        #  border: 1px solid black;
-        #  background : rgb(23, 23, 23);
-        #  color:rgb(255, 255, 255)
-        # }
-        # QLineEdit{
-        # color:rgb(255, 255, 255)
-        # }
-		# QWidget{
-    	# background-color:rgb(35, 35, 35);
-        # }
-        # QPushButton{
-        # 	color:rgb(255, 255, 255)
-        # }
-        # QPushButton:hover{
-        # 	color:rgb(255, 255, 0)
-        # }
-        # QLabel{
-        #  border: 1px solid black;
-        #  background : rgb(35, 35, 35);
-        #  color:rgb(255, 255, 255)
-        # }
-        # QLineEdit{
-		# border: 1px solid black;
-        # color:rgb(255, 255, 255)
-        # }
-
-        #  ''')
-        self.GUI.setStyleSheet('''
-        QWidget{
-        background-color:rgb(35,35,35);
-        }
-        .QGroupBox{
-        border:none;
-        background:none;
-        }
-
-        .QScrollArea{
-        border:none;
-        background-color:rgba(23,23,23,0)
-        }
-
-        QPushButton{
-        color:rgb(255, 255, 255);
-        font-size: 14pt;
-        font-family: Segoe UI;
-        }
-        QPushButton:hover{
-        color:rgb(255, 255, 0);
-        }
-
-        QLabel{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        font-size: 16pt;
-        font-family: Segoe UI;
-        }
-        QLabel:hover{
-        color:rgb(255, 255, 0);
-        }
-
-        QLabel#MainTitle{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        font-size: 20pt;
-        font-family: Segoe UI;
-        }
-
-        QLabel#SubTitle{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        font-size: 18pt;
-        font-family: Segoe UI;
-        }
-        QLabel#SubTitle:hover{
-        color:rgb(255, 255, 0);
-        }
-
-        QLineEdit{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        background-color:rgb(35,35,35);
-        font-size: 14pt;
-        font-family: Segoe UI;
-        }
-
-        QTextEdit{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        background-color:rgb(35,35,35);
-        font-size: 14pt;
-        font-family: Segoe UI;
-        }
-
-        QComboBox{
-        background-color:rgb(23,23,23);
-        color:rgb(255, 255, 255);
-        font-size: 14pt;
-        font-family: Segoe UI;
-        }
-        QComboBox:hover{
-        color:rgb(255, 255, 0);
-        }
-		QComboBox QAbstractItemView {
-        border: 1px solid grey;
-        color: white;
-        selection-color: yellow;
-		}
-
-        QRadioButton{
-        color:rgb(255, 255, 255);
-        font-size: 14pt;
-        font-family: Segoe UI;
-        }
-        QRadioButton:hover{
-        color:rgb(255, 255, 0);
-        }
-
-        QToolTip{
-        background-color: rgb(23,23,23);
-        color: white;
-        border: 1px solid black;
-        font-size: 14pt;
-        font-family: Segoe UI;
 
 
-        }
-
-        ''')
-
-
-        # self.labelBack = QLabel(self.GUI)
-        # self.labelBack.setGeometry(230,10,820,780)
-        # self.labelBack.setStyleSheet('''
-        #         QLabel{
-        #  border: 1px solid black;
-        #  background : rgb(23, 23, 23);
-        #  color:rgb(255, 255, 255);
-        # }
-        # ''')
+        self.labelBack = QLabel(self.GUI)
+        self.labelBack.setGeometry(237,5,1125,950)
+        self.labelBack.setProperty("Color","Dark")
 
         self.scrollNPC = QScrollArea(self.GUI)
         self.scrollNPC.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scrollNPC.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.scrollNPC.setGeometry(237,5,355,1015)
-        self.scrollNPC.setStyleSheet('''
-        .QScrollArea{
-        border: none;
-        background-color:rgba(23, 23, 23);
-        }
-        QGroupBox{
-        border: none;
-        background-color:rgba(23,23,23,0);
-        }
-        ''')
+        self.scrollNPC.setGeometry(237,5,1125,950)
+
 
         self.LabelControl = QLabel(self.GUI)
         self.LabelControl.setGeometry(5,964,1592,55)
@@ -1371,9 +1216,16 @@ class UiLayoutImportMenu(object):
         }
         ''')
 
+        self.myformNPC = QGridLayout()
+        self.myformNPC.WidgetsList = []
+        self.mygroupboxNPC = QGroupBox()
+
         self.Refresh()
 
     def Refresh(self):
+        for Widget in self.myformNPC.WidgetsList:
+            self.myformNPC.removeWidget(Widget)
+
         NPCFiles = {}
         NPCCurrent = {}
         NPCStatus = {}
@@ -1404,8 +1256,7 @@ class UiLayoutImportMenu(object):
 
 
 
-        self.myformNPC = QGridLayout()
-        self.mygroupboxNPC = QGroupBox()
+
 
         Layer, Row = 0,0
 
@@ -1420,6 +1271,7 @@ class UiLayoutImportMenu(object):
             Object = GenericNPCObject(NPCID, Name, NPCStatus[NPCID])
             Widget = Object.GetWidget()
             self.myformNPC.addWidget(Widget, Layer, Row)
+            self.myformNPC.WidgetsList.append(Widget)
             Row += 1
             if Row >= 3:
                 Layer += 1
@@ -1427,11 +1279,11 @@ class UiLayoutImportMenu(object):
 
         self.mygroupboxNPC.setLayout(self.myformNPC)
         self.scrollNPC.setWidget(self.mygroupboxNPC)
-        self.scrollNPC.setMinimumWidth(1125)
-        self.scrollNPC.setMaximumWidth(1125)
-        self.scrollNPC.setMinimumHeight(950)
-        self.scrollNPC.setMaximumHeight(950)
-        self.myformNPC.setContentsMargins(10, 0, 5, 5)
+        # self.scrollNPC.setMinimumWidth(1125)
+        # self.scrollNPC.setMaximumWidth(1125)
+        # self.scrollNPC.setMinimumHeight(950)
+        # self.scrollNPC.setMaximumHeight(950)
+        # self.myformNPC.setContentsMargins(10, 0, 5, 5)
 
 class UiLayoutExportMenu(object):
     def __init__(self):

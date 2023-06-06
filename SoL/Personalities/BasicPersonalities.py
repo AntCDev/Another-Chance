@@ -92,8 +92,18 @@ def CheckAction(self, ID, NPCID):
         for CommandID in Globals.Commands:
             Available = Globals.Commands[CommandID]["Reference"].CheckCommandAvailable(self, CommandID, ID, NPCID)
             if Available == 1:
+
                 TargetConnotations, ActorConnotations = Globals.Commands[CommandID]["Reference"].GetConnotations(self, CommandID, ID, NPCID, {"Succes":0})
+
+                Globals.SignalData["CAS1"] = {"CommandID":CommandID, "ID":ID, "NPCID":NPCID, "Flags":{"Succes":0}, "TargetConnotations":TargetConnotations, "ActorConnotations":ActorConnotations}
+                Globals.References["SoLFunctions"].Emit("CAS1")
+                TargetConnotations, ActorConnotations = Globals.SignalData["CAS1"]["TargetConnotations"], Globals.SignalData["CAS1"]["ActorConnotations"]
+
                 TargetConnotations, ActorConnotations = ProcessConnotations(self, ID, NPCID, "Actor", TargetConnotations, ActorConnotations)
+
+                Globals.SignalData["CAS2"] = {"CommandID":CommandID, "ID":ID, "NPCID":NPCID, "Flags":{"Succes":0}, "TargetConnotations":TargetConnotations, "ActorConnotations":ActorConnotations}
+                Globals.References["SoLFunctions"].Emit("CAS2")
+                TargetConnotations, ActorConnotations = Globals.SignalData["CAS2"]["TargetConnotations"], Globals.SignalData["CAS2"]["ActorConnotations"]
 
                 Weight = 0
                 for Connotation in ActorConnotations:
@@ -134,6 +144,12 @@ def ProcessConnotations(self, ID, NPCID, Who, TargetConnotations, ActorConnotati
             if "Sexual" in ActorConnotations:
                 if ActorConnotations["Sexual"][0] > Relation:
                     ActorConnotations["Sexual"][1] = ActorConnotations["Sexual"][1] * (ActorConnotations["Sexual"][0] + 1 - Relation) * -1
+                if True: # TOOD MAKE CHECK FOR SEXUALITY
+                    if Globals.SoLNPCData[NPCID]["BodyData"]["Sex"] == Globals.SoLNPCData[NPCID]["BodyData"]["Sex"]:
+                        if ActorConnotations["Sexual"][1] < 0:
+                            ActorConnotations["Sexual"][1] = ActorConnotations["Sexual"][1] * 2
+                        elif ActorConnotations["Sexual"][1] > 0:
+                            ActorConnotations["Sexual"][1] = int(ActorConnotations["Sexual"][1] / 2)
             if "StartIntimacy" in ActorConnotations:
                 if Relation < 2:
                     ActorConnotations["StartIntimacy"][1] = -50
@@ -144,7 +160,6 @@ def ProcessConnotations(self, ID, NPCID, Who, TargetConnotations, ActorConnotati
         Log(2, "ERROR ProcessConnotations", e, ID, NPCID, Who, TargetConnotations, ActorConnotations)
 
     return TargetConnotations, ActorConnotations
-    ""
 
 def GetName(self, PersonalityID):
     if PersonalityID == "Standard0":

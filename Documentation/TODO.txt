@@ -1,3 +1,4 @@
-Removing a character pops their data from any other character.
 Idle action when the PC moves
-Random NPC created when moving, deleted when not interacted after moving
+Add sexuality selector
+Upon a character that isn't the PC sleeping, call for ProcessGems to modify existing abilities, traits, and fallenstates of every relationship they have.
+Add processing of negative gems

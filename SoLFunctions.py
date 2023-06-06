@@ -120,6 +120,7 @@ class GenericNPCObject:
         self.LabelAction.setText(f'''{self.Data["Name"]} angrily scolds Player''')
         self.LabelAction.setFont(QFont('Segoe UI', 12))
         self.LabelAction.setAlignment(Qt.AlignTop | Qt.AlignLeft)
+        self.LabelAction.setWordWrap(True)
 
         Fluff = Globals.SoLNPCData[self.ID]["Actions"]["CurrentTask"]["Task"][1]["BriefFluff"]
         self.LabelAction.setText(Fluff)
@@ -299,27 +300,27 @@ class GenericNPCObject:
             else:
                 self.LabelMood5.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
         elif self.Data["State"]["Mood"] <= 0:
-            if self.Data["State"]["Mood"] <= 20:
+            if self.Data["State"]["Mood"] <= -20:
                 self.LabelMood1.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
             else:
                 self.LabelMood1.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
 
-            if self.Data["State"]["Mood"] <= 40:
+            if self.Data["State"]["Mood"] <= -40:
                 self.LabelMood2.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
             else:
                 self.LabelMood2.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
 
-            if self.Data["State"]["Mood"] <= 60:
+            if self.Data["State"]["Mood"] <= -60:
                 self.LabelMood3.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
             else:
                 self.LabelMood3.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
 
-            if self.Data["State"]["Mood"] <= 80:
+            if self.Data["State"]["Mood"] <= -80:
                 self.LabelMood4.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
             else:
                 self.LabelMood4.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
 
-            if self.Data["State"]["Mood"] <= 100:
+            if self.Data["State"]["Mood"] <= -100:
                 self.LabelMood5.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
             else:
                 self.LabelMood5.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
@@ -585,9 +586,9 @@ def GetFlavorText(self):
                 elif TMood > -20:
                     FlavorText += TPSub + " has a somewhat neutral expression on " + TPPos.lower() + " face."
                 elif TMood > -40:
-                    FlavorText += TPSub + "  is a bit uncomfortable around you, still not being overly hostile but not being too friendly eiTPPos"
+                    FlavorText += TPSub + "  is a bit uncomfortable around you, still not being overly hostile but not being too friendly either."
                 elif TMood > -60:
-                    FlavorText += TPSub + "  is looking boTPPosed and just looking at how he behaves " + TPSub.lower() + " is obviously getting upset."
+                    FlavorText += TPSub + "  is looking bothered and just looking at how " + TPSub.lower() + " behaves " + TPSub.lower() + " is obviously getting upset."
                 elif TMood > -80:
                     FlavorText += TPSub + " is openly angry with an overly agressive way of behaving comapred to " + TPPos.lower() + " usual self."
                 elif TMood > -100:
@@ -597,7 +598,7 @@ def GetFlavorText(self):
                 if TArousal > 80:
                     FlavorText += TPSub + "  has an expression of pure desire on it's eyes, with obvious signs of aroussal all over " + TPPos.lower() + " body."
                 elif TArousal > 60:
-                    FlavorText += TPSub + "  gets a heavy blush all over " + TPPos.lower() + " face, rubbing " + TPPos.lower() + " thighs togeTPPos as if to hide something."
+                    FlavorText += TPSub + "  gets a heavy blush all over " + TPPos.lower() + " face, rubbing " + TPPos.lower() + " thighs together as if to hide something."
                 elif TArousal > 40:
                     FlavorText += TPSub + "  fidgets with " + TPPos.lower() + " fingers a bit too much moving as if something was bothering " + TPPos.lower() + "."
                 elif TArousal > 20:
@@ -860,9 +861,6 @@ def Refresh(self):
 
 def CommandsProcessing(self, TargetDict, ActorDict, CommandID, Target, Actor, Modification, Implementation):
     try:
-        if Actor == "03" or Target == "03":
-            print(Actor, CommandID, Target)
-
         ActorName = Globals.SoLNPCData[Actor]["Name"]
         TargetName = Globals.SoLNPCData[Target]["Name"]
         # PACKS UP ORIGINAL DATA
@@ -939,22 +937,21 @@ def CommandsProcessing(self, TargetDict, ActorDict, CommandID, Target, Actor, Mo
             ResistancePass = 1
         if (TargetDict["State"]["Energy"]*-1) <= Globals.SoLNPCData[Target]["State"]["Energy"]:
             EnergyPass = 1
-        ResistancePass, EnergyPass = 1, 1
+        # ResistancePass, EnergyPass = 1, 1
 
         CommandStatus = ""
         if ResistancePass == 1 and EnergyPass == 1:
             CommandStatus = "Success"
             TargetTask = TargetDict["Task"]
             ActorTask = ActorDict["Task"]
-        elif ResistancePass == 0:
-            CommandStatus = "ResistanceFailed"
-            TargetTask = TargetDict["ResistanceTask"]
-            ActorTask = ActorDict["ResistanceTask"]
         elif EnergyPass == 0:
             CommandStatus = "EnergyFailed"
             TargetTask = TargetDict["EnergyTask"]
             ActorTask = ActorDict["EnergyTask"]
-
+        elif ResistancePass == 0:
+            CommandStatus = "ResistanceFailed"
+            TargetTask = TargetDict["ResistanceTask"]
+            ActorTask = ActorDict["ResistanceTask"]
         FinalData["CommandStatus"] = CommandStatus
         FinalData["TargetTask"] = TargetTask
         FinalData["ActorTask"] = ActorTask
@@ -964,65 +961,138 @@ def CommandsProcessing(self, TargetDict, ActorDict, CommandID, Target, Actor, Mo
 
 
         # WRITES THE VALUES
-        for ValueID in FinalData["TargetDict"]["State"]:
-            if ValueID in Globals.SoLNPCData[Target]["State"]:
-                Globals.SoLNPCData[Target]["State"][ValueID] += FinalData["TargetDict"]["State"][ValueID]
-            else:
-                Globals.SoLNPCData[Target]["State"][ValueID] = FinalData["TargetDict"]["State"][ValueID]
 
-        for ValueID in FinalData["TargetDict"]["Temporal"]:
+        if ResistancePass == 1 and EnergyPass == 1:
+            # TARGET
+            for ValueID in FinalData["TargetDict"]["State"]:
+                if ValueID in Globals.SoLNPCData[Target]["State"]:
+                    Globals.SoLNPCData[Target]["State"][ValueID] += FinalData["TargetDict"]["State"][ValueID]
+                else:
+                    Globals.SoLNPCData[Target]["State"][ValueID] = FinalData["TargetDict"]["State"][ValueID]
+
+            for ValueID in FinalData["TargetDict"]["Temporal"]:
+                try:
+                    if ValueID not in Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"] or type(Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"][ValueID]) == int:
+                        Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"][ValueID] = Globals.SoLTValues[ValueID]["BaseData"].copy()
+
+                    Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"][ValueID]["Amount"] += FinalData["TargetDict"]["Temporal"][ValueID]
+                except Exception as e:
+                    Log(3, "ERROR WRITTING TVALUE", e, ValueID)
+
+            for ValueID in FinalData["TargetDict"]["Permanent"]:
+                if ValueID in Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]:
+                    Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"][ValueID] += FinalData["TargetDict"]["Permanent"][ValueID]
+                else:
+                    Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"][ValueID] = FinalData["TargetDict"]["Permanent"][ValueID]
+
+            # ACTOR
+            for ValueID in FinalData["ActorDict"]["State"]:
+                if ValueID in Globals.SoLNPCData[Actor]["State"]:
+                    Globals.SoLNPCData[Actor]["State"][ValueID] += FinalData["ActorDict"]["State"][ValueID]
+                else:
+                    Globals.SoLNPCData[Actor]["State"][ValueID] = FinalData["ActorDict"]["State"][ValueID]
+
+            for ValueID in FinalData["ActorDict"]["Temporal"]:
+                try:
+                    if ValueID not in Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"] or type(Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"][ValueID]) == int:
+                        Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"][ValueID] = Globals.SoLTValues[ValueID]["BaseData"].copy()
+
+                    Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"][ValueID]["Amount"] += FinalData["ActorDict"]["Temporal"][ValueID]
+                except Exception as e:
+                    Log(3, "ERROR WRITTING TVALUE", e, ValueID)
+
+            for ValueID in FinalData["ActorDict"]["Permanent"]:
+                if ValueID in Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"]:
+                    Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"][ValueID] += FinalData["ActorDict"]["Permanent"][ValueID]
+                else:
+                    Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"][ValueID] = FinalData["ActorDict"]["Permanent"][ValueID]
+
             try:
-                if ValueID not in Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"] or type(Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"][ValueID]) == int:
-                    Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"][ValueID] = Globals.SoLTValues[ValueID]["BaseData"].copy()
+                Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"]["InteractionExp"] += 1
+            except:
+                Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"]["InteractionExp"] = 1
 
-                Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"][ValueID]["Amount"] += FinalData["TargetDict"]["Temporal"][ValueID]
-            except Exception as e:
-                Log(3, "ERROR WRITTING TVALUE", e, ValueID)
+            try:
+                Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]["InteractionExp"] += 1
+            except:
+                Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]["InteractionExp"] = 1
+        elif EnergyPass == 0:
+            # TARGET
+            for ValueID in FinalData["TargetDict"]["State"]:
+                if ValueID in Globals.SoLNPCData[Target]["State"]:
+                    Globals.SoLNPCData[Target]["State"][ValueID] += FinalData["TargetDict"]["State"][ValueID]
+                else:
+                    Globals.SoLNPCData[Target]["State"][ValueID] = FinalData["TargetDict"]["State"][ValueID]
 
-        for ValueID in FinalData["TargetDict"]["Permanent"]:
-            if ValueID in Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]:
-                Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"][ValueID] += FinalData["TargetDict"]["Permanent"][ValueID]
-            else:
-                Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"][ValueID] = FinalData["TargetDict"]["Permanent"][ValueID]
+            for ValueID in FinalData["TargetDict"]["Temporal"]:
+                try:
+                    if ValueID not in Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"] or type(Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"][ValueID]) == int:
+                        Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"][ValueID] = Globals.SoLTValues[ValueID]["BaseData"].copy()
 
+                    Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"][ValueID]["Amount"] += int(FinalData["TargetDict"]["Temporal"][ValueID] / 2)
+                except Exception as e:
+                    Log(3, "ERROR WRITTING TVALUE", e, ValueID)
+
+            # ACTOR
+            for ValueID in FinalData["ActorDict"]["State"]:
+                if ValueID in Globals.SoLNPCData[Actor]["State"]:
+                    Globals.SoLNPCData[Actor]["State"][ValueID] += FinalData["ActorDict"]["State"][ValueID]
+                else:
+                    Globals.SoLNPCData[Actor]["State"][ValueID] = FinalData["ActorDict"]["State"][ValueID]
+
+            for ValueID in FinalData["ActorDict"]["Temporal"]:
+                try:
+                    if ValueID not in Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"] or type(Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"][ValueID]) == int:
+                        Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"][ValueID] = Globals.SoLTValues[ValueID]["BaseData"].copy()
+
+                    Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"][ValueID]["Amount"] += int(FinalData["ActorDict"]["Temporal"][ValueID] / 2)
+                except Exception as e:
+                    Log(3, "ERROR WRITTING TVALUE", e, ValueID)
+
+            try:
+                Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"]["InteractionExp"] += 1
+            except:
+                Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"]["InteractionExp"] = 1
+
+            try:
+                Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]["InteractionExp"] += 1
+            except:
+                Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]["InteractionExp"] = 1
+        else:
+            # TARGET
+            try:
+                Globals.SoLNPCData[Target]["State"]["Mood"] -= 5
+                if Globals.SoLNPCData[Target]["State"]["Mood"] < -100:
+                    Globals.SoLNPCData[Target]["State"]["Mood"] = -100
+            except:
+                ""
+            for ValueID in FinalData["TargetDict"]["Temporal"]:
+                if ValueID in ["Discomfort","Hate"]:
+                    try:
+                        if ValueID not in Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"] or type(Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"][ValueID]) == int:
+                            Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"][ValueID] = Globals.SoLTValues[ValueID]["BaseData"].copy()
+
+                        Globals.SoLNPCData[Target]["Relations"][Actor]["Temporal"][ValueID]["Amount"] += FinalData["TargetDict"]["Temporal"][ValueID]
+                    except Exception as e:
+                        Log(3, "ERROR WRITTING TVALUE", e, ValueID)
+
+            # ACTOR
+            for ValueID in FinalData["ActorDict"]["Temporal"]:
+                if ValueID in ["Discomfort","Hate"]:
+                    try:
+                        if ValueID not in Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"] or type(Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"][ValueID]) == int:
+                            Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"][ValueID] = Globals.SoLTValues[ValueID]["BaseData"].copy()
+
+                        Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"][ValueID]["Amount"] += FinalData["ActorDict"]["Temporal"][ValueID]
+                    except Exception as e:
+                        Log(3, "ERROR WRITTING TVALUE", e, ValueID)
 
         Globals.SoLNPCData[Target]["Actions"]["PreviousTask"] = Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]
         Globals.SoLNPCData[Target]["Actions"]["CurrentTask"] = FinalData["TargetTask"]
 
-
-        for ValueID in FinalData["ActorDict"]["State"]:
-            if ValueID in Globals.SoLNPCData[Actor]["State"]:
-                Globals.SoLNPCData[Actor]["State"][ValueID] += FinalData["ActorDict"]["State"][ValueID]
-            else:
-                Globals.SoLNPCData[Actor]["State"][ValueID] = FinalData["ActorDict"]["State"][ValueID]
-
-        for ValueID in FinalData["ActorDict"]["Temporal"]:
-            try:
-                if ValueID not in Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"] or type(Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"][ValueID]) == int:
-                    Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"][ValueID] = Globals.SoLTValues[ValueID]["BaseData"].copy()
-
-                Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"][ValueID]["Amount"] += FinalData["ActorDict"]["Temporal"][ValueID]
-            except Exception as e:
-                Log(3, "ERROR WRITTING TVALUE", e, ValueID)
-
-        for ValueID in FinalData["ActorDict"]["Permanent"]:
-            if ValueID in Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"]:
-                Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"][ValueID] += FinalData["ActorDict"]["Permanent"][ValueID]
-            else:
-                Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"][ValueID] = FinalData["ActorDict"]["Permanent"][ValueID]
-
         Globals.SoLNPCData[Actor]["Actions"]["PreviousTask"] = Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]
         Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"] = FinalData["ActorTask"]
 
-        try:
-            Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"]["InteractionExp"] += 1
-        except:
-            Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"]["InteractionExp"] = 1
-
-        try:
-            Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]["InteractionExp"] += 1
-        except:
-            Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]["InteractionExp"] = 1
 
 
         if Actor == Globals.SoLPCData["ID"]:
@@ -1490,6 +1560,9 @@ def Sleep(NPCID):
         if NPCID == Globals.SoLPCData["ID"]:
             PassTime(Globals.Layouts["SoLUI"], 480)
             Globals.Layouts["MainF"].gotoLayout("SleepUI")
+        else:
+            # ProcessGems(NPCID)
+            ""
 
     except Exception as e:
         print(e)
