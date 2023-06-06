@@ -24,6 +24,7 @@ def TPSHandling():
 
 def CheckIdleAction(self, ID):
     try:
+        # print("Triggered", ID)
         Personality = Globals.SoLNPCData[ID]["Personality"]
 
         if Personality == "Standard0":
@@ -37,15 +38,15 @@ def CheckIdleAction(self, ID):
                 Globals.SoLNPCData[ID]["State"]["MConscious"] = 1
 
                 # CHECKS FOR RANDOM MOVEMENT
-                if Globals.SoLNPCData[ID]["Actions"]["InteractionParty"] == [] and Globals.SoLNPCData[ID]["Actions"]["Targeting"] == None:
-                    if random.random() > 0.8:
+                if Globals.SoLNPCData[ID]["Actions"]["InteractionParty"] == {}:
+                    if random.random() > 0.7:
+                        # print("CHECKED", ID)
                         CheckMovement(self, ID)
 
                 # CHECKS FOR POSSIBLE ACTIONS
-                Sociability = 0.6
+                Sociability = 0.7
                 if random.random() > Sociability:
                     NPCData = Globals.SoLNPCData[ID]
-                    NPCData["Actions"]["InteractionParty"] = []
                     NPCLocation = NPCData["Actions"]["CurrentTask"]["Location"]
                     inHere = Globals.SoLEnviorementData["Locations"][NPCLocation]["inHere"]
 
@@ -53,12 +54,6 @@ def CheckIdleAction(self, ID):
                     for OtherID in Globals.SoLEnviorementData["Locations"][NPCLocation]["inHere"]:
                         if OtherID != ID:
                             List.append(OtherID)
-
-                    # if NPCData["Actions"]["InteractionParty"] != []:
-                    #     List = list(set(List + NPCData["Actions"]["InteractionParty"]))
-                    # if NPCData["Actions"]["Targeting"] != None and NPCData["Actions"]["Targeting"] != []:
-                    #     if NPCData["Actions"]["Targeting"] not in List:
-                    #         List.append(NPCData["Actions"]["Targeting"])
 
                     PCID = Globals.SoLPCData["ID"]
                     if PCID in List:
@@ -83,7 +78,25 @@ def CheckIdleAction(self, ID):
 
 
 def CheckMovement(self, ID):
-    Globals.SoLNPCData[ID]
+    try:
+        Location = Globals.SoLNPCData[ID]["Actions"]["CurrentTask"]["Location"]
+        Connected = Globals.SoLEnviorementData["Locations"][Location]["CanAccess"]
+        Possible = []
+        for OtherLocation in Connected:
+            if Globals.SoLEnviorementData["Locations"][OtherLocation]["Flags"]["Open"] == 1:
+                if ID not in Globals.SoLEnviorementData["Locations"][OtherLocation]["Forbidden"]:
+                    Possible.append(OtherLocation)
+            elif Globals.SoLEnviorementData["Locations"][OtherLocation]["Flags"]["Open"] == 0:
+                if ID in Globals.SoLEnviorementData["Locations"][OtherLocation]["Allowed"]:
+                    Possible.append(OtherLocation)
+
+        if Possible != []:
+            NewLocation = random.choice(Possible)
+            Globals.References["SoLFunctions"].Move(Globals.Layouts["SoLUI"], NewLocation, ID)
+    except Exception as e:
+        Log(2, "ERROR CheckMovement", e, ID)
+
+
 
 
 def CheckAction(self, ID, NPCID):

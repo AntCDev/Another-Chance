@@ -13,6 +13,7 @@ import Globals
 Log = Globals.Layouts["MainF"].Log
 import copy
 import time
+import inspect
 
 class GenericNPCObject:
     def __init__(self, ID):
@@ -359,6 +360,8 @@ def CheckNPCActions(self):
         for NPCID in IdleNPCList:
             PersonalityID = Globals.SoLNPCData[NPCID]["Personality"]
             Globals.SoLPersonalities[PersonalityID]["Reference"].CheckIdleAction(self, NPCID)
+
+
 
         if IdleNPCList != []:
             if False:
@@ -883,6 +886,7 @@ def Refresh(self):
                 Globals.SoLFlavorDict["NPCActionsFlavor"] = []
 
             self.labelMain.setText(TotalFlavor)
+
         except Exception as e:
             Log(3, "ERROR SOL REFRESH labelMain", e)
             ""
@@ -1049,6 +1053,12 @@ def CommandsProcessing(self, TargetDict, ActorDict, CommandID, Target, Actor, Mo
                 Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]["InteractionExp"] += 1
             except:
                 Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]["InteractionExp"] = 1
+
+            if Target not in Globals.SoLNPCData[Actor]["Actions"]["InteractionParty"] or Globals.SoLNPCData[Actor]["Actions"]["InteractionParty"][Target] < 3:
+                Globals.SoLNPCData[Actor]["Actions"]["InteractionParty"][Target] = 3
+            if Actor not in Globals.SoLNPCData[Target]["Actions"]["InteractionParty"] or Globals.SoLNPCData[Target]["Actions"]["InteractionParty"][Actor] < 3:
+                Globals.SoLNPCData[Target]["Actions"]["InteractionParty"][Actor] = 3
+
         elif EnergyPass == 0:
             # TARGET
             for ValueID in FinalData["TargetDict"]["State"]:
@@ -1091,6 +1101,11 @@ def CommandsProcessing(self, TargetDict, ActorDict, CommandID, Target, Actor, Mo
                 Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]["InteractionExp"] += 1
             except:
                 Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]["InteractionExp"] = 1
+
+            if Target not in Globals.SoLNPCData[Actor]["Actions"]["InteractionParty"] or Globals.SoLNPCData[Actor]["Actions"]["InteractionParty"][Target] < 3:
+                Globals.SoLNPCData[Actor]["Actions"]["InteractionParty"][Target] = 3
+            if Actor not in Globals.SoLNPCData[Target]["Actions"]["InteractionParty"] or Globals.SoLNPCData[Target]["Actions"]["InteractionParty"][Actor] < 3:
+                Globals.SoLNPCData[Target]["Actions"]["InteractionParty"][Actor] = 3
         else:
             # TARGET
             try:
@@ -1119,6 +1134,19 @@ def CommandsProcessing(self, TargetDict, ActorDict, CommandID, Target, Actor, Mo
                         Globals.SoLNPCData[Actor]["Relations"][Target]["Temporal"][ValueID]["Amount"] += FinalData["ActorDict"]["Temporal"][ValueID]
                     except Exception as e:
                         Log(3, "ERROR WRITTING TVALUE", e, ValueID)
+
+        for OtherID in list(Globals.SoLNPCData[Actor]["Actions"]["InteractionParty"].keys()):
+            if Globals.SoLNPCData[Actor]["Actions"]["InteractionParty"] != Target:
+                Globals.SoLNPCData[Actor]["Actions"]["InteractionParty"][OtherID] -= 1
+                if Globals.SoLNPCData[Actor]["Actions"]["InteractionParty"][OtherID] <= 0:
+                    Globals.SoLNPCData[Actor]["Actions"]["InteractionParty"].pop(OtherID)
+
+        for OtherID in list(Globals.SoLNPCData[Target]["Actions"]["InteractionParty"].keys()):
+            if Globals.SoLNPCData[Target]["Actions"]["InteractionParty"] != Actor:
+                Globals.SoLNPCData[Target]["Actions"]["InteractionParty"][OtherID] -= 1
+                if Globals.SoLNPCData[Target]["Actions"]["InteractionParty"][OtherID] <= 0:
+                    Globals.SoLNPCData[Target]["Actions"]["InteractionParty"].pop(OtherID)
+
 
         Globals.SoLNPCData[Target]["Actions"]["PreviousTask"] = Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]
         Globals.SoLNPCData[Target]["Actions"]["CurrentTask"] = FinalData["TargetTask"]
@@ -1163,16 +1191,32 @@ def CommandsProcessing(self, TargetDict, ActorDict, CommandID, Target, Actor, Mo
     # CPS5.EMIT
 
 def Move(self, Location, NPCID):
-    PreLocation = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
-    try:
-        Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"].remove(NPCID)
-    except:
-        ""
+    # curframe = inspect.currentframe()
+    # calframe = inspect.getouterframes(curframe, 2)
+    # print('caller name:', calframe[1][3])
+
+    # TODO Investigate why this doesn't work
+    # print("MOVED", NPCID, Location)
+    # PreLocation = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
+    # try:
+    #     Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"].remove(NPCID)
+    # except Exception as e:
+    #     # print(1, e, NPCID, PreLocation, Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"])
+    #     ""
+    ### PATCH
+    for OtherLocation in Globals.SoLEnviorementData["Locations"]:
+        if OtherLocation != Location and NPCID in Globals.SoLEnviorementData["Locations"][OtherLocation]["inHere"]:
+            Globals.SoLEnviorementData["Locations"][OtherLocation]["inHere"].remove(NPCID)
+
+
     Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"] = Location
     try:
-        Globals.SoLEnviorementData["Locations"][Location]["inHere"].append(NPCID)
-    except:
+        if NPCID not in Globals.SoLEnviorementData["Locations"][Location]["inHere"]: Globals.SoLEnviorementData["Locations"][Location]["inHere"].append(NPCID)
+    except Exception as e:
+        # print(1, e, Location, Globals.SoLEnviorementData["Locations"][Location]["inHere"])
         ""
+
+
     for NPCOther in Globals.SoLNPCData[NPCID]["Actions"]["HasFollowing"]:
         if NPCOther not in Globals.SoLEnviorementData["Locations"][Location]["inHere"]:
             Move(self, Location, NPCOther)
@@ -1181,6 +1225,10 @@ def Move(self, Location, NPCID):
         if Globals.SoLPCData["Targeting"] not in Globals.SoLEnviorementData["Locations"][Location]["inHere"]:
             Globals.SoLPCData["Targeting"] = None
         Refresh(self)
+    else:
+        if Globals.SoLPCData["Targeting"] == NPCID:
+            Globals.SoLPCData["Targeting"] = None
+
 
 def Switch(self, NPCID):
     PCID = Globals.SoLPCData["ID"]
@@ -1202,7 +1250,7 @@ def PassTime(self, Amount):
                     Globals.SoLEnviorementData["DateData"]["Month"] = 1
                     Globals.SoLEnviorementData["DateData"]["Year"] += 1
 
-        CheckNPCActions(self)
+        # CheckNPCActions(self)
 
         Globals.SignalData["TPS"] = {}
         Globals.References["SoLFunctions"].Emit("TPS")
@@ -1593,7 +1641,7 @@ def Sleep(NPCID):
                 Data = Globals.SoLNPCData[NPCID]["Relations"][OtherID]["Temporal"][TValue]
                 Globals.SoLTValues[TValue]["Reference"].ProcessTAbility(NPCID, OtherID, Data)
 
-        Globals.SoLNPCData[NPCID]["Actions"]["InteractionParty"] = []
+        Globals.SoLNPCData[NPCID]["Actions"]["InteractionParty"] = {}
 
         if NPCID == Globals.SoLPCData["ID"]:
             PassTime(Globals.Layouts["SoLUI"], 480)
