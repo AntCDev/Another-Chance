@@ -118,39 +118,28 @@ def ProcessCommand(self, ID, NPCID, Who):
 def ProcessConnotations(self, ID, NPCID, Who, TargetConnotations, ActorConnotations):
     try:
         Relation = 0
-        # if TAFlags["isLove"] == 1 or TAFlags["isLust"] == 1:
-        #     Relation = 3
-        # elif TAFlags["isAffection"] == 1 or TAFlags["isLewd"] == 1:
-        #     Relation = 2
-        # elif TAFlags["isAcquitance"] == 1:
-        #     Relation = 1
-        # else:
-        #     Relation = 0
-
-        # RLewd = 0
-        # if TAFlags["isLewd"] == 1:
-        #     RLewd = 1
-        # if TAFlags["isLust"] == 1:
-        #     RLewd = 2
-
-        # RAffection = 0
-        # if TAFlags["isAffection"] == 1:
-        #     RAffection = 1
-        # if TAFlags["isLove"] == 1:
-        #     RAffection = 2
+        try:
+            for FallenID in Globals.SoLNPCData[ID]["Relations"][NPCID]["FallenData"]:
+                Relation = Globals.SoLFallenStates[FallenID].GetFallenRelationData(Globals.SoLNPCData[ID]["Relations"][NPCID]["FallenData"][FallenID])
+        except:
+            ""
+        if Relation == 0:
+            try:
+                if Globals.SoLNPCData[ID]["Relations"][NPCID]["Permanent"]["InteractionExp"] >= 50:
+                    Relation = 1
+            except:
+                ""
 
         if Who == "Actor":
             if "Sexual" in ActorConnotations:
-                ActorConnotations["Sexual"][1] = -10000
-                # if ActorConnotations["Sexual"][0] > Relation:
-                    # ActorConnotations["Sexual"][1] = ActorConnotations["Sexual"][1] * (ActorConnotations["Sexual"][0] + 1 - Relation) * -1
+                if ActorConnotations["Sexual"][0] > Relation:
+                    ActorConnotations["Sexual"][1] = ActorConnotations["Sexual"][1] * (ActorConnotations["Sexual"][0] + 1 - Relation) * -1
             if "StartIntimacy" in ActorConnotations:
                 if Relation < 2:
-                    ActorConnotations["StartIntimacy"][1] = -10000
+                    ActorConnotations["StartIntimacy"][1] = -50
             if "Intimate" in ActorConnotations:
-                ActorConnotations["Intimate"][1] = -10000
-                # if ActorConnotations["Intimate"][0] > Relation:
-                    # ActorConnotations["Intimate"][1] = ActorConnotations["Intimate"][1] * (ActorConnotations["Intimate"][0] + 1 - Relation) * -1
+                if ActorConnotations["Intimate"][0] > Relation:
+                    ActorConnotations["Intimate"][1] = ActorConnotations["Intimate"][1] * (ActorConnotations["Intimate"][0] + 1 - Relation) * -1
     except Exception as e:
         Log(2, "ERROR ProcessConnotations", e, ID, NPCID, Who, TargetConnotations, ActorConnotations)
 

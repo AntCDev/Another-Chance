@@ -1014,6 +1014,16 @@ def CommandsProcessing(self, TargetDict, ActorDict, CommandID, Target, Actor, Mo
         Globals.SoLNPCData[Actor]["Actions"]["PreviousTask"] = Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]
         Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"] = FinalData["ActorTask"]
 
+        try:
+            Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"]["InteractionExp"] += 1
+        except:
+            Globals.SoLNPCData[Actor]["Relations"][Target]["Permanent"]["InteractionExp"] = 1
+
+        try:
+            Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]["InteractionExp"] += 1
+        except:
+            Globals.SoLNPCData[Target]["Relations"][Actor]["Permanent"]["InteractionExp"] = 1
+
 
         if Actor == Globals.SoLPCData["ID"]:
             # GETS THE FLAVOR TEXT

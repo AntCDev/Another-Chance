@@ -1981,6 +1981,15 @@ def CTSHandling2():
 def CTSHandling3():
     Data = Globals.SignalData["CTS3"]["Values"]
 
+def GetFallenRelationData(Data):
+    FallenList = ["Love", "Lust", "Submission"]
+    # Data = {"ID":FallenID, "Level":Value,"OtherData":{}}
+    Relation = 0
+    # if Data["ID"] == "Love":
+    if Data["Level"] != 0:
+        Relation = Data["Level"] + 1
+    return Relation
+
 def FallenChange(FallenID, NPCID, OtherID, Data, Value):
     if list(Data.keys()) == ["Level"]:
         Data = {"ID":FallenID, "Level":Value,"OtherData":{}}
