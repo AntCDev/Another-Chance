@@ -79,6 +79,11 @@ class UiLayoutMainMenu(QWidget):
         self.buttonChangelog = QPushButton('V. M1', self.GUI, clicked = lambda: webbrowser.open("https://github.com/AntCDev/Another-Chance"))
         self.buttonChangelog.setGeometry(335, 560, 180, 30)
         self.buttonChangelog.setProperty("Color","Light")
+        self.labelChangelog = QLabel(self.GUI)
+        self.labelChangelog.setStyleSheet('''background:none;border:none;''')
+        self.labelChangelog.setPixmap(QPixmap("images/OtherResources/github-mark-white.png"))
+        self.labelChangelog.setGeometry(339,562,26,26)
+        self.labelChangelog.setScaledContents(True)
 
         # self.buttonCredits = QPushButton('Credits (Bat)', self.GUI, clicked = lambda: MainWindow.gotoLayout("BattleScene"))
         self.buttonCredits = QPushButton('Credits', self.GUI, clicked = lambda: MainWindow.gotoLayout("CreditsUI"))
