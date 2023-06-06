@@ -9,7 +9,7 @@ import os
 Log = Globals.Layouts["MainF"].Log
 
 def GetCommands(self, Reference):
-    CommandsList = ["Conversation0", "Skinship0", "ServeThem0", "GetLapPillow0", "GiveLapPillow0", "BellyCaress0", "PinchCheek0", "ButtCaress0", "Hug0", "Kiss0", "BreastCaress0", "AnalCaress0", "PussyCaress0", "PenisCaress0" "ServeAlcohol0", "PushDown0"]
+    CommandsList = ["Conversation0", "Skinship0", "ServeThem0", "GetLapPillow0", "GiveLapPillow0", "BellyCaress0", "PinchCheek0", "ButtCaress0", "Hug0", "Kiss0", "BreastCaress0", "AnalCaress0", "PussyCaress0", "PenisCaress0" "ServeAlcohol0", "PushDown0", "GetFollow0"]
     CommandsList +=["CaressSex0", "GetCaressSex0", "PussyCaressSex0", "GetPussyCaressSex0", "FingeringSex0", "GetFingeringSex0", "CunnilingusSex0", "GetCunnilingusSex0", "PenissCaressSex0", "GetPenisCaressSex0", "HandJobSex0", "GetHandjobSex0", "BlowjobSex0", "GetBlowjobSex0", "BreastCaressSex0", "GetBreastCaressSex0", "NippleTeaseSex0", "GetNippleTeaseSex0", "NippleSuckingSex0", "GetNippleSuckingSex0", "AnalCaressSex0", "GetAnalCaressSex0", "AnalFingeringSex0", "GetAnalFingeringSex0", "RimjobSex0", "GetRimjobSex0", "MasturbateSex0", "GetMasturbateSex0", "AMasturbateSex0", "GetAMasturbateSex0", "ThighjobSex0", "GetThighjobSex0", "FootjobSex0", "GetFootjobSex0", "TitjobSex0", "GetTitjobSex0", "ButtjonbSex0", "GetButtjobSex0", "FacesittingSex0", "GetFacesittingSex0", "AFacesittingSex0", "GetAFacesittingSex0", "AssSpankingSex0", "GetAssSpankingSex0", "BreastSlappingSex0", "GetBreastSlappingSex0", "MissionarySex0", "GetMissionarySex0", "DoggyStyleSex0", "GetDoggyStyleSex0", "CowgirlSex0", "GetCowgirlSex0", "LotusSex0", "GetLotusSex0", "AMissionarySex0", "GetAMissionarySex0", "ADoggyStyleSex0", "GetADoggyStyleSex0", "ACowgirlSex0", "GetACowgirlSex0", "ALotusSex0", "GetALotusSex0", "StopSex0"]
 
     # CommandsList = ["Conversation0"]
@@ -59,6 +59,8 @@ def CheckCommandAvailable(self, CommandID, Actor, Target):
                 return Status
                 if  "Alcohol" in Globals.SoLNPCData[Actor]["Items"] and Globals.SoLNPCData[Actor]["Items"]["Alcohol"] > 0: Status = 1
             elif CommandID == "PushDown0":
+                Status = 1
+            elif CommandID == "GetFollow0":
                 Status = 1
             # if Globals.SoLNPCData[Target]["isInSexScene"] and Globals.SoLNPCData[Actor]["isInSexScene"]:
         elif Target != None and Target in Globals.SoLNPCData[Actor]["Actions"]["isInSexScene"]:
@@ -233,6 +235,7 @@ def GetCommandButton(self, CommandID, PCID, NPCID):
             elif CommandID == "PussyCaress0": Text = "Pussy Caress"
             elif CommandID == "ServeAlcohol0": Text = "Serve Alcohol"
             elif CommandID == "PushDown0": Text = "Push Down"
+            elif CommandID == "GetFollow0": Text = "Ask to Follow"
 
             elif CommandID == "CaressSex0": Text = "Caress"
             elif CommandID == "GetCaressSex0": Text = "Get Caress"
@@ -1599,6 +1602,81 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 },
                 "Connotations":{},
                 "Resistance":50
+                }
+            OtherData = {
+                "Success":2
+                }
+        elif CommandID == "GetFollow0":
+            TargetDict = {
+                "State":{
+                    "Energy": -5,
+                    },
+                "Temporal":{
+                    "Discomfort": 10,
+                    },
+                "Permanent":{
+                    },
+                "Task":{
+                    "HourStart": DateData["Hour"],
+                    "HourFinish": DateData["Hour"] + 5,
+                    "Task": ["PushedDown", {"BriefFluff": f'''Starting to follow {AName}''', "LongFluff": f'''{TName} is starting to follow {AName}.'''}],
+                    "InterruptionPenalty": 20,
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                },
+                "ForcefulTask":{},
+                "ResistanceTask":{
+                    "HourStart": DateData["Hour"],
+                    "HourFinish": DateData["Hour"] + 5,
+                    "Task": ["PushedDown", {"BriefFluff": f'''Refusing to follow {AName}''', "LongFluff": f'''{TName} is refusing to follow {AName}.'''}],
+                    "InterruptionPenalty": -20,
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                },
+                "EnergyTask":{
+                    "HourStart": DateData["Hour"],
+                    "HourFinish": DateData["Hour"] + 5,
+                    "Task": ["PushedDown", {"BriefFluff": f'''Trying to focus on following {AName}''', "LongFluff": f'''{TName} is trying to focus while following {AName}.'''}],
+                    "InterruptionPenalty": 20,
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                },
+                "Connotations":{},
+                "Resistance":-5
+                }
+            ActorDict = {
+                "State":{
+                    "Energy": -5,
+                    "Excitement": 10,
+                    "Arousal": 10,
+                    },
+                "Temporal":{
+                    "Desire": 15,
+                    "Discomfort": 55,
+                    },
+                "Permanent":{
+                    },
+                "Task":{
+                    "HourStart": DateData["Hour"],
+                    "HourFinish": DateData["Hour"] + 5,
+                    "Task": ["PushedDown", {"BriefFluff": f'''Getting {TName} to follow {APObj}''', "LongFluff": f'''{AName} is getting {TName} to follow {APObj}.'''}],
+                    "InterruptionPenalty": 20,
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                },
+                "ForcefulTask":{},
+                "ResistanceTask":{
+                    "HourStart": DateData["Hour"],
+                    "HourFinish": DateData["Hour"] + 5,
+                    "Task": ["PushedDown", {"BriefFluff": f'''Failing to get {TName} to follow {APObj}''', "LongFluff": f'''{AName} is trying and failing to get {TName} to follow {APObj}.'''}],
+                    "InterruptionPenalty": -20,
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                },
+                "EnergyTask":{
+                    "HourStart": DateData["Hour"],
+                    "HourFinish": DateData["Hour"] + 5,
+                    "Task": ["PushedDown", {"BriefFluff": f'''Tiredly makiing {TName} follow {APObj}''', "LongFluff": f'''{AName} is tiredly making {TName} follow {APObj}.'''}],
+                    "InterruptionPenalty": 20,
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                },
+                "Connotations":{},
+                "Resistance":-5
                 }
             OtherData = {
                 "Success":2
@@ -6981,7 +7059,14 @@ def ConfirmCommand(self, FinalData):
                 if Actor in Globals.SoLNPCData[Target]["Actions"]["isInSexScene"]: Globals.SoLNPCData[Target]["Actions"]["isInSexScene"].remove(Actor)
                 # print("PUSHED DOWN")
                 # FinalData["CommandStatus"]
-    except:
+        elif FinalData["CommandID"] == "GetFollow0":
+            if FinalData["CommandStatus"] == "Success" or FinalData["CommandStatus"] == "EnergyFailed":
+                Target = FinalData["Target"]
+                Actor = FinalData["Actor"]
+                Globals.SoLNPCData[Target]["Actions"]["IsFollowing"] = Actor
+                Globals.SoLNPCData[Actor]["Actions"]["HasFollowing"].append(Target)
+    except Exception as e:
+        Log(3,"ERROR ConfirmCommand", e, FinalData)
         ""
 
 def GetConnotations(self, CommandID, Actor, Target, OtherData):
@@ -7197,6 +7282,15 @@ def GetConnotations(self, CommandID, Actor, Target, OtherData):
             "Passive":[1,10],
             "Sexual":[2,50],
             "StartIntimacy":[1,0],
+            }
+    elif CommandID == "GetFollow0":
+        TargetConnotations = {
+            "Simple":[1,15],
+            "Active":[1,10],
+            }
+        ActorConnotations = {
+            "Simple":[1,15],
+            "Passive":[1,10],
             }
 
 

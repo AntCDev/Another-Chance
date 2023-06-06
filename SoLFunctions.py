@@ -1173,10 +1173,15 @@ def Move(self, Location, NPCID):
         Globals.SoLEnviorementData["Locations"][Location]["inHere"].append(NPCID)
     except:
         ""
+    for NPCOther in Globals.SoLNPCData[NPCID]["Actions"]["HasFollowing"]:
+        if NPCOther not in Globals.SoLEnviorementData["Locations"][Location]["inHere"]:
+            Move(self, Location, NPCOther)
 
     if NPCID == Globals.SoLPCData["ID"]:
-        Globals.SoLPCData["Targeting"] = None
+        if Globals.SoLPCData["Targeting"] not in Globals.SoLEnviorementData["Locations"][Location]["inHere"]:
+            Globals.SoLPCData["Targeting"] = None
         Refresh(self)
+
 def Switch(self, NPCID):
     PCID = Globals.SoLPCData["ID"]
     Globals.SoLPCData["ID"] = NPCID
