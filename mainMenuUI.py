@@ -52,6 +52,8 @@ class UiLayoutMainMenu(QWidget):
         self.buttonOptions = QPushButton('Options', self.GUI)
         self.buttonOptions.setGeometry(425, 520, 180, 30)
         self.buttonOptions.setProperty("Color","Light")
+        self.buttonOptions.setProperty("Enabled","0")
+        self.buttonOptions.setEnabled(False)
 
         self.buttonDiscord = QPushButton('Discord', self.GUI, clicked = lambda: webbrowser.open("https://discord.gg/rjBW7Uj48g"))
         self.buttonDiscord.setGeometry(615, 520, 180, 30)
@@ -74,6 +76,8 @@ class UiLayoutMainMenu(QWidget):
         self.buttonHelp = QPushButton('Help', self.GUI)
         self.buttonHelp.setGeometry(995, 520, 180, 30)
         self.buttonHelp.setProperty("Color","Light")
+        self.buttonHelp.setProperty("Enabled","0")
+        self.buttonHelp.setEnabled(False)
 
 
         self.buttonChangelog = QPushButton('V. M1', self.GUI, clicked = lambda: webbrowser.open("https://github.com/AntCDev/Another-Chance"))
