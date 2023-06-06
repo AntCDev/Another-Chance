@@ -891,6 +891,9 @@ def Refresh(self):
             Log(3, "ERROR SOL REFRESH labelMain", e)
             ""
 
+        # for Location in Globals.SoLEnviorementData["Locations"]:
+        #     print(Location, Globals.SoLEnviorementData["Locations"][Location]["inHere"])
+
         self.RefreshSignal3.emit()
 
     except Exception as e:
@@ -1194,19 +1197,11 @@ def Move(self, Location, NPCID):
     # curframe = inspect.currentframe()
     # calframe = inspect.getouterframes(curframe, 2)
     # print('caller name:', calframe[1][3])
-
-    # TODO Investigate why this doesn't work
-    # print("MOVED", NPCID, Location)
-    # PreLocation = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
-    # try:
-    #     Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"].remove(NPCID)
-    # except Exception as e:
-    #     # print(1, e, NPCID, PreLocation, Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"])
-    #     ""
-    ### PATCH
-    for OtherLocation in Globals.SoLEnviorementData["Locations"]:
-        if OtherLocation != Location and NPCID in Globals.SoLEnviorementData["Locations"][OtherLocation]["inHere"]:
-            Globals.SoLEnviorementData["Locations"][OtherLocation]["inHere"].remove(NPCID)
+    PreLocation = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
+    try:
+        Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"].remove(NPCID)
+    except Exception as e:
+        ""
 
 
     Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"] = Location
@@ -1654,10 +1649,11 @@ def Sleep(NPCID):
         print(e)
 def ApplyIdleTask(NPCID):
     DateData = Globals.SoLEnviorementData["DateData"]
-    Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"] = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]
+    Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"] = copy.deepcopy(Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"])
     Task = copy.deepcopy(Globals.SoLOtherData["IdlingTask"])
     Task["HourStart"] == DateData["Hour"]
     Task["HourFinish"] == DateData["Hour"] + 15
+    Task["Location"] = Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"]["Location"]
     Task["Task"][1]["BriefFluff"] = "Idle at " + Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"]["Location"]
     Task["Task"][1]["LongFluff"] = Globals.SoLNPCData[NPCID]["Name"] + " is idling at " + Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"]["Location"]
     Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"] = Task

@@ -24,7 +24,6 @@ def TPSHandling():
 
 def CheckIdleAction(self, ID):
     try:
-        # print("Triggered", ID)
         Personality = Globals.SoLNPCData[ID]["Personality"]
 
         if Personality == "Standard0":
@@ -40,29 +39,26 @@ def CheckIdleAction(self, ID):
                 # CHECKS FOR RANDOM MOVEMENT
                 if Globals.SoLNPCData[ID]["Actions"]["InteractionParty"] == {}:
                     if random.random() > 0.7:
-                        # print("CHECKED", ID)
                         CheckMovement(self, ID)
 
                 # CHECKS FOR POSSIBLE ACTIONS
                 Sociability = 0.7
                 if random.random() > Sociability:
-                    NPCData = Globals.SoLNPCData[ID]
-                    NPCLocation = NPCData["Actions"]["CurrentTask"]["Location"]
-                    inHere = Globals.SoLEnviorementData["Locations"][NPCLocation]["inHere"]
+                    NPCLocation = Globals.SoLNPCData[ID]["Actions"]["CurrentTask"]["Location"]
 
-                    List = []
-                    for OtherID in Globals.SoLEnviorementData["Locations"][NPCLocation]["inHere"]:
-                        if OtherID != ID:
-                            List.append(OtherID)
+                    List = Globals.SoLEnviorementData["Locations"][NPCLocation]["inHere"].copy()
+                    if ID in List:
+                        List.remove(ID)
 
                     PCID = Globals.SoLPCData["ID"]
                     if PCID in List:
                         List.remove(PCID)
+
                     if List != []:
                         NPCWeights = {}
                         for NPCOther in List:
                             try:
-                                Weight = NPCData["Relations"][NPCOther]["Permanent"]["Attraction"] + NPCData["Relations"][NPCOther]["Permanent"]["Reliability"] - NPCData["Relations"][NPCOther]["Fear"] - (NPCData["Relations"][NPCOther]["Hate"] * 3) + 75
+                                Weight = Globals.SoLNPCData[ID]["Relations"][NPCOther]["Permanent"]["Attraction"] + Globals.SoLNPCData[ID]["Relations"][NPCOther]["Permanent"]["Reliability"] - Globals.SoLNPCData[ID]["Relations"][NPCOther]["Fear"] - (Globals.SoLNPCData[ID]["Relations"][NPCOther]["Hate"] * 3) + 75
                             except:
                                 Weight = 50
                             NPCWeights[NPCOther] = Weight

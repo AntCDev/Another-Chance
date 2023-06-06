@@ -7061,11 +7061,11 @@ def ConfirmCommand(self, FinalData):
                 # FinalData["CommandStatus"]
         elif FinalData["CommandID"] == "GetFollow0":
             ""
-            # if FinalData["CommandStatus"] == "Success" or FinalData["CommandStatus"] == "EnergyFailed":
-            #     Target = FinalData["Target"]
-            #     Actor = FinalData["Actor"]
-            #     Globals.SoLNPCData[Target]["Actions"]["IsFollowing"] = Actor
-            #     Globals.SoLNPCData[Actor]["Actions"]["HasFollowing"].append(Target)
+            if FinalData["CommandStatus"] == "Success" or FinalData["CommandStatus"] == "EnergyFailed":
+                Target = FinalData["Target"]
+                Actor = FinalData["Actor"]
+                Globals.SoLNPCData[Target]["Actions"]["IsFollowing"] = Actor
+                Globals.SoLNPCData[Actor]["Actions"]["HasFollowing"].append(Target)
     except Exception as e:
         Log(3,"ERROR ConfirmCommand", e, FinalData)
         ""
