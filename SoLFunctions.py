@@ -752,6 +752,7 @@ def Refresh(self):
             Log(3, "ERROR SOL REFRESH SoLControlButtons", e)
             ""
 
+        self.GroupBoxPC.Height = 0
         ### SETS UP THE PC DATA TO THE LEFT
         try:
             for Widget in self.FormPC.WidgetsList:
@@ -764,6 +765,7 @@ def Refresh(self):
             Widget = Object.GetWidget()
             self.FormPC.addWidget(Widget)
             self.FormPC.WidgetsList.append(Widget)
+            self.GroupBoxPC.Height += Widget.height()
         except Exception as e:
             Log(3, "ERROR SOL REFRESH PCWidgets", e)
             ""
@@ -806,14 +808,44 @@ def Refresh(self):
             scrollLabel.setWidget(TargetDataLabel)
             self.FormPC.addWidget(scrollLabel)
             self.FormPC.WidgetsList.append(scrollLabel)
-            self.GroupBoxPC.setMinimumHeight(Widget.height() + scrollLabel.height() + 30)
-            self.GroupBoxPC.setMaximumHeight(Widget.height() + scrollLabel.height() + 30)
-            #MAP
-            self.RefreshSignal2.emit()
+            self.GroupBoxPC.Height += scrollLabel.height()
         except Exception as e:
             Log(3, "ERROR SOL REFRESH Target TValue", e)
+
+        try:
+            # FOR THE LOCATION OF FAVORITE NPC's
+            FavoriteText = ""
+            for NPCID in Globals.SoLTempData["FavoriteNPC"]:
+                NPCName = Globals.SoLNPCData[NPCID]["Name"]
+
+                NPCLocation = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
+                LocationName = Globals.SoLEnviorementData["Locations"][NPCLocation]["Name"]
+                FavoriteText += f"{NPCName}: {LocationName}<br>"
+
+            FavLocationLabel = QLabel()
+            FavLocationLabel.setText(FavoriteText)
+            FavLocationLabel.setWordWrap(True)
+            FavLocationLabel.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+            FavLocationScroll = QScrollArea()
+            FavLocationScroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+            FavLocationScroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+            FavLocationScroll.setWidgetResizable(True)
+            FavLocationScroll.setMinimumWidth(350)
+            FavLocationScroll.setMaximumWidth(350)
+            FavLocationScroll.setMinimumHeight(150)
+            FavLocationScroll.setMaximumHeight(150)
+            FavLocationScroll.setWidget(FavLocationLabel)
+            self.FormPC.addWidget(FavLocationScroll)
+            self.FormPC.WidgetsList.append(FavLocationScroll)
+            self.GroupBoxPC.Height += FavLocationScroll.height()
+        except Exception as e:
+            Log(3, "ERROR SOL REFRESH Favorite Location", e)
             ""
 
+        self.GroupBoxPC.setMinimumHeight(self.GroupBoxPC.Height + 30)
+        self.GroupBoxPC.setMaximumHeight(self.GroupBoxPC.Height + 30)
+
+        self.RefreshSignal2.emit()
 
         ### REFRESHES THE FLAVOR TEXT
         try:
