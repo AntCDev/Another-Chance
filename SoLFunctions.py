@@ -785,6 +785,7 @@ def Refresh(self):
                     ""
             TargetDataLabel.setText(TotalText)
             TargetDataLabel.setWordWrap(True)
+            TargetDataLabel.setAlignment(Qt.AlignLeft | Qt.AlignTop)
             scrollLabel = QScrollArea()
             scrollLabel.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
             scrollLabel.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)

@@ -349,7 +349,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
         if CommandID == "Conversation0":
             TargetDict = {
                 "State":{
-                    "Mood": 1,
+                    "Mood": 3,
                     "Energy": -5,
                     },
                 "Temporal":{
@@ -742,7 +742,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s attempt to caress {TPPos} belly caressed.''', "LongFluff": f'''{TName} is rejecting {AName}'s attempts at caressing {TPPos} belly.'''}],
+                    "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s attempt to caress {TPPos} belly.''', "LongFluff": f'''{TName} is rejecting {AName}'s attempts at caressing {TPPos} belly.'''}],
                     "InterruptionPenalty": -20,
                     "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
                     },
@@ -6964,20 +6964,25 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
         Log(3, "ERROR COMMAND TRIGGERED", e, __name__, CommandID, Actor, Target)
 
 def ConfirmCommand(self, FinalData):
-    if FinalData["CommandID"] == "PushDown0":
-        Target = FinalData["Target"]
-        Actor = FinalData["Actor"]
-        print(Actor, "Pushed Down", Target)
-        if Target not in Globals.SoLNPCData[Actor]["Actions"]["isInSexScene"]: Globals.SoLNPCData[Actor]["Actions"]["isInSexScene"].append(Target)
-        if Actor not in Globals.SoLNPCData[Target]["Actions"]["isInSexScene"]: Globals.SoLNPCData[Target]["Actions"]["isInSexScene"].append(Actor)
-    elif FinalData["CommandID"] == "StopSex0":
-        Target = FinalData["Target"]
-        Actor = FinalData["Actor"]
-        print(Actor, "StopSex", Target)
-        if Target in Globals.SoLNPCData[Actor]["Actions"]["isInSexScene"]: Globals.SoLNPCData[Actor]["Actions"]["isInSexScene"].remove(Target)
-        if Actor in Globals.SoLNPCData[Target]["Actions"]["isInSexScene"]: Globals.SoLNPCData[Target]["Actions"]["isInSexScene"].remove(Actor)
-        # print("PUSHED DOWN")
-        # FinalData["CommandStatus"]
+    try:
+        if FinalData["CommandID"] == "PushDown0":
+            if FinalData["CommandStatus"] == "Success" or FinalData["CommandStatus"] == "EnergyFailed":
+                Target = FinalData["Target"]
+                Actor = FinalData["Actor"]
+                # print(Actor, "Pushed Down", Target)
+                if Target not in Globals.SoLNPCData[Actor]["Actions"]["isInSexScene"]: Globals.SoLNPCData[Actor]["Actions"]["isInSexScene"].append(Target)
+                if Actor not in Globals.SoLNPCData[Target]["Actions"]["isInSexScene"]: Globals.SoLNPCData[Target]["Actions"]["isInSexScene"].append(Actor)
+        elif FinalData["CommandID"] == "StopSex0":
+            if FinalData["CommandStatus"] == "Success" or FinalData["CommandStatus"] == "EnergyFailed":
+                Target = FinalData["Target"]
+                Actor = FinalData["Actor"]
+                # print(Actor, "StopSex", Target)
+                if Target in Globals.SoLNPCData[Actor]["Actions"]["isInSexScene"]: Globals.SoLNPCData[Actor]["Actions"]["isInSexScene"].remove(Target)
+                if Actor in Globals.SoLNPCData[Target]["Actions"]["isInSexScene"]: Globals.SoLNPCData[Target]["Actions"]["isInSexScene"].remove(Actor)
+                # print("PUSHED DOWN")
+                # FinalData["CommandStatus"]
+    except:
+        ""
 
 def GetConnotations(self, CommandID, Actor, Target, OtherData):
     if CommandID == "Conversation0":

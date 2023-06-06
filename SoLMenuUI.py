@@ -23,7 +23,6 @@ class UiLayoutSoLMenu(QWidget):
 
     CommandCheckSignal = pyqtSignal()
 
-
     def __init__(self):
         try:
             super().__init__()

@@ -2655,6 +2655,7 @@ def CommandProcessTrait(self, OriginalData, FinalData, TraitID):
                     if "Pain" in FinalData["TargetDict"]["Temporal"]: FinalData["TargetDict"]["Temporal"]["Pain"] = int(FinalData["TargetDict"]["Temporal"]["Pain"] * 0.9)
                     if "Shame" in FinalData["TargetDict"]["Temporal"]: FinalData["TargetDict"]["Temporal"]["Shame"] = int(FinalData["TargetDict"]["Temporal"]["Shame"] * 0.86)
                 elif Level == 2: #Timid
+                    ""
                     if "Submission" in FinalData["TargetDict"]["Temporal"]: FinalData["TargetDict"]["Temporal"]["Submission"] = int(FinalData["TargetDict"]["Temporal"]["Submission"] * 1.2)
                     if "Pain" in FinalData["TargetDict"]["Temporal"]: FinalData["TargetDict"]["Temporal"]["Pain"] = int(FinalData["TargetDict"]["Temporal"]["Pain"] * 1.1)
                     if "Shame" in FinalData["TargetDict"]["Temporal"]: FinalData["TargetDict"]["Temporal"]["Shame"] = int(FinalData["TargetDict"]["Temporal"]["Shame"] * 1.15)
@@ -2671,7 +2672,7 @@ def CommandProcessTrait(self, OriginalData, FinalData, TraitID):
                     if "Service" in FinalData["TargetDict"]["Temporal"]: FinalData["TargetDict"]["Temporal"]["Service"] = int(FinalData["TargetDict"]["Temporal"]["Service"] * 1.3)
                     if "Shame" in FinalData["TargetDict"]["Temporal"]: FinalData["TargetDict"]["Temporal"]["Shame"] = int(FinalData["TargetDict"]["Temporal"]["Shame"] * 0.85)
                     if "Discomfort" in FinalData["TargetDict"]["Temporal"]: FinalData["TargetDict"]["Temporal"]["Discomfort"] = int(FinalData["TargetDict"]["Temporal"]["Discomfort"] * 0.9)
-                    if "Resistance" in FinalData["TargetDict"]: FinalData["TargetDict"]["Temporal"]["Submission"] = int(FinalData["TargetDict"]["Resistance"] * 0.9)
+                    if "Resistance" in FinalData["TargetDict"]: FinalData["TargetDict"]["Resistance"] = int(FinalData["TargetDict"]["Resistance"] * 0.9)
         elif TraitID == "Pride0":
             if TraitID in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"][TraitID]["Level"] != 0:
                 if Level == 1: # Prideful
