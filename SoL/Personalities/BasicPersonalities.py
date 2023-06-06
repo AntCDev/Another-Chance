@@ -87,21 +87,25 @@ def CheckMovement(self, ID):
 
 
 def CheckAction(self, ID, NPCID):
-    CommandWeights = {}
-    for CommandID in Globals.Commands:
-        Available = Globals.Commands[CommandID]["Reference"].CheckCommandAvailable(self, CommandID, ID, NPCID)
-        if Available == 1:
-            TargetConnotations, ActorConnotations = Globals.Commands[CommandID]["Reference"].GetConnotations(self, CommandID, ID, NPCID, {"Succes":0})
-            TargetConnotations, ActorConnotations = ProcessConnotations(self, ID, NPCID, "Actor", TargetConnotations, ActorConnotations)
+    try:
+        CommandWeights = {}
+        for CommandID in Globals.Commands:
+            Available = Globals.Commands[CommandID]["Reference"].CheckCommandAvailable(self, CommandID, ID, NPCID)
+            if Available == 1:
+                TargetConnotations, ActorConnotations = Globals.Commands[CommandID]["Reference"].GetConnotations(self, CommandID, ID, NPCID, {"Succes":0})
+                TargetConnotations, ActorConnotations = ProcessConnotations(self, ID, NPCID, "Actor", TargetConnotations, ActorConnotations)
 
-            Weight = 0
-            for Connotation in TargetConnotations:
-                Weight += TargetConnotations[Connotation][1]
+                Weight = 0
+                for Connotation in ActorConnotations:
+                    Weight = Weight + ActorConnotations[Connotation][1]
 
-            CommandWeights[CommandID] = Weight
-    CommandID = random.choices(list(CommandWeights.keys()), list(CommandWeights.values()))[0]
-    # print(ID, NPCID, CommandID)
-    Globals.Commands[CommandID]["Reference"].TriggerCommand(self, CommandID, NPCID, ID, None)
+                CommandWeights[CommandID] = Weight
+
+        CommandID = Globals.References["SoLFunctions"].RandomChoice(CommandWeights)
+        Globals.Commands[CommandID]["Reference"].TriggerCommand(self, CommandID, NPCID, ID, None)
+    except Exception as e:
+        Log(3, "ERROR CheckAction", e, "Standard0", ID, NPCID)
+
 
 def ProcessCommand(self, ID, NPCID, Who):
     if Who == "Target":
@@ -112,6 +116,44 @@ def ProcessCommand(self, ID, NPCID, Who):
         ActorData = Globals.SoLNPCData[ID]
 
 def ProcessConnotations(self, ID, NPCID, Who, TargetConnotations, ActorConnotations):
+    try:
+        Relation = 0
+        # if TAFlags["isLove"] == 1 or TAFlags["isLust"] == 1:
+        #     Relation = 3
+        # elif TAFlags["isAffection"] == 1 or TAFlags["isLewd"] == 1:
+        #     Relation = 2
+        # elif TAFlags["isAcquitance"] == 1:
+        #     Relation = 1
+        # else:
+        #     Relation = 0
+
+        # RLewd = 0
+        # if TAFlags["isLewd"] == 1:
+        #     RLewd = 1
+        # if TAFlags["isLust"] == 1:
+        #     RLewd = 2
+
+        # RAffection = 0
+        # if TAFlags["isAffection"] == 1:
+        #     RAffection = 1
+        # if TAFlags["isLove"] == 1:
+        #     RAffection = 2
+
+        if Who == "Actor":
+            if "Sexual" in ActorConnotations:
+                ActorConnotations["Sexual"][1] = -10000
+                # if ActorConnotations["Sexual"][0] > Relation:
+                    # ActorConnotations["Sexual"][1] = ActorConnotations["Sexual"][1] * (ActorConnotations["Sexual"][0] + 1 - Relation) * -1
+            if "StartIntimacy" in ActorConnotations:
+                if Relation < 2:
+                    ActorConnotations["StartIntimacy"][1] = -10000
+            if "Intimate" in ActorConnotations:
+                ActorConnotations["Intimate"][1] = -10000
+                # if ActorConnotations["Intimate"][0] > Relation:
+                    # ActorConnotations["Intimate"][1] = ActorConnotations["Intimate"][1] * (ActorConnotations["Intimate"][0] + 1 - Relation) * -1
+    except Exception as e:
+        Log(2, "ERROR ProcessConnotations", e, ID, NPCID, Who, TargetConnotations, ActorConnotations)
+
     return TargetConnotations, ActorConnotations
     ""
 

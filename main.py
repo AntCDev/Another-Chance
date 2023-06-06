@@ -17,7 +17,7 @@ def Log(*args):
     # 5 Likely Crasing Source
     Level = args[0]
     Type = "Print"
-    Tolerance = 6
+    Tolerance = 0
 
     Separator = ''' || '''
     Message = f'''{Level}: '''

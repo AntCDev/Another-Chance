@@ -26,6 +26,7 @@ Log = Globals.Layouts["MainF"].Log
 def Initialize(self, Reference):
     ID = "01"
     List = ["Leanne Confession", "Train with Leanne", "General Shop", "Find Rogue Merchant"]
+    List = []
     for EventID in List:
         Globals.EventCommands[EventID] = {"ID":EventID, "Reference":Reference, "OtherData":{}}
 

@@ -97,7 +97,7 @@ class GenericNPCObject:
         self.LabelName.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
 
         def GoToDetails():
-            
+
             Globals.LayoutsData["DetailsUI"]["ID"] = self.ID
             Globals.LayoutsData["DetailsUI"]["Name"] = self.Name
             Globals.LayoutsData["DetailsUI"]["Type"] = 1
@@ -1446,6 +1446,17 @@ def Connect(Signal, Func):
         Globals.Signals[Signal].append(Func)
     else:
         Globals.Signals[Signal] = [Func]
+
+def RandomChoice(Dict):
+    try:
+        NewDict = {}
+        for Key in Dict:
+            if Dict[Key] > 0:
+                NewDict[Key] = Dict[Key]
+        Choice = random.choices(list(NewDict.keys()), list(NewDict.values()))[0]
+        return Choice
+    except Exception as e:
+        print("ERROR RandomChoice", e)
 
 def Sleep(NPCID):
     try:

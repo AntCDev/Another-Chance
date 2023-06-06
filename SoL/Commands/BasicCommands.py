@@ -1304,7 +1304,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Having {TPPos} {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{TName} is having {TPPos} {Desc("VTightness", TargetData, "DSP")} caressed by {AName}.'''}],
+                    "Task": ["Skinship", {"BriefFluff": f'''Having {TPPos} {Desc("VTightness", TargetData, "P")} caressed by {AName}''', "LongFluff": f'''{TName} is having {TPPos} {Desc("VTightness", TargetData, "DSP")} caressed by {AName}.'''}],
                     "InterruptionPenalty": 20,
                     "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
                     },
@@ -1603,7 +1603,6 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
             OtherData = {
                 "Success":2
                 }
-
 
 
         elif CommandID == "CaressSex0":
