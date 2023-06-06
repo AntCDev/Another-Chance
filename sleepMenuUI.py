@@ -46,10 +46,9 @@ class EnhanceGenericNPCObject:
         except Exception as e:
             ""
         def CC():
-            print(self.Data["Name"])
-            # Globals.LayoutsData["EnhanceUI"]["TargetID"] = self.Data["ID"]
-            # Globals.LayoutsData["EnhanceUI"]["ActorID"] = Globals.SoLPCData["ID"]
-            # Globals.Layouts["MainF"].gotoLayout("EnhanceUI")
+            Globals.LayoutsData["EnhanceUI"]["TargetID"] = self.Data["ID"]
+            Globals.LayoutsData["EnhanceUI"]["ActorID"] = Globals.SoLPCData["ID"]
+            Globals.Layouts["MainF"].gotoLayout("EnhanceUI")
 
         NPCImage.mouseReleaseEvent = lambda event: CC()
 
@@ -78,7 +77,7 @@ class UiLayoutSleepMenu(object):
         self.EnhanceLabelBack.setGeometry(5,5,420,1014)
         self.EnhanceLabelBack.setProperty("Color","Dark")
 
-        self.EnhanceLabel = QLabel("Enhance", self.GUI, objectName = "Title")
+        self.EnhanceLabel = QLabel(self.GUI, objectName = "Title")
         self.EnhanceLabel.setGeometry(10,10,410,35)
         self.EnhanceLabel.setProperty("Color","Light")
         self.EnhanceLabel.setAlignment(Qt.AlignCenter)
@@ -96,8 +95,12 @@ class UiLayoutSleepMenu(object):
         self.EnhanceForm.setContentsMargins(0, 0, 0, 0)
         self.EnhanceForm.WidgetsDict = {}
 
-        self.buttonContinue = QPushButton('Continue', self.GUI, clicked = lambda: MainWindow.gotoLayout("SoLUI"))
-        self.buttonContinue.setGeometry(800, 880, 180, 30)
+        self.BottomLabel = QLabel(self.GUI)
+        self.BottomLabel.setGeometry(430,964,1165,55)
+        self.BottomLabel.setProperty("Color", "Dark")
+
+        self.buttonContinue = QPushButton('Wake Up', self.GUI, clicked = lambda: MainWindow.gotoLayout("SoLUI"))
+        self.buttonContinue.setGeometry(435,969,200,45)
 
     def Refresh(self):
         Globals.References["SoLFunctions"].ResetGenericNPC()

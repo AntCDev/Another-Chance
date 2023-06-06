@@ -105,7 +105,7 @@ class MainWindow(QMainWindow):
                 }
 
                 QLabel#MainTitle{
-                    font-size: 20pt;
+                    font-size: 28pt;
                     }
                 QLabel#Title{
                     font-size: 16pt;

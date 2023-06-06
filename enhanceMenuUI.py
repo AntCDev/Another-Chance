@@ -427,12 +427,11 @@ class UiLayoutEnhanceMenu:
                         Data = None
                         if AbilityID in TARelation["Abilities"]:
                             Data = TARelation["Abilities"][AbilityID]
-                        Widget = Globals.SoLAbilities[AbilityID]["Reference"].GetAbilityDynamicWidget(AbilityID, Data, Target, Actor, {"UpgradeForceAvailable":1, "DowngradeForceAvailable":1})
+                        Widget = Globals.SoLAbilities[AbilityID]["Reference"].GetAbilityDynamicWidget(AbilityID, Data, Target, Actor, {"UpgradeForceAvailable":0, "DowngradeForceAvailable":0})
                         if Widget != None:
                             WidgetsDict[AbilityID] = Widget
                     except Exception as e:
                         print(e)
-                        ""
 
                 MaxWidth = 994
                 Width, Height = Globals.References["SoLFunctions"].GridLayoutMaker(self, self.ALayout, WidgetsDict, MaxWidth, 10)
@@ -503,7 +502,7 @@ class UiLayoutEnhanceMenu:
                         Data = None
                         if TraitID in TargetData["Traits"]:
                             Data = TargetData["Traits"][TraitID]
-                        Widget = Globals.SoLTraits[TraitID]["Reference"].GetTraitDynamicWidget(TraitID, Data, Target, Actor, {"ForceAvailable":1})
+                        Widget = Globals.SoLTraits[TraitID]["Reference"].GetTraitDynamicWidget(TraitID, Data, Target, Actor, {"ForceAvailable":0})
                         if Widget != None:
                             WidgetsDict[TraitID] = Widget
                     except Exception as e:
@@ -578,7 +577,7 @@ class UiLayoutEnhanceMenu:
                         Data = None
                         if FallenID in TARelation["FallenData"]:
                             Data = TARelation["FallenData"][FallenID]
-                        Widget = Globals.SoLFallenStates[FallenID]["Reference"].GetFallenDynamicWidget(FallenID, Data, Target, Actor, {"ForceAvailable":1})
+                        Widget = Globals.SoLFallenStates[FallenID]["Reference"].GetFallenDynamicWidget(FallenID, Data, Target, Actor, {"ForceAvailable":0})
                         if Widget != None:
                             WidgetsDict[FallenID] = Widget
                     except Exception as e:
