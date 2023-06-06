@@ -21,77 +21,77 @@ class UiLayoutMainMenu(QWidget):
 
         self.labelTitle = QLabel(self.GUI, objectName = "MainTitle")
         self.labelTitle.setFont(QFont('Segoe UI', 36))
-        self.labelTitle.setGeometry(360,110,700,260)
+        self.labelTitle.setGeometry(450,110,700,260)
         self.labelTitle.setText("Another Chance")
         self.labelTitle.setAlignment(Qt.AlignCenter)
         self.labelTitle.setProperty("Color","Dark")
 
         self.labelCommandsHolder = QLabel(self.GUI)
-        self.labelCommandsHolder.setGeometry(325,470,770,130)
+        self.labelCommandsHolder.setGeometry(415,470,770,130)
         self.labelCommandsHolder.setProperty("Color","Dark")
 
 
         self.buttonContinue = QPushButton('Continue', self.GUI, clicked = lambda: MainWindow.gotoLayout("SoLUI"))
-        self.buttonContinue.setGeometry(335, 480, 180, 30)
+        self.buttonContinue.setGeometry(425, 480, 180, 30)
         self.buttonContinue.setProperty("Color","Light")
 
 
         self.buttonData = QPushButton('Save/Load', self.GUI, clicked = lambda: MainWindow.gotoLayout("SaveUI"))
-        self.buttonData.setGeometry(525, 480, 180, 30)
+        self.buttonData.setGeometry(615, 480, 180, 30)
         self.buttonData.setProperty("Color","Light")
 
         self.buttonImport = QPushButton('Manage Characters', self.GUI, clicked = lambda: MainWindow.gotoLayout("ImportUI"))
-        self.buttonImport.setGeometry(715, 480, 180, 30)
+        self.buttonImport.setGeometry(805, 480, 180, 30)
         self.buttonImport.setProperty("Color","Light")
 
         self.buttonMaker = QPushButton('Character Maker', self.GUI, clicked = lambda: MainWindow.gotoLayout("MakerUI"))
-        self.buttonMaker.setGeometry(905, 480, 180, 30)
+        self.buttonMaker.setGeometry(995, 480, 180, 30)
         self.buttonMaker.setProperty("Color","Light")
 
 
         self.buttonOptions = QPushButton('Options', self.GUI)
-        self.buttonOptions.setGeometry(335, 520, 180, 30)
+        self.buttonOptions.setGeometry(425, 520, 180, 30)
         self.buttonOptions.setProperty("Color","Light")
 
         self.buttonDiscord = QPushButton('Discord', self.GUI, clicked = lambda: webbrowser.open("https://discord.gg/rjBW7Uj48g"))
-        self.buttonDiscord.setGeometry(525, 520, 180, 30)
+        self.buttonDiscord.setGeometry(615, 520, 180, 30)
         self.buttonDiscord.setStyleSheet('''color:rgb(88, 101, 242);''')
         self.labelDiscord = QLabel(self.GUI)
         self.labelDiscord.setStyleSheet('''background:none;border:none;''')
         self.labelDiscord.setPixmap(QPixmap("images/OtherResources/discord-mark-blue.png"))
-        self.labelDiscord.setGeometry(529,522,30,26)
+        self.labelDiscord.setGeometry(619,522,30,26)
         self.labelDiscord.setScaledContents(True)
 
         self.buttonPatreon = QPushButton('Patreon', self.GUI, clicked = lambda: webbrowser.open("https://patreon.com/AntCDev"))
-        self.buttonPatreon.setGeometry(715, 520, 180, 30)
+        self.buttonPatreon.setGeometry(805, 520, 180, 30)
         self.buttonPatreon.setStyleSheet('''color:rgb(249, 104, 84);''')
         self.labelPatreon = QLabel(self.GUI)
         self.labelPatreon.setStyleSheet('''background:none;border:none;''')
         self.labelPatreon.setPixmap(QPixmap("images/OtherResources/Digital-Patreon-Logo_FieryCoral.png"))
-        self.labelPatreon.setGeometry(719,522,26,26)
+        self.labelPatreon.setGeometry(809,522,26,26)
         self.labelPatreon.setScaledContents(True)
 
         self.buttonHelp = QPushButton('Help', self.GUI)
-        self.buttonHelp.setGeometry(905, 520, 180, 30)
+        self.buttonHelp.setGeometry(995, 520, 180, 30)
         self.buttonHelp.setProperty("Color","Light")
 
 
         self.buttonChangelog = QPushButton('V. M1', self.GUI, clicked = lambda: webbrowser.open("https://github.com/AntCDev/Another-Chance"))
-        self.buttonChangelog.setGeometry(335, 560, 180, 30)
+        self.buttonChangelog.setGeometry(425, 560, 180, 30)
         self.buttonChangelog.setProperty("Color","Light")
         self.labelChangelog = QLabel(self.GUI)
         self.labelChangelog.setStyleSheet('''background:none;border:none;''')
         self.labelChangelog.setPixmap(QPixmap("images/OtherResources/github-mark-white.png"))
-        self.labelChangelog.setGeometry(339,562,26,26)
+        self.labelChangelog.setGeometry(429,562,26,26)
         self.labelChangelog.setScaledContents(True)
 
         # self.buttonCredits = QPushButton('Credits (Bat)', self.GUI, clicked = lambda: MainWindow.gotoLayout("BattleScene"))
         self.buttonCredits = QPushButton('Credits', self.GUI, clicked = lambda: MainWindow.gotoLayout("CreditsUI"))
-        self.buttonCredits.setGeometry(525, 560, 180, 30)
+        self.buttonCredits.setGeometry(615, 560, 180, 30)
         self.buttonCredits.setProperty("Color","Light")
 
         self.buttonDisclaimer = QPushButton('Disclaimer', self.GUI, clicked = lambda: MainWindow.gotoLayout("DisclaimerUI"))
-        self.buttonDisclaimer.setGeometry(715, 560, 180, 30)
+        self.buttonDisclaimer.setGeometry(805, 560, 180, 30)
         self.buttonDisclaimer.setProperty("Color","Light")
 
         def NG(MainWindow):
@@ -107,7 +107,7 @@ class UiLayoutMainMenu(QWidget):
                 ""
 
         self.buttonReset = QPushButton('New Game', self.GUI, clicked = lambda: MainWindow.gotoLayout("NewGameUI"))
-        self.buttonReset.setGeometry(905, 560, 180, 30)
+        self.buttonReset.setGeometry(995, 560, 180, 30)
         self.buttonReset.setProperty("Color","Light")
 
     def Refresh(self):
