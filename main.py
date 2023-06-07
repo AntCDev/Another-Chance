@@ -206,7 +206,7 @@ class MainWindow(QMainWindow):
         Reference = __import__("SoLFunctions")
         Reference.Initialize(self, Reference)
 
-        ModsPath = CurrentPath + "\SoL\Mods"
+        ModsPath = CurrentPath + "\\SoL\\Mods"
         if ModsPath not in sys.path:
             sys.path.insert(0, ModsPath)
         try:
@@ -230,7 +230,7 @@ class MainWindow(QMainWindow):
                     Log(4, "ERROR INITIALIZE FILES", e, File)
 
         # IMPORTS THE MODS
-        ModsPath = CurrentPath + "\SoL\Mods"
+        ModsPath = CurrentPath + "\\SoL\\Mods"
         if ModsPath not in sys.path:
             sys.path.insert(0, ModsPath)
         FileList = os.listdir("SoL/Mods")
@@ -244,7 +244,7 @@ class MainWindow(QMainWindow):
                 Log(3, "ERROR INITIALIZE Mods", e, File)
 
         # IMPORTS THE LOCATIONS
-        LocationsPath = CurrentPath + "\SoL\Locations"
+        LocationsPath = CurrentPath + "\\SoL\\Locations"
         if LocationsPath not in sys.path:
             sys.path.insert(0, LocationsPath)
         FileList = os.listdir("SoL/Locations")
@@ -259,7 +259,7 @@ class MainWindow(QMainWindow):
 
 
         # IMPORTS THE COMMANDS
-        CommandsPath = CurrentPath + "\SoL\Commands"
+        CommandsPath = CurrentPath + "\\SoL\\Commands"
         if CommandsPath not in sys.path:
             sys.path.insert(0, CommandsPath)
         FileList = os.listdir("SoL/Commands")
@@ -273,7 +273,7 @@ class MainWindow(QMainWindow):
                 Log(2, "ERROR INITIALIZE Commands", e, File)
 
         # IMPORTS THE ABILITIES
-        AbilitiesPath = CurrentPath + "\SoL\Abilities"
+        AbilitiesPath = CurrentPath + "\\SoL\\Abilities"
         if AbilitiesPath not in sys.path:
             sys.path.insert(0, AbilitiesPath)
         FileList = os.listdir("SoL/Abilities")
@@ -287,7 +287,7 @@ class MainWindow(QMainWindow):
                 Log(2, "ERROR INITIALIZE Abilities", e, File)
 
         # IMPORTS THE TRAITS
-        TraitsPath = CurrentPath + "\SoL\Traits"
+        TraitsPath = CurrentPath + "\\SoL\\Traits"
         if TraitsPath not in sys.path:
             sys.path.insert(0, TraitsPath)
         FileList = os.listdir("SoL/Traits")
@@ -301,7 +301,7 @@ class MainWindow(QMainWindow):
                 Log(2, "ERROR INITIALIZE Traits", e, File)
 
         # IMPORTS THE PERSONALITIES
-        PersonalitiesPath = CurrentPath + "\SoL\Personalities"
+        PersonalitiesPath = CurrentPath + "\\SoL\\Personalities"
         if PersonalitiesPath not in sys.path:
             sys.path.insert(0, PersonalitiesPath)
         FileList = os.listdir("SoL/Personalities")
