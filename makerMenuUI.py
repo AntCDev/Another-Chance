@@ -16,7 +16,7 @@ class UiLayoutMakerMenu(QWidget):
         self.TraitWidgetsDict = {}
 
         CurrentPath = os.path.dirname(os.path.realpath(__file__))
-        CommandsPath = CurrentPath + "\SoL\Traits"
+        CommandsPath = CurrentPath + "\\SoL\\Traits"
         if CommandsPath not in sys.path:
             sys.path.insert(0, CommandsPath)
         FileList = os.listdir("SoL/Traits")

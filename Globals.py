@@ -42,7 +42,7 @@ def retrieveEnemies():
     nameLength = len(os.path.basename(__file__))
     fullLength = len(EnemiesPath)
     EnemiesPath = EnemiesPath[0:fullLength-nameLength]
-    EnemiesPath += "Combat\Enemies"
+    EnemiesPath += "Combat\\Enemies"
     if EnemiesPath not in sys.path:
         sys.path.insert(0, EnemiesPath)
 

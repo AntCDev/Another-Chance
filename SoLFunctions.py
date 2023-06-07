@@ -1245,7 +1245,7 @@ def PassTime(self, Amount):
                     Globals.SoLEnviorementData["DateData"]["Month"] = 1
                     Globals.SoLEnviorementData["DateData"]["Year"] += 1
 
-        # CheckNPCActions(self)
+        CheckNPCActions(self)
 
         Globals.SignalData["TPS"] = {}
         Globals.References["SoLFunctions"].Emit("TPS")

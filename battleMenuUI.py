@@ -1164,7 +1164,7 @@ class UiLayoutBattleMenu(QWidget):
         nameLength = len(os.path.basename(__file__))
         fullLength = len(EnemiesPath)
         EnemiesPath = EnemiesPath[0:fullLength-nameLength]
-        EnemiesPath += "Combat\Enemies"
+        EnemiesPath += "Combat\\Enemies"
         if EnemiesPath not in sys.path:
             sys.path.insert(0, EnemiesPath)
 
@@ -1242,7 +1242,7 @@ class UiLayoutBattleMenu(QWidget):
                     fullLength = len(DeckPath)
                     FullPath = FullPath[0:fullLength-nameLength]
 
-                    DeckPath = r"\Combat\Decks"
+                    DeckPath = r"\\Combat\\Decks"
                     DeckFullPath = FullPath + DeckPath
                     if DeckFullPath not in sys.path:
                         sys.path.insert(0, DeckFullPath)
@@ -1258,7 +1258,7 @@ class UiLayoutBattleMenu(QWidget):
                 fullLength = len(DeckPath)
                 FullPath = FullPath[0:fullLength-nameLength]
 
-                DeckPath = r"\Combat\Decks"
+                DeckPath = r"\\Combat\\Decks"
                 DeckFullPath = FullPath + DeckPath
                 if DeckFullPath not in sys.path:
                     sys.path.insert(0, DeckFullPath)
@@ -2557,7 +2557,7 @@ class UiLayoutBattleScene(QWidget):
                         try:
                             try:
                                 Name = "TODO"
-                                NPCPath = Path + f'''NPCdata\{Name}{NPCID}\\'''
+                                NPCPath = Path + f'''NPCdata\\{Name}{NPCID}\\'''
                                 FileName = f'''{Name}{NPCID}Functions'''
                                 if FileName not in Globals.References:
 
@@ -2618,7 +2618,7 @@ class UiLayoutBattleScene(QWidget):
                             # PINGS FOR THE FUNCTION REFERENCE OR MAKES IT
                             ID = NPCID
                             Name = NPCfullData[ID]["Name"]
-                            NPCPath = Path + f'''NPCData\{Name}{ID}\\'''
+                            NPCPath = Path + f'''NPCData\\{Name}{ID}\\'''
                             FileName = f'''{Name}{ID}Functions'''
                             if FileName not in Globals.References:
 
@@ -2682,7 +2682,7 @@ class UiLayoutBattleScene(QWidget):
                 NameLen = len(os.path.basename(__file__))
                 Path = PathFull[0:-NameLen]
 
-                PathEffects = Path + "Combat\Effects"
+                PathEffects = Path + "Combat\\Effects"
                 if PathEffects not in sys.path:
                     sys.path.insert(0, PathEffects)
 
@@ -2708,7 +2708,7 @@ class UiLayoutBattleScene(QWidget):
                 NameLen = len(os.path.basename(__file__))
                 Path = PathFull[0:-NameLen]
 
-                PathEffects = Path + "Combat\Relics"
+                PathEffects = Path + "Combat\\Relics"
                 if PathEffects not in sys.path:
                     sys.path.insert(0, PathEffects)
 
@@ -3253,7 +3253,7 @@ class UiLayoutBattleScene(QWidget):
             PathFull = os.path.abspath(__file__)
             NameLen = len(os.path.basename(__file__))
             Path = PathFull[0:-NameLen]
-            PathEnemies = Path + "Combat\Enemies"
+            PathEnemies = Path + "Combat\\Enemies"
             if PathEnemies not in sys.path:
                 sys.path.insert(0, PathEnemies)
             FileList = os.listdir(PathEnemies)
@@ -3301,7 +3301,7 @@ class UiLayoutBattleScene(QWidget):
             PathFull = os.path.abspath(__file__)
             NameLen = len(os.path.basename(__file__))
             Path = PathFull[0:-NameLen]
-            PathEvents = Path + "Combat\Events"
+            PathEvents = Path + "Combat\\Events"
             if PathEvents not in sys.path:
                 sys.path.insert(0, PathEvents)
             FileList = os.listdir(PathEvents)
