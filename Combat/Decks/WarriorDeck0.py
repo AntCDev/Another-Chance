@@ -217,7 +217,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -227,7 +227,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -336,7 +336,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -346,7 +346,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -494,7 +494,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -504,7 +504,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -655,7 +655,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -665,7 +665,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -852,7 +852,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -862,7 +862,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -1072,7 +1072,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -1082,7 +1082,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -1194,7 +1194,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -1204,7 +1204,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -1315,7 +1315,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -1325,7 +1325,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -1513,7 +1513,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -1523,7 +1523,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -1720,7 +1720,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -1730,7 +1730,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -1837,7 +1837,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -1847,7 +1847,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -1959,7 +1959,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -1969,7 +1969,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -2077,7 +2077,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -2087,7 +2087,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -2198,7 +2198,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -2208,7 +2208,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -2354,7 +2354,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -2364,7 +2364,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -2516,7 +2516,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -2526,7 +2526,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -2636,7 +2636,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -2646,7 +2646,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -2757,7 +2757,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -2767,7 +2767,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -2839,7 +2839,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -2849,7 +2849,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -2922,7 +2922,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -2932,7 +2932,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -3127,7 +3127,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -3137,7 +3137,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -3340,7 +3340,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -3350,7 +3350,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -3493,7 +3493,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -3503,7 +3503,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -3653,7 +3653,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -3663,7 +3663,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -3809,7 +3809,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -3819,7 +3819,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -3971,7 +3971,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -3981,7 +3981,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -4127,7 +4127,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -4137,7 +4137,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -4286,7 +4286,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -4296,7 +4296,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -4405,7 +4405,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -4415,7 +4415,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -4527,7 +4527,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -4537,7 +4537,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -4645,7 +4645,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -4655,7 +4655,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -4765,7 +4765,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -4775,7 +4775,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -4934,7 +4934,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -4944,7 +4944,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -5108,7 +5108,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -5118,7 +5118,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -5228,7 +5228,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -5238,7 +5238,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -5348,7 +5348,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -5358,7 +5358,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -5445,7 +5445,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -5455,7 +5455,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -5544,7 +5544,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -5554,7 +5554,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -5700,7 +5700,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -5710,7 +5710,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -5859,7 +5859,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -5869,7 +5869,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -6017,7 +6017,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -6027,7 +6027,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -6179,7 +6179,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -6189,7 +6189,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -6276,7 +6276,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -6286,7 +6286,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -6376,7 +6376,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -6386,7 +6386,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -6537,7 +6537,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -6547,7 +6547,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -6703,7 +6703,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -6713,7 +6713,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -6828,7 +6828,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -6838,7 +6838,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -6955,7 +6955,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -6965,7 +6965,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -7109,7 +7109,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -7119,7 +7119,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -7271,7 +7271,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -7281,7 +7281,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -7391,7 +7391,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -7401,7 +7401,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -7511,7 +7511,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -7521,7 +7521,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -7594,7 +7594,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -7604,7 +7604,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -7677,7 +7677,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -7687,7 +7687,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -7776,7 +7776,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -7786,7 +7786,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -7875,7 +7875,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -7885,7 +7885,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -8082,7 +8082,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -8092,7 +8092,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -8299,7 +8299,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -8309,7 +8309,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -8461,7 +8461,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -8471,7 +8471,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -8630,7 +8630,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -8640,7 +8640,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -8748,7 +8748,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -8758,7 +8758,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -8868,7 +8868,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -8878,7 +8878,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -8987,7 +8987,7 @@ def getCard(self, Attack, Type):
                 ''')
 
 
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -8997,7 +8997,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -9108,7 +9108,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -9118,7 +9118,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -9226,7 +9226,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -9236,7 +9236,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -9347,7 +9347,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -9357,7 +9357,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -9507,7 +9507,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -9517,7 +9517,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -9672,7 +9672,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -9682,7 +9682,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -9832,7 +9832,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -9842,7 +9842,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -9998,7 +9998,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -10008,7 +10008,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -10159,7 +10159,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -10169,7 +10169,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -10324,7 +10324,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -10334,7 +10334,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -10441,7 +10441,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -10451,7 +10451,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -10561,7 +10561,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -10571,7 +10571,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -10679,7 +10679,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -10689,7 +10689,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -10799,7 +10799,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -10809,7 +10809,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -10917,7 +10917,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -10927,7 +10927,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -11037,7 +11037,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -11047,7 +11047,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -11155,7 +11155,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -11165,7 +11165,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -11278,7 +11278,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -11288,7 +11288,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -11376,7 +11376,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -11386,7 +11386,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -11475,7 +11475,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -11485,7 +11485,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -11592,7 +11592,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -11602,7 +11602,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -11715,7 +11715,7 @@ def getCard(self, Attack, Type):
                 CardTypeLabel.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/Attack.png")
+                image = QImage("Resources/CombatResources/Attack.png")
                 imagepix = QPixmap.fromImage(image)
                 CardTypeLabel.setPixmap(imagepix)
 
@@ -11725,7 +11725,7 @@ def getCard(self, Attack, Type):
                 CardImage.setStyleSheet('''
                 background-color:rgb(35,35,35);
                 ''')
-                image = QImage("images/CombatResources/AttackCard.png")
+                image = QImage("Resources/CombatResources/AttackCard.png")
                 imagepix = QPixmap.fromImage(image)
                 CardImage.setPixmap(imagepix)
 
@@ -11813,7 +11813,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/AttackEffect1.png")
+                image = QImage("Resources/CombatResources/AttackEffect1.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -11863,7 +11863,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/AttackEffect3.png")
+                image = QImage("Resources/CombatResources/AttackEffect3.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -11919,7 +11919,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -11975,7 +11975,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12027,7 +12027,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/AttackEffect1.png''')
+                image = QImage(f'''Resources/CombatResources/AttackEffect1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12083,7 +12083,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12139,7 +12139,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12195,7 +12195,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12251,7 +12251,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12301,7 +12301,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/PunchEffect1.png")
+                image = QImage("Resources/CombatResources/PunchEffect1.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12353,7 +12353,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/PunchEffect1.png''')
+                image = QImage(f'''Resources/CombatResources/PunchEffect1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12405,7 +12405,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/AttackEffect4.png''')
+                image = QImage(f'''Resources/CombatResources/AttackEffect4.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12461,7 +12461,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12513,7 +12513,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/Flame.png''')
+                image = QImage(f'''Resources/CombatResources/Flame.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12563,7 +12563,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/ShieldBash.png")
+                image = QImage("Resources/CombatResources/ShieldBash.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12615,7 +12615,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/Shield1.png")
+                image = QImage("Resources/CombatResources/Shield1.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12671,7 +12671,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12727,7 +12727,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12777,7 +12777,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/Buff1.png")
+                image = QImage("Resources/CombatResources/Buff1.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12833,7 +12833,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12885,7 +12885,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/Shield1.png''')
+                image = QImage(f'''Resources/CombatResources/Shield1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12938,7 +12938,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/Buff1.png''')
+                image = QImage(f'''Resources/CombatResources/Buff1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12994,7 +12994,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13050,7 +13050,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13101,7 +13101,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/Buff1.png''')
+                image = QImage(f'''Resources/CombatResources/Buff1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13152,7 +13152,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/Buff1.png''')
+                image = QImage(f'''Resources/CombatResources/Buff1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13206,7 +13206,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/Gaze1.png")
+                image = QImage("Resources/CombatResources/Gaze1.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13262,7 +13262,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13318,7 +13318,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13374,7 +13374,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13424,7 +13424,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/DeBuff2.png")
+                image = QImage("Resources/CombatResources/DeBuff2.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13478,7 +13478,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/Fear1.png''')
+                image = QImage(f'''Resources/CombatResources/Fear1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13528,7 +13528,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/DeBuff2.png")
+                image = QImage("Resources/CombatResources/DeBuff2.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13584,7 +13584,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
+                image = QImage(f'''Resources/CombatResources/{Globals.AnimationData[AnimationID]["ImgName"]}.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13634,7 +13634,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/Fear1.png")
+                image = QImage("Resources/CombatResources/Fear1.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13684,7 +13684,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/Buff1.png")
+                image = QImage("Resources/CombatResources/Buff1.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13734,7 +13734,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/DeBuff2.png")
+                image = QImage("Resources/CombatResources/DeBuff2.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13786,7 +13786,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''images/CombatResources/Buff1.png''')
+                image = QImage(f'''Resources/CombatResources/Buff1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13836,7 +13836,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/Gaze1.png")
+                image = QImage("Resources/CombatResources/Gaze1.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13886,7 +13886,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/DeBuff2.png")
+                image = QImage("Resources/CombatResources/DeBuff2.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)

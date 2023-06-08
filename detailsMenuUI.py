@@ -1102,7 +1102,7 @@ class UiLayoutDetailsMenu:
 
         TotalText = ""
         if ImageName != "":
-            TotalText += f'''<img src="images/OtherResources/35.PNG" width="205" height="200" style="float: left; padding: 15px 15px;" />'''
+            TotalText += f'''<img src="Resources/OtherResources/35.PNG" width="205" height="200" style="float: left; padding: 15px 15px;" />'''
             self.ImageLabel = QLabel(self.GeneralWidget)
             self.ImageLabel.setGeometry(10,60,200,200)
             self.ImageLabel.setText(f'''<img src="NPCData/{Name}{ID}/{ImageName}" width="200" height="200" />''')

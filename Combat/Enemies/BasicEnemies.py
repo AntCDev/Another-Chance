@@ -462,7 +462,7 @@ class Enemy:
                     border: 0px solid black;
                     background-color: rgba(0,0,0,0%);
                     ''')
-                    image = QImage("images/CombatResources/Shield1.png")
+                    image = QImage("Resources/CombatResources/Shield1.png")
                     imagepix = QPixmap.fromImage(image)
                     widget.setPixmap(imagepix)
                     Globals.Layouts["BattleMenu"].Fade(widget)
@@ -512,7 +512,7 @@ class Enemy:
                     border: 0px solid black;
                     background-color: rgba(0,0,0,0%);
                     ''')
-                    image = QImage("images/CombatResources/AttackEffect1.png")
+                    image = QImage("Resources/CombatResources/AttackEffect1.png")
                     imagepix = QPixmap.fromImage(image)
                     widget.setPixmap(imagepix)
                     Globals.Layouts["BattleMenu"].Fade(widget)
@@ -562,7 +562,7 @@ class Enemy:
                     border: 0px solid black;
                     background-color: rgba(0,0,0,0%);
                     ''')
-                    image = QImage("images/CombatResources/AttackEffect3.png")
+                    image = QImage("Resources/CombatResources/AttackEffect3.png")
                     imagepix = QPixmap.fromImage(image)
                     widget.setPixmap(imagepix)
                     Globals.Layouts["BattleMenu"].Fade(widget)

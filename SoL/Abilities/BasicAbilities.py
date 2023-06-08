@@ -1526,7 +1526,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -1581,7 +1581,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available
@@ -1652,7 +1652,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -1707,7 +1707,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available
@@ -1777,7 +1777,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -1832,7 +1832,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available
@@ -1902,7 +1902,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -1957,7 +1957,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available
@@ -2027,7 +2027,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -2082,7 +2082,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available
@@ -2152,7 +2152,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -2207,7 +2207,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available
@@ -2277,7 +2277,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -2332,7 +2332,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available
@@ -2402,7 +2402,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -2457,7 +2457,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available
@@ -2527,7 +2527,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -2582,7 +2582,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available
@@ -2652,7 +2652,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -2707,7 +2707,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available
@@ -2777,7 +2777,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -2832,7 +2832,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available
@@ -2902,7 +2902,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -2957,7 +2957,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available
@@ -3027,7 +3027,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -3082,7 +3082,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available
@@ -3152,7 +3152,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(images/SoLResources/UpArrow.png); ")
+            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
             ULButton.setGeometry(215,1,33,33)
             ULButton.setProperty("Color","Dark")
             ULButton.Available = Available
@@ -3207,7 +3207,7 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                     except Exception as e:
                         print(e)
             DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(images/SoLResources/DownArrow.png); ")
+            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
             DLButton.setGeometry(215,1,33,33)
             DLButton.setProperty("Color","Dark")
             DLButton.Available = Available

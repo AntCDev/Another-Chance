@@ -213,7 +213,7 @@ class UiLayoutSoLMenu(QWidget):
         self.labelTImage.setGeometry(1080,20,120,120)
         self.labelTImage.setAlignment(Qt.AlignCenter)
         self.labelTImage.setScaledContents(True)
-        self.labelTImage.setPixmap(QPixmap("/images/None.png"))
+        self.labelTImage.setPixmap(QPixmap("/Resources/None.png"))
 
 
         # BUTTONS TO THE RIGHT OF THE TARGET IMAGE

@@ -232,104 +232,104 @@ class GenericNPCObject:
         self.Data = Globals.SoLNPCData[self.ID]
 
         if self.Data["State"]["Arousal"] >= 20:
-            self.LabelArousal1.setPixmap(QPixmap(f'''images/SoLResources/FilledHeart'''))
+            self.LabelArousal1.setPixmap(QPixmap(f'''Resources/SoLResources/FilledHeart'''))
         else:
-            self.LabelArousal1.setPixmap(QPixmap(f'''images/SoLResources/EmptyHeart'''))
+            self.LabelArousal1.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyHeart'''))
         if self.Data["State"]["Arousal"] >= 40:
-            self.LabelArousal2.setPixmap(QPixmap(f'''images/SoLResources/FilledHeart'''))
+            self.LabelArousal2.setPixmap(QPixmap(f'''Resources/SoLResources/FilledHeart'''))
         else:
-            self.LabelArousal2.setPixmap(QPixmap(f'''images/SoLResources/EmptyHeart'''))
+            self.LabelArousal2.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyHeart'''))
         if self.Data["State"]["Arousal"] >= 60:
-            self.LabelArousal3.setPixmap(QPixmap(f'''images/SoLResources/FilledHeart'''))
+            self.LabelArousal3.setPixmap(QPixmap(f'''Resources/SoLResources/FilledHeart'''))
         else:
-            self.LabelArousal3.setPixmap(QPixmap(f'''images/SoLResources/EmptyHeart'''))
+            self.LabelArousal3.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyHeart'''))
         if self.Data["State"]["Arousal"] >= 80:
-            self.LabelArousal4.setPixmap(QPixmap(f'''images/SoLResources/FilledHeart'''))
+            self.LabelArousal4.setPixmap(QPixmap(f'''Resources/SoLResources/FilledHeart'''))
         else:
-            self.LabelArousal4.setPixmap(QPixmap(f'''images/SoLResources/EmptyHeart'''))
+            self.LabelArousal4.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyHeart'''))
         if self.Data["State"]["Arousal"] >= 100:
-            self.LabelArousal5.setPixmap(QPixmap(f'''images/SoLResources/FilledHeart'''))
+            self.LabelArousal5.setPixmap(QPixmap(f'''Resources/SoLResources/FilledHeart'''))
         else:
-            self.LabelArousal5.setPixmap(QPixmap(f'''images/SoLResources/EmptyHeart'''))
+            self.LabelArousal5.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyHeart'''))
 
 
         if self.Data["State"]["Energy"] >= self.Data["GeneralAbilities"]["MaxEnergy"] / 5:
-            self.LabelEnergy1.setPixmap(QPixmap(f'''images/SoLResources/FilledEnergy'''))
+            self.LabelEnergy1.setPixmap(QPixmap(f'''Resources/SoLResources/FilledEnergy'''))
         else:
-            self.LabelEnergy1.setPixmap(QPixmap(f'''images/SoLResources/EmptyEnergy'''))
+            self.LabelEnergy1.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyEnergy'''))
         if self.Data["State"]["Energy"] >= (self.Data["GeneralAbilities"]["MaxEnergy"] / 5) * 2:
-            self.LabelEnergy2.setPixmap(QPixmap(f'''images/SoLResources/FilledEnergy'''))
+            self.LabelEnergy2.setPixmap(QPixmap(f'''Resources/SoLResources/FilledEnergy'''))
         else:
-            self.LabelEnergy2.setPixmap(QPixmap(f'''images/SoLResources/EmptyEnergy'''))
+            self.LabelEnergy2.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyEnergy'''))
         if self.Data["State"]["Energy"] >= (self.Data["GeneralAbilities"]["MaxEnergy"] / 5) * 3:
-            self.LabelEnergy3.setPixmap(QPixmap(f'''images/SoLResources/FilledEnergy'''))
+            self.LabelEnergy3.setPixmap(QPixmap(f'''Resources/SoLResources/FilledEnergy'''))
         else:
-            self.LabelEnergy3.setPixmap(QPixmap(f'''images/SoLResources/EmptyEnergy'''))
+            self.LabelEnergy3.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyEnergy'''))
         if self.Data["State"]["Energy"] >= (self.Data["GeneralAbilities"]["MaxEnergy"] / 5) * 4:
-            self.LabelEnergy4.setPixmap(QPixmap(f'''images/SoLResources/FilledEnergy'''))
+            self.LabelEnergy4.setPixmap(QPixmap(f'''Resources/SoLResources/FilledEnergy'''))
         else:
-            self.LabelEnergy4.setPixmap(QPixmap(f'''images/SoLResources/EmptyEnergy'''))
+            self.LabelEnergy4.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyEnergy'''))
         if self.Data["State"]["Energy"] >= (self.Data["GeneralAbilities"]["MaxEnergy"] / 5) * 5:
-            self.LabelEnergy5.setPixmap(QPixmap(f'''images/SoLResources/FilledEnergy'''))
+            self.LabelEnergy5.setPixmap(QPixmap(f'''Resources/SoLResources/FilledEnergy'''))
         else:
-            self.LabelEnergy5.setPixmap(QPixmap(f'''images/SoLResources/EmptyEnergy'''))
+            self.LabelEnergy5.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyEnergy'''))
 
 
         if self.Data["State"]["Mood"] >= 0:
             if self.Data["State"]["Mood"] >= 20:
-                self.LabelMood1.setPixmap(QPixmap(f'''images/SoLResources/BlueDiamond'''))
+                self.LabelMood1.setPixmap(QPixmap(f'''Resources/SoLResources/BlueDiamond'''))
             else:
-                self.LabelMood1.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                self.LabelMood1.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyDiamond'''))
 
             if self.Data["State"]["Mood"] >= 40:
-                self.LabelMood2.setPixmap(QPixmap(f'''images/SoLResources/BlueDiamond'''))
+                self.LabelMood2.setPixmap(QPixmap(f'''Resources/SoLResources/BlueDiamond'''))
             else:
-                self.LabelMood2.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                self.LabelMood2.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyDiamond'''))
 
             if self.Data["State"]["Mood"] >= 60:
-                self.LabelMood3.setPixmap(QPixmap(f'''images/SoLResources/BlueDiamond'''))
+                self.LabelMood3.setPixmap(QPixmap(f'''Resources/SoLResources/BlueDiamond'''))
             else:
-                self.LabelMood3.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                self.LabelMood3.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyDiamond'''))
 
             if self.Data["State"]["Mood"] >= 80:
-                self.LabelMood4.setPixmap(QPixmap(f'''images/SoLResources/BlueDiamond'''))
+                self.LabelMood4.setPixmap(QPixmap(f'''Resources/SoLResources/BlueDiamond'''))
             else:
-                self.LabelMood4.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                self.LabelMood4.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyDiamond'''))
 
             if self.Data["State"]["Mood"] >= 100:
-                self.LabelMood5.setPixmap(QPixmap(f'''images/SoLResources/BlueDiamond'''))
+                self.LabelMood5.setPixmap(QPixmap(f'''Resources/SoLResources/BlueDiamond'''))
             else:
-                self.LabelMood5.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                self.LabelMood5.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyDiamond'''))
         elif self.Data["State"]["Mood"] <= 0:
             if self.Data["State"]["Mood"] <= -20:
-                self.LabelMood1.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
+                self.LabelMood1.setPixmap(QPixmap(f'''Resources/SoLResources/RedDiamond'''))
             else:
-                self.LabelMood1.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                self.LabelMood1.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyDiamond'''))
 
             if self.Data["State"]["Mood"] <= -40:
-                self.LabelMood2.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
+                self.LabelMood2.setPixmap(QPixmap(f'''Resources/SoLResources/RedDiamond'''))
             else:
-                self.LabelMood2.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                self.LabelMood2.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyDiamond'''))
 
             if self.Data["State"]["Mood"] <= -60:
-                self.LabelMood3.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
+                self.LabelMood3.setPixmap(QPixmap(f'''Resources/SoLResources/RedDiamond'''))
             else:
-                self.LabelMood3.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                self.LabelMood3.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyDiamond'''))
 
             if self.Data["State"]["Mood"] <= -80:
-                self.LabelMood4.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
+                self.LabelMood4.setPixmap(QPixmap(f'''Resources/SoLResources/RedDiamond'''))
             else:
-                self.LabelMood4.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                self.LabelMood4.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyDiamond'''))
 
             if self.Data["State"]["Mood"] <= -100:
-                self.LabelMood5.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
+                self.LabelMood5.setPixmap(QPixmap(f'''Resources/SoLResources/RedDiamond'''))
             else:
-                self.LabelMood5.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                self.LabelMood5.setPixmap(QPixmap(f'''Resources/SoLResources/EmptyDiamond'''))
 
         if self.ID in Globals.SoLTempData["FavoriteNPC"]:
-            self.LabelFavorite.setStyleSheet('''border-image: url(images/SoLResources/FilledStar.png); background-color:rgba(0,0,0,0); border-color:rgba(0,0,0,0); ''')
+            self.LabelFavorite.setStyleSheet('''border-image: url(Resources/SoLResources/FilledStar.png); background-color:rgba(0,0,0,0); border-color:rgba(0,0,0,0); ''')
         else:
-            self.LabelFavorite.setStyleSheet('''border-image: url(images/SoLResources/EmptyStar.png); background-color:rgba(0,0,0,0); border-color:rgba(0,0,0,0); ''')
+            self.LabelFavorite.setStyleSheet('''border-image: url(Resources/SoLResources/EmptyStar.png); background-color:rgba(0,0,0,0); border-color:rgba(0,0,0,0); ''')
 
 
         # print(Globals.SoLNPCData[Target]["Actions"]["CurrentTask"])
@@ -1445,7 +1445,7 @@ def GetGenericImage(NPCData):
     Face = NPCData["BodyData"]["Face"]
     Complexion = NPCData["BodyData"]["Complexion"]
 
-    FullImagesList = os.listdir("images/Generic")
+    FullImagesList = os.listdir("Resources/Generic")
     T0Text = f'''{Race}_{Sex}_{PhysicalAge}_{SkinColor}_{HairColor}_{Face}_{Complexion}'''
     T1Text = f'''{Race}_{Sex}_{PhysicalAge}_{SkinColor}_{HairColor}_{Face}'''
     T2Text = f'''{Race}_{Sex}_{PhysicalAge}_{SkinColor}_{HairColor}'''

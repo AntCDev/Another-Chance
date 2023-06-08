@@ -3119,15 +3119,15 @@ class UiLayoutBattleScene(QWidget):
                 # SETS UP THE ICONS ON TOP OF THE POLYGONS
                 Type = Map[Layer][Node]["Type"]
                 if Type == "Enemy":
-                    Path = f'''images/CombatResources/BasicEncounter.png'''
+                    Path = f'''Resources/CombatResources/BasicEncounter.png'''
                 elif Type == "Elite":
-                    Path = f'''images/CombatResources/EliteEncounter.png'''
+                    Path = f'''Resources/CombatResources/EliteEncounter.png'''
                 elif Type == "Event":
-                    Path = f'''images/CombatResources/Event.png'''
+                    Path = f'''Resources/CombatResources/Event.png'''
                 elif Type == "Treasure":
-                    Path = f'''images/CombatResources/Treasure.png'''
+                    Path = f'''Resources/CombatResources/Treasure.png'''
                 elif Type == "Boss":
-                    Path = f'''images/CombatResources/BossEncounter.png'''
+                    Path = f'''Resources/CombatResources/BossEncounter.png'''
 
                 image_qt = QImage(Path)
 

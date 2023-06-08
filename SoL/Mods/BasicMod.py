@@ -2170,7 +2170,7 @@ def GetFallenDynamicWidget(FallenID, Data, NPCID, OtherID, Flags):
                     if Button0.Available == 1:
                         FallenChange(FallenID, NPCID, OtherID, Data, 0)
                 Button0 = QPushButton(Widget0, clicked = lambda: Click0())
-                Button0.setStyleSheet("border-image: url(images/SoLResources/Cycle.png); ")
+                Button0.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
                 Button0.setGeometry(215,1,33,33)
                 Button0.setProperty("Color","Dark")
                 Button0.Available = Available
@@ -2217,7 +2217,7 @@ def GetFallenDynamicWidget(FallenID, Data, NPCID, OtherID, Flags):
                     if Button1.Available == 1:
                         FallenChange(FallenID, NPCID, OtherID, Data, 1)
                 Button1 = QPushButton(Widget1, clicked = lambda: Click1())
-                Button1.setStyleSheet("border-image: url(images/SoLResources/Cycle.png); ")
+                Button1.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
                 Button1.setGeometry(215,1,33,33)
                 Button1.setProperty("Color","Dark")
                 Button1.Available = Available
@@ -2266,7 +2266,7 @@ def GetFallenDynamicWidget(FallenID, Data, NPCID, OtherID, Flags):
                     if Button2.Available == 1:
                         FallenChange(FallenID, NPCID, OtherID, Data, 2)
                 Button2 = QPushButton(Widget2, clicked = lambda: Click2())
-                Button2.setStyleSheet("border-image: url(images/SoLResources/Cycle.png); ")
+                Button2.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
                 Button2.setGeometry(215,1,33,33)
                 Button2.setProperty("Color","Dark")
                 Button2.Available = Available

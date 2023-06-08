@@ -90,7 +90,7 @@ class UiLayoutEnhanceMenu:
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
 
-                        self.PCloser.setStyleSheet("border-image: url(images/SoLResources/Down.png); ")
+                        self.PCloser.setStyleSheet("border-image: url(Resources/SoLResources/Down.png); ")
                         self.PWidget.Status = "Closed"
                     elif self.PWidget.Status == "Closed":
                         TotalHeight = self.PWidget.TotalHeight
@@ -101,12 +101,12 @@ class UiLayoutEnhanceMenu:
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
 
-                        self.PCloser.setStyleSheet("border-image: url(images/SoLResources/Up.png); ")
+                        self.PCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
                         self.PWidget.Status = "Open"
                 self.PCloser = QPushButton(self.PWidget, clicked = lambda: POpenClose())
                 self.PCloser.setProperty("Color","Light")
                 self.PCloser.setGeometry(950,5,30,30)
-                self.PCloser.setStyleSheet("border-image: url(images/SoLResources/Up.png); ")
+                self.PCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
 
 
                 self.PLayout = QGridLayout()
@@ -229,7 +229,7 @@ class UiLayoutEnhanceMenu:
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
 
-                        self.TCloser.setStyleSheet("border-image: url(images/SoLResources/Down.png); ")
+                        self.TCloser.setStyleSheet("border-image: url(Resources/SoLResources/Down.png); ")
                         self.TWidget.Status = "Closed"
                     elif self.TWidget.Status == "Closed":
                         TotalHeight = self.TWidget.TotalHeight
@@ -240,12 +240,12 @@ class UiLayoutEnhanceMenu:
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
 
-                        self.TCloser.setStyleSheet("border-image: url(images/SoLResources/Up.png); ")
+                        self.TCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
                         self.TWidget.Status = "Open"
                 self.TCloser = QPushButton(self.TWidget, clicked = lambda: TOpenClose())
                 self.TCloser.setProperty("Color","Light")
                 self.TCloser.setGeometry(950,5,30,30)
-                self.TCloser.setStyleSheet("border-image: url(images/SoLResources/Up.png); ")
+                self.TCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
 
 
 
@@ -313,7 +313,7 @@ class UiLayoutEnhanceMenu:
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
 
-                        self.GCloser.setStyleSheet("border-image: url(images/SoLResources/Down.png); ")
+                        self.GCloser.setStyleSheet("border-image: url(Resources/SoLResources/Down.png); ")
                         self.GWidget.Status = "Closed"
                     elif self.GWidget.Status == "Closed":
                         TotalHeight = self.GWidget.TotalHeight
@@ -324,12 +324,12 @@ class UiLayoutEnhanceMenu:
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
 
-                        self.GCloser.setStyleSheet("border-image: url(images/SoLResources/Up.png); ")
+                        self.GCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
                         self.GWidget.Status = "Open"
                 self.GCloser = QPushButton(self.GWidget, clicked = lambda: GOpenClose())
                 self.GCloser.setProperty("Color","Light")
                 self.GCloser.setGeometry(950,5,30,30)
-                self.GCloser.setStyleSheet("border-image: url(images/SoLResources/Up.png); ")
+                self.GCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
 
                 self.GLayout = QGridLayout()
                 self.GLayout.setContentsMargins(5, 5, 5, 5)
@@ -395,7 +395,7 @@ class UiLayoutEnhanceMenu:
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
 
-                        self.ACloser.setStyleSheet("border-image: url(images/SoLResources/Down.png); ")
+                        self.ACloser.setStyleSheet("border-image: url(Resources/SoLResources/Down.png); ")
                         self.AWidget.Status = "Closed"
                     elif self.AWidget.Status == "Closed":
                         TotalHeight = self.AWidget.TotalHeight
@@ -406,12 +406,12 @@ class UiLayoutEnhanceMenu:
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
 
-                        self.ACloser.setStyleSheet("border-image: url(images/SoLResources/Up.png); ")
+                        self.ACloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
                         self.AWidget.Status = "Open"
                 self.ACloser = QPushButton(self.AWidget, clicked = lambda: AOpenClose())
                 self.ACloser.setProperty("Color","Light")
                 self.ACloser.setGeometry(950,5,30,30)
-                self.ACloser.setStyleSheet("border-image: url(images/SoLResources/Up.png); ")
+                self.ACloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
 
                 self.ALayout = QGridLayout()
                 self.ALayout.setContentsMargins(5, 5, 5, 5)
@@ -470,7 +470,7 @@ class UiLayoutEnhanceMenu:
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
 
-                        self.TTCloser.setStyleSheet("border-image: url(images/SoLResources/Down.png); ")
+                        self.TTCloser.setStyleSheet("border-image: url(Resources/SoLResources/Down.png); ")
                         self.TTWidget.Status = "Closed"
                     elif self.TTWidget.Status == "Closed":
                         TotalHeight = self.TTWidget.TotalHeight
@@ -481,12 +481,12 @@ class UiLayoutEnhanceMenu:
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
 
-                        self.TTCloser.setStyleSheet("border-image: url(images/SoLResources/Up.png); ")
+                        self.TTCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
                         self.TTWidget.Status = "Open"
                 self.TTCloser = QPushButton(self.TTWidget, clicked = lambda: TTOpenClose())
                 self.TTCloser.setProperty("Color","Light")
                 self.TTCloser.setGeometry(950,5,30,30)
-                self.TTCloser.setStyleSheet("border-image: url(images/SoLResources/Up.png); ")
+                self.TTCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
 
                 self.TTLayout = QGridLayout()
                 self.TTLayout.setContentsMargins(0, 0, 0, 0)
@@ -545,7 +545,7 @@ class UiLayoutEnhanceMenu:
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
 
-                        self.FCloser.setStyleSheet("border-image: url(images/SoLResources/Down.png); ")
+                        self.FCloser.setStyleSheet("border-image: url(Resources/SoLResources/Down.png); ")
                         self.FWidget.Status = "Closed"
                     elif self.FWidget.Status == "Closed":
                         TotalHeight = self.FWidget.TotalHeight
@@ -556,12 +556,12 @@ class UiLayoutEnhanceMenu:
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
 
-                        self.FCloser.setStyleSheet("border-image: url(images/SoLResources/Up.png); ")
+                        self.FCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
                         self.FWidget.Status = "Open"
                 self.FCloser = QPushButton(self.FWidget, clicked = lambda: FOpenClose())
                 self.FCloser.setProperty("Color","Light")
                 self.FCloser.setGeometry(950,5,30,30)
-                self.FCloser.setStyleSheet("border-image: url(images/SoLResources/Up.png); ")
+                self.FCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
 
                 self.FLayout = QGridLayout()
                 self.FLayout.setContentsMargins(0, 0, 0, 0)

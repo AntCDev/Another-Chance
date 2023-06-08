@@ -18,8 +18,174 @@ def Initialize(self, Reference):
     except:
         ""
 
+    Globals.References["SoLFunctions"].Connect("CAS2", CASHandling2)
+    # Globals.SignalData["CAS2"] = {"CommandID":CommandID, "ID":ID, "NPCID":NPCID, "Flags":{"Succes":0}, "TargetConnotations":TargetConnotations, "ActorConnotations":ActorConnotations}
+
+
+
 # def ProcessingTrait(self, TargetDict, ActorDict, CommandID, Actor, Target, TraitID, Who):
 #     return TargetDict, ActorDict
+def CASHandling2():
+    # Globals.SignalData["CAS2"] = {"CommandID":CommandID, "ID":ID, "NPCID":NPCID, "Flags":{"Succes":0}, "TargetConnotations":TargetConnotations, "ActorConnotations":ActorConnotations}
+    Actor = Globals.SignalData["CAS2"]["ID"]
+    Target = Globals.SignalData["CAS2"]["NPCID"]
+    # if "Courage0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Courage0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Courage0"]["Level"] == 1:
+    #         print("Brave")
+    #         ""
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Courage0"]["Level"] == 2:
+    #         print("Timid")
+    # if "Attitude0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Attitude0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Attitude0"]["Level"] == 1:
+    #         print("Defiant")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Attitude0"]["Level"] == 2:
+    #         print("Docile")
+    # if "Pride0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Pride0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Pride0"]["Level"] == 1:
+    #         print("Prideful")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Pride0"]["Level"] == 2:
+    #         print("Humble")
+    # if "Dere0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Dere0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Dere0"]["Level"] == 1:
+    #         print("Tsundere")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Dere0"]["Level"] == 2:
+    #         print("Dandere")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Dere0"]["Level"] == 2:
+    #         print("Kuudere")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Dere0"]["Level"] == 2:
+    #         print("Yandere")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Dere0"]["Level"] == 2:
+    #         print("Deredere")
+    # if "SelfControl0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["SelfControl0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["SelfControl0"]["Level"] == 1:
+    #         print("High")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["SelfControl0"]["Level"] == 2:
+    #         print("Low")
+    # if "Cheerfulness0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Cheerfulness0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Cheerfulness0"]["Level"] == 1:
+    #         print("Cheerful")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Cheerfulness0"]["Level"] == 2:
+    #         print("Gloomy")
+    # if "Shyness0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Shyness0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Shyness0"]["Level"] == 1:
+    #         print("Shy")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Shyness0"]["Level"] == 2:
+    #         print("Outgoing")
+    # if "Gullible0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Gullible0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Gullible0"]["Level"] == 1:
+    #         print("Gullible")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Gullible0"]["Level"] == 2:
+    #         print("Untrusting")
+    # if "Charm0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Charm0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Charm0"]["Level"] == 1:
+    #         print("Charming")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Charm0"]["Level"] == 2:
+    #         print("Charmless")
+    # if "SubstanceResistance0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["SubstanceResistance0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["SubstanceResistance0"]["Level"] == 1:
+    #         print("Resistant")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["SubstanceResistance0"]["Level"] == 2:
+    #         print("Weak")
+    # if "SexualInterest0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["SexualInterest0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["SexualInterest0"]["Level"] == 1:
+    #         print("Curious")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["SexualInterest0"]["Level"] == 2:
+    #         print("Conservative")
+    # if "Virtue0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Virtue0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Virtue0"]["Level"] == 1:
+    #         print("Virtuous")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Virtue0"]["Level"] == 2:
+    #         print("Depraved")
+    # if "Chastity0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Chastity0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Chastity0"]["Level"] == 1:
+    #         print("Not for Lewding")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Chastity0"]["Level"] == 2:
+    #         print("Chaste")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Chastity0"]["Level"] == 2:
+    #         print("Unchaste")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Chastity0"]["Level"] == 2:
+    #         print("Slutty")
+    # if "Openess" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Openess"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Openess"]["Level"] == 1:
+    #         print("Liberated")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Openess"]["Level"] == 2:
+    #         print("Repressed")
+    # if "PainResistance0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["PainResistance0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["PainResistance0"]["Level"] == 1:
+    #         print("High")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["PainResistance0"]["Level"] == 2:
+    #         print("Low")
+    # if "ArousalEase0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["ArousalEase0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["ArousalEase0"]["Level"] == 1:
+    #         print("Easy")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["ArousalEase0"]["Level"] == 2:
+    #         print("Hard")
+    # if "ResponseToPleasure0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["ResponseToPleasure0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["ResponseToPleasure0"]["Level"] == 1:
+    #         print("Enjoys")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["ResponseToPleasure0"]["Level"] == 2:
+    #         print("Denies")
+    # if "Perversion0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Perversion0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Perversion0"]["Level"] == 1:
+    #         print("Perverted")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Perversion0"]["Level"] == 2:
+    #         print("Pure")
+    # if "Dominance0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Dominance0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Dominance0"]["Level"] == 1:
+    #         print("Submissive")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Dominance0"]["Level"] == 2:
+    #         print("Dominant")
+    # if "Forceful0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Forceful0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Forceful0"]["Level"] == 1:
+    #         print("Forceful")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Forceful0"]["Level"] == 2:
+    #         print("Exploitable")
+    # if "Loyalty0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Loyalty0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Loyalty0"]["Level"] == 1:
+    #         print("Loyal")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Loyalty0"]["Level"] == 2:
+    #         print("Disloyal")
+    # if "Violence0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Violence0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Violence0"]["Level"] == 1:
+    #         print("Violent")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Violence0"]["Level"] == 2:
+    #         print("Meek")
+    # if "Beauty0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Beauty0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Beauty0"]["Level"] == 1:
+    #         print("Gorgeous")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Beauty0"]["Level"] == 2:
+    #         print("Beautiful")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Beauty0"]["Level"] == 2:
+    #         print("Ugly")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Beauty0"]["Level"] == 2:
+    #         print("Disfigured")
+    # if "Shame0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Shame0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Shame0"]["Level"] == 1:
+    #         print("Shameful")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Shame0"]["Level"] == 2:
+    #         print("Shameless")
+    # if "Will0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Will0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Will0"]["Level"] == 1:
+    #         print("Strong Willed")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Will0"]["Level"] == 2:
+    #         print("Weak Willed")
+    # if "Influence0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Influence0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Influence0"]["Level"] == 1:
+    #         print("Corruptor")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Influence0"]["Level"] == 2:
+    #         print("Purificator")
+    # if "Fertility0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Fertility0"]["Level"] != 0:
+    #     if Globals.SoLNPCData[Target]["Traits"]["Fertility0"]["Level"] == 1:
+    #         print("Hyper Fertile")
+    #     elif Globals.SoLNPCData[Target]["Traits"]["Fertility0"]["Level"] == 2:
+    #         print("Infertile")
+    # if "LewdBody0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Courage0"]["Level"] != 0:
+    #     ""
+    #     # if Globals.SoLNPCData[Target]["Traits"]["Courage0"]["Level"] == 1:
+    #     #     print("Brave")
+    #     # elif Globals.SoLNPCData[Target]["Traits"]["Courage0"]["Level"] == 2:
+    #     #     print("Timid")
+
 
 
 def TraitChange(TraitID, NPCID, Data, Value):
@@ -2239,7 +2405,7 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     if Button0.Available == 1:
                         TraitChange(TraitID, NPCID, Data, 0)
                 Button0 = QPushButton(Widget0, clicked = lambda: Click0())
-                Button0.setStyleSheet("border-image: url(images/SoLResources/Cycle.png); ")
+                Button0.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
                 Button0.setGeometry(215,1,33,33)
                 Button0.setProperty("Color","Dark")
                 Button0.Available = Available
@@ -2279,7 +2445,7 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     if Button1.Available == 1:
                         TraitChange(TraitID, NPCID, Data, 1)
                 Button1 = QPushButton(Widget1, clicked = lambda: Click1())
-                Button1.setStyleSheet("border-image: url(images/SoLResources/Cycle.png); ")
+                Button1.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
                 Button1.setGeometry(215,1,33,33)
                 Button1.setProperty("Color","Dark")
                 Button1.Available = Available
@@ -2320,7 +2486,7 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     if Button2.Available == 1:
                         TraitChange(TraitID, NPCID, Data, 2)
                 Button2 = QPushButton(Widget2, clicked = lambda: Click2())
-                Button2.setStyleSheet("border-image: url(images/SoLResources/Cycle.png); ")
+                Button2.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
                 Button2.setGeometry(215,1,33,33)
                 Button2.setProperty("Color","Dark")
                 Button2.Available = Available
@@ -2396,7 +2562,7 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     if NaDButton.Available == 1:
                         TraitChange(TraitID, NPCID, Data, 0)
                 NaDButton = QPushButton(NaDWidget, clicked = lambda: NaDClick())
-                NaDButton.setStyleSheet("border-image: url(images/SoLResources/Cycle.png); ")
+                NaDButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
                 NaDButton.setGeometry(215,1,33,33)
                 NaDButton.setProperty("Color","Dark")
                 NaDButton.Available = Available
@@ -2436,7 +2602,7 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     if TsunButton.Available == 1:
                         TraitChange(TraitID, NPCID, Data, 1)
                 TsunButton = QPushButton(TsunWidget, clicked = lambda: TsunClick())
-                TsunButton.setStyleSheet("border-image: url(images/SoLResources/Cycle.png); ")
+                TsunButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
                 TsunButton.setGeometry(215,1,33,33)
                 TsunButton.setProperty("Color","Dark")
                 TsunButton.Available = Available
@@ -2477,7 +2643,7 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     if DanButton.Available == 1:
                         TraitChange(TraitID, NPCID, Data, 2)
                 DanButton = QPushButton(DanWidget, clicked = lambda: DanClick())
-                DanButton.setStyleSheet("border-image: url(images/SoLResources/Cycle.png); ")
+                DanButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
                 DanButton.setGeometry(215,1,33,33)
                 DanButton.setProperty("Color","Dark")
                 DanButton.Available = Available
@@ -2518,7 +2684,7 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     if KuuButton.Available == 1:
                         TraitChange(TraitID, NPCID, Data, 3)
                 KuuButton = QPushButton(KuuWidget, clicked = lambda: KuuClick())
-                KuuButton.setStyleSheet("border-image: url(images/SoLResources/Cycle.png); ")
+                KuuButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
                 KuuButton.setGeometry(215,1,33,33)
                 KuuButton.setProperty("Color","Dark")
                 KuuButton.Available = Available
@@ -2559,7 +2725,7 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     if YanButton.Available == 1:
                         TraitChange(TraitID, NPCID, Data, 4)
                 YanButton = QPushButton(YanWidget, clicked = lambda: YanClick())
-                YanButton.setStyleSheet("border-image: url(images/SoLResources/Cycle.png); ")
+                YanButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
                 YanButton.setGeometry(215,1,33,33)
                 YanButton.setProperty("Color","Dark")
                 YanButton.Available = Available
@@ -2600,7 +2766,7 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     if DereButton.Available == 1:
                         TraitChange(TraitID, NPCID, Data, 5)
                 DereButton = QPushButton(DereWidget, clicked = lambda: DereClick())
-                DereButton.setStyleSheet("border-image: url(images/SoLResources/Cycle.png); ")
+                DereButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
                 DereButton.setGeometry(215,1,33,33)
                 DereButton.setProperty("Color","Dark")
                 DereButton.Available = Available

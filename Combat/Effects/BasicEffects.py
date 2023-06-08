@@ -223,7 +223,7 @@ def EffectAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/AttackEffect4.png")
+                image = QImage("Resources/CombatResources/AttackEffect4.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -273,7 +273,7 @@ def EffectAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/Strength.png")
+                image = QImage("Resources/CombatResources/Strength.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -323,7 +323,7 @@ def EffectAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/AttackEffect4.png")
+                image = QImage("Resources/CombatResources/AttackEffect4.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -373,7 +373,7 @@ def EffectAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/Gaze1.png")
+                image = QImage("Resources/CombatResources/Gaze1.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -423,7 +423,7 @@ def EffectAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/Fear1.png")
+                image = QImage("Resources/CombatResources/Fear1.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -473,7 +473,7 @@ def EffectAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/Debuff2.png")
+                image = QImage("Resources/CombatResources/Debuff2.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -523,7 +523,7 @@ def EffectAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage("images/CombatResources/Debuff2.png")
+                image = QImage("Resources/CombatResources/Debuff2.png")
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -961,7 +961,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Vulnerable.png);
+        border-image: url(Resources/CombatResources/Vulnerable.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -981,7 +981,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Weak.png);
+        border-image: url(Resources/CombatResources/Weak.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1001,7 +1001,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Parry.png);
+        border-image: url(Resources/CombatResources/Parry.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1021,7 +1021,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Thorns.png);
+        border-image: url(Resources/CombatResources/Thorns.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1041,7 +1041,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Hunker.png);
+        border-image: url(Resources/CombatResources/Hunker.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1061,7 +1061,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Buff1.png);
+        border-image: url(Resources/CombatResources/Buff1.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1081,7 +1081,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Strength.png);
+        border-image: url(Resources/CombatResources/Strength.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1101,7 +1101,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Debuff2.png);
+        border-image: url(Resources/CombatResources/Debuff2.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1121,7 +1121,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Buff1.png);
+        border-image: url(Resources/CombatResources/Buff1.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1141,7 +1141,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Buff2.png);
+        border-image: url(Resources/CombatResources/Buff2.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1161,7 +1161,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Fear2.png);
+        border-image: url(Resources/CombatResources/Fear2.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1181,7 +1181,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Stun.png);
+        border-image: url(Resources/CombatResources/Stun.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1201,7 +1201,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Prey.png);
+        border-image: url(Resources/CombatResources/Prey.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1221,7 +1221,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Unyielding.png);
+        border-image: url(Resources/CombatResources/Unyielding.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1241,7 +1241,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Hunting.png);
+        border-image: url(Resources/CombatResources/Hunting.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -1261,7 +1261,7 @@ def getIcon(Effect, Object):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/PainfulMind.png);
+        border-image: url(Resources/CombatResources/PainfulMind.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)

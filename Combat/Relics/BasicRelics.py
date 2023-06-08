@@ -215,7 +215,7 @@ def getIcon(self, Relic):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Vulnerable.png);
+        border-image: url(Resources/CombatResources/Vulnerable.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -233,7 +233,7 @@ def getIcon(self, Relic):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Vulnerable.png);
+        border-image: url(Resources/CombatResources/Vulnerable.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)
@@ -251,7 +251,7 @@ def getIcon(self, Relic):
         IconWidget.setStyleSheet('''
         QLabel{
         background-color:rgb(35,35,35);
-        border-image: url(images/CombatResources/Vulnerable.png);
+        border-image: url(Resources/CombatResources/Vulnerable.png);
         }
         QToolTip{
         background-color:rgb(255,255,255)

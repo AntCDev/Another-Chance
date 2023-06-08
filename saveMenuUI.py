@@ -41,19 +41,19 @@ class SaveObject:
         def DeleteFunc(self):
             Globals.Layouts["SaveUI"].Remove(self.Path)
         RemoveButton = QPushButton(SaveWidget, clicked = lambda: DeleteFunc(self))
-        RemoveButton.setStyleSheet("border-image: url(images/SoLResources/removeIcon.png); ")
+        RemoveButton.setStyleSheet("border-image: url(Resources/SoLResources/removeIcon.png); ")
         RemoveButton.setGeometry(960,2,45,45)
 
         def SaveFunc(self):
             Globals.Layouts["SaveUI"].Save(self.Path)
         SaveButton = QPushButton(SaveWidget, clicked = lambda: SaveFunc(self))
-        SaveButton.setStyleSheet("border-image: url(images/SoLResources/saveIcon.png); ")
+        SaveButton.setStyleSheet("border-image: url(Resources/SoLResources/saveIcon.png); ")
         SaveButton.setGeometry(1015,2,45,45)
 
         def LoadFunc(self):
             Globals.Layouts["SaveUI"].Load(self.Path)
         LoadButton = QPushButton(SaveWidget, clicked = lambda: LoadFunc(self))
-        LoadButton.setStyleSheet("border-image: url(images/SoLResources/loadIcon.png);")
+        LoadButton.setStyleSheet("border-image: url(Resources/SoLResources/loadIcon.png);")
         LoadButton.setGeometry(1065,2,45,45)
 
 
@@ -166,12 +166,12 @@ class UiLayoutSaveMenuOld(object):
         self.lineSaveTop.setAlignment(Qt.AlignVCenter)
 
         self.buttonSaveTop = QPushButton(self.GUI)
-        self.buttonSaveTop.setStyleSheet("background-image : url(images/saveIcon.png);")
+        self.buttonSaveTop.setStyleSheet("background-image : url(Resources/saveIcon.png);")
         self.buttonSaveTop.setGeometry(950,30,40,40)
         self.buttonSaveTop.clicked.connect(self.saveButtonTop)
 
         self.buttonLoadTop = QPushButton(self.GUI)
-        self.buttonLoadTop.setStyleSheet("background-image : url(images/loadIcon.png);")
+        self.buttonLoadTop.setStyleSheet("background-image : url(Resources/loadIcon.png);")
         self.buttonLoadTop.setGeometry(995,30,40,40)
         self.buttonLoadTop.clicked.connect(self.loadButtonTop)
 
@@ -182,17 +182,17 @@ class UiLayoutSaveMenuOld(object):
         self.labelSave1.setAlignment(Qt.AlignVCenter)
 
         self.buttonSave1 = QPushButton(self.GUI)
-        self.buttonSave1.setStyleSheet("background-image : url(images/saveIcon.png);")
+        self.buttonSave1.setStyleSheet("background-image : url(Resources/saveIcon.png);")
         self.buttonSave1.setGeometry(905,130,40,40)
         self.buttonSave1.clicked.connect(self.saveButton1)
 
         self.buttonLoad1 = QPushButton(self.GUI)
-        self.buttonLoad1.setStyleSheet("background-image : url(images/loadIcon.png);")
+        self.buttonLoad1.setStyleSheet("background-image : url(Resources/loadIcon.png);")
         self.buttonLoad1.setGeometry(950,130,40,40)
         self.buttonLoad1.clicked.connect(self.loadButton1)
 
         self.buttonDelete1 = QPushButton(self.GUI, clicked = lambda: self.deleteFun(1))
-        self.buttonDelete1.setStyleSheet("background-image : url(images/deleteIcon.png);")
+        self.buttonDelete1.setStyleSheet("background-image : url(Resources/deleteIcon.png);")
         self.buttonDelete1.setGeometry(995,130,40,40)
 
 
@@ -202,17 +202,17 @@ class UiLayoutSaveMenuOld(object):
         self.labelSave2.setAlignment(Qt.AlignVCenter)
 
         self.buttonSave2 = QPushButton(self.GUI)
-        self.buttonSave2.setStyleSheet("background-image : url(images/saveIcon.png);")
+        self.buttonSave2.setStyleSheet("background-image : url(Resources/saveIcon.png);")
         self.buttonSave2.setGeometry(905,180,40,40)
         self.buttonSave2.clicked.connect(self.saveButton2)
 
         self.buttonLoad2 = QPushButton(self.GUI)
-        self.buttonLoad2.setStyleSheet("background-image : url(images/loadIcon.png);")
+        self.buttonLoad2.setStyleSheet("background-image : url(Resources/loadIcon.png);")
         self.buttonLoad2.setGeometry(950,180,40,40)
         self.buttonLoad2.clicked.connect(self.loadButton2)
 
         self.buttonDelete2 = QPushButton(self.GUI, clicked = lambda: self.deleteFun(2))
-        self.buttonDelete2.setStyleSheet("background-image : url(images/deleteIcon.png);")
+        self.buttonDelete2.setStyleSheet("background-image : url(Resources/deleteIcon.png);")
         self.buttonDelete2.setGeometry(995,180,40,40)
 
 
@@ -222,17 +222,17 @@ class UiLayoutSaveMenuOld(object):
         self.labelSave3.setAlignment(Qt.AlignVCenter)
 
         self.buttonSave3 = QPushButton(self.GUI)
-        self.buttonSave3.setStyleSheet("background-image : url(images/saveIcon.png);")
+        self.buttonSave3.setStyleSheet("background-image : url(Resources/saveIcon.png);")
         self.buttonSave3.setGeometry(905,230,40,40)
         self.buttonSave3.clicked.connect(self.saveButton3)
 
         self.buttonLoad3 = QPushButton(self.GUI)
-        self.buttonLoad3.setStyleSheet("background-image : url(images/loadIcon.png);")
+        self.buttonLoad3.setStyleSheet("background-image : url(Resources/loadIcon.png);")
         self.buttonLoad3.setGeometry(950,230,40,40)
         self.buttonLoad3.clicked.connect(self.loadButton3)
 
         self.buttonDelete3 = QPushButton(self.GUI, clicked = lambda: self.deleteFun(3))
-        self.buttonDelete3.setStyleSheet("background-image : url(images/deleteIcon.png);")
+        self.buttonDelete3.setStyleSheet("background-image : url(Resources/deleteIcon.png);")
         self.buttonDelete3.setGeometry(995,230,40,40)
 
 
@@ -242,17 +242,17 @@ class UiLayoutSaveMenuOld(object):
         self.labelSave4.setAlignment(Qt.AlignVCenter)
 
         self.buttonSave4 = QPushButton(self.GUI)
-        self.buttonSave4.setStyleSheet("background-image : url(images/saveIcon.png);")
+        self.buttonSave4.setStyleSheet("background-image : url(Resources/saveIcon.png);")
         self.buttonSave4.setGeometry(905,280,40,40)
         self.buttonSave4.clicked.connect(self.saveButton4)
 
         self.buttonLoad4 = QPushButton(self.GUI)
-        self.buttonLoad4.setStyleSheet("background-image : url(images/loadIcon.png);")
+        self.buttonLoad4.setStyleSheet("background-image : url(Resources/loadIcon.png);")
         self.buttonLoad4.setGeometry(950,280,40,40)
         self.buttonLoad4.clicked.connect(self.loadButton4)
 
         self.buttonDelete4 = QPushButton(self.GUI, clicked = lambda: self.deleteFun(4))
-        self.buttonDelete4.setStyleSheet("background-image : url(images/deleteIcon.png);")
+        self.buttonDelete4.setStyleSheet("background-image : url(Resources/deleteIcon.png);")
         self.buttonDelete4.setGeometry(995,280,40,40)
 
 
@@ -262,17 +262,17 @@ class UiLayoutSaveMenuOld(object):
         self.labelSave5.setAlignment(Qt.AlignVCenter)
 
         self.buttonSave5 = QPushButton(self.GUI)
-        self.buttonSave5.setStyleSheet("background-image : url(images/saveIcon.png);")
+        self.buttonSave5.setStyleSheet("background-image : url(Resources/saveIcon.png);")
         self.buttonSave5.setGeometry(905,330,40,40)
         self.buttonSave5.clicked.connect(self.saveButton5)
 
         self.buttonLoad5 = QPushButton(self.GUI)
-        self.buttonLoad5.setStyleSheet("background-image : url(images/loadIcon.png);")
+        self.buttonLoad5.setStyleSheet("background-image : url(Resources/loadIcon.png);")
         self.buttonLoad5.setGeometry(950,330,40,40)
         self.buttonLoad5.clicked.connect(self.loadButton5)
 
         self.buttonDelete5 = QPushButton(self.GUI, clicked = lambda: self.deleteFun(5))
-        self.buttonDelete5.setStyleSheet("background-image : url(images/deleteIcon.png);")
+        self.buttonDelete5.setStyleSheet("background-image : url(Resources/deleteIcon.png);")
         self.buttonDelete5.setGeometry(995,330,40,40)
 
 
@@ -282,17 +282,17 @@ class UiLayoutSaveMenuOld(object):
         self.labelSave6.setAlignment(Qt.AlignVCenter)
 
         self.buttonSave6 = QPushButton(self.GUI)
-        self.buttonSave6.setStyleSheet("background-image : url(images/saveIcon.png);")
+        self.buttonSave6.setStyleSheet("background-image : url(Resources/saveIcon.png);")
         self.buttonSave6.setGeometry(905,380,40,40)
         self.buttonSave6.clicked.connect(self.saveButton6)
 
         self.buttonLoad6 = QPushButton(self.GUI)
-        self.buttonLoad6.setStyleSheet("background-image : url(images/loadIcon.png);")
+        self.buttonLoad6.setStyleSheet("background-image : url(Resources/loadIcon.png);")
         self.buttonLoad6.setGeometry(950,380,40,40)
         self.buttonLoad6.clicked.connect(self.loadButton6)
 
         self.buttonDelete6 = QPushButton(self.GUI, clicked = lambda: self.deleteFun(6))
-        self.buttonDelete6.setStyleSheet("background-image : url(images/deleteIcon.png);")
+        self.buttonDelete6.setStyleSheet("background-image : url(Resources/deleteIcon.png);")
         self.buttonDelete6.setGeometry(995,380,40,40)
 
 
@@ -302,17 +302,17 @@ class UiLayoutSaveMenuOld(object):
         self.labelSave7.setAlignment(Qt.AlignVCenter)
 
         self.buttonSave7 = QPushButton(self.GUI)
-        self.buttonSave7.setStyleSheet("background-image : url(images/saveIcon.png);")
+        self.buttonSave7.setStyleSheet("background-image : url(Resources/saveIcon.png);")
         self.buttonSave7.setGeometry(905,430,40,40)
         self.buttonSave7.clicked.connect(self.saveButton7)
 
         self.buttonLoad7 = QPushButton(self.GUI)
-        self.buttonLoad7.setStyleSheet("background-image : url(images/loadIcon.png);")
+        self.buttonLoad7.setStyleSheet("background-image : url(Resources/loadIcon.png);")
         self.buttonLoad7.setGeometry(950,430,40,40)
         self.buttonLoad7.clicked.connect(self.loadButton7)
 
         self.buttonDelete7 = QPushButton(self.GUI, clicked = lambda: self.deleteFun(7))
-        self.buttonDelete7.setStyleSheet("background-image : url(images/deleteIcon.png);")
+        self.buttonDelete7.setStyleSheet("background-image : url(Resources/deleteIcon.png);")
         self.buttonDelete7.setGeometry(995,430,40,40)
 
 
@@ -322,17 +322,17 @@ class UiLayoutSaveMenuOld(object):
         self.labelSave8.setAlignment(Qt.AlignVCenter)
 
         self.buttonSave8 = QPushButton(self.GUI)
-        self.buttonSave8.setStyleSheet("background-image : url(images/saveIcon.png);")
+        self.buttonSave8.setStyleSheet("background-image : url(Resources/saveIcon.png);")
         self.buttonSave8.setGeometry(905,480,40,40)
         self.buttonSave8.clicked.connect(self.saveButton8)
 
         self.buttonLoad8 = QPushButton(self.GUI)
-        self.buttonLoad8.setStyleSheet("background-image : url(images/loadIcon.png);")
+        self.buttonLoad8.setStyleSheet("background-image : url(Resources/loadIcon.png);")
         self.buttonLoad8.setGeometry(950,480,40,40)
         self.buttonLoad8.clicked.connect(self.loadButton8)
 
         self.buttonDelete8 = QPushButton(self.GUI, clicked = lambda: self.deleteFun(8))
-        self.buttonDelete8.setStyleSheet("background-image : url(images/deleteIcon.png);")
+        self.buttonDelete8.setStyleSheet("background-image : url(Resources/deleteIcon.png);")
         self.buttonDelete8.setGeometry(995,480,40,40)
 
 
@@ -342,17 +342,17 @@ class UiLayoutSaveMenuOld(object):
         self.labelSave9.setAlignment(Qt.AlignVCenter)
 
         self.buttonSave9 = QPushButton(self.GUI)
-        self.buttonSave9.setStyleSheet("background-image : url(images/saveIcon.png);")
+        self.buttonSave9.setStyleSheet("background-image : url(Resources/saveIcon.png);")
         self.buttonSave9.setGeometry(905,530,40,40)
         self.buttonSave9.clicked.connect(self.saveButton9)
 
         self.buttonLoad9 = QPushButton(self.GUI)
-        self.buttonLoad9.setStyleSheet("background-image : url(images/loadIcon.png);")
+        self.buttonLoad9.setStyleSheet("background-image : url(Resources/loadIcon.png);")
         self.buttonLoad9.setGeometry(950,530,40,40)
         self.buttonLoad9.clicked.connect(self.loadButton9)
 
         self.buttonDelete9 = QPushButton(self.GUI, clicked = lambda: self.deleteFun(9))
-        self.buttonDelete9.setStyleSheet("background-image : url(images/deleteIcon.png);")
+        self.buttonDelete9.setStyleSheet("background-image : url(Resources/deleteIcon.png);")
         self.buttonDelete9.setGeometry(995,530,40,40)
 
 
@@ -362,17 +362,17 @@ class UiLayoutSaveMenuOld(object):
         self.labelSave10.setAlignment(Qt.AlignVCenter)
 
         self.buttonSave10 = QPushButton(self.GUI)
-        self.buttonSave10.setStyleSheet("background-image : url(images/saveIcon.png);")
+        self.buttonSave10.setStyleSheet("background-image : url(Resources/saveIcon.png);")
         self.buttonSave10.setGeometry(905,580,40,40)
         self.buttonSave10.clicked.connect(self.saveButton10)
 
         self.buttonLoad10 = QPushButton(self.GUI)
-        self.buttonLoad10.setStyleSheet("background-image : url(images/loadIcon.png);")
+        self.buttonLoad10.setStyleSheet("background-image : url(Resources/loadIcon.png);")
         self.buttonLoad10.setGeometry(950,580,40,40)
         self.buttonLoad10.clicked.connect(self.loadButton10)
 
         self.buttonDelete10 = QPushButton(self.GUI, clicked = lambda: self.deleteFun(10))
-        self.buttonDelete10.setStyleSheet("background-image : url(images/deleteIcon.png);")
+        self.buttonDelete10.setStyleSheet("background-image : url(Resources/deleteIcon.png);")
         self.buttonDelete10.setGeometry(995,580,40,40)
 
         self.saveCheck()
@@ -892,11 +892,11 @@ class UiLayoutSaveMenu(object):
         self.LineSave.setGeometry(237,5,1125,45)
 
         self.ButtonSave = QPushButton(self.GUI, clicked = lambda: self.Save(self.LineSave.text()) )
-        self.ButtonSave.setStyleSheet("border-image: url(images/SoLResources/saveIcon.png);")
+        self.ButtonSave.setStyleSheet("border-image: url(Resources/SoLResources/saveIcon.png);")
         self.ButtonSave.setGeometry(1272,7,40,40)
 
         self.ButtonLoad = QPushButton(self.GUI, clicked = lambda: self.Load(self.LineSave.text()) )
-        self.ButtonLoad.setStyleSheet("border-image: url(images/SoLResources/loadIcon.png);")
+        self.ButtonLoad.setStyleSheet("border-image: url(Resources/SoLResources/loadIcon.png);")
         self.ButtonLoad.setGeometry(1317,7,40,40)
 
         self.ScrollSaves = QScrollArea(self.GUI)
