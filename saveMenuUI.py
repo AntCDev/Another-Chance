@@ -605,12 +605,12 @@ class UiLayoutSaveMenuOld(object):
                     tempData = json.load(f)
                 with open('enviorementData.json', 'rb') as f:
                     enviorementData = json.load(f)
-                with open('NPCdata.json', 'rb') as f:
-                    NPCdata = json.load(f)
+                with open('NPCData.json', 'rb') as f:
+                    NPCData = json.load(f)
                 with open('PCdata.json', 'rb') as f:
                     PCdata = json.load(f)
 
-                data = {"tempData":tempData, "enviorementData":enviorementData, "NPCdata":NPCdata, "PCdata":PCdata}
+                data = {"tempData":tempData, "enviorementData":enviorementData, "NPCData":NPCData, "PCdata":PCdata}
                 savePath = "saves/" + str(saveName)
 
                 length = len(savePath)
@@ -659,14 +659,14 @@ class UiLayoutSaveMenuOld(object):
 
                 tempData = data["tempData"]
                 enviorementData = data["enviorementData"]
-                NPCdata = data["NPCdata"]
+                NPCData = data["NPCData"]
                 PCdata = data["PCdata"]
 
 
                 with open("tempData.json", 'w') as f:
                     json.dump(tempData, f)
-                with open("NPCdata.json", 'w') as f:
-                    json.dump(NPCdata, f)
+                with open("NPCData.json", 'w') as f:
+                    json.dump(NPCData, f)
                 with open("enviorementData.json", 'w') as f:
                     json.dump(enviorementData, f)
                 with open("PCdata.json", 'w') as f:

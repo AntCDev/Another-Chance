@@ -1,9 +1,10 @@
 import sys
+import PyQt5
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
+from PyQt5.QtGui import QTextCursor, QFont, QFontDatabase
 import json
 import os
 import Globals
@@ -33,6 +34,7 @@ class MainWindow(QMainWindow):
     resized = QtCore.pyqtSignal()
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
+        QFontDatabase.addApplicationFont("images/OtherResourcecs/Segoe UI")
 
         DisclaimerAgreed = 0
 

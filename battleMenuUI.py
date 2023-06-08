@@ -1189,8 +1189,8 @@ class UiLayoutBattleMenu(QWidget):
     def allyCreate(self, AllyID):
         with open('tempData.json', 'rb') as f:
             tempData = json.load(f)
-        with open('NPCdata.json', 'rb') as f:
-            NPCdata = json.load(f)
+        with open('NPCData.json', 'rb') as f:
+            NPCData = json.load(f)
 
         # TRIES TO CHECK FOR CUSTOM OBJECTS FOR THE CHARACTER
         try:
@@ -1199,17 +1199,17 @@ class UiLayoutBattleMenu(QWidget):
             fullLength = len(DeckPath)
             FullPath = FullPath[0:fullLength-nameLength]
 
-            ObjectPath = f'''\\NPCdata\\{str(NPCdata[ID]["Name"]) + str(ID)}'''
+            ObjectPath = f'''\\NPCData\\{str(NPCData[ID]["Name"]) + str(ID)}'''
             ObjectFullPath = FullPath + ObjectPath
             if OnjectFullPath not in sys.path:
                 sys.path.insert(0, ObjectFullPath)
-            Name = NPCdata[ID]["Name"]
+            Name = NPCData[ID]["Name"]
             Object = __import__(Name)
             Ally = Object.getObject(self)
         except:
             ID = tempData["PlayerID"]
-            Name = NPCdata[ID]["Name"]
-            HP = NPCdata[ID]["CombatAbilities"]["HP"]
+            Name = NPCData[ID]["Name"]
+            HP = NPCData[ID]["CombatAbilities"]["HP"]
             Ally = AllyClass(Name, HP, ID)
         Globals.Allies[ID] = Ally
         # {"AttackID":Strike0, "DeckReference":0x0002, "ID":"03", "Flags":{"CanBeUpgraded":1,"CanBeUsed":1,"NumberOfUpgrades":0}}
@@ -1217,17 +1217,17 @@ class UiLayoutBattleMenu(QWidget):
 
         # GETS THE DECK OF THE CHARACTER
         try:    # TRIES TO SEE IF THE CHARACTER HAS A CUSTOM DECK
-            if NPCdata[ID]["CombatAbilities"]["DeckLocation"] != []:
+            if NPCData[ID]["CombatAbilities"]["DeckLocation"] != []:
                 FullPath = os.path.abspath(__file__)
                 nameLength = len(os.path.basename(__file__))
                 fullLength = len(DeckPath)
                 FullPath = FullPath[0:fullLength-nameLength]
 
-                DeckPath = NPCdata[ID]["CombatAbilities"]["DeckLocation"]
+                DeckPath = NPCData[ID]["CombatAbilities"]["DeckLocation"]
                 DeckFullPath = FullPath + DeckPath
                 if DeckFullPath not in sys.path:
                     sys.path.insert(0, DeckFullPath)
-                DeckName = NPCdata[ID]["CombatAbilities"]["DeckName"]
+                DeckName = NPCData[ID]["CombatAbilities"]["DeckName"]
                 Deck = __import__(DeckName)
                 Globals.Decks[DeckName] = Deck
                 RawDeck = Deck.getDeck(self)
@@ -1236,7 +1236,7 @@ class UiLayoutBattleMenu(QWidget):
             # RawDeck = Globals.Allies[ID].Deck()
         except:
             try:    # IF NOT THEN IT CHECKS FOR A SPECIFIC CLASS AND CHECKS TO SEE IF THEY EXISTS ON THE /COMBAT/DECKS FOLDER
-                if NPCdata[ID]["CombatAbilities"]["Class"] != []:
+                if NPCData[ID]["CombatAbilities"]["Class"] != []:
                     FullPath = os.path.abspath(__file__)
                     nameLength = len(os.path.basename(__file__))
                     fullLength = len(DeckPath)
@@ -1246,7 +1246,7 @@ class UiLayoutBattleMenu(QWidget):
                     DeckFullPath = FullPath + DeckPath
                     if DeckFullPath not in sys.path:
                         sys.path.insert(0, DeckFullPath)
-                    DeckName = NPCdata[ID]["CombatAbilities"]["Class"]
+                    DeckName = NPCData[ID]["CombatAbilities"]["Class"]
                     Deck = __import__(DeckName)
                     Globals.Decks[DeckName] = Deck
                     RawDeck = Deck.getDeck(self)
@@ -1883,7 +1883,7 @@ class RectItem(QtWidgets.QGraphicsRectItem):
 
 class AllyClass:
     def __init__(self, ID, Stats):
-        with open('NPCdata.json', 'rb') as f:
+        with open('NPCData.json', 'rb') as f:
             NPCfullData = json.load(f)
         NPCData = NPCfullData[ID]
 
@@ -2519,7 +2519,7 @@ class UiLayoutBattleScene(QWidget):
     def Intiliaze(self):
         try:
             ### PULLS FROM THE CURRENT PARTY MEMEBERS TO GENERATE THE WHOLE DECK AS WELL AS THE DRAWING DECK
-            # with open('NPCdata.json', 'rb') as f:
+            # with open('NPCData.json', 'rb') as f:
             #     NPCfullData = json.load(f)
             # with open('tempData.json', 'rb') as f:
             #     tempData = json.load(f)
@@ -2557,7 +2557,7 @@ class UiLayoutBattleScene(QWidget):
                         try:
                             try:
                                 Name = "TODO"
-                                NPCPath = Path + f'''NPCdata\\{Name}{NPCID}\\'''
+                                NPCPath = Path + f'''NPCData\\{Name}{NPCID}\\'''
                                 FileName = f'''{Name}{NPCID}Functions'''
                                 if FileName not in Globals.References:
 

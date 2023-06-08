@@ -39,8 +39,8 @@ def Initialize(self, Reference):
 
     if "SoLTempData" in Globals.CurrentSession:
         Globals.SoLTempData = Globals.CurrentSession["SoLTempData"]
-        Globals.SoLTempData["TempNPC"] = []
-        Globals.SoLTempData["FavoriteNPC"] = []
+        if "TempNPC" not in Globals.SoLTempData: Globals.SoLTempData["TempNPC"] = []
+        if "FavoriteNPC" not in Globals.SoLTempData: Globals.SoLTempData["FavoriteNPC"] = []
     else:
         Globals.SoLTempData = {
             "TempNPC":[],

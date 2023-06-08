@@ -41,7 +41,7 @@ class EnhanceGenericNPCObject:
             if ImageType == "FullBody" or ListPortraits == []:
                 ImageName = random.choice(ListFullBody)
 
-            NPCImage.setPixmap(QPixmap(f'''NPCdata/{self.Data["Name"]}{self.Data["ID"]}/{ImageName}'''))
+            NPCImage.setPixmap(QPixmap(f'''NPCData/{self.Data["Name"]}{self.Data["ID"]}/{ImageName}'''))
             NPCImage.setScaledContents(True)
         except Exception as e:
             ""

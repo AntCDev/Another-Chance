@@ -816,168 +816,168 @@ class UiLayoutMakerMenu(QWidget):
         self.DescriptionsWidget.setMaximumHeight(680)
 
     def CheckLoad(self):
-        Path = "NPCdata"
+        Path = "NPCData"
         DirList = os.listdir(Path)
         for DirName in DirList:
             try:
-                with open(f'''NPCdata/{DirName}/{DirName}Data.json''', 'rb') as f:
-                    NPCdata = json.load(f)
-                Name = NPCdata["Name"]
-                ID = NPCdata["ID"]
+                with open(f'''NPCData/{DirName}/{DirName}Data.json''', 'rb') as f:
+                    NPCData = json.load(f)
+                Name = NPCData["Name"]
+                ID = NPCData["ID"]
                 self.LoadBox.addItem(f'''{Name} {ID}''' )
-                self.LoadBox.NPCData[f'''{Name} {ID}'''] = NPCdata
+                self.LoadBox.NPCData[f'''{Name} {ID}'''] = NPCData
             except Exception as e:
                 ""
 
     def Load(self):
         try:
             Current = self.LoadBox.currentText()
-            NPCdata = self.LoadBox.NPCData[Current]
-            if NPCdata["Version"] == 1:
-                self.FullNameLine.setText(NPCdata["FullName"])
-                self.MainNameLine.setText(NPCdata["Name"])
-                self.SkinColorLine.setText(NPCdata["BodyType"]["SkinColor"])
-                self.HairColorLine.setText(NPCdata["BodyType"]["HairColor"])
-                self.RaceLine.setText(NPCdata["BodyType"]["Race"])
-                # self.EyesLine.setText(NPCdata["BodyType"]["SkinColor"])
-                self.IDLine.setText(NPCdata["ID"])
-                self.FaceBox.setCurrentIndex(NPCdata["BodyType"]["FaceType"])
-                self.BodySizeBox.setCurrentIndex(NPCdata["BodyType"]["BodySize"])
-                self.BodyTypeBox.setCurrentIndex(NPCdata["BodyType"]["Complexion"])
-                self.ChestBox.setCurrentIndex(NPCdata["BodyType"]["ChestSize"])
-                self.HipBox.setCurrentIndex(NPCdata["BodyType"]["HipsSize"])
-                self.AssBox.setCurrentIndex(NPCdata["BodyType"]["AssSize"])
-                self.LipBox.setCurrentIndex(NPCdata["BodyType"]["LipsSize"])
-                self.VBox.setCurrentIndex(NPCdata["BodyType"]["VTightness"])
-                self.ABox.setCurrentIndex(NPCdata["BodyType"]["ATightness"])
-                self.PBox.setCurrentIndex(NPCdata["BodyType"]["PenisSize"])
-                self.BBox.setCurrentIndex(NPCdata["BodyType"]["BallsSize"])
+            NPCData = self.LoadBox.NPCData[Current]
+            if NPCData["Version"] == 1:
+                self.FullNameLine.setText(NPCData["FullName"])
+                self.MainNameLine.setText(NPCData["Name"])
+                self.SkinColorLine.setText(NPCData["BodyType"]["SkinColor"])
+                self.HairColorLine.setText(NPCData["BodyType"]["HairColor"])
+                self.RaceLine.setText(NPCData["BodyType"]["Race"])
+                # self.EyesLine.setText(NPCData["BodyType"]["SkinColor"])
+                self.IDLine.setText(NPCData["ID"])
+                self.FaceBox.setCurrentIndex(NPCData["BodyType"]["FaceType"])
+                self.BodySizeBox.setCurrentIndex(NPCData["BodyType"]["BodySize"])
+                self.BodyTypeBox.setCurrentIndex(NPCData["BodyType"]["Complexion"])
+                self.ChestBox.setCurrentIndex(NPCData["BodyType"]["ChestSize"])
+                self.HipBox.setCurrentIndex(NPCData["BodyType"]["HipsSize"])
+                self.AssBox.setCurrentIndex(NPCData["BodyType"]["AssSize"])
+                self.LipBox.setCurrentIndex(NPCData["BodyType"]["LipsSize"])
+                self.VBox.setCurrentIndex(NPCData["BodyType"]["VTightness"])
+                self.ABox.setCurrentIndex(NPCData["BodyType"]["ATightness"])
+                self.PBox.setCurrentIndex(NPCData["BodyType"]["PenisSize"])
+                self.BBox.setCurrentIndex(NPCData["BodyType"]["BallsSize"])
 
-                self.VVirginBox.setChecked(NPCdata["Traits"]["isVirginV"])
-                self.AVirginBox.setChecked(NPCdata["Traits"]["isVirginA"])
-                self.PVirginBox.setChecked(NPCdata["Traits"]["isVirginP"])
-                self.MVirginBox.setChecked(NPCdata["Traits"]["isVirginM"])
+                self.VVirginBox.setChecked(NPCData["Traits"]["isVirginV"])
+                self.AVirginBox.setChecked(NPCData["Traits"]["isVirginA"])
+                self.PVirginBox.setChecked(NPCData["Traits"]["isVirginP"])
+                self.MVirginBox.setChecked(NPCData["Traits"]["isVirginM"])
 
-                if NPCdata["BodyType"]["Pronouns"]["Structure"] == "Male":
-                    self.PSubLine.setText(NPCdata["BodyType"]["Pronouns"]["Pronoun1"])
-                    self.PObjLine.setText(NPCdata["BodyType"]["Pronouns"]["Pronoun2"])
-                    self.PPosLine.setText(NPCdata["BodyType"]["Pronouns"]["Pronoun3"])
-                    self.PIPosLine.setText(NPCdata["BodyType"]["Pronouns"]["Pronoun3"])
+                if NPCData["BodyType"]["Pronouns"]["Structure"] == "Male":
+                    self.PSubLine.setText(NPCData["BodyType"]["Pronouns"]["Pronoun1"])
+                    self.PObjLine.setText(NPCData["BodyType"]["Pronouns"]["Pronoun2"])
+                    self.PPosLine.setText(NPCData["BodyType"]["Pronouns"]["Pronoun3"])
+                    self.PIPosLine.setText(NPCData["BodyType"]["Pronouns"]["Pronoun3"])
 
                     self.PStructureButtonM.setChecked(True)
                     self.PStructureButtonF.setChecked(False)
-                if NPCdata["BodyType"]["Pronouns"]["Structure"] == "Female":
-                    self.PSubLine.setText(NPCdata["BodyType"]["Pronouns"]["Pronoun1"])
-                    self.PObjLine.setText(NPCdata["BodyType"]["Pronouns"]["Pronoun2"])
-                    self.PPosLine.setText(NPCdata["BodyType"]["Pronouns"]["Pronoun2"])
-                    self.PIPosLine.setText(NPCdata["BodyType"]["Pronouns"]["Pronoun3"])
+                if NPCData["BodyType"]["Pronouns"]["Structure"] == "Female":
+                    self.PSubLine.setText(NPCData["BodyType"]["Pronouns"]["Pronoun1"])
+                    self.PObjLine.setText(NPCData["BodyType"]["Pronouns"]["Pronoun2"])
+                    self.PPosLine.setText(NPCData["BodyType"]["Pronouns"]["Pronoun2"])
+                    self.PIPosLine.setText(NPCData["BodyType"]["Pronouns"]["Pronoun3"])
 
                     self.PStructureButtonM.setChecked(False)
                     self.PStructureButtonF.setChecked(True)
 
                 # print(self.TraitWidgetsDict["Courage0"].ReturnValue(self.TraitWidgetsDict["Courage0"]))
                 try:
-                    self.TraitWidgetsDict["Courage0"].LoadValue(self.TraitWidgetsDict["Courage0"], NPCdata["Traits"]["isCourage"])
-                    self.TraitWidgetsDict["Attitude0"].LoadValue(self.TraitWidgetsDict["Attitude0"], NPCdata["Traits"]["isAttitude"])
-                    self.TraitWidgetsDict["Pride0"].LoadValue(self.TraitWidgetsDict["Pride0"], NPCdata["Traits"]["isPride"])
-                    self.TraitWidgetsDict["Dere0"].LoadValue(self.TraitWidgetsDict["Dere0"], NPCdata["Traits"]["isDere"])
-                    self.TraitWidgetsDict["SelfControl0"].LoadValue(self.TraitWidgetsDict["SelfControl0"], NPCdata["Traits"]["isControl"])
-                    self.TraitWidgetsDict["Cheerfulness0"].LoadValue(self.TraitWidgetsDict["Cheerfulness0"], NPCdata["Traits"]["isCheerful"])
-                    self.TraitWidgetsDict["Shyness0"].LoadValue(self.TraitWidgetsDict["Shyness0"], NPCdata["Traits"]["isShy"])
-                    self.TraitWidgetsDict["Gullible0"].LoadValue(self.TraitWidgetsDict["Gullible0"], NPCdata["Traits"]["isGullible"])
-                    self.TraitWidgetsDict["Charm0"].LoadValue(self.TraitWidgetsDict["Charm0"], NPCdata["Traits"]["isCharm"])
-                    self.TraitWidgetsDict["SubstanceResistance0"].LoadValue(self.TraitWidgetsDict["SubstanceResistance0"], NPCdata["Traits"]["isSubstanceResistance"])
-                    self.TraitWidgetsDict["SexualInterest0"].LoadValue(self.TraitWidgetsDict["SexualInterest0"], NPCdata["Traits"]["isSexualInterest"])
-                    self.TraitWidgetsDict["Virtue0"].LoadValue(self.TraitWidgetsDict["Virtue0"], NPCdata["Traits"]["isVirtue"])
-                    self.TraitWidgetsDict["Chastity0"].LoadValue(self.TraitWidgetsDict["Chastity0"], NPCdata["Traits"]["isChastity"])
-                    self.TraitWidgetsDict["Openess0"].LoadValue(self.TraitWidgetsDict["Openess0"], NPCdata["Traits"]["isOpenessTrait"])
-                    self.TraitWidgetsDict["PainResistance0"].LoadValue(self.TraitWidgetsDict["PainResistance0"], NPCdata["Traits"]["isPainResistance"])
-                    self.TraitWidgetsDict["ArousalEase0"].LoadValue(self.TraitWidgetsDict["ArousalEase0"], NPCdata["Traits"]["isAroussalEase"])
-                    self.TraitWidgetsDict["ResponseToPleasure0"].LoadValue(self.TraitWidgetsDict["ResponseToPleasure0"], NPCdata["Traits"]["isResponseToPleasure"])
-                    self.TraitWidgetsDict["Perversion0"].LoadValue(self.TraitWidgetsDict["Perversion0"], NPCdata["Traits"]["isPerversion"])
-                    self.TraitWidgetsDict["Dominance0"].LoadValue(self.TraitWidgetsDict["Dominance0"], NPCdata["Traits"]["isDominanceTrait"])
-                    self.TraitWidgetsDict["Forceful0"].LoadValue(self.TraitWidgetsDict["Forceful0"], NPCdata["Traits"]["isForcefulTrait"])
-                    self.TraitWidgetsDict["Loyalty0"].LoadValue(self.TraitWidgetsDict["Loyalty0"], NPCdata["Traits"]["isLoyaltyTrait"])
-                    self.TraitWidgetsDict["Violence0"].LoadValue(self.TraitWidgetsDict["Violence0"], NPCdata["Traits"]["isViolenceTrait"])
-                    self.TraitWidgetsDict["Beauty0"].LoadValue(self.TraitWidgetsDict["Beauty0"], NPCdata["Traits"]["isBeautyTrait"])
-                    self.TraitWidgetsDict["Shame0"].LoadValue(self.TraitWidgetsDict["Shame0"], NPCdata["Traits"]["isShameTrait"])
-                    self.TraitWidgetsDict["Will0"].LoadValue(self.TraitWidgetsDict["Will0"], NPCdata["Traits"]["isWillTrait"])
-                    self.TraitWidgetsDict["Influence0"].LoadValue(self.TraitWidgetsDict["Influence0"], NPCdata["Traits"]["isInfluenceTrait"])
-                    self.TraitWidgetsDict["Fertility0"].LoadValue(self.TraitWidgetsDict["Fertility0"], NPCdata["Traits"]["isFertility"])
-                    dict = {"V":NPCdata["Traits"]["isLewdV"], "A":NPCdata["Traits"]["isLewdA"], "B":NPCdata["Traits"]["isLewdB"], "P":NPCdata["Traits"]["isLewdP"], "M":NPCdata["Traits"]["isLewdM"] }
+                    self.TraitWidgetsDict["Courage0"].LoadValue(self.TraitWidgetsDict["Courage0"], NPCData["Traits"]["isCourage"])
+                    self.TraitWidgetsDict["Attitude0"].LoadValue(self.TraitWidgetsDict["Attitude0"], NPCData["Traits"]["isAttitude"])
+                    self.TraitWidgetsDict["Pride0"].LoadValue(self.TraitWidgetsDict["Pride0"], NPCData["Traits"]["isPride"])
+                    self.TraitWidgetsDict["Dere0"].LoadValue(self.TraitWidgetsDict["Dere0"], NPCData["Traits"]["isDere"])
+                    self.TraitWidgetsDict["SelfControl0"].LoadValue(self.TraitWidgetsDict["SelfControl0"], NPCData["Traits"]["isControl"])
+                    self.TraitWidgetsDict["Cheerfulness0"].LoadValue(self.TraitWidgetsDict["Cheerfulness0"], NPCData["Traits"]["isCheerful"])
+                    self.TraitWidgetsDict["Shyness0"].LoadValue(self.TraitWidgetsDict["Shyness0"], NPCData["Traits"]["isShy"])
+                    self.TraitWidgetsDict["Gullible0"].LoadValue(self.TraitWidgetsDict["Gullible0"], NPCData["Traits"]["isGullible"])
+                    self.TraitWidgetsDict["Charm0"].LoadValue(self.TraitWidgetsDict["Charm0"], NPCData["Traits"]["isCharm"])
+                    self.TraitWidgetsDict["SubstanceResistance0"].LoadValue(self.TraitWidgetsDict["SubstanceResistance0"], NPCData["Traits"]["isSubstanceResistance"])
+                    self.TraitWidgetsDict["SexualInterest0"].LoadValue(self.TraitWidgetsDict["SexualInterest0"], NPCData["Traits"]["isSexualInterest"])
+                    self.TraitWidgetsDict["Virtue0"].LoadValue(self.TraitWidgetsDict["Virtue0"], NPCData["Traits"]["isVirtue"])
+                    self.TraitWidgetsDict["Chastity0"].LoadValue(self.TraitWidgetsDict["Chastity0"], NPCData["Traits"]["isChastity"])
+                    self.TraitWidgetsDict["Openess0"].LoadValue(self.TraitWidgetsDict["Openess0"], NPCData["Traits"]["isOpenessTrait"])
+                    self.TraitWidgetsDict["PainResistance0"].LoadValue(self.TraitWidgetsDict["PainResistance0"], NPCData["Traits"]["isPainResistance"])
+                    self.TraitWidgetsDict["ArousalEase0"].LoadValue(self.TraitWidgetsDict["ArousalEase0"], NPCData["Traits"]["isAroussalEase"])
+                    self.TraitWidgetsDict["ResponseToPleasure0"].LoadValue(self.TraitWidgetsDict["ResponseToPleasure0"], NPCData["Traits"]["isResponseToPleasure"])
+                    self.TraitWidgetsDict["Perversion0"].LoadValue(self.TraitWidgetsDict["Perversion0"], NPCData["Traits"]["isPerversion"])
+                    self.TraitWidgetsDict["Dominance0"].LoadValue(self.TraitWidgetsDict["Dominance0"], NPCData["Traits"]["isDominanceTrait"])
+                    self.TraitWidgetsDict["Forceful0"].LoadValue(self.TraitWidgetsDict["Forceful0"], NPCData["Traits"]["isForcefulTrait"])
+                    self.TraitWidgetsDict["Loyalty0"].LoadValue(self.TraitWidgetsDict["Loyalty0"], NPCData["Traits"]["isLoyaltyTrait"])
+                    self.TraitWidgetsDict["Violence0"].LoadValue(self.TraitWidgetsDict["Violence0"], NPCData["Traits"]["isViolenceTrait"])
+                    self.TraitWidgetsDict["Beauty0"].LoadValue(self.TraitWidgetsDict["Beauty0"], NPCData["Traits"]["isBeautyTrait"])
+                    self.TraitWidgetsDict["Shame0"].LoadValue(self.TraitWidgetsDict["Shame0"], NPCData["Traits"]["isShameTrait"])
+                    self.TraitWidgetsDict["Will0"].LoadValue(self.TraitWidgetsDict["Will0"], NPCData["Traits"]["isWillTrait"])
+                    self.TraitWidgetsDict["Influence0"].LoadValue(self.TraitWidgetsDict["Influence0"], NPCData["Traits"]["isInfluenceTrait"])
+                    self.TraitWidgetsDict["Fertility0"].LoadValue(self.TraitWidgetsDict["Fertility0"], NPCData["Traits"]["isFertility"])
+                    dict = {"V":NPCData["Traits"]["isLewdV"], "A":NPCData["Traits"]["isLewdA"], "B":NPCData["Traits"]["isLewdB"], "P":NPCData["Traits"]["isLewdP"], "M":NPCData["Traits"]["isLewdM"] }
                     self.TraitWidgetsDict["LewdBody0"].LoadValue(self.TraitWidgetsDict["LewdBody0"], dict)
 
                 except Exception as e:
                     print("Ee", e)
-            elif NPCdata["Version"] == 2:
-                self.MainNameLine.setText(NPCdata["Name"])
-                self.IDLine.setText(NPCdata["ID"])
+            elif NPCData["Version"] == 2:
+                self.MainNameLine.setText(NPCData["Name"])
+                self.IDLine.setText(NPCData["ID"])
 
-                self.FullNameLine.setText(NPCdata["BodyData"]["FullName"])
+                self.FullNameLine.setText(NPCData["BodyData"]["FullName"])
                 try:
-                    self.AgeBox.setCurrentIndex(NPCdata["BodyData"]["PhysicalAge"])
+                    self.AgeBox.setCurrentIndex(NPCData["BodyData"]["PhysicalAge"])
                 except Exception as e:
                     ""
                 try:
-                    self.EnergySlider.setValue(NPCdata["GeneralAbilities"]["MaxEnergy"])
+                    self.EnergySlider.setValue(NPCData["GeneralAbilities"]["MaxEnergy"])
                 except Exception as e:
                     ""
                 try:
-                    self.PersonalityBox.setCurrentIndex( self.PersonalityBox.Personalities.index(NPCdata["Personality"]) )
+                    self.PersonalityBox.setCurrentIndex( self.PersonalityBox.Personalities.index(NPCData["Personality"]) )
                 except Exception as e:
                     ""
 
 
 
-                self.SkinColorLine.setText(NPCdata["BodyData"]["SkinColor"])
-                self.HairColorLine.setText(NPCdata["BodyData"]["HairColor"])
-                self.RaceLine.setText(NPCdata["BodyData"]["Race"])
-                self.EyesLine.setText(NPCdata["BodyData"]["Eyes"])
-                self.FaceBox.setCurrentIndex(NPCdata["BodyData"]["Face"])
-                self.BodySizeBox.setCurrentIndex(NPCdata["BodyData"]["Height"])
-                self.BodyTypeBox.setCurrentIndex(NPCdata["BodyData"]["Complexion"])
-                self.ChestBox.setCurrentIndex(NPCdata["BodyData"]["Chest"])
-                self.HipBox.setCurrentIndex(NPCdata["BodyData"]["Hips"])
-                self.AssBox.setCurrentIndex(NPCdata["BodyData"]["Ass"])
-                self.LipBox.setCurrentIndex(NPCdata["BodyData"]["Lips"])
-                self.VBox.setCurrentIndex(NPCdata["BodyData"]["VTightness"])
-                self.ABox.setCurrentIndex(NPCdata["BodyData"]["ATightness"])
-                self.PBox.setCurrentIndex(NPCdata["BodyData"]["PenisSize"])
-                self.BBox.setCurrentIndex(NPCdata["BodyData"]["BallsSize"])
+                self.SkinColorLine.setText(NPCData["BodyData"]["SkinColor"])
+                self.HairColorLine.setText(NPCData["BodyData"]["HairColor"])
+                self.RaceLine.setText(NPCData["BodyData"]["Race"])
+                self.EyesLine.setText(NPCData["BodyData"]["Eyes"])
+                self.FaceBox.setCurrentIndex(NPCData["BodyData"]["Face"])
+                self.BodySizeBox.setCurrentIndex(NPCData["BodyData"]["Height"])
+                self.BodyTypeBox.setCurrentIndex(NPCData["BodyData"]["Complexion"])
+                self.ChestBox.setCurrentIndex(NPCData["BodyData"]["Chest"])
+                self.HipBox.setCurrentIndex(NPCData["BodyData"]["Hips"])
+                self.AssBox.setCurrentIndex(NPCData["BodyData"]["Ass"])
+                self.LipBox.setCurrentIndex(NPCData["BodyData"]["Lips"])
+                self.VBox.setCurrentIndex(NPCData["BodyData"]["VTightness"])
+                self.ABox.setCurrentIndex(NPCData["BodyData"]["ATightness"])
+                self.PBox.setCurrentIndex(NPCData["BodyData"]["PenisSize"])
+                self.BBox.setCurrentIndex(NPCData["BodyData"]["BallsSize"])
 
-                self.VVirginBox.setChecked(NPCdata["BodyData"]["VVirgin"])
-                self.AVirginBox.setChecked(NPCdata["BodyData"]["AVirgin"])
-                self.PVirginBox.setChecked(NPCdata["BodyData"]["PVirgin"])
-                self.MVirginBox.setChecked(NPCdata["BodyData"]["MVirgin"])
+                self.VVirginBox.setChecked(NPCData["BodyData"]["VVirgin"])
+                self.AVirginBox.setChecked(NPCData["BodyData"]["AVirgin"])
+                self.PVirginBox.setChecked(NPCData["BodyData"]["PVirgin"])
+                self.MVirginBox.setChecked(NPCData["BodyData"]["MVirgin"])
 
 
-                self.PSubLine.setText(NPCdata["BodyData"]["Pronouns"]["PSub"])
-                self.PObjLine.setText(NPCdata["BodyData"]["Pronouns"]["PObj"])
-                self.PPosLine.setText(NPCdata["BodyData"]["Pronouns"]["PPos"])
-                self.PIPosLine.setText(NPCdata["BodyData"]["Pronouns"]["PIPos"])
+                self.PSubLine.setText(NPCData["BodyData"]["Pronouns"]["PSub"])
+                self.PObjLine.setText(NPCData["BodyData"]["Pronouns"]["PObj"])
+                self.PPosLine.setText(NPCData["BodyData"]["Pronouns"]["PPos"])
+                self.PIPosLine.setText(NPCData["BodyData"]["Pronouns"]["PIPos"])
 
-                if NPCdata["BodyData"]["Sex"] == "Male":
+                if NPCData["BodyData"]["Sex"] == "Male":
                     self.PStructureButtonM.setChecked(True)
                     self.PStructureButtonF.setChecked(False)
-                if NPCdata["BodyData"]["Sex"] == "Female":
+                if NPCData["BodyData"]["Sex"] == "Female":
                     self.PStructureButtonM.setChecked(False)
                     self.PStructureButtonF.setChecked(True)
 
-                for TraitID in NPCdata["Traits"]:
+                for TraitID in NPCData["Traits"]:
                     if TraitID in self.TraitWidgetsDict:
                         try:
-                            self.TraitWidgetsDict[TraitID].LoadValue(self.TraitWidgetsDict[TraitID], NPCdata["Traits"][TraitID])
+                            self.TraitWidgetsDict[TraitID].LoadValue(self.TraitWidgetsDict[TraitID], NPCData["Traits"][TraitID])
                         except:
                             ""
 
-                self.LegsLine.setText(NPCdata["Descriptions"]["Legs"])
-                self.ArmsLine.setText(NPCdata["Descriptions"]["Arms"])
-                self.FaceLine.setText(NPCdata["Descriptions"]["Head"])
-                self.CoreLine.setText(NPCdata["Descriptions"]["Core"])
-                self.StoryLine.setText(NPCdata["Descriptions"]["Backstory"])
-                self.GenitalsLine.setText(NPCdata["Descriptions"]["Genitals"])
+                self.LegsLine.setText(NPCData["Descriptions"]["Legs"])
+                self.ArmsLine.setText(NPCData["Descriptions"]["Arms"])
+                self.FaceLine.setText(NPCData["Descriptions"]["Head"])
+                self.CoreLine.setText(NPCData["Descriptions"]["Core"])
+                self.StoryLine.setText(NPCData["Descriptions"]["Backstory"])
+                self.GenitalsLine.setText(NPCData["Descriptions"]["Genitals"])
 
-                self.LabelStatus.setText(f'''Succesfully loaded {NPCdata["Name"]} {NPCdata["ID"]}''')
+                self.LabelStatus.setText(f'''Succesfully loaded {NPCData["Name"]} {NPCData["ID"]}''')
         except Exception as e:
             print(e)
             ""
@@ -1080,7 +1080,7 @@ class UiLayoutMakerMenu(QWidget):
                 self.LabelStatus.setText("Please fill the ID or Name")
             else:
                 self.LabelStatus.setText(f'''Succesfully saved {Name} {ID}''')
-                Path = "NPCdata/" + Name + ID
+                Path = "NPCData/" + Name + ID
                 if not os.path.exists(Path):
                     os.makedirs(Path)
                 FullPath = f'''{Path}/{Name}{ID}Data.json'''

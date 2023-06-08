@@ -6,7 +6,7 @@ if errorlevel 1 goto errorNoPython
 
 :: Reaching here means Python is installed.
 :: Execute stuff...
-pip3 install PyQt5
+pip install -R requirements.txt
 
 :: Once done, exit the batch file -- skips executing the errorNoPython section
 goto:eof

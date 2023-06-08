@@ -413,34 +413,34 @@ class UiLayoutDetails2Menu:
         with open("tempData.json", 'rb') as f:
             tempData = json.load(f)
         DetailsData = tempData["DetailsData"]
-        ### TYPES = 1:BASE, WILL PULL DATA FROM THE ORIGINAL FILE. 2:EDITED, WILL PULL DATA FROM THE NPCdata FILE. 3:TEMPORAL, WILL PULL DATA FROM THE tempData FILE
+        ### TYPES = 1:BASE, WILL PULL DATA FROM THE ORIGINAL FILE. 2:EDITED, WILL PULL DATA FROM THE NPCData FILE. 3:TEMPORAL, WILL PULL DATA FROM THE tempData FILE
         if DetailsData["Type"] == 1:
-            path = f'''NPCdata/{DetailsData["Name"]}{DetailsData["ID"]}/{DetailsData["Name"]}{DetailsData["ID"]}Data.json'''
+            path = f'''NPCData/{DetailsData["Name"]}{DetailsData["ID"]}/{DetailsData["Name"]}{DetailsData["ID"]}Data.json'''
             with open(path, 'rb') as f:
-                NPCdata = json.load(f)
+                NPCData = json.load(f)
         elif DetailsData["Type"] == 2:
-            with open("NPCdata.json", 'rb') as f:
-                NPCdataWhole = json.load(f)
-            NPCdata = NPCdataWhole[DetailsData["ID"]]
+            with open("NPCData.json", 'rb') as f:
+                NPCDataWhole = json.load(f)
+            NPCData = NPCDataWhole[DetailsData["ID"]]
 
         NPCID = DetailsData["ID"]
         PCID = tempData["PlayerID"]
         type = DetailsData["Type"]
 
         try:
-            Relation = NPCdata["Relations"][PCID]
+            Relation = NPCData["Relations"][PCID]
         except:
             with open("ResetData/baseRelationship.json", 'rb') as f:
                 baseRelationship = json.load(f)
             Relation = baseRelationship
-            NPCdata["Relations"][PCID] = Relation
+            NPCData["Relations"][PCID] = Relation
 
-        self.appareanceCheck(NPCdata, NPCID, PCID, type)
-        self.fallingCheck(NPCdata, NPCID, PCID, type)
-        self.expCheck(NPCdata, NPCID, PCID, type)
+        self.appareanceCheck(NPCData, NPCID, PCID, type)
+        self.fallingCheck(NPCData, NPCID, PCID, type)
+        self.expCheck(NPCData, NPCID, PCID, type)
         self.relationsWidget.hide()
 
-    def appareanceCheck(self, NPCdata, NPCID, PCID, type):
+    def appareanceCheck(self, NPCData, NPCID, PCID, type):
         textBaseTop = '''
         <html>
         <head/>
@@ -468,21 +468,21 @@ class UiLayoutDetails2Menu:
         dataNPC = tempData["DetailsData"]
         # dataNPC = {"ID":"02", "Name":"Valerie", "Type":2}
 
-        ID = NPCdata["ID"]
-        Name = NPCdata["Name"]
+        ID = NPCData["ID"]
+        Name = NPCData["Name"]
 
-        BodyType = NPCdata["BodyType"]
+        BodyType = NPCData["BodyType"]
         Structure = BodyType["Pronouns"]["Structure"]
         if Structure == "Male":
-            PSub = NPCdata["BodyType"]["Pronouns"]["Pronoun1"] # He
-            PObj = NPCdata["BodyType"]["Pronouns"]["Pronoun2"] # Himr
-            PPos = NPCdata["BodyType"]["Pronouns"]["Pronoun3"] # His
-            PIPos = NPCdata["BodyType"]["Pronouns"]["Pronoun3"]# His
+            PSub = NPCData["BodyType"]["Pronouns"]["Pronoun1"] # He
+            PObj = NPCData["BodyType"]["Pronouns"]["Pronoun2"] # Himr
+            PPos = NPCData["BodyType"]["Pronouns"]["Pronoun3"] # His
+            PIPos = NPCData["BodyType"]["Pronouns"]["Pronoun3"]# His
         elif Structure == "Female":
-            PSub = NPCdata["BodyType"]["Pronouns"]["Pronoun1"] # She
-            PObj = NPCdata["BodyType"]["Pronouns"]["Pronoun2"] # Her
-            PPos = NPCdata["BodyType"]["Pronouns"]["Pronoun2"] # Her
-            PIPos = NPCdata["BodyType"]["Pronouns"]["Pronoun3"] # Hers
+            PSub = NPCData["BodyType"]["Pronouns"]["Pronoun1"] # She
+            PObj = NPCData["BodyType"]["Pronouns"]["Pronoun2"] # Her
+            PPos = NPCData["BodyType"]["Pronouns"]["Pronoun2"] # Her
+            PIPos = NPCData["BodyType"]["Pronouns"]["Pronoun3"] # Hers
 
         def appareanceCheck(self):
             def getDescription(Area):
@@ -581,17 +581,17 @@ class UiLayoutDetails2Menu:
             ApText = ""
             #### CORE AND HEAD
             ## TODO ADD RANDOM BACKSTORY
-            ApText += f'''{NPCdata["FullName"]} is a {BodyType["Race"]}, {PSub.lower()} has {BodyType["HairColor"].lower()} hair over a {getDescription("FaceType").lower()} with {getDescription("LipsSize").lower()}. {PPos.capitalize()} body is {getDescription("BodySize").lower()}, with an overall {getDescription("Complexion").lower()}. {PPos.capitalize()} chest is {getDescription("ChestSize").lower()}, {PPos.lower()} hips are {getDescription("HipsSize").lower()}, with a complimenting {getDescription("AssSize").lower()}.<br/>'''
-            if NPCdata["Descriptions"]["Core"] != "":
-                APtext += NPCdata["Descriptions"]["Core"] + "<br/>"
-            if NPCdata["Descriptions"]["Head"] != "":
-                APtext += NPCdata["Descriptions"]["Head"] + "<br/>"
-            if NPCdata["Descriptions"]["Arms"] != "":
-                APtext += NPCdata["Descriptions"]["Arms"] + "<br/>"
-            if NPCdata["Descriptions"]["Legs"] != "":
-                APtext += NPCdata["Descriptions"]["Legs"] + "<br/>"
-            if NPCdata["Descriptions"]["Genitals"] != "":
-                APtext += NPCdata["Descriptions"]["Genitals"] + "<br/>"
+            ApText += f'''{NPCData["FullName"]} is a {BodyType["Race"]}, {PSub.lower()} has {BodyType["HairColor"].lower()} hair over a {getDescription("FaceType").lower()} with {getDescription("LipsSize").lower()}. {PPos.capitalize()} body is {getDescription("BodySize").lower()}, with an overall {getDescription("Complexion").lower()}. {PPos.capitalize()} chest is {getDescription("ChestSize").lower()}, {PPos.lower()} hips are {getDescription("HipsSize").lower()}, with a complimenting {getDescription("AssSize").lower()}.<br/>'''
+            if NPCData["Descriptions"]["Core"] != "":
+                APtext += NPCData["Descriptions"]["Core"] + "<br/>"
+            if NPCData["Descriptions"]["Head"] != "":
+                APtext += NPCData["Descriptions"]["Head"] + "<br/>"
+            if NPCData["Descriptions"]["Arms"] != "":
+                APtext += NPCData["Descriptions"]["Arms"] + "<br/>"
+            if NPCData["Descriptions"]["Legs"] != "":
+                APtext += NPCData["Descriptions"]["Legs"] + "<br/>"
+            if NPCData["Descriptions"]["Genitals"] != "":
+                APtext += NPCData["Descriptions"]["Genitals"] + "<br/>"
 
             return ApText
         x = appareanceCheck(self)
@@ -600,44 +600,44 @@ class UiLayoutDetails2Menu:
 
         def virginityCheck(self):
             def NPCcheck(part):
-                with open("NPCdata.json", 'rb') as f:
-                    NPCdataWhole = json.load(f)
-                OtherID = NPCdata["Traits"][part]
+                with open("NPCData.json", 'rb') as f:
+                    NPCDataWhole = json.load(f)
+                OtherID = NPCData["Traits"][part]
                 if OtherID != "0":
                     try:
-                        Name = NPCdataWhole[OtherID]["Name"]
+                        Name = NPCDataWhole[OtherID]["Name"]
                     except:
                         Name = "someone unknow"
 
 
             text = ""
-            if NPCdata["Traits"]["isVirginM"] == 1:
+            if NPCData["Traits"]["isVirginM"] == 1:
                 text += f'''{PSub} hasn't given {PObj.lower()} first kiss to anyone yet. '''
             else:
                 text += f'''{PSub} had {PObj.lower()} first kiss taken by {NPCcheck("isVirginM")}. '''
-            if NPCdata["Traits"]["isVirginV"] == 1 and NPCdata["BodyType"]["VTightness"] != 0:
+            if NPCData["Traits"]["isVirginV"] == 1 and NPCData["BodyType"]["VTightness"] != 0:
                 text += f'''{PSub} hasn't given {PObj.lower()} vaginal virginity to anyone yet. '''
-            elif NPCdata["BodyType"]["VTightness"] != 0:
+            elif NPCData["BodyType"]["VTightness"] != 0:
                 text += f'''{PSub} had {PObj.lower()} vaginal virginity taken by {NPCcheck("isVirginV")}. '''
-            if NPCdata["Traits"]["isVirginP"] == 1 and NPCdata["BodyType"]["PenisSize"] != 0:
+            if NPCData["Traits"]["isVirginP"] == 1 and NPCData["BodyType"]["PenisSize"] != 0:
                 text += f'''{PSub} hasn't given {PObj.lower()} penis virginity to anyone yet. '''
-            elif NPCdata["BodyType"]["PenisSize"] != 0:
+            elif NPCData["BodyType"]["PenisSize"] != 0:
                 text += f'''{PSub} had {PObj.lower()} penis virginity taken by {NPCcheck("isVirginP")}. '''
-            if NPCdata["Traits"]["isVirginA"] == 1 and NPCdata["BodyType"]["ATightness"] != 0:
+            if NPCData["Traits"]["isVirginA"] == 1 and NPCData["BodyType"]["ATightness"] != 0:
                 text += f'''{PSub} hasn't given {PObj.lower()} anal virginity to anyone yet. '''
-            elif NPCdata["BodyType"]["ATightness"] != 0:
+            elif NPCData["BodyType"]["ATightness"] != 0:
                 text += f'''{PSub} had {PObj.lower()} anal virginity taken by {NPCcheck("isVirginA")}. '''
 
             return text
         x = virginityCheck(self)
         textBaseTop += f'''<br/>{x}'''
-        def backgroundCheck(self, NPCdata, dataNPC):
-            #### CHECKS IN THE NPCdata DICT TO GET THEIR BACKGROUND
-            descriptions = NPCdata["Descriptions"]
+        def backgroundCheck(self, NPCData, dataNPC):
+            #### CHECKS IN THE NPCData DICT TO GET THEIR BACKGROUND
+            descriptions = NPCData["Descriptions"]
             backstory = descriptions["Backstory"]
             #### IF THE CHARACTER IS A RANDOM THEN GENERATES A RANDOM BACKSTORY, OTHERWISE IT BRINGS OUT A BLANK
             return backstory
-            x = backgroundCheck(self, NPCdata, dataNPC)
+            x = backgroundCheck(self, NPCData, dataNPC)
             if x != "":
                 textBaseTop += "<p><center><stt>Background</stt></center></p>"
                 textBaseTop += x
@@ -652,7 +652,7 @@ class UiLayoutDetails2Menu:
 
 
 
-    def fallingCheck(self, NPCdata, NPCID, PCID, type):
+    def fallingCheck(self, NPCData, NPCID, PCID, type):
         def check(Amount,Needed):
             if Amount >= Needed:
                 return f'''<font color=#FFFF00>'''
@@ -660,9 +660,9 @@ class UiLayoutDetails2Menu:
                 return f'''<font color=#FFFFFF>'''
 
         text = ""
-        Temporal = NPCdata["Relations"][PCID]["Temporal"]
-        Permanent = NPCdata["Relations"][PCID]["Permanent"]
-        Flags = NPCdata["Relations"][PCID]["Flags"]
+        Temporal = NPCData["Relations"][PCID]["Temporal"]
+        Permanent = NPCData["Relations"][PCID]["Permanent"]
+        Flags = NPCData["Relations"][PCID]["Flags"]
 
         Attraction = Permanent["Attraction"]
         Reliability = Permanent["Reliability"]
@@ -683,8 +683,8 @@ class UiLayoutDetails2Menu:
         # 2500 500
 
 
-    def expCheck(self, NPCdata, NPCID, PCID, type):
-        Relations = NPCdata["Relations"]
+    def expCheck(self, NPCData, NPCID, PCID, type):
+        Relations = NPCData["Relations"]
         noList = ["Attraction","Reliability"]
         expDict = {}
         for NPCother in Relations:
@@ -1029,11 +1029,11 @@ class UiLayoutDetailsMenu:
                 Name = Globals.LayoutsData["DetailsUI"]["Name"]
 
                 Path = os.path.dirname(os.path.realpath(__file__))
-                NPCPath = f'''{Path}/NPCdata/{Name}{ID}/{Name}{ID}Data.json'''
+                NPCPath = f'''{Path}/NPCData/{Name}{ID}/{Name}{ID}Data.json'''
                 with open(NPCPath, 'rb') as f:
                     NPCData = json.load(f)
 
-                Files = os.listdir(f'''NPCdata/{Name}{ID}''')
+                Files = os.listdir(f'''NPCData/{Name}{ID}''')
                 ImageType = "Portrait"
                 list = [File for File in Files if File.endswith((".png")) or File.endswith((".jpg")) or File.endswith((".jpeg"))]
                 ListPortraits, ListFullBody = [], []
@@ -1052,7 +1052,7 @@ class UiLayoutDetailsMenu:
 
                 ImageName = ""
                 try:
-                    Files = os.listdir(f'''NPCdata/{Name}{ID}''')
+                    Files = os.listdir(f'''NPCData/{Name}{ID}''')
                     ImageType = "Portrait"
                     list = [File for File in Files if File.endswith((".png")) or File.endswith((".jpg")) or File.endswith((".jpeg"))]
                     ListPortraits, ListFullBody = [], []
@@ -1105,7 +1105,7 @@ class UiLayoutDetailsMenu:
             TotalText += f'''<img src="images/OtherResources/35.PNG" width="205" height="200" style="float: left; padding: 15px 15px;" />'''
             self.ImageLabel = QLabel(self.GeneralWidget)
             self.ImageLabel.setGeometry(10,60,200,200)
-            self.ImageLabel.setText(f'''<img src="NPCdata/{Name}{ID}/{ImageName}" width="200" height="200" />''')
+            self.ImageLabel.setText(f'''<img src="NPCData/{Name}{ID}/{ImageName}" width="200" height="200" />''')
 
 
         ### SETTING UP THE FLAVOR TEXT

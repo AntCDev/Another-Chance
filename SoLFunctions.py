@@ -70,7 +70,7 @@ class GenericNPCObject:
 
             self.LabelImage = QLabel(self.NPCWidget)
             self.LabelImage.setGeometry(5,5,130,130)
-            self.LabelImage.setPixmap(QPixmap(f'''NPCdata/{self.Name}{self.ID}/{ImageName}'''))
+            self.LabelImage.setPixmap(QPixmap(f'''NPCData/{self.Name}{self.ID}/{ImageName}'''))
             self.LabelImage.setScaledContents(True)
         except Exception as e:
             self.LabelImage = QLabel(self.NPCWidget)
@@ -934,7 +934,7 @@ def CommandsProcessing(self, TargetDict, ActorDict, CommandID, Target, Actor, Mo
         try:
             TargetFile = f'''{TargetName}{Target}Function.py'''
             if TargetFile[:-3] not in Globals.References:
-                TargetPath = f'''NPCdata/{TargetName}{Target}'''
+                TargetPath = f'''NPCData/{TargetName}{Target}'''
                 if TargetPath not in sys.path:
                     sys.path.insert(0, TargetPath)
                 TargetReference = __import__(TargetFile[:-3])
@@ -947,7 +947,7 @@ def CommandsProcessing(self, TargetDict, ActorDict, CommandID, Target, Actor, Mo
         try:
             ActorFile = f'''{ActorName}{Actor}Function.py'''
             if ActorFile[:-3] not in Globals.References:
-                ActorPath = f'''NPCdata/{ActorName}{Actor}'''
+                ActorPath = f'''NPCData/{ActorName}{Actor}'''
                 if ActorPath not in sys.path:
                     sys.path.insert(0, ActorPath)
                 ActorReference = __import__(ActorFile[:-3])
@@ -1420,7 +1420,7 @@ def GetImages(NPCData):
         ID = NPCData["ID"]
         Name = NPCData["Name"]
 
-        Files = os.listdir(f'''NPCdata/{Name}{ID}''')
+        Files = os.listdir(f'''NPCData/{Name}{ID}''')
 
         list = [File for File in Files if File.endswith((".png")) or File.endswith((".jpg")) or File.endswith((".jpeg"))]
         ListPortraits, ListFullBody = [], []
@@ -1679,8 +1679,8 @@ def GetDescription(Area, NPCData, Options):
     ATightness = BodyType["ATightness"]
     PenisSize = BodyType["PenisSize"]
 
-    # with open('NPCdata.json', 'rb') as f:
-    #     NPCdata = json.load(f)
+    # with open('NPCData.json', 'rb') as f:
+    #     NPCData = json.load(f)
     Arousal = NPCData["State"]["Arousal"]
     Mood = NPCData["State"]["Mood"]
 

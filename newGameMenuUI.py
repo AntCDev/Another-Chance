@@ -618,12 +618,12 @@ class UiLayoutNewGameMenuOld(object):
                 else:
                     print(ID)
                 print(ID)
-                NPCList = os.listdir("NPCdata")
+                NPCList = os.listdir("NPCData")
                 for ItemName in NPCList:
                     if ItemName.endswith(ID):
                         NPCName = ItemName
 
-                with open(f"NPCdata/{NPCName}/{NPCName}Data.json", 'rb') as f:
+                with open(f"NPCData/{NPCName}/{NPCName}Data.json", 'rb') as f:
                     NPCData = json.load(f)
             except:
                 if ID == None or ID.strip() == "":
@@ -668,18 +668,18 @@ class UiLayoutNewGameMenuOld(object):
             Version = 1
             Actions = {"PreviousTask": {"HourStart": 0, "HourFinish": 1, "Task": ["Idlying", {"Fluff": "Idlying in the streets of "}], "Location": "Residential Area"}, "CurrentTask": {"HourStart": 2, "HourFinish": 3, "Task": ["Idlying", {"Fluff": "Idlying in the streets of "}], "Location": "Residential Area"}, "FutureTask": {"HourStart": 4, "HourFinish": 5, "Task": ["Idlying", {"Fluff": "Idlying in the streets of "}], "Location": "Residential Area"}, "HasFollowing": [], "InteractionParty": {}, "IsFollowing": 0, "isInSexScene": []}
 
-            NPCdata = {"Name":Name, "FullName":Name, "ID":"0", "State":State, "Relations":Relations, "BodyType":BodyType, "GeneralFlags":GeneralFlags, "Traits":Traits, "GeneralAbilities":GeneralAbilities, "CombatAbilities":CombatAbilities, "Descriptions":Descriptions, "Version":Version, "Actions":Actions}
+            NPCData = {"Name":Name, "FullName":Name, "ID":"0", "State":State, "Relations":Relations, "BodyType":BodyType, "GeneralFlags":GeneralFlags, "Traits":Traits, "GeneralAbilities":GeneralAbilities, "CombatAbilities":CombatAbilities, "Descriptions":Descriptions, "Version":Version, "Actions":Actions}
             ID = "0"
             ShortName = Name
             if ID == "" or ShortName == "":
                 print("Please fill the ID or Short Name")
             else:
-                path = "NPCdata/" + ShortName + ID
+                path = "NPCData/" + ShortName + ID
                 if not os.path.exists(path):
                     os.makedirs(path)
                 x = path + "/" + ShortName + ID + "Data.json"
                 with open(x, 'w') as f:
-                    json.dump(NPCdata, f)
+                    json.dump(NPCData, f)
 
         else:
             if self.customCharacterLine.text() == "":
@@ -688,7 +688,7 @@ class UiLayoutNewGameMenuOld(object):
                 try:
                     #### TRIES TO RETRIEVE TEH NPCDATA BASED ON THE ID
                     ID = self.customCharacterLine.text()
-                    NPClist = os.listdir("NPCdata")
+                    NPClist = os.listdir("NPCData")
                     NameWhole = ""
                     for NPC in NPClist:
                         y = len(NPC)
@@ -696,10 +696,10 @@ class UiLayoutNewGameMenuOld(object):
                         NPCID = NPC[y-z:y]
                         if NPCID == ID:
                             NameWhole = NPC
-                    path = "NPCdata/" + str(NameWhole) + "/" + str(NameWhole) + "Data.json"
+                    path = "NPCData/" + str(NameWhole) + "/" + str(NameWhole) + "Data.json"
                     with open(path, 'rb') as f:
-                        NPCdata = json.load(f)
-        #### WITH THE NPCdata RETRIEVED THEN IT RESETS THE FILES
+                        NPCData = json.load(f)
+        #### WITH THE NPCData RETRIEVED THEN IT RESETS THE FILES
                 except:
                     print("An error occured when reading the NPC data")
         # enviorementData
@@ -732,29 +732,29 @@ class UiLayoutNewGameMenuOld(object):
         #PCdata
         with open("PCdata.json", 'rb') as f:
             PCdata = json.load(f)
-        PCdata["Name"] = NPCdata["Name"]
-        PCdata["ID"] = NPCdata["ID"]
+        PCdata["Name"] = NPCData["Name"]
+        PCdata["ID"] = NPCData["ID"]
         PCdata["Quest"] = {"CurrentQuestText": "", "CurrentQuest": ""}
         PCdata["Items"] = {"Alcohol": 60}
         PCdata["Others"] = {"Others": "Others", "PinnedText": ""}
         PCdata["Status"] = {"Energy": 6000}
         with open("PCdata.json", 'w') as f:
             json.dump(PCdata, f)
-        #NPCdata
-        NPCdataWhole = {ID:NPCdata}
-        with open("NPCdata.json", 'w') as f:
-            json.dump(NPCdataWhole, f)
+        #NPCData
+        NPCDataWhole = {ID:NPCData}
+        with open("NPCData.json", 'w') as f:
+            json.dump(NPCDataWhole, f)
 
         #tempData
         with open("tempData.json", 'rb') as f:
             tempData = json.load(f)
-        tempData["Name"] = NPCdata["Name"]
+        tempData["Name"] = NPCData["Name"]
         tempData["commandPage"] = 1
         tempData["isInSexScene"] = 0
-        tempData["ID"] = NPCdata["ID"]
+        tempData["ID"] = NPCData["ID"]
         tempData["NPCpage"] = 1
         tempData["Following"] = {}
-        tempData["PlayerID"] = NPCdata["ID"]
+        tempData["PlayerID"] = NPCData["ID"]
         tempData["Location"] = "Home"
         tempData["PlayerTargetID"] = "0"
         tempData["FlavorText"] = {"LocationText": "", "NPCtext": "", "AttitudeText": "", "CommandText": ""}
