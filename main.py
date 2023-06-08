@@ -34,7 +34,7 @@ class MainWindow(QMainWindow):
     resized = QtCore.pyqtSignal()
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        QFontDatabase.addApplicationFont("images/OtherResourcecs/Segoe UI")
+        QFontDatabase.addApplicationFont("images/OtherResources/Segoe UI.ttf")
 
         DisclaimerAgreed = 0
 
