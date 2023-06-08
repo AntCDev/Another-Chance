@@ -4,3 +4,4 @@ Upon a character that isn't the PC sleeping, call for ProcessGems to modify exis
 Add processing of negative gems
 Fix Issue Loading importMenuUI new game, and import it again.
 Fix Issue NewGameMenuUI using custom dicts for NPCData
+Fix Issue sleeping with a single enhance target halving the portraits

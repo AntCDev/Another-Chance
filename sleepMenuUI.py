@@ -73,7 +73,7 @@ class UiLayoutSleepMenu(object):
 
 
 
-        self.EnhanceLabelBack = QLabel("Enhance", self.GUI)
+        self.EnhanceLabelBack = QLabel(self.GUI)
         self.EnhanceLabelBack.setGeometry(5,5,420,1014)
         self.EnhanceLabelBack.setProperty("Color","Dark")
 
@@ -103,7 +103,7 @@ class UiLayoutSleepMenu(object):
         self.buttonContinue.setGeometry(435,969,200,45)
 
     def Refresh(self):
-        Globals.References["SoLFunctions"].ResetGenericNPC()
+        # Globals.References["SoLFunctions"].ResetGenericNPC()
         PCID = Globals.SoLPCData["ID"]
         for OtherID in Globals.SoLNPCData[PCID]["Relations"]:
             OtherData = Globals.SoLNPCData[OtherID]

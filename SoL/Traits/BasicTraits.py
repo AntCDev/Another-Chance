@@ -26,9 +26,10 @@ def Initialize(self, Reference):
 # def ProcessingTrait(self, TargetDict, ActorDict, CommandID, Actor, Target, TraitID, Who):
 #     return TargetDict, ActorDict
 def CASHandling2():
+    ""
     # Globals.SignalData["CAS2"] = {"CommandID":CommandID, "ID":ID, "NPCID":NPCID, "Flags":{"Succes":0}, "TargetConnotations":TargetConnotations, "ActorConnotations":ActorConnotations}
-    Actor = Globals.SignalData["CAS2"]["ID"]
-    Target = Globals.SignalData["CAS2"]["NPCID"]
+    # Actor = Globals.SignalData["CAS2"]["ID"]
+    # Target = Globals.SignalData["CAS2"]["NPCID"]
     # if "Courage0" in Globals.SoLNPCData[Target]["Traits"] and Globals.SoLNPCData[Target]["Traits"]["Courage0"]["Level"] != 0:
     #     if Globals.SoLNPCData[Target]["Traits"]["Courage0"]["Level"] == 1:
     #         print("Brave")
@@ -3236,6 +3237,7 @@ def CommandProcessTrait(self, OriginalData, FinalData, TraitID):
             #     # PLEA+++
 
     except Exception as e:
-        Log(3, "ERROR CommandProcessTrait", e, TraitID, OriginalData, FinalData)
+        ""
+        # Log(3, "ERROR CommandProcessTrait", e, TraitID, OriginalData, FinalData)
 
     return OriginalData, FinalData

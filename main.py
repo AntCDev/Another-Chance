@@ -33,6 +33,7 @@ def Log(*args):
 class MainWindow(QMainWindow):
     resized = QtCore.pyqtSignal()
     def __init__(self, parent=None):
+        print(__file__)
         super(MainWindow, self).__init__(parent)
         QFontDatabase.addApplicationFont("Resources/OtherResources/Segoe UI.ttf")
 

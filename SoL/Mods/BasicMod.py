@@ -45,7 +45,6 @@ def Initialize(self, Reference):
         Globals.SoLTempData = {
             "TempNPC":[],
             "FavoriteNPC":[],
-
             }
 
     if True:
@@ -147,7 +146,6 @@ def Initialize(self, Reference):
                 "Targeting": None,
             },
             "Items":{},
-            "isInSexScene": 0,
             "Version":2,
             },
         }

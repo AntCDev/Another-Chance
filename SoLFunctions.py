@@ -1641,6 +1641,7 @@ def Sleep(NPCID):
         if NPCID == Globals.SoLPCData["ID"]:
             PassTime(Globals.Layouts["SoLUI"], 480)
             Globals.Layouts["MainF"].gotoLayout("SleepUI")
+            Globals.References["SoLFunctions"].ResetGenericNPC()
         else:
             # ProcessGems(NPCID)
             ""
