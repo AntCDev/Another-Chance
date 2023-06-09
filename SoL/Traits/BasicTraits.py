@@ -1,5 +1,5 @@
 import Globals
-
+import random
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import *
@@ -1055,8 +1055,11 @@ def TriggerTrait(self, TraitID, Source):
 
 def GetTraitStaticWidget(self, TraitID, NPCData):
     try:
-        if TraitID == "Courage0":
+        try:
             Value = NPCData["Traits"][TraitID]["Level"]
+        except:
+            Value = 0
+        if TraitID == "Courage0":
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Courage", TraitWidget)
@@ -1079,7 +1082,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Attitude0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Attitude", TraitWidget)
@@ -1102,7 +1104,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Pride0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Pride", TraitWidget)
@@ -1125,7 +1126,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Dere0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Dere", TraitWidget)
@@ -1154,7 +1154,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "SelfControl0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Self Control", TraitWidget)
@@ -1177,7 +1176,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Cheerfulness0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Cheerfulness", TraitWidget)
@@ -1200,7 +1198,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Shyness0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Shyness", TraitWidget)
@@ -1223,7 +1220,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Gullible0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Gullible", TraitWidget)
@@ -1246,7 +1242,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Charm0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Charm", TraitWidget)
@@ -1269,7 +1264,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "SubstanceResistance0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Substance Resistance", TraitWidget)
@@ -1292,7 +1286,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "SexualInterest0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Sexual Interest", TraitWidget)
@@ -1315,7 +1308,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Virtue0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Virtue", TraitWidget)
@@ -1338,7 +1330,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Chastity0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Chastity", TraitWidget)
@@ -1365,7 +1356,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Openess0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Openess", TraitWidget)
@@ -1388,7 +1378,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "PainResistance0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Pain Resistance", TraitWidget)
@@ -1411,7 +1400,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "ArousalEase0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Arousal Ease", TraitWidget)
@@ -1434,7 +1422,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "ResponseToPleasure0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Response To Pleasure", TraitWidget)
@@ -1457,7 +1444,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Perversion0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Perversion", TraitWidget)
@@ -1480,7 +1466,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Dominance0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Dominance", TraitWidget)
@@ -1503,7 +1488,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Forceful0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Forceful", TraitWidget)
@@ -1526,7 +1510,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Loyalty0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Loyalty", TraitWidget)
@@ -1549,7 +1532,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Violence0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Violence", TraitWidget)
@@ -1572,7 +1554,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Beauty0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Beauty", TraitWidget)
@@ -1599,7 +1580,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Shame0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Shame", TraitWidget)
@@ -1622,7 +1602,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Will0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Will", TraitWidget)
@@ -1645,7 +1624,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Influence0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Influence", TraitWidget)
@@ -1668,7 +1646,6 @@ def GetTraitStaticWidget(self, TraitID, NPCData):
             # TraitWidget.setToolTip('Courage, affects the Resistance and Discomfort values.')
             return TraitWidget
         elif TraitID == "Fertility0":
-            Value = NPCData["Traits"][TraitID]["Level"]
             TraitWidget = QWidget()
 
             TraitLabel = QLabel("Fertility", TraitWidget)
@@ -2804,8 +2781,6 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
 
     return None
 
-
-
 def CommandProcessTrait(self, OriginalData, FinalData, TraitID):
     Target = FinalData["Target"]
     Actor = FinalData["Actor"]
@@ -3241,3 +3216,71 @@ def CommandProcessTrait(self, OriginalData, FinalData, TraitID):
         # Log(3, "ERROR CommandProcessTrait", e, TraitID, OriginalData, FinalData)
 
     return OriginalData, FinalData
+
+def GetrandomTraitData(TraitID):
+    try:
+        Data = {"ID":TraitID, "Level":0,"OtherData":{}}
+        if TraitID == "Courage0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Attitude0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Pride0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Dere0":
+            Data["Level"] = random.randint(0,5)
+        elif TraitID == "SelfControl0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Cheerfulness0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Shyness0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Gullible0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Charm0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "SubstanceResistance0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "SexualInterest0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Virtue0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Chastity0":
+            Data["Level"] = random.randint(0,4)
+        elif TraitID == "Openess0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "PainResistance0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "ArousalEase0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "ResponseToPleasure0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Perversion0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Dominance0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Forceful0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Loyalty0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Violence0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Beauty0":
+            Data["Level"] = random.randint(0,4)
+        elif TraitID == "Shame0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Will0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Influence0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "Fertility0":
+            Data["Level"] = random.randint(0,2)
+        elif TraitID == "LewdBody0":
+            Data["V"] = random.randint(0,1)
+            Data["A"] = random.randint(0,1)
+            Data["B"] = random.randint(0,1)
+            Data["P"] = random.randint(0,1)
+            Data["M"] = random.randint(0,1)
+            Data.pop("Level")
+        return Data
+    except Exception as e:
+        print(e)
