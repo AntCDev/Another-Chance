@@ -1476,116 +1476,132 @@ def ResetGenericNPC():
         RemoveNPC(NPCID)
     Globals.SoLTempData["TempNPC"] = []
 
-    NPCAmount = 15
-    if NPCAmount > 0:
 
-        with open(pathlib.Path() / "Resources" / "Generic" / "FemenineNames.txt" , 'rb') as f:
-            FemenineNames = json.load(f)
-        with open(pathlib.Path() / "Resources" / "Generic" / "MasculineNames.txt" , 'rb') as f:
-            MasculineNames = json.load(f)
-        SkinList = ["Ivory", "Pale", "Fair", "Light", "Tanned", "Olive", "Dark", "Brown"]
-        HairList = ["Auburn", "Black", "Red", "Blonde", "Blue", "Brown", "Dark Blue", "Dark Brown", "Dark Red", "Ginger", "Golden", "Grey", "Hazel", "Silver", "White"]
-        RaceList = ["Human"]
-        EyesList = ["Amber", "Amethyst", "Aquamarine", "Azure", "Black", "Blue", "Brown", "Crimosn", "Emerald", "Gold", "Green", "Hazel", "Ivory", "Orange", "Red", "Ruby", "Grey", "Silver", "Blue", "Turquoise"]
-        # MasculineNames = with open
-        for i in range(NPCAmount):
-            NPCData = copy.deepcopy(Globals.SoLOtherData["BaseData"])
+    if Globals.PlayerConfig["RandomNPC"] == 1:
+        NPCAmount = Globals.PlayerConfig["RandomAmount"]
+        if NPCAmount > 0:
 
-            try:
-                NPCID = "00" + str(max( [int(k) for k in Globals.SoLNPCData if Globals.SoLNPCData[k]["ID"].startswith("00")] ) + 1)
-            except Exception as e:
-                NPCID = "001"
+            with open(pathlib.Path() / "Resources" / "Generic" / "FemenineNames.txt" , 'rb') as f:
+                FemenineNames = json.load(f)
+            with open(pathlib.Path() / "Resources" / "Generic" / "MasculineNames.txt" , 'rb') as f:
+                MasculineNames = json.load(f)
+            SkinList = ["Ivory", "Pale", "Fair", "Light", "Tanned", "Olive", "Dark", "Brown"]
+            HairList = ["Auburn", "Black", "Red", "Blonde", "Blue", "Brown", "Dark Blue", "Dark Brown", "Dark Red", "Ginger", "Golden", "Grey", "Hazel", "Silver", "White"]
+            RaceList = ["Human"]
+            EyesList = ["Amber", "Amethyst", "Aquamarine", "Azure", "Black", "Blue", "Brown", "Crimosn", "Emerald", "Gold", "Green", "Hazel", "Ivory", "Orange", "Red", "Ruby", "Grey", "Silver", "Blue", "Turquoise"]
+            # MasculineNames = with open
+            for i in range(NPCAmount):
+                NPCData = copy.deepcopy(Globals.SoLOtherData["BaseData"])
 
-            Sex = random.choice(["Male", "Female", "Futanari"])
-            if Sex == "Female" or "Futanari":
-                FullName = random.choice(FemenineNames)
-            else:
-                FullName = random.choice(MasculineNames)
-            ShortName = FullName.split(' ', 1)[0]
-
-            Energy = random.randint(500,2000)
-
-
-
-            NPCData["Name"] = ShortName
-            NPCData["ID"] = NPCID
-            NPCData["Personality"] = random.choice(list(Globals.SoLPersonalities.keys()))
-
-            NPCData["State"]["Energy"] = Energy
-
-            NPCData["BodyData"]["FullName"] = FullName
-            NPCData["BodyData"]["SkinColor"] = random.choice(SkinList)
-            NPCData["BodyData"]["HairColor"] = random.choice(HairList)
-            NPCData["BodyData"]["PhysicalAge"] = random.randrange(0,7)
-            NPCData["BodyData"]["Race"] = random.choice(RaceList)
-
-            if Sex == "Male":
-                NPCData["BodyData"]["Face"] = random.randrange(0,4)
-                NPCData["BodyData"]["Pronouns"] = {"PSub":"He", "PObj":"Him", "PPos":"His", "PIPos":"His"}
-                NPCData["BodyData"]["Chest"] = random.randrange(0,1)
-                NPCData["BodyData"]["VTightness"] = 0
-                NPCData["BodyData"]["PenisSize"] = random.randrange(1,5)
-                NPCData["BodyData"]["BallsSize"] = random.randrange(1,5)
-                NPCData["BodyData"]["VVirgin"] = 1
-                NPCData["BodyData"]["PVirgin"] = 1
-            elif Sex == "Female":
-                NPCData["BodyData"]["Face"] = random.randrange(2,6)
-                NPCData["BodyData"]["Pronouns"] = {"PSub":"She", "PObj":"Her", "PPos":"Her", "PIPos":"Hers"}
-                NPCData["BodyData"]["Chest"] = random.randrange(2,7)
-                NPCData["BodyData"]["VTightness"] = random.randrange(1,5)
-                NPCData["BodyData"]["PenisSize"] = 0
-                NPCData["BodyData"]["BallsSize"] = 0
-                NPCData["BodyData"]["VVirgin"] = 1
-                NPCData["BodyData"]["PVirgin"] = 1
-            else:
-                NPCData["BodyData"]["Face"] = random.randrange(2,6)
-                NPCData["BodyData"]["Pronouns"] = {"PSub":"She", "PObj":"Her", "PPos":"Her", "PIPos":"Hers"}
-                NPCData["BodyData"]["Chest"] = random.randrange(2,7)
-                NPCData["BodyData"]["VTightness"] = random.randrange(1,5)
-                NPCData["BodyData"]["PenisSize"] = random.randrange(1,5)
-                NPCData["BodyData"]["BallsSize"] = random.randrange(1,5)
-                NPCData["BodyData"]["VVirgin"] = 1
-                NPCData["BodyData"]["PVirgin"] = 1
-
-            NPCData["BodyData"]["Eyes"] = random.choice(EyesList)
-            NPCData["BodyData"]["Lips"] = random.randrange(0,4)
-            NPCData["BodyData"]["Height"] = random.randrange(0,6)
-            NPCData["BodyData"]["Complexion"] = random.randrange(0,6)
-            NPCData["BodyData"]["Sex"] = Sex
-            NPCData["BodyData"]["Hips"] = random.randrange(0,5)
-            NPCData["BodyData"]["Ass"] = random.randrange(0,6)
-            NPCData["BodyData"]["ATightness"] = random.randrange(1,5)
-            NPCData["BodyData"]["AVirgin"] = 1
-            NPCData["BodyData"]["MVirgin"] = 1
-
-            NPCData["GeneralAbilities"]["MaxEnergy"] = Energy
-
-            NPCData["Descriptions"]["Backstory"] = ""
-            NPCData["Descriptions"]["Core"] = ""
-            NPCData["Descriptions"]["Head"] = ""
-            NPCData["Descriptions"]["Arms"] = ""
-            NPCData["Descriptions"]["Legs"] = ""
-            NPCData["Descriptions"]["Genitals"] = ""
-
-            NPCData["Actions"]["PreviousTask"] = copy.deepcopy(Globals.SoLOtherData["IdlingTask"])
-            NPCData["Actions"]["CurrentTask"] = copy.deepcopy(Globals.SoLOtherData["IdlingTask"])
-            NPCData["Actions"]["FutureTask"] = copy.deepcopy(Globals.SoLOtherData["IdlingTask"])
-
-            for TraitID in Globals.SoLTraits:
                 try:
-                    NPCData["Traits"][TraitID] = Globals.SoLTraits[TraitID]["Reference"].GetrandomTraitData(TraitID)
-                except:
-                    ""
+                    NPCID = "00" + str(max( [int(k) for k in Globals.SoLNPCData if Globals.SoLNPCData[k]["ID"].startswith("00")] ) + 1)
+                except Exception as e:
+                    NPCID = "001"
 
-            Globals.SoLNPCData[NPCID] = NPCData
+                # CALCULATES THE SEX
+                SexKeys = []
+                SexValues = []
+                if Globals.PlayerConfig["RandomRatio"]["Male"] > 0:
+                    SexKeys.append("Male")
+                    SexValues.append(Globals.PlayerConfig["RandomRatio"]["Male"])
+                if Globals.PlayerConfig["RandomRatio"]["Female"] > 0:
+                    SexKeys.append("Female")
+                    SexValues.append(Globals.PlayerConfig["RandomRatio"]["Female"])
+                if Globals.PlayerConfig["RandomRatio"]["FutaRatio"] > 0:
+                    SexKeys.append("Futanari")
+                    SexValues.append(Globals.PlayerConfig["RandomRatio"]["FutaRatio"])
+                Sex = random.choices(SexKeys, SexValues)
 
-            NPCList = Globals.SoLEnviorementData["Locations"]["ResidentialArea"]["inHere"].append(NPCID)
-            Globals.SoLTempData["TempNPC"].append(NPCID)
+                # Sex = random.choice(["Male", "Female", "Futanari"])
+                if Sex == "Female" or "Futanari":
+                    FullName = random.choice(FemenineNames)
+                else:
+                    FullName = random.choice(MasculineNames)
+                ShortName = FullName.split(' ', 1)[0]
 
-        # for NPCID in Globals.SoLNPCData:
-        #     Name = Globals.SoLNPCData[NPCID]["Name"]
-        #     Location = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
-        #     print(Name, Location)
+                Energy = random.randint(500,2000)
+
+
+
+                NPCData["Name"] = ShortName
+                NPCData["ID"] = NPCID
+                NPCData["Personality"] = random.choice(list(Globals.SoLPersonalities.keys()))
+
+                NPCData["State"]["Energy"] = Energy
+
+                NPCData["BodyData"]["FullName"] = FullName
+                NPCData["BodyData"]["SkinColor"] = random.choice(SkinList)
+                NPCData["BodyData"]["HairColor"] = random.choice(HairList)
+                NPCData["BodyData"]["PhysicalAge"] = random.randrange(0,7)
+                NPCData["BodyData"]["Race"] = random.choice(RaceList)
+
+                if Sex == "Male":
+                    NPCData["BodyData"]["Face"] = random.randrange(0,4)
+                    NPCData["BodyData"]["Pronouns"] = {"PSub":"He", "PObj":"Him", "PPos":"His", "PIPos":"His"}
+                    NPCData["BodyData"]["Chest"] = random.randrange(0,1)
+                    NPCData["BodyData"]["VTightness"] = 0
+                    NPCData["BodyData"]["PenisSize"] = random.randrange(1,5)
+                    NPCData["BodyData"]["BallsSize"] = random.randrange(1,5)
+                    NPCData["BodyData"]["VVirgin"] = 1
+                    NPCData["BodyData"]["PVirgin"] = 1
+                elif Sex == "Female":
+                    NPCData["BodyData"]["Face"] = random.randrange(2,6)
+                    NPCData["BodyData"]["Pronouns"] = {"PSub":"She", "PObj":"Her", "PPos":"Her", "PIPos":"Hers"}
+                    NPCData["BodyData"]["Chest"] = random.randrange(2,7)
+                    NPCData["BodyData"]["VTightness"] = random.randrange(1,5)
+                    NPCData["BodyData"]["PenisSize"] = 0
+                    NPCData["BodyData"]["BallsSize"] = 0
+                    NPCData["BodyData"]["VVirgin"] = 1
+                    NPCData["BodyData"]["PVirgin"] = 1
+                else:
+                    NPCData["BodyData"]["Face"] = random.randrange(2,6)
+                    NPCData["BodyData"]["Pronouns"] = {"PSub":"She", "PObj":"Her", "PPos":"Her", "PIPos":"Hers"}
+                    NPCData["BodyData"]["Chest"] = random.randrange(2,7)
+                    NPCData["BodyData"]["VTightness"] = random.randrange(1,5)
+                    NPCData["BodyData"]["PenisSize"] = random.randrange(1,5)
+                    NPCData["BodyData"]["BallsSize"] = random.randrange(1,5)
+                    NPCData["BodyData"]["VVirgin"] = 1
+                    NPCData["BodyData"]["PVirgin"] = 1
+
+                NPCData["BodyData"]["Eyes"] = random.choice(EyesList)
+                NPCData["BodyData"]["Lips"] = random.randrange(0,4)
+                NPCData["BodyData"]["Height"] = random.randrange(0,6)
+                NPCData["BodyData"]["Complexion"] = random.randrange(0,6)
+                NPCData["BodyData"]["Sex"] = Sex
+                NPCData["BodyData"]["Hips"] = random.randrange(0,5)
+                NPCData["BodyData"]["Ass"] = random.randrange(0,6)
+                NPCData["BodyData"]["ATightness"] = random.randrange(1,5)
+                NPCData["BodyData"]["AVirgin"] = 1
+                NPCData["BodyData"]["MVirgin"] = 1
+
+                NPCData["GeneralAbilities"]["MaxEnergy"] = Energy
+
+                NPCData["Descriptions"]["Backstory"] = ""
+                NPCData["Descriptions"]["Core"] = ""
+                NPCData["Descriptions"]["Head"] = ""
+                NPCData["Descriptions"]["Arms"] = ""
+                NPCData["Descriptions"]["Legs"] = ""
+                NPCData["Descriptions"]["Genitals"] = ""
+
+                NPCData["Actions"]["PreviousTask"] = copy.deepcopy(Globals.SoLOtherData["IdlingTask"])
+                NPCData["Actions"]["CurrentTask"] = copy.deepcopy(Globals.SoLOtherData["IdlingTask"])
+                NPCData["Actions"]["FutureTask"] = copy.deepcopy(Globals.SoLOtherData["IdlingTask"])
+
+                for TraitID in Globals.SoLTraits:
+                    try:
+                        NPCData["Traits"][TraitID] = Globals.SoLTraits[TraitID]["Reference"].GetrandomTraitData(TraitID)
+                    except:
+                        ""
+
+                Globals.SoLNPCData[NPCID] = NPCData
+
+                NPCList = Globals.SoLEnviorementData["Locations"]["ResidentialArea"]["inHere"].append(NPCID)
+                Globals.SoLTempData["TempNPC"].append(NPCID)
+
+            # for NPCID in Globals.SoLNPCData:
+            #     Name = Globals.SoLNPCData[NPCID]["Name"]
+            #     Location = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
+            #     print(Name, Location)
 
 def RemoveNPC(NPCID):
     if NPCID == Globals.SoLPCData["Targeting"]:

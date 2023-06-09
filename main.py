@@ -141,10 +141,18 @@ class MainWindow(QMainWindow):
                     }
 
             QLineEdit{
+                font-size: 14pt;
+                font-family: Segoe UI;
                 color:white;
                 border:1px solid black;
                 background-color:rgb(35,35,35);
                 }
+                QLineEdit[Color = "Dark"]{
+                    background-color:rgb(23,23,23);
+                    }
+                QLineEdit[Color = "Light"]{
+                    background-color:rgb(35,35,35);
+                    }
 
             QTextEdit{
                 color:white;

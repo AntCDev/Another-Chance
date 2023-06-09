@@ -49,11 +49,11 @@ class UiLayoutMainMenu(QWidget):
         self.buttonMaker.setProperty("Color","Light")
 
 
-        self.buttonOptions = QPushButton('Options', self.GUI)
+        self.buttonOptions = QPushButton('Options', self.GUI, clicked = lambda: MainWindow.gotoLayout("OptionsUI"))
         self.buttonOptions.setGeometry(425, 520, 180, 30)
         self.buttonOptions.setProperty("Color","Light")
-        self.buttonOptions.setProperty("Enabled","0")
-        self.buttonOptions.setEnabled(False)
+        # self.buttonOptions.setProperty("Enabled","0")
+        # self.buttonOptions.setEnabled(False)
 
         self.buttonDiscord = QPushButton('Discord', self.GUI, clicked = lambda: webbrowser.open("https://discord.gg/rjBW7Uj48g"))
         self.buttonDiscord.setGeometry(615, 520, 180, 30)

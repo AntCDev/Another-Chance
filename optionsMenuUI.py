@@ -3,12 +3,12 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
+from PyQt5.QtGui import QTextCursor, QIntValidator
 import json
 import os
+import Globals
 
-
-class UiLayoutOptionsMenu(object):
+class UiLayoutOptionsMenuOld(object):
     def Ui(self, MainWindow):
         self.optionsMenuUI = QWidget(MainWindow)
         # mainwindow.setWindowIcon(QtGui.QIcon('PhotoIcon.png'))
@@ -111,9 +111,9 @@ class UiLayoutOptionsMenu(object):
         myform = QVBoxLayout()
 
         #### NPC OPTIONS
-        self.NPCWidget = QWidget()
-        self.NPCWidget.setFixedSize(800,250)
-        self.NPCWidget.setStyleSheet('''
+        self.InteractWidget = QWidget()
+        self.InteractWidget.setFixedSize(800,250)
+        self.InteractWidget.setStyleSheet('''
         QWidget{
     	background-color:rgb(23, 23, 23);
         }
@@ -122,7 +122,7 @@ class UiLayoutOptionsMenu(object):
         }
         ''')
 
-        self.labelNPCinteractions = QLabel("NPC Interactions", self.NPCWidget)
+        self.labelNPCinteractions = QLabel("NPC Interactions", self.InteractWidget)
         self.labelNPCinteractions.setFont(QFont('Segoe UI', 16))
         self.labelNPCinteractions.setGeometry(10,10,780,40)
         self.labelNPCinteractions.setAlignment(Qt.AlignVCenter)
@@ -134,71 +134,71 @@ class UiLayoutOptionsMenu(object):
         color:rgb(255, 255, 255)
         }
         ''')
-        self.labelNPCinteract = QLabel("NPC Can Interact With One Another", self.NPCWidget)
+        self.labelNPCinteract = QLabel("NPC Can Interact With One Another", self.InteractWidget)
         self.labelNPCinteract.setFont(QFont('Segoe UI', 14))
         self.labelNPCinteract.setGeometry(20,60,390,40)
         self.labelNPCinteract.setAlignment(Qt.AlignVCenter)
         self.labelNPCinteract.setAlignment(Qt.AlignHCenter)
-        self.buttonNPCinteractCan = QPushButton("Can", self.NPCWidget)
+        self.buttonNPCinteractCan = QPushButton("Can", self.InteractWidget)
         self.buttonNPCinteractCan.setFont(QFont('Segoe UI', 14))
         self.buttonNPCinteractCan.setGeometry(100,100,90,35)
         self.buttonNPCinteractCan.setCheckable(True)
         self.buttonNPCinteractCan.clicked.connect(self.buttonNPCinteractCanAction)
-        self.buttonNPCinteractCant = QPushButton("Can't", self.NPCWidget)
+        self.buttonNPCinteractCant = QPushButton("Can't", self.InteractWidget)
         self.buttonNPCinteractCant.setFont(QFont('Segoe UI', 14))
         self.buttonNPCinteractCant.setGeometry(210,100,90,35)
         self.buttonNPCinteractCant.setCheckable(True)
         self.buttonNPCinteractCant.clicked.connect(self.buttonNPCinteractCantAction)
 
-        self.labelNPCrelations = QLabel("NPC Can Form Relationships", self.NPCWidget)
+        self.labelNPCrelations = QLabel("NPC Can Form Relationships", self.InteractWidget)
         self.labelNPCrelations.setFont(QFont('Segoe UI', 14))
         self.labelNPCrelations.setGeometry(420,60,390,40)
         self.labelNPCrelations.setAlignment(Qt.AlignVCenter)
         self.labelNPCrelations.setAlignment(Qt.AlignHCenter)
-        self.buttonNPCrelationsCan = QPushButton("Can", self.NPCWidget)
+        self.buttonNPCrelationsCan = QPushButton("Can", self.InteractWidget)
         self.buttonNPCrelationsCan.setFont(QFont('Segoe UI', 14))
         self.buttonNPCrelationsCan.setGeometry(500,100,90,35)
         self.buttonNPCrelationsCan.setCheckable(True)
         self.buttonNPCrelationsCan.clicked.connect(self.buttonNPCrelationsCanAction)
-        self.buttonNPCrelationsCant = QPushButton("Can't", self.NPCWidget)
+        self.buttonNPCrelationsCant = QPushButton("Can't", self.InteractWidget)
         self.buttonNPCrelationsCant.setFont(QFont('Segoe UI', 14))
         self.buttonNPCrelationsCant.setGeometry(610,100,90,35)
         self.buttonNPCrelationsCant.setCheckable(True)
         self.buttonNPCrelationsCant.clicked.connect(self.buttonNPCrelationsCantAction)
 
-        self.labelNPCviolence = QLabel("Violent interactions between NPC", self.NPCWidget)
+        self.labelNPCviolence = QLabel("Violent interactions between NPC", self.InteractWidget)
         self.labelNPCviolence.setFont(QFont('Segoe UI', 14))
         self.labelNPCviolence.setGeometry(20,150,390,40)
         self.labelNPCviolence.setAlignment(Qt.AlignVCenter)
         self.labelNPCviolence.setAlignment(Qt.AlignHCenter)
-        self.buttonNPCviolenceCan = QPushButton("Can", self.NPCWidget)
+        self.buttonNPCviolenceCan = QPushButton("Can", self.InteractWidget)
         self.buttonNPCviolenceCan.setFont(QFont('Segoe UI', 14))
         self.buttonNPCviolenceCan.setGeometry(100,190,90,35)
         self.buttonNPCviolenceCan.setCheckable(True)
         self.buttonNPCviolenceCan.clicked.connect(self.buttonNPCviolenceCanAction)
-        self.buttonNPCviolenceCant = QPushButton("Can't", self.NPCWidget)
+        self.buttonNPCviolenceCant = QPushButton("Can't", self.InteractWidget)
         self.buttonNPCviolenceCant.setFont(QFont('Segoe UI', 14))
         self.buttonNPCviolenceCant.setGeometry(210,190,90,35)
         self.buttonNPCviolenceCant.setCheckable(True)
         self.buttonNPCviolenceCant.clicked.connect(self.buttonNPCviolenceCantAction)
 
-        self.labelNPCerotic = QLabel("Erotic interactions between NPC", self.NPCWidget)
+        self.labelNPCerotic = QLabel("Erotic interactions between NPC", self.InteractWidget)
         self.labelNPCerotic.setFont(QFont('Segoe UI', 14))
         self.labelNPCerotic.setGeometry(420,150,390,40)
         self.labelNPCerotic.setAlignment(Qt.AlignVCenter)
         self.labelNPCerotic.setAlignment(Qt.AlignHCenter)
-        self.buttonNPCeroticCan = QPushButton("Can", self.NPCWidget)
+        self.buttonNPCeroticCan = QPushButton("Can", self.InteractWidget)
         self.buttonNPCeroticCan.setFont(QFont('Segoe UI', 14))
         self.buttonNPCeroticCan.setGeometry(500,190,90,35)
         self.buttonNPCeroticCan.setCheckable(True)
         self.buttonNPCeroticCan.clicked.connect(self.buttonNPCeroticCanAction)
-        self.buttonNPCeroticCant = QPushButton("Can't", self.NPCWidget)
+        self.buttonNPCeroticCant = QPushButton("Can't", self.InteractWidget)
         self.buttonNPCeroticCant.setFont(QFont('Segoe UI', 14))
         self.buttonNPCeroticCant.setGeometry(610,190,90,35)
         self.buttonNPCeroticCant.setCheckable(True)
         self.buttonNPCeroticCant.clicked.connect(self.buttonNPCeroticCantAction)
 
-        myform.addWidget(self.NPCWidget)
+        myform.addWidget(self.InteractWidget)
         ####
 
         #### NPC OPTIONS
@@ -480,5 +480,421 @@ class UiLayoutOptionsMenu(object):
         if self.buttonFetishRyona.isChecked(): self.buttonFetishRyona.setText("Enabled")
         else: self.buttonFetishRyona.setText("Disabled")
 
+class UiLayoutOptionsMenu:
+    def __init__(self):
+        Globals.Layouts["OptionsUI"] = self
+        Globals.LayoutsData["OptionsUI"] = {"Source":"optionsMenuUI", "Initialized":0}
+
+    def UI(self):
+        MainWindow = Globals.Layouts["MainF"]
+        self.GUI = QWidget(MainWindow)
+
+        self.LabelBack = QLabel(self.GUI)
+        self.LabelBack.setGeometry(288,5,1024,954)
+        self.LabelBack.setProperty("Color","Dark")
+
+        self.OptionsScroll = QScrollArea(self.GUI)
+        self.OptionsScroll.setGeometry(288,5,1024,954)
+        self.OptionsScroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.OptionsScroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+
+        self.OptionsForm = QGridLayout()
+        self.OptionsBox = QGroupBox()
+        self.OptionsBox.setLayout(self.OptionsForm)
+        self.OptionsBox.setMinimumWidth(1024)
+        self.OptionsBox.setMaximumWidth(1024)
+        self.OptionsScroll.setWidget(self.OptionsBox)
+        self.OptionsForm.setContentsMargins(5, 5, 0, 0)
+        self.OptionsForm.WidgetsDict = {}
+
+        ###
+        self.InteractWidget = QWidget(objectName = "Transparent")
+
+        self.InteractLabel = QLabel(self.InteractWidget, objectName = "Title")
+        self.InteractLabel.setText("NPC Interaction Options")
+        self.InteractLabel.setGeometry(0,0,500,45)
+        self.InteractLabel.setProperty("Color","Light")
+        self.InteractLabel.setAlignment(Qt.AlignCenter)
+
+        #
+        self.NPCInteractLabel = QLabel(self.InteractWidget, objectName = "SubTitle")
+        self.NPCInteractLabel.setText("NPC Interactions")
+        self.NPCInteractLabel.setGeometry(0,50,290,40)
+        self.NPCInteractLabel.setProperty("Color","Dark")
+        self.NPCInteractLabel.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+
+        self.NPCInteractButtonOFF = QPushButton("Disabled", self.InteractWidget)
+        self.NPCInteractButtonOFF.setGeometry(295,50,100,40)
+        self.NPCInteractButtonOFF.setProperty("Color","Light")
+        self.NPCInteractButtonOFF.setCheckable(True)
+
+        self.NPCInteractButtonON = QPushButton("Enabled", self.InteractWidget)
+        self.NPCInteractButtonON.setGeometry(400,50,100,40)
+        self.NPCInteractButtonON.setProperty("Color","Light")
+        self.NPCInteractButtonON.setCheckable(True)
+
+        InteractButtonGroup = QButtonGroup(self.InteractWidget)
+        InteractButtonGroup.addButton(self.NPCInteractButtonOFF)
+        InteractButtonGroup.addButton(self.NPCInteractButtonON)
+        InteractButtonGroup.setExclusive(True)
+        self.NPCInteractButtonON.setChecked(True)
+        #
+
+        #
+        self.NPCInteractOtherLabel = QLabel(self.InteractWidget, objectName = "SubTitle")
+        self.NPCInteractOtherLabel.setText("Interactions between NPC")
+        self.NPCInteractOtherLabel.setGeometry(0,100,290,40)
+        self.NPCInteractOtherLabel.setProperty("Color","Dark")
+        self.NPCInteractOtherLabel.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+
+        self.NPCInteractButtonOtherOFF = QPushButton("Disabled", self.InteractWidget)
+        self.NPCInteractButtonOtherOFF.setGeometry(295,100,100,40)
+        self.NPCInteractButtonOtherOFF.setProperty("Color","Light")
+        self.NPCInteractButtonOtherOFF.setCheckable(True)
+
+        self.NPCInteractButtonOtherON = QPushButton("Enabled", self.InteractWidget)
+        self.NPCInteractButtonOtherON.setGeometry(400,100,100,40)
+        self.NPCInteractButtonOtherON.setProperty("Color","Light")
+        self.NPCInteractButtonOtherON.setCheckable(True)
+
+        InteractButtonOtherGroup = QButtonGroup(self.InteractWidget)
+        InteractButtonOtherGroup.addButton(self.NPCInteractButtonOtherOFF)
+        InteractButtonOtherGroup.addButton(self.NPCInteractButtonOtherON)
+        InteractButtonOtherGroup.setExclusive(True)
+        self.NPCInteractButtonOtherON.setChecked(True)
+        #
+
+        #
+        self.NPCInteractPlayerLabel = QLabel(self.InteractWidget, objectName = "SubTitle")
+        self.NPCInteractPlayerLabel.setText("NPC interactions with the player")
+        self.NPCInteractPlayerLabel.setGeometry(0,150,290,40)
+        self.NPCInteractPlayerLabel.setProperty("Color","Dark")
+        self.NPCInteractPlayerLabel.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+
+
+        self.NPCInteractButtonPlayerOFF = QPushButton("Disabled", self.InteractWidget)
+        self.NPCInteractButtonPlayerOFF.setGeometry(295,150,100,40)
+        self.NPCInteractButtonPlayerOFF.setProperty("Color","Light")
+        self.NPCInteractButtonPlayerOFF.setCheckable(True)
+
+        self.NPCInteractButtonPlayerON = QPushButton("Enabled", self.InteractWidget)
+        self.NPCInteractButtonPlayerON.setGeometry(400,150,100,40)
+        self.NPCInteractButtonPlayerON.setProperty("Color","Light")
+        self.NPCInteractButtonPlayerON.setCheckable(True)
+
+        InteractButtonPlayerGroup = QButtonGroup(self.InteractWidget)
+        InteractButtonPlayerGroup.addButton(self.NPCInteractButtonPlayerOFF)
+        InteractButtonPlayerGroup.addButton(self.NPCInteractButtonPlayerON)
+        InteractButtonPlayerGroup.setExclusive(True)
+        self.NPCInteractButtonPlayerOFF.setChecked(True)
+        #
+
+
+        self.InteractWidget.setMinimumWidth(500)
+        self.InteractWidget.setMaximumWidth(500)
+        self.InteractWidget.Height = 200
+        self.OptionsForm.addWidget(self.InteractWidget, 0, 1)
+        ###
+
+
+        ###
+        self.RandomWidget = QWidget(objectName = "Transparent")
+
+        self.RandomLabel = QLabel(self.RandomWidget, objectName = "Title")
+        self.RandomLabel.setText("Random NPC Options")
+        self.RandomLabel.setGeometry(0,0,500,45)
+        self.RandomLabel.setProperty("Color","Light")
+        self.RandomLabel.setAlignment(Qt.AlignCenter)
+
+        #
+        self.RandomNPCLabel = QLabel(self.RandomWidget, objectName = "SubTitle")
+        self.RandomNPCLabel.setText("NPC Interactions")
+        self.RandomNPCLabel.setGeometry(0,50,290,40)
+        self.RandomNPCLabel.setProperty("Color","Dark")
+        self.RandomNPCLabel.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+
+        self.RandomNPCButtonOFF = QPushButton("Disabled", self.RandomWidget)
+        self.RandomNPCButtonOFF.setGeometry(295,50,100,40)
+        self.RandomNPCButtonOFF.setProperty("Color","Light")
+        self.RandomNPCButtonOFF.setCheckable(True)
+
+        self.RandomNPCButtonON = QPushButton("Enabled", self.RandomWidget)
+        self.RandomNPCButtonON.setGeometry(400,50,100,40)
+        self.RandomNPCButtonON.setProperty("Color","Light")
+        self.RandomNPCButtonON.setCheckable(True)
+
+        RandomNPCButtonGroup = QButtonGroup(self.RandomWidget)
+        RandomNPCButtonGroup.addButton(self.RandomNPCButtonOFF)
+        RandomNPCButtonGroup.addButton(self.RandomNPCButtonON)
+        RandomNPCButtonGroup.setExclusive(True)
+        self.RandomNPCButtonON.setChecked(True)
+        #
+
+        #
+        self.RandomAmountLabel = QLabel(self.RandomWidget, objectName = "SubTitle")
+        self.RandomAmountLabel.setText("Amount of random NPC's")
+        self.RandomAmountLabel.setGeometry(0,100,290,40)
+        self.RandomAmountLabel.setProperty("Color","Dark")
+        self.RandomAmountLabel.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+
+        self.RandomAmountLine = QLineEdit(self.RandomWidget)
+        self.RandomAmountLine.setText("15")
+        self.RandomAmountLine.setGeometry(295,100,290,40)
+        self.RandomAmountLine.setProperty("Color","Light")
+        self.RandomAmountLine.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+        self.RandomAmountLine.setValidator(QIntValidator(0,99))
+        #
+
+        #
+        self.RandomSexLabel = QLabel(self.RandomWidget, objectName = "SubTitle")
+        self.RandomSexLabel.setText("Sex ratio of random NPC's")
+        self.RandomSexLabel.setGeometry(0,150,290,40)
+        self.RandomSexLabel.setProperty("Color","Dark")
+        self.RandomSexLabel.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+
+        def SexLinesRefresh(self):
+            try:
+                if self.Lines[0] == "Male" and int(self.RandomSexMaleLine.text()) >= 100:
+                    self.RandomSexMaleLine.setText(100)
+                    self.RandomSexFemaleLine.setText(0)
+                    self.RandomSexFutanariLine.setText(0)
+                elif self.Lines[0] == "Female" and int(self.RandomSexFemaleLine.text()) >= 100:
+                    self.RandomSexMaleLine.setText(0)
+                    self.RandomSexFemaleLine.setText(100)
+                    self.RandomSexFutanariLine.setText(0)
+                elif self.Lines[0] == "Futanari" and int(self.RandomSexFutanariLine.text()) >= 100:
+                    self.RandomSexMaleLine.setText(0)
+                    self.RandomSexFemaleLine.setText(0)
+                    self.RandomSexFutanariLine.setText(100)
+                else:
+                    FutaValue = int(self.RandomSexFutanariLine.text())
+                    FemaleValue = int(self.RandomSexFemaleLine.text())
+                    MaleValue = int(self.RandomSexMaleLine.text())
+
+                    if self.Lines[1] == 0:
+                        if FutaValue + FemaleValue + MaleValue > 100:
+                            Extra = FutaValue + FemaleValue + MaleValue - 100
+                            if self.Lines[0] == "Male":
+                                for i in range(Extra):
+                                    if FemaleValue < FutaValue:
+                                        FutaValue -= 1
+                                    else:
+                                        FemaleValue -= 1
+                            elif self.Lines[0] == "Female":
+                                for i in range(Extra):
+                                    if FutaValue < MaleValue:
+                                        MaleValue -= 1
+                                    else:
+                                        FutaValue -= 1
+                            elif self.Lines[0] == "Futanari":
+                                for i in range(Extra):
+                                    if FemaleValue < MaleValue:
+                                        MaleValue -= 1
+                                    else:
+                                        FemaleValue -= 1
+                        elif FutaValue + FemaleValue + MaleValue < 100:
+                            Remaining = 100 - FutaValue + FemaleValue + MaleValue
+                            if self.Lines[0] == "Male":
+                                for i in range(Remaining):
+                                    if FemaleValue > FutaValue:
+                                        FutaValue += 1
+                                    else:
+                                        FemaleValue += 1
+                            elif self.Lines[0] == "Female":
+                                for i in range(Remaining):
+                                    if FutaValue > MaleValue:
+                                        MaleValue += 1
+                                    else:
+                                        FutaValue += 1
+                            elif self.Lines[0] == "Futanari":
+                                for i in range(Remaining):
+                                    if FemaleValue > MaleValue:
+                                        MaleValue += 1
+                                    else:
+                                        FemaleValue += 1
+
+                        self.RandomSexMaleLine.setText(str(MaleValue))
+                        self.RandomSexFemaleLine.setText(str(FemaleValue))
+                        self.RandomSexFutanariLine.setText(str(FutaValue))
+                    else:
+                        if (self.Lines[0] == "Male" and self.Lines[1] == "Female") and MaleValue + FemaleValue > 100:
+                            FemaleValue = 100 - MaleValue
+                        elif (self.Lines[0] == "Female" and self.Lines[1] == "Male") and MaleValue + FemaleValue > 100:
+                            MaleValue = 100 - FemaleValue
+
+                        elif (self.Lines[0] == "Futanari" and self.Lines[1] == "Female") and FutaValue + FemaleValue > 100:
+                            FemaleValue = 100 - FutaValue
+                        elif (self.Lines[0] == "Female" and self.Lines[1] == "Futanari") and FutaValue + FemaleValue > 100:
+                            FutaValue = 100 - FemaleValue
+
+                        elif (self.Lines[0] == "Futanari" and self.Lines[1] == "Male") and FutaValue + MaleValue > 100:
+                            MaleValue = 100 - FutaValue
+                        elif (self.Lines[0] == "Male" and self.Lines[1] == "Futanari") and FutaValue + MaleValue > 100:
+                            FutaValue = 100 - MaleValue
+
+                        else:
+                            # if FutaValue + FemaleValue + MaleValue < 100:
+                            if (self.Lines[0] == "Male" and self.Lines[1] == "Female") or (self.Lines[0] == "Female" and self.Lines[1] == "Male"):
+                                FutaValue = 100 - (MaleValue + FemaleValue)
+                            elif (self.Lines[0] == "Futanari" and self.Lines[1] == "Female") or (self.Lines[0] == "Female" and self.Lines[1] == "Futanari"):
+                                MaleValue = 100 - (FutaValue + FemaleValue)
+                            elif (self.Lines[0] == "Male" and self.Lines[1] == "Futanari") or (self.Lines[0] == "Futanari" and self.Lines[1] == "Male"):
+                                FemaleValue = 100 - (MaleValue + FutaValue)
+
+                    self.RandomSexMaleLine.setText(str(MaleValue))
+                    self.RandomSexFemaleLine.setText(str(FemaleValue))
+                    self.RandomSexFutanariLine.setText(str(FutaValue))
+            except Exception as e:
+                print(e)
+        self.Lines = [0,0]
+        self.RandomSexMaleLabel = QLabel(self.RandomWidget, objectName = "SmallText")
+        self.RandomSexMaleLabel.setText("Male")
+        self.RandomSexMaleLabel.setGeometry(300,130,60,20)
+        self.RandomSexMaleLabel.setProperty("Color", "None")
+        self.RandomSexMaleLabel.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
+        self.RandomSexMaleLine = QLineEdit(self.RandomWidget)
+        self.RandomSexMaleLine.setText("45")
+        self.RandomSexMaleLine.setGeometry(295,150,65,40)
+        self.RandomSexMaleLine.setProperty("Color","Light")
+        self.RandomSexMaleLine.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+        def MaleFinished(self):
+            self.Lines[1] = self.Lines[0]
+            self.Lines[0] = "Male"
+            SexLinesRefresh(self)
+
+        self.RandomSexMaleLine.editingFinished.connect(lambda: MaleFinished(self))
+
+
+        self.RandomSexFemaleLabel = QLabel(self.RandomWidget, objectName = "SmallText")
+        self.RandomSexFemaleLabel.setText("Female")
+        self.RandomSexFemaleLabel.setGeometry(370,130,60,20)
+        self.RandomSexFemaleLabel.setProperty("Color", "None")
+        self.RandomSexFemaleLabel.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
+        self.RandomSexFemaleLine = QLineEdit(self.RandomWidget)
+        self.RandomSexFemaleLine.setText("45")
+        self.RandomSexFemaleLine.setGeometry(365,150,65,40)
+        self.RandomSexFemaleLine.setProperty("Color","Light")
+        self.RandomSexFemaleLine.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+        def FemaleFinished(self):
+            self.Lines[1] = self.Lines[0]
+            self.Lines[0] = "Female"
+            SexLinesRefresh(self)
+
+        self.RandomSexFemaleLine.editingFinished.connect(lambda: FemaleFinished(self))
+
+
+        self.RandomSexFutanariLabel = QLabel(self.RandomWidget, objectName = "SmallText")
+        self.RandomSexFutanariLabel.setText("Futanari")
+        self.RandomSexFutanariLabel.setGeometry(440,130,60,20)
+        self.RandomSexFutanariLabel.setProperty("Color", "None")
+        self.RandomSexFutanariLabel.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
+        self.RandomSexFutanariLine = QLineEdit(self.RandomWidget)
+        self.RandomSexFutanariLine.setText("10")
+        self.RandomSexFutanariLine.setGeometry(435,150,65,40)
+        self.RandomSexFutanariLine.setProperty("Color","Light")
+        self.RandomSexFutanariLine.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+        def FutaFinished(self):
+            self.Lines[1] = self.Lines[0]
+            self.Lines[0] = "Futanari"
+            SexLinesRefresh(self)
+
+        self.RandomSexFutanariLine.editingFinished.connect(lambda: FutaFinished(self))
+
+
+        self.RandomWidget.setMinimumWidth(500)
+        self.RandomWidget.setMaximumWidth(500)
+        self.RandomWidget.Height = 200
+        self.OptionsForm.addWidget(self.RandomWidget, 0, 2)
+        ###
+
+
+
+        self.LabelControl = QLabel(self.GUI)
+        self.LabelControl.setGeometry(5,964,1592,55)
+        self.LabelControl.setProperty("Color","Dark")
+
+        self.ButtonMenu = QPushButton("Back", self.GUI, clicked = lambda: MainWindow.gotoPreviousLayout())
+        self.ButtonMenu.setGeometry(15,970,200,45)
+
+        self.ButtonSave = QPushButton("Save", self.GUI, clicked = lambda: self.Save())
+        self.ButtonSave.setGeometry(225,970,200,45)
+
+
+    def Refresh(self):
+        self.InteractWidget.setMinimumHeight(self.InteractWidget.Height)
+        self.InteractWidget.setMaximumHeight(self.InteractWidget.Height)
+
+        self.RandomWidget.setMinimumHeight(self.RandomWidget.Height)
+        self.RandomWidget.setMaximumHeight(self.RandomWidget.Height)
+
+
+        # Width = self.InteractWidget.width() + self.RandomWidget.width()
+        self.OptionsBox.setMinimumWidth(1020)
+        self.OptionsBox.setMaximumWidth(1020)
+        self.OptionsBox.setMinimumHeight(self.InteractWidget.Height)
+        self.OptionsBox.setMaximumHeight(self.InteractWidget.Height)
+
+        Interactions = Globals.PlayerConfig["Interactions"]
+        BetweenNPC = Globals.PlayerConfig["BetweenNPC"]
+        NPCtoPC = Globals.PlayerConfig["NPCtoPC"]
+
+        RandomNPC = Globals.PlayerConfig["RandomNPC"]
+
+        RandomAmount = Globals.PlayerConfig["RandomAmount"]
+
+        MaleRatio = Globals.PlayerConfig["RandomRatio"]["Male"]
+        FemaleRatio = Globals.PlayerConfig["RandomRatio"]["Female"]
+        FutaRatio = Globals.PlayerConfig["RandomRatio"]["FutaRatio"]
+
+
+        if Interactions == 1: self.NPCInteractButtonON.setChecked(True)
+        else: self.NPCInteractButtonOFF.setChecked(True)
+
+        if BetweenNPC == 1: self.NPCInteractButtonOtherON.setChecked(True)
+        else: self.NPCInteractButtonOtherOFF.setChecked(True)
+
+        if NPCtoPC == 1: self.NPCInteractButtonPlayerON.setChecked(True)
+        else: self.NPCInteractButtonPlayerOFF.setChecked(True)
+
+        if RandomNPC == 1: self.RandomNPCButtonON.setChecked(True)
+        else: self.RandomNPCButtonOFF.setChecked(True)
+
+        self.RandomAmountLine.setText(str(RandomAmount))
+
+        self.RandomSexMaleLine.setText(str(MaleRatio))
+        self.RandomSexFemaleLine.setText(str(FemaleRatio))
+        self.RandomSexFutanariLine.setText(str(FutaRatio))
+
+        # Globals.PlayerConfig["RandomRatio"] = {"Male":MaleRatio, "Female":FemaleRatio, "FutaRatio":FutaRatio}
+
+
+    def Save(self):
+        print(Globals.PlayerConfig)
+        if self.NPCInteractButtonOFF.isChecked: Interactions = 0
+        if self.NPCInteractButtonON.isChecked: Interactions = 1
+
+        if self.NPCInteractButtonOtherOFF.isChecked: BetweenNPC = 0
+        if self.NPCInteractButtonOtherON.isChecked: BetweenNPC = 1
+
+        if self.NPCInteractButtonPlayerOFF.isChecked: NPCtoPC = 0
+        if self.NPCInteractButtonPlayerON.isChecked: NPCtoPC = 1
+
+        if self.RandomNPCButtonOFF.isChecked: RandomNPC = 0
+        if self.RandomNPCButtonON.isChecked: RandomNPC = 1
+
+        RandomAmount = int(self.RandomAmountLine.text())
+        MaleRatio = int(self.RandomSexMaleLine.text())
+        FemaleRatio = int(self.RandomSexFemaleLine.text())
+        FutaRatio = int(self.RandomSexFutanariLine.text())
+
+        Globals.PlayerConfig["Interactions"] = Interactions
+        Globals.PlayerConfig["BetweenNPC"] = BetweenNPC
+        Globals.PlayerConfig["NPCtoPC"] = NPCtoPC
+        Globals.PlayerConfig["RandomNPC"] = RandomNPC
+        Globals.PlayerConfig["RandomAmount"] = RandomAmount
+        Globals.PlayerConfig["RandomRatio"] = {"Male":MaleRatio, "Female":FemaleRatio, "FutaRatio":FutaRatio}
+        print(Globals.PlayerConfig)
+
 def Initialize(self, Reference):
-    ""
+    if "OptionsUI" not in Globals.Layouts:
+        Object = UiLayoutOptionsMenu()

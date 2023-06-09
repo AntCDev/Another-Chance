@@ -43,16 +43,22 @@ def CheckIdleAction(self, ID):
 
                 # CHECKS FOR POSSIBLE ACTIONS
                 Sociability = 0.7
-                if random.random() > Sociability:
+                if random.random() > Sociability and Globals.PlayerConfig["Interactions"] == 1:
                     NPCLocation = Globals.SoLNPCData[ID]["Actions"]["CurrentTask"]["Location"]
 
                     List = Globals.SoLEnviorementData["Locations"][NPCLocation]["inHere"].copy()
                     if ID in List:
                         List.remove(ID)
 
-                    PCID = Globals.SoLPCData["ID"]
-                    if PCID in List:
-                        List.remove(PCID)
+                        PCID = Globals.SoLPCData["ID"]
+                    if Globals.PlayerConfig["NPCtoPC"] == 0:
+                        if PCID in List:
+                            List.remove(PCID)
+                    if Globals.PlayerConfig["BetweenNPC"] == 0:
+                        if PCID in List:
+                            List = [PCID]
+                        else:
+                            List = []
 
                     if List != []:
                         NPCWeights = {}

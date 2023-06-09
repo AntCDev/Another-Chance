@@ -150,6 +150,18 @@ def Initialize(self, Reference):
             },
         }
 
+    if "PlayerConfig" in Globals.CurrentSession:
+        Globals.PlayerConfig = Globals.CurrentSession["PlayerConfig"]
+    else:
+        Globals.PlayerConfig = {
+        "Interactions":1,
+        "BetweenNPC":1,
+        "NPCtoPC":0,
+        "RandomNPC":1,
+        "RandomAmount":15,
+        "RandomRatio":{"Male":35,"Female":55,"FutaRatio":10}
+        }
+
     if "SoLEnviorementData" in Globals.CurrentSession:
         Globals.SoLEnviorementData = Globals.CurrentSession["SoLEnviorementData"]
     else:
