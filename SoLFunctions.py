@@ -1726,6 +1726,8 @@ def GetDescription(Area, NPCData, Options):
     VTightness = BodyType["VTightness"]
     ATightness = BodyType["ATightness"]
     PenisSize = BodyType["PenisSize"]
+    BallsSize = BodyType["BallsSize"]
+    Age = BodyType["PhysicalAge"]
 
     # with open('NPCData.json', 'rb') as f:
     #     NPCData = json.load(f)
@@ -1914,21 +1916,46 @@ def GetDescription(Area, NPCData, Options):
             State.append('''Hard''')
             State.append('''Stiff''')
             State.append('''Firm''')
+    elif Area == "BallsSize":
+        Part.append("Balls")
+        Part.append("Testicles")
+
+        if PenisSize == 0: Desc.append('''Non Existant''')
+        elif PenisSize == 1: Desc.append('''Tiny''')
+        elif PenisSize == 2: Desc.append('''Small''')
+        elif PenisSize == 3: Desc.append('''Average''')
+        elif PenisSize == 4: Desc.append('''Big''')
+        elif PenisSize == 5: Desc.append('''Huge''')
+
+
     elif Area == "Age":
         Part.append("")
-        # if Age == 0:
-        if True:
+        if Age == 0:
             Desc.append("Very Young")
+        if Age == 0 or Age == 1:
+            Desc.append("Young")
+        elif Age == 2:
+            Desc.append("Young Adult")
+        elif Age == 3:
+            Desc.append("Adult")
+        elif Age == 4:
+            Desc.append("Middle Aged")
+        elif Age == 5:
+            Desc.append("Older Adult")
+        elif Age == 6:
+            Desc.append("Old")
+        elif Age == 7:
+            Desc.append("Very Old")
         State.append('''''')
     elif Area == "Height":
         if Height == 0: Desc.append("Pixie Size")
-        if Height == 1: Desc.append("Very Tiny")
-        if Height == 2: Desc.append("Tiny")
-        if Height == 3: Desc.append("Small")
-        if Height == 4: Desc.append("Average")
-        if Height == 5: Desc.append("Tall")
-        if Height == 6: Desc.append("Very Tall")
-        if Height == 7: Desc.append("Towering")
+        elif Height == 1: Desc.append("Very Tiny")
+        elif Height == 2: Desc.append("Tiny")
+        elif Height == 3: Desc.append("Small")
+        elif Height == 4: Desc.append("Average")
+        elif Height == 5: Desc.append("Tall")
+        elif Height == 6: Desc.append("Very Tall")
+        elif Height == 7: Desc.append("Towering")
 
         State.append('''''')
         Part.append("")
