@@ -5,3 +5,4 @@ Add processing of negative gems
 Fix Issue Loading importMenuUI new game, and import it again.
 Fix Issue NewGameMenuUI using custom dicts for NPCData
 Fix Issue sleeping with a single enhance target halving the portraits
+Add flavor text for characters leavingn or coming
