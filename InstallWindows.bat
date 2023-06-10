@@ -1,19 +1,25 @@
 @echo off
 
-:: Check for Python Installation
-python --version 2>NUL
-if errorlevel 1 goto errorNoPython
+set PYTHON=python
+set "VENV_DIR=%~dp0%venv"
 
-:: Reaching here means Python is installed.
-:: Execute stuff...
-pip install -r requirements.txt
+%PYTHON% -c ""
+if %ERRORLEVEL% == 0 goto :check_pip
+echo Couldn't launch python
+goto :enof
 
-:: Once done, exit the batch file -- skips executing the errorNoPython section
-goto:neof
+:check_pip
+pip
+if %ERRORLEVEL% == 0 goto :start_install
+echo Couldn't install pip
+goto :enof
 
-:errorNoPython
-echo Error^: Python not installed, please make sure you have installed Python 3 and it's added to PATH. It can be obtained at https://www.python.org
+:start_install
+%PYTHON% -m venv "env"
+set PENV=env\Scripts\python.exe
+%PENV% env\Scripts\pip.exe install -r requirements.txt
 
-:neof
+
+:enof
 pause
-goto:eof
+goto :eof

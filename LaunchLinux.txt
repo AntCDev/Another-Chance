@@ -1,0 +1,4 @@
+Open a command line and move to the directory of your game. Once there write and send:
+python main.py
+
+Or double click the main.py file

@@ -1,4 +1,4 @@
 Please make sure you have Python 3, and you have correctly set the PATH.
-Run:
 
-pIp3 install PyQt5
+To install open a command line and move to the directory where the game is located. Once there write and send:
+pip install -r requirements.txt
