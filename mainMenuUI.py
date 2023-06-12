@@ -73,11 +73,11 @@ class UiLayoutMainMenu(QWidget):
         self.labelPatreon.setGeometry(809,522,26,26)
         self.labelPatreon.setScaledContents(True)
 
-        self.buttonHelp = QPushButton('Help', self.GUI)
+        self.buttonHelp = QPushButton('Help', self.GUI, clicked = lambda: MainWindow.gotoLayout("HelpUI"))
         self.buttonHelp.setGeometry(995, 520, 180, 30)
         self.buttonHelp.setProperty("Color","Light")
-        self.buttonHelp.setProperty("Enabled","0")
-        self.buttonHelp.setEnabled(False)
+        # self.buttonHelp.setProperty("Enabled","0")
+        # self.buttonHelp.setEnabled(False)
 
 
         self.buttonChangelog = QPushButton('V. M1', self.GUI, clicked = lambda: webbrowser.open("https://github.com/AntCDev/Another-Chance"))
