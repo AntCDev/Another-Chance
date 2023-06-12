@@ -58,7 +58,19 @@ class MainWindow(QMainWindow):
                     background:none;
                     border:none;
                     }
+                .QWidget[Color = "Dark"]{
+                    border:1px solid black;
+                    background-color:rgb(23,23,23);
+                    }
 
+            .QGridLayout{
+                border:none;
+                background:none;
+                }
+            .QVBoxLayout{
+                border:none;
+                background:none;
+                }
             .QGroupBox{
                 border:none;
                 background:none;
@@ -400,6 +412,8 @@ class MainWindow(QMainWindow):
             key = "Enter"
         elif key == 18:     # Alt
             key = "Alt"
+        if key == 27:       # Esc
+            key = "Esc"
         elif key == 192:    # Tilde, key to the left of 1
             key = "Tilde"
         elif key == 20:     # Mayus
@@ -453,15 +467,30 @@ class MainWindow(QMainWindow):
             key = e.nativeVirtualKey()      # To prevent Shift+1 to turn into ! instead of 1
             key = self.keyList(key)
             Globals.Keys[key] = e
-            Globals.Layouts["BattleMenu"].KeyHandling("Pressed", key, e)
+            # Globals.Layouts[]
+            # Globals.Layouts["BattleMenu"].KeyHandling("Pressed", key, e)
         except:
+            ""
+        try:
+            if "Control" in Globals.Keys.keys() and "Shift" in Globals.Keys.keys() and "1" in Globals.Keys.keys():
+                try:
+                    self.gotoPreviousLayout()
+                except:
+                    ""
+            if "Control" in Globals.Keys.keys() and "Shift" in Globals.Keys.keys() and "2" in Globals.Keys.keys():
+                try:
+                    if Globals.LayoutsData["Active"] != Globals.Layouts["MainMenuUI"]:
+                        self.gotoLayout("MainMenuUI")
+                except Exception as e:
+                    ""
+        except Exception as e:
             ""
 
     def keyReleaseEvent(self, e):
         try:
             key = e.nativeVirtualKey()      # To prevent Shift+1 to turn into ! instead of 1
             key = self.keyList(key)
-            Globals.Layouts["BattleMenu"].KeyHandling("Released", key, e)
+            # Globals.Layouts["BattleMenu"].KeyHandling("Released", key, e)
             Globals.Keys.pop(key)
         except:
             ""

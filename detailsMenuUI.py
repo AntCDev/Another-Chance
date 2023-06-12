@@ -891,91 +891,91 @@ class UiLayoutDetailsMenu:
         MainWindow = Globals.Layouts["MainF"]
         self.GUI = QWidget(MainWindow)
         # mainwindow.setWindowIcon(QtGui.QIcon('PhotoIcon.png'))
-        self.GUI.setStyleSheet('''
-        QWidget{
-        background-color:rgb(35,35,35);
-        }
-        .QGroupBox{
-        border:none;
-        background:none;
-        }
-
-        .QScrollArea{
-        border:none;
-        background-color:rgba(23,23,23,0)
-        }
-
-        QPushButton{
-        color:rgb(255, 255, 255);
-        font-size: 14pt;
-        font-family: Segoe UI;
-        }
-        QPushButton:hover{
-        color:rgb(255, 255, 0);
-        }
-
-        QLabel{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        }
-        QLabel:hover{
-        color:rgb(255, 255, 0);
-        }
-
-        QLabel#MainTitle{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        }
-
-        QLabel#SubTitle{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        }
-        QLabel#SubTitle:hover{
-        color:rgb(255, 255, 0);
-        }
-
-        QLineEdit{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        background-color:rgb(35,35,35);
-        }
-
-        QTextEdit{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        background-color:rgb(35,35,35);
-        }
-
-        QComboBox{
-        background-color:rgb(23,23,23);
-        color:rgb(255, 255, 255);
-        }
-        QComboBox:hover{
-        color:rgb(255, 255, 0);
-        }
-		QComboBox QAbstractItemView {
-        border: 1px solid grey;
-        color: white;
-        selection-color: yellow;
-		}
-
-        QRadioButton{
-        color:rgb(255, 255, 255);
-        }
-        QRadioButton:hover{
-        color:rgb(255, 255, 0);
-        }
-
-        QToolTip{
-        background-color: rgb(23,23,23);
-        color: white;
-        border: 1px solid black;
-
-
-        }
-
-        ''')
+        # self.GUI.setStyleSheet('''
+        # QWidget{
+        # background-color:rgb(35,35,35);
+        # }
+        # .QGroupBox{
+        # border:none;
+        # background:none;
+        # }
+        #
+        # .QScrollArea{
+        # border:none;
+        # background-color:rgba(23,23,23,0)
+        # }
+        #
+        # QPushButton{
+        # color:rgb(255, 255, 255);
+        # font-size: 14pt;
+        # font-family: Segoe UI;
+        # }
+        # QPushButton:hover{
+        # color:rgb(255, 255, 0);
+        # }
+        #
+        # QLabel{
+        # color:rgb(255, 255, 255);
+        # border:1px solid black;
+        # }
+        # QLabel:hover{
+        # color:rgb(255, 255, 0);
+        # }
+        #
+        # QLabel#MainTitle{
+        # color:rgb(255, 255, 255);
+        # border:1px solid black;
+        # }
+        #
+        # QLabel#SubTitle{
+        # color:rgb(255, 255, 255);
+        # border:1px solid black;
+        # }
+        # QLabel#SubTitle:hover{
+        # color:rgb(255, 255, 0);
+        # }
+        #
+        # QLineEdit{
+        # color:rgb(255, 255, 255);
+        # border:1px solid black;
+        # background-color:rgb(35,35,35);
+        # }
+        #
+        # QTextEdit{
+        # color:rgb(255, 255, 255);
+        # border:1px solid black;
+        # background-color:rgb(35,35,35);
+        # }
+        #
+        # QComboBox{
+        # background-color:rgb(23,23,23);
+        # color:rgb(255, 255, 255);
+        # }
+        # QComboBox:hover{
+        # color:rgb(255, 255, 0);
+        # }
+		# QComboBox QAbstractItemView {
+        # border: 1px solid grey;
+        # color: white;
+        # selection-color: yellow;
+		# }
+        #
+        # QRadioButton{
+        # color:rgb(255, 255, 255);
+        # }
+        # QRadioButton:hover{
+        # color:rgb(255, 255, 0);
+        # }
+        #
+        # QToolTip{
+        # background-color: rgb(23,23,23);
+        # color: white;
+        # border: 1px solid black;
+        #
+        #
+        # }
+        #
+        # ''')
 
         self.MainScroll = QScrollArea(self.GUI)
         self.MainScroll.setGeometry(288,5,1024,954)
@@ -1069,8 +1069,8 @@ class UiLayoutDetailsMenu:
             self.setTraits(NPCData, ImageName)
             self.setRelationships(NPCData, ImageName)
 
-            self.MainBox.setMinimumHeight(self.GeneralWidget.height() + self.TraitsWidget.height() + self.RelationshipsWidget.height() )
-            self.MainBox.setMaximumHeight(self.GeneralWidget.height() + self.TraitsWidget.height() + self.RelationshipsWidget.height() )
+            self.MainBox.setMinimumHeight(self.GeneralWidget.height() + self.TraitsWidget.height() + self.RelationshipsWidget.height() + 20)
+            self.MainBox.setMaximumHeight(self.GeneralWidget.height() + self.TraitsWidget.height() + self.RelationshipsWidget.height() + 20)
 
     def setDescriptions(self, NPCData, ImageName):
         ID = NPCData["ID"]
@@ -1333,6 +1333,299 @@ class UiLayoutDetailsMenu:
         self.MainForm.addWidget(self.TraitsWidget)
 
     def setRelationships(self, NPCData, ImageName):
+        try:
+            self.RelationshipsWidget = QWidget()
+            self.RelationshipsWidget.setProperty("Color", "Dark")
+
+            self.RelationshipsLabel = QLabel("Relations", self.RelationshipsWidget, objectName = "Title")
+            self.RelationshipsLabel.setGeometry(5,0,1014,45)
+            self.RelationshipsLabel.setProperty("Color", "Light")
+            self.RelationshipsLabel.setAlignment(Qt.AlignCenter)
+
+            self.RelationLayout = QVBoxLayout()
+            self.RelationHolder = QWidget(self.RelationshipsWidget, objectName = "Transparent")
+            self.RelationHolder.setLayout(self.RelationLayout)
+            self.RelationHolder.setGeometry(5,50,1014,0)
+            self.RelationLayout.setContentsMargins(0,0,0,0)
+
+            self.GlobalWidget = QWidget(objectName = "Transparent")
+            self.GlobalLayout = QGridLayout()
+            self.GlobalLayout.setContentsMargins(0,0,0,0)
+            self.GlobalHolder = QWidget(self.GlobalWidget, objectName = "Transparent")
+            self.GlobalHolder.setLayout(self.GlobalLayout)
+            self.GlobalHolder.setGeometry(0,0,1014,0)
+
+            self.RelationHolder.setMinimumHeight(0)
+            self.RelationHolder.setMaximumHeight(0)
+
+            if True:
+                # Sets up the global values
+                try:
+                    GlobalsDict = {}
+                    for Relation in NPCData["Relations"]:
+                        for Key in NPCData["Relations"][Relation]["Permanent"]:
+                            if Key not in GlobalsDict:
+                                GlobalsDict[Key] = NPCData["Relations"][Relation]["Permanent"][Key]
+                            else:
+                                GlobalsDict[Key] += NPCData["Relations"][Relation]["Permanent"][Key]
+                    if "Attraction" in GlobalsDict:
+                        GlobalsDict.pop("Attraction")
+                    if "Reliability" in GlobalsDict:
+                        GlobalsDict.pop("Reliability")
+
+                    GlobalWidgetsDict = {}
+                    for ValueID in GlobalsDict:
+                        Object = ValueWidget(ValueID, GlobalsDict[ValueID])
+                        Widget = Object.GetWidget()
+                        if Widget != None:
+                            GlobalWidgetsDict[ValueID] = Widget
+
+                    MaxWidth = 1014
+                    Width, Height = Globals.References["SoLFunctions"].GridLayoutMaker(self, self.GlobalLayout, GlobalWidgetsDict, MaxWidth, 10)
+
+                    self.GlobalHolder.setMinimumHeight(Height)
+                    self.GlobalHolder.setMaximumHeight(Height)
+                    self.GlobalHolder.setMinimumWidth(Width)
+                    self.GlobalHolder.setMaximumWidth(Width)
+
+                except Exception as e:
+                    Log(2, "ERROR SETT UP GLOBAL PERMANENT VALUES", e)
+
+            self.GlobalWidget.setMinimumHeight(self.GlobalHolder.height())
+            self.GlobalWidget.setMaximumHeight(self.GlobalHolder.height())
+            self.GlobalWidget.setMinimumWidth(1014)
+            self.GlobalWidget.setMaximumWidth(1014)
+            # self.GlobalWidget.setStyleSheet('''background-color:rgb(0,0,255)''')
+
+            self.RelationHolder.setMinimumHeight(self.RelationHolder.height() + self.GlobalWidget.height() + 5)
+            self.RelationHolder.setMaximumHeight(self.RelationHolder.height() + self.GlobalWidget.height() + 5)
+
+            self.RelationLayout.addWidget(self.GlobalWidget)
+
+            # GLOBALS
+            # RELATION
+            ## PERMANENT
+            ## ABILITIES
+            ## FALLEN STATE
+
+
+
+            if len(NPCData["Relations"]) > 0:
+                def setRelation():
+                    self.RelationHolder.setMinimumHeight(50 + self.GlobalWidget.height() + 5)
+                    self.RelationHolder.setMaximumHeight(50 + self.GlobalWidget.height() + 5)
+
+                    Key = self.RelationPicker.currentText()
+                    self.RelationNPCLabel.setText(f'''{Key}''')
+                    RelationData = self.RelationPicker.Data[Key]
+
+                    ### PERMANENT
+                    try:
+                        for Widget in self.PermanentLayout.WidgetsList:
+                            self.PermanentLayout.removeWidget(Widget)
+                    except:
+                        ""
+                    self.PermanentLayout.WidgetsList = []
+
+                    PermanentDict = {}
+                    for PermanentID in RelationData["Permanent"]:
+                        PermanentDict[PermanentID] = RelationData["Permanent"][PermanentID]
+
+                    PermanentWidgetsDict = {}
+                    for ValueID in PermanentDict:
+                        Object = ValueWidget(ValueID, PermanentDict[ValueID])
+                        Widget = Object.GetWidget()
+                        if Widget != None:
+                            PermanentWidgetsDict[ValueID] = Widget
+                            self.PermanentLayout.WidgetsList.append(Widget)
+
+                    MaxWidth = 1014
+                    Width, Height = Globals.References["SoLFunctions"].GridLayoutMaker(self, self.PermanentLayout, PermanentWidgetsDict, MaxWidth, 10)
+                    self.PermanentHolder.setMinimumWidth(Width)
+                    self.PermanentHolder.setMaximumWidth(Width)
+                    self.PermanentHolder.setMinimumHeight(Height)
+                    self.PermanentHolder.setMaximumHeight(Height)
+
+                    self.PermanentWidget.setMinimumWidth(MaxWidth)
+                    self.PermanentWidget.setMaximumWidth(MaxWidth)
+                    self.PermanentWidget.setMinimumHeight(Height+45)
+                    self.PermanentWidget.setMaximumHeight(Height+45)
+
+
+                    ### ABILITIES
+                    try:
+                        for Widget in self.AbilitiesLayout.WidgetsList:
+                            self.AbilitiesLayout.removeWidget(Widget)
+                    except:
+                        ""
+                    self.AbilitiesLayout.WidgetsList = []
+
+
+                    AbilitiesWidgetsDict = {}
+                    for AbilityID in Globals.SoLAbilities:
+                        if AbilityID in RelationData["Abilities"]:
+                            Data = RelationData["Abilities"][AbilityID]
+                        else:
+                            Data = {}
+                        Widget = Globals.SoLAbilities[AbilityID]["Reference"].GetAbilityStaticWidget(AbilityID, Data)
+                        if Widget != None:
+                            AbilitiesWidgetsDict[AbilityID] = Widget
+                            self.AbilitiesLayout.WidgetsList.append(Widget)
+
+                    MaxWidth = 1014
+                    Width, Height = Globals.References["SoLFunctions"].GridLayoutMaker(self, self.AbilitiesLayout, AbilitiesWidgetsDict, MaxWidth, 10)
+                    self.AbilitiesHolder.setMinimumWidth(Width)
+                    self.AbilitiesHolder.setMaximumWidth(Width)
+                    self.AbilitiesHolder.setMinimumHeight(Height)
+                    self.AbilitiesHolder.setMaximumHeight(Height)
+
+                    self.AbilitiesWidget.setMinimumWidth(MaxWidth)
+                    self.AbilitiesWidget.setMaximumWidth(MaxWidth)
+                    self.AbilitiesWidget.setMinimumHeight(Height+45)
+                    self.AbilitiesWidget.setMaximumHeight(Height+45)
+                    #
+                    #
+                    ### FALLEN STATES
+                    try:
+                        for Widget in self.FallenLayout.WidgetsList:
+                            self.FallenLayout.removeWidget(Widget)
+                    except:
+                        ""
+                    self.FallenLayout.WidgetsList = []
+
+                    FallenWidgetsDict = {}
+                    for FallenID in Globals.SoLFallenStates:
+                        if FallenID in RelationData["FallenData"]:
+                            FallenData = RelationData["FallenData"][FallenID]
+                        else:
+                            FallenData = {}
+                        Widget = Globals.SoLFallenStates[FallenID]["Reference"].GetStaticFallenWidget(FallenID, FallenData, RelationData)
+                        if Widget != None:
+                            FallenWidgetsDict[FallenID] = Widget
+                            self.AbilitiesLayout.WidgetsList.append(Widget)
+                            # self.FallenLayout.WidgetList.append(Widget)
+
+                    MaxWidth = 1014
+                    Width, Height = Globals.References["SoLFunctions"].GridLayoutMaker(self, self.FallenLayout, FallenWidgetsDict, MaxWidth, 10)
+                    self.FallenHolder.setMinimumWidth(Width)
+                    self.FallenHolder.setMaximumWidth(Width)
+                    self.FallenHolder.setMinimumHeight(Height)
+                    self.FallenHolder.setMaximumHeight(Height)
+
+                    self.FallenWidget.setMinimumWidth(MaxWidth)
+                    self.FallenWidget.setMaximumWidth(MaxWidth)
+                    self.FallenWidget.setMinimumHeight(Height+50)
+                    self.FallenWidget.setMaximumHeight(Height+50)
+                    #
+                    #
+                    #
+                    #
+                    #
+                    #
+                    if self.PermanentWidget.height() != 0:
+                        self.RelationLayout.addWidget(self.PermanentWidget)
+                        self.RelationHolder.setMinimumHeight(self.RelationHolder.height() + self.PermanentWidget.height() + 5)
+                        self.RelationHolder.setMaximumHeight(self.RelationHolder.height() + self.PermanentWidget.height() + 5)
+                    if self.AbilitiesWidget.height() != 0:
+                        self.RelationLayout.addWidget(self.AbilitiesWidget)
+                        self.RelationHolder.setMinimumHeight(self.RelationHolder.height() + self.AbilitiesWidget.height() + 5)
+                        self.RelationHolder.setMaximumHeight(self.RelationHolder.height() + self.AbilitiesWidget.height() + 5)
+                    if self.FallenWidget.height() != 0:
+                        self.RelationLayout.addWidget(self.FallenWidget)
+                        self.RelationHolder.setMinimumHeight(self.RelationHolder.height() + self.FallenWidget.height() + 5)
+                        self.RelationHolder.setMaximumHeight(self.RelationHolder.height() + self.FallenWidget.height() + 5)
+                    # Height = self.PermanentWidget.height() + self.AbilitiesWidget.height() + self.FallenWidget.height() + 50
+                    # self.RelationLayout.setMinimumHeight(Height + 50)
+                    # self.RelationLayout.setMaximumHeight(Height + 50)
+
+                    # self.RelationshipsWidget.setMinimumHeight(self.RelationLayout.height() + 50)
+                    # self.RelationshipsWidget.setMaximumHeight(self.RelationLayout.height() + 50)
+
+                ##
+                self.RelationPickerWidget = QWidget(objectName = "Transparent")
+                self.RelationNPCLabel = QLabel(self.RelationPickerWidget, objectName = "SubTitle")
+                self.RelationNPCLabel.setGeometry(0, 0, 1014, 45)
+                self.RelationNPCLabel.setProperty("Color", "Light")
+                self.RelationNPCLabel.setAlignment(Qt.AlignCenter)
+
+                self.RelationPicker = QComboBox(self.RelationPickerWidget)
+                self.RelationPicker.setGeometry(804,5,200,35)
+                self.RelationPicker.setFont(QFont('Segoe UI', 12))
+                self.RelationPicker.currentIndexChanged.connect(setRelation)
+                self.RelationPicker.Data = {}
+
+                self.RelationPickerWidget.setMinimumWidth(1014)
+                self.RelationPickerWidget.setMaximumWidth(1014)
+                self.RelationPickerWidget.setMinimumHeight(45)
+                self.RelationPickerWidget.setMaximumHeight(45)
+
+                self.RelationLayout.addWidget(self.RelationPickerWidget)
+                self.RelationHolder.setMinimumHeight(self.RelationHolder.height() + self.RelationPickerWidget.height() + 5)
+                self.RelationHolder.setMaximumHeight(self.RelationHolder.height() + self.RelationPickerWidget.height() + 5)
+                # self.RelationPickerWidget.setStyleSheet('''background-color:rgb(255,255,0)''')
+                ##
+
+                self.PermanentWidget = QWidget(objectName = "Transparent")
+                self.PermanentLabel = QLabel("Permanent", self.PermanentWidget, objectName = "SubTitle")
+                self.PermanentLabel.setGeometry(0,0,1014,45)
+                self.PermanentLabel.setProperty("Color", "Light")
+                self.PermanentLabel.setAlignment(Qt.AlignCenter)
+                self.PermanentLayout = QGridLayout()
+                self.PermanentLayout.setContentsMargins(0,0,0,0)
+                self.PermanentHolder = QWidget(self.PermanentWidget, objectName = "Transparent")
+                self.PermanentHolder.setGeometry(0,45,1014,0)
+                self.PermanentHolder.setLayout(self.PermanentLayout)
+                # self.PermanentWidget.setStyleSheet('''background-color:rgb(255,0,255)''')
+                #
+                self.AbilitiesWidget = QWidget(objectName = "Transparent")
+                self.AbilitiesLabel = QLabel("Abilities", self.AbilitiesWidget, objectName = "SubTitle")
+                self.AbilitiesLabel.setGeometry(0,0,1014,45)
+                self.AbilitiesLabel.setProperty("Color", "Light")
+                self.AbilitiesLabel.setAlignment(Qt.AlignCenter)
+                self.AbilitiesLayout = QGridLayout()
+                self.AbilitiesLayout.setContentsMargins(0,0,0,0)
+                self.AbilitiesHolder = QWidget(self.AbilitiesWidget, objectName = "Transparent")
+                self.AbilitiesHolder.setGeometry(0,45,1014,0)
+                self.AbilitiesHolder.setLayout(self.AbilitiesLayout)
+                # self.AbilitiesWidget.setStyleSheet('''background-color:rgb(0,255,255)''')
+                #
+                self.FallenWidget = QWidget(objectName = "Transparent")
+                self.FallenLabel = QLabel("Fallen", self.FallenWidget, objectName = "SubTitle")
+                self.FallenLabel.setGeometry(0,0,1014,45)
+                self.FallenLabel.setProperty("Color", "Light")
+                self.FallenLabel.setAlignment(Qt.AlignCenter)
+                self.FallenLayout = QGridLayout()
+                self.FallenLayout.setContentsMargins(0,0,0,0)
+                self.FallenHolder = QWidget(self.FallenWidget, objectName = "Transparent")
+                self.FallenHolder.setGeometry(0,45,1014,0)
+                self.FallenHolder.setLayout(self.FallenLayout)
+                # self.FallenWidget.setStyleSheet('''background-color:rgb(255,255,255)''')
+
+                for NPCID in NPCData["Relations"]:
+                    RelationData = NPCData["Relations"][NPCID]
+                    try:
+                        OtherName = Globals.SoLNPCData[NPCID]["Name"]
+                        OtherID = Globals.SoLNPCData[NPCID]["ID"]
+                        self.RelationPicker.Data[f'''{OtherName} {OtherID}'''] = RelationData
+                        self.RelationPicker.addItem(f'''{OtherName} {OtherID}''')
+                    except Exception as e:
+                        ""
+
+            # self.RelationHolder.setStyleSheet('''background-color:rgb(0,255,0)''')
+            # self.RelationshipsWidget.setStyleSheet('''background-color:rgb(255,0,0)''')
+
+            self.RelationshipsWidget.setMinimumHeight(self.RelationHolder.height() + 50)
+            self.RelationshipsWidget.setMaximumHeight(self.RelationHolder.height() + 50)
+            # self.RelationshipsWidget.setMinimumHeight(self.RelationshipsWidget.height() + 500)
+            # self.RelationshipsWidget.setMaximumHeight(self.RelationshipsWidget.height() + 500)
+
+            self.MainForm.WidgetsList.append(self.RelationshipsWidget)
+            self.MainForm.addWidget(self.RelationshipsWidget)
+
+        except Exception as e:
+            print("ERR", e)
+
+    def setRelationships2(self, NPCData, ImageName):
         self.RelationshipsWidget = QWidget()
         self.RelationshipsWidget.setStyleSheet('''
         .QWidget{
@@ -1370,65 +1663,42 @@ class UiLayoutDetailsMenu:
                 WidgetsDict[ValueID] = Widget
 
 
-        Height = 0
         MaxWidth = 1014
 
-        TotalWidth = 0
-        TotalHeight = 0
+        self.GlobalLayout = QGridLayout()
 
-        TempHeight = 0
-        TempWidth = 5
 
-        Row, Layer = 0, 0
-        TraitsLayout = QGridLayout()
-        # self.TraitsLayout.setGeometry(QRect(5,600,1014,45))
-        for ValueID in WidgetsDict:
-            TempWidth += 5
-            ObjectWidth = WidgetsDict[ValueID].width()
-            ObjectHeight = WidgetsDict[ValueID].height()
-
-            if ObjectHeight > TempHeight:
-                TempHeight = ObjectHeight
-
-            if TempWidth + ObjectWidth < MaxWidth:
-                TraitsLayout.addWidget(WidgetsDict[ValueID], Layer, Row)
-                TempWidth += ObjectWidth
-                Row += 1
-            else:
-                Layer += 1
-                Row = 0
-                TraitsLayout.addWidget(WidgetsDict[ValueID], Layer, Row)
-
-                TempWidth = 5
-                TotalHeight += TempHeight
-                TempWidth += ObjectWidth
-                Row += 1
-        else:
-            TotalHeight += TempHeight
-
-        if len(WidgetsDict) > 0:
-            if Layer >= 1:
-                Width = MaxWidth
-                Height = TotalHeight + 20
-            else:
-                Width = TempWidth + 5
-                Height = TempHeight + 20
+        Width, Height = Globals.References["SoLFunctions"].GridLayoutMaker(self, self.GlobalLayout, WidgetsDict, MaxWidth, 10)
 
         self.GlobalValuesHolder = QWidget(self.GlobalWidget)
         self.GlobalValuesHolder.setGeometry(5,50,1014,45)
-        self.GlobalValuesHolder.setLayout(TraitsLayout)
+        self.GlobalValuesHolder.setLayout(self.GlobalLayout)
         self.GlobalValuesHolder.setMinimumHeight(Height)
         self.GlobalValuesHolder.setMaximumHeight(Height)
+        self.GlobalValuesHolder.setMinimumWidth(Width)
+        self.GlobalValuesHolder.setMaximumWidth(Width)
+
+
+        Height += 50
         self.GlobalWidget.setMinimumHeight(Height)
         self.GlobalWidget.setMaximumHeight(Height)
+        self.GlobalWidget.setMinimumWidth(MaxWidth)
+        self.GlobalWidget.setMaximumWidth(MaxWidth)
 
+        if len(NPCData["Relations"]) > 0:
+            self.RelationWidget = QWidget()
 
-        if len(NPCData["Relations"]):
-            self.RelationLabel = QLabel(self.RelationshipsWidget)
-            self.RelationLabel.setGeometry(5,Height+20,1014,45)
-            self.RelationLabel.setFont(QFont('Segoe UI', 16))
+            self.RelationLabel = QLabel(self.RelationshipsWidget, objectName = "Title")
+            self.RelationLabel.setGeometry(0,0,1014,45)
             self.RelationLabel.setAlignment(Qt.AlignCenter)
-            self.RelationLabel.setText("NPCName")
+
+
+
+            # self.RelationLabel = QLabel(self.RelationshipsWidget, objectName = "Title")
+            # self.RelationLabel.setGeometry(5,Height+20,1014,45)
+            # self.RelationLabel.setFont(QFont('Segoe UI', 16))
+            # self.RelationLabel.setAlignment(Qt.AlignCenter)
+            # self.RelationLabel.setText("NPCName")
 
             def setRelation():
                 try:
@@ -1538,10 +1808,12 @@ class UiLayoutDetailsMenu:
                     self.FallenLayoutHolder.setMinimumWidth(Width)
                     self.FallenLayoutHolder.setMaximumWidth(Width)
 
-                    self.FallenWidget.setMinimumHeight(Height+55)
-                    self.FallenWidget.setMaximumHeight(Height+55)
+                    self.FallenWidget.setMinimumHeight(Height+555)
+                    self.FallenWidget.setMaximumHeight(Height+555)
                     self.FallenWidget.setMinimumWidth(MaxWidth)
                     self.FallenWidget.setMaximumWidth(MaxWidth)
+
+                    self.FallenWidget.setStyleSheet('''background-color:rgb(255,0,0) ''')
 
 
 
@@ -1554,13 +1826,13 @@ class UiLayoutDetailsMenu:
                     YLocation = self.GlobalWidget.height() + self.PermanentWidget.height() + self.AbilitiesWidget.height() + 70
                     self.FallenWidget.setGeometry(5,YLocation,0,0)
 
-                    self.RelationshipsWidget.setMinimumHeight(self.GlobalWidget.height() + self.PermanentWidget.height() + self.AbilitiesWidget.height() + self.FallenWidget.height() + 130)
-                    self.RelationshipsWidget.setMaximumHeight(self.GlobalWidget.height() + self.PermanentWidget.height() + self.AbilitiesWidget.height() + self.FallenWidget.height() + 130)
+                    self.RelationshipsWidget.setMinimumHeight(self.GlobalWidget.height() + self.PermanentWidget.height() + self.AbilitiesWidget.height() + self.FallenWidget.height() + 630)
+                    self.RelationshipsWidget.setMaximumHeight(self.GlobalWidget.height() + self.PermanentWidget.height() + self.AbilitiesWidget.height() + self.FallenWidget.height() + 630)
                     self.PermanentLabel.raise_()
 
 
                 except Exception as e:
-                    print(e)
+                    print("ERROR SET RELATION", e)
                     ""
 
 
@@ -1628,9 +1900,17 @@ class UiLayoutDetailsMenu:
                     self.RelationBox.Data[f'''{OtherID}'''] = RelationData
 
 
-        Height = self.GlobalWidget.height() + self.PermanentWidget.height() + self.AbilitiesWidget.height() + 110
-        # self.RelationshipsWidget.setMinimumHeight(Height)
-        # self.RelationshipsWidget.setMaximumHeight(Height)
+
+            Height = self.GlobalWidget.height() + self.PermanentWidget.height() + self.AbilitiesWidget.height()
+            if Height != 0:
+                print("oh", self.GlobalWidget.height(), self.PermanentWidget.height(), self.AbilitiesWidget.height())
+                Height += 110
+            self.RelationshipsWidget.setMinimumHeight(Height)
+            self.RelationshipsWidget.setMaximumHeight(Height)
+        else:
+            self.RelationshipsWidget.setMaximumHeight(50)
+            self.RelationshipsWidget.setMinimumHeight(50)
+            # self.RelationshipsWidget.setStyleSheet('''background-color:rgb(255,0,0) ''')
         self.MainForm.WidgetsList.append(self.RelationshipsWidget)
         self.MainForm.addWidget(self.RelationshipsWidget)
 

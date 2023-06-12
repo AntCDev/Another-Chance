@@ -381,7 +381,7 @@ class UiLayoutNewGameMenuOld(object):
                     "Pronouns": {"PSub": "He", "PObj": "Him", "PPos": "His", "PIPos": "His"},
                     "Hips": 3,
                     "Ass": 3,
-                    "Chest": 4,
+                    "Chest": 0,
                     "VTightness": 0,
                     "ATightness": 3,
                     "PenisSize": 3,
@@ -617,7 +617,7 @@ class UiLayoutNewGameMenuOld(object):
                     raise
                 else:
                     print(ID)
-                print(ID)
+                # print(ID)
                 NPCList = os.listdir("NPCData")
                 for ItemName in NPCList:
                     if ItemName.endswith(ID):

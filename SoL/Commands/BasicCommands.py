@@ -625,7 +625,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Forcing {APObj}self to get a lap pillow from {TName}.''', "LongFluff": f'''{AName} is forcing {APObj}self to geat a lap pillow from {TName}.'''}],
+                    "Task": ["Skinship", {"BriefFluff": f'''Forcing {APObj}self to get a lap pillow from {TName}.''', "LongFluff": f'''{AName} is forcing {APObj}self to get a lap pillow from {TName}.'''}],
                     "InterruptionPenalty": -20,
                     "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
                     },
