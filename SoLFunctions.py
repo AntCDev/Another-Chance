@@ -513,7 +513,7 @@ def CheckNPCActions(self):
                                 ""
     except Exception as e:
         Log(2, "ERROR NPC ACTION", e)
-def GetFlavorText(self):
+def GetFlavorText2(self):
     try:
         # GETS THE NPC FLAVOR
         PCID = Globals.SoLPCData["ID"]
@@ -619,7 +619,80 @@ def GetFlavorText(self):
         Globals.SoLFlavorDict["NPCActionsFlavor"] = NPCFlavor
     except Exception as e:
         Log(3, "ERROR GetFlavorText", e, PCID, NPCID, Globals.SoLNPCData[NPCID])
+def GetFlavorText(self):
+    FlavorText = ""
+    PCID = Globals.SoLPCData["ID"]
+    PCLocation = Globals.SoLNPCData[PCID]["Actions"]["CurrentTask"]["Location"]
+
+
+    # SETS UP THE TEXT FOR THE LOCATION
+    try:
+        FlavorText += Globals.SoLEnviorementData["Locations"][PCLocation]["BaseText"]
+
+        if Globals.SoLEnviorementData["Locations"][PCLocation]["FlavorText"] != []:
+            for Text in Globals.SoLEnviorementData["Locations"][PCLocation]["FlavorText"]:
+                FlavorText += " " + Text
+        FlavorText += "<br/>"
+
+        if Globals.SoLFlavorDict["EnviorementFlavor"] != []:
+            for Text in Globals.SoLFlavorDict["EnviorementFlavor"]:
+                FlavorText += " " + Text
+            FlavorText += "<br/>"
+    except Exception as e:
+        print("ERR 1", e)
+
+    if FlavorText != "":
+        FlavorText += "<br/>"
+
+    # SETS UP THE TEXT FOR THE PC ACTIONS
+    try:
+        if Globals.SoLNPCData[PCID]["Actions"]["CurrentTask"]["Task"][1]["LongFluff"] != "":
+            FlavorText += Globals.SoLNPCData[PCID]["Actions"]["CurrentTask"]["Task"][1]["LongFluff"]
+            FlavorText += " "
+
+        if Globals.SoLFlavorDict["PCActionsFlavor"] != []:
+            for Text in Globals.SoLFlavorDict["PCActionsFlavor"]:
+                FlavorText += " " + Text
+            FlavorText += "<br/>"
+
+        TargetFlavor = ""
+        TargetFlavor = TargetStateFlavor()
+        if TargetFlavor != "" or TargetFlavor != None:
+            FlavorText += TargetFlavor
+            FlavorText += "<br/>"
+    except Exception as e:
+        print("ERR 2", e)
+        ""
+
+    if FlavorText != "":
+        FlavorText += "<br/>"
+
+    # SETS UP THE TEXT FOR THE NPC ACTIONS
+    try:
+        if Globals.SoLFlavorDict["NPCActionsFlavor"] != []:
+            for Text in Globals.SoLFlavorDict["NPCActionsFlavor"]:
+                FlavorText += Text + " "
+            FlavorText += "<br/>"
+
+        for NPCOther in Globals.SoLEnviorementData["Locations"][PCLocation]["inHere"]:
+            if Globals.SoLNPCData[NPCOther]["Actions"]["CurrentTask"]["Task"][1]["LongFluff"] != "":
+                FlavorText += Globals.SoLNPCData[NPCOther]["Actions"]["CurrentTask"]["Task"][1]["LongFluff"]
+                FlavorText += "<br/>"
+    except Exception as e:
+        print("ERR 3", e)
+        ""
+    return FlavorText
+def ResetFlavorText(self):
+    Globals.SoLFlavorDict["EnviorementFlavor"] = []
+    Globals.SoLFlavorDict["PCActionsFlavor"] = []
+    Globals.SoLFlavorDict["PCTargetFlavor"] = []
+    Globals.SoLFlavorDict["NPCActionsFlavor"] = []
+
 def Refresh(self):
+    # curframe = inspect.currentframe()
+    # calframe = inspect.getouterframes(curframe, 2)
+    # print('caller name:', calframe[1][3])
+
     try:
         self.RefreshSignal1.emit()
         ### CHECKS FOR NPC INTEACTIONS AND OTHER POSSIBLE UPDATES
@@ -856,38 +929,11 @@ def Refresh(self):
         try:
             Hour, Day, Month, Year = GetDate(self)
             self.labelStatus.setText(f'''{Hour}            {Day} {Globals.SoLEnviorementData["DateData"]["Day"]}  {Month} {Year}''')
-            GetFlavorText(self)
 
-            TotalFlavor = ""
-            for Text in Globals.SoLFlavorDict["EnviorementFlavor"]:
-                TotalFlavor += Text
-            else:
-                if len(Globals.SoLFlavorDict["EnviorementFlavor"]) > 0:
-                    TotalFlavor += "<br/><br/>"
-                Globals.SoLFlavorDict["EnviorementFlavor"] = []
+            FlavorText = GetFlavorText(self)
+            ResetFlavorText(self)
 
-            for Text in Globals.SoLFlavorDict["PCActionsFlavor"]:
-                TotalFlavor += Text
-            else:
-                if len(Globals.SoLFlavorDict["PCActionsFlavor"]) > 0:
-                    TotalFlavor += "<br/><br/>"
-                Globals.SoLFlavorDict["PCActionsFlavor"] = []
-
-            for Text in Globals.SoLFlavorDict["PCTargetFlavor"]:
-                TotalFlavor += Text
-            else:
-                if len(Globals.SoLFlavorDict["PCTargetFlavor"]) > 0:
-                    TotalFlavor += "<br/><br/>"
-                Globals.SoLFlavorDict["PCTargetFlavor"] = []
-
-            for Text in Globals.SoLFlavorDict["NPCActionsFlavor"]:
-                TotalFlavor += Text
-            else:
-                if len(Globals.SoLFlavorDict["NPCActionsFlavor"]) > 0:
-                    TotalFlavor += "<br/><br/>"
-                Globals.SoLFlavorDict["NPCActionsFlavor"] = []
-
-            self.labelMain.setText(TotalFlavor)
+            self.labelMain.setText(FlavorText)
 
         except Exception as e:
             Log(3, "ERROR SOL REFRESH labelMain", e)
@@ -1213,6 +1259,18 @@ def Move(self, Location, NPCID):
         # print(1, e, Location, Globals.SoLEnviorementData["Locations"][Location]["inHere"])
         ""
 
+    PCID = Globals.SoLPCData["ID"]
+    PCLocation = Globals.SoLNPCData[PCID]["Actions"]["CurrentTask"]["Location"]
+    if NPCID != PCID:
+        # print("CCC")
+        if PCID in Globals.SoLEnviorementData["Locations"][Location]["inHere"]:
+            Globals.SoLFlavorDict["NPCActionsFlavor"].append(f'''{Globals.SoLNPCData[NPCID]["Name"]} arrives from {PreLocation}''')
+        elif PCID in Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"]:
+            Globals.SoLFlavorDict["NPCActionsFlavor"].append(f'''{Globals.SoLNPCData[NPCID]["Name"]} leaves to {Location}''')
+        # else:
+        #     print(PreLocation, Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"])
+        #     print(Location, Globals.SoLEnviorementData["Locations"][Location]["inHere"])
+
 
     for NPCOther in Globals.SoLNPCData[NPCID]["Actions"]["HasFollowing"]:
         if NPCOther not in Globals.SoLEnviorementData["Locations"][Location]["inHere"]:
@@ -1480,6 +1538,8 @@ def ResetGenericNPC():
     if Globals.PlayerConfig["RandomNPC"] == 1:
         NPCAmount = Globals.PlayerConfig["RandomAmount"]
         if NPCAmount > 0:
+            # Skin: Fair, light, tanned, dark, brown, black
+            # Hair: red, black, blonde, blue, brown, orange, grey, silver, white
 
             with open(pathlib.Path() / "Resources" / "Generic" / "FemenineNames.txt" , 'rb') as f:
                 FemenineNames = json.load(f)
@@ -1627,7 +1687,7 @@ def ImportNPC(NPCData):
             NPCData["OtherData"]["Home"] = f"{Name}{NPCID} Room"
             # TODO
             # Data = {
-            #     "PrivacyLevel": 0,
+            #     "PrivacyLevel": 10,
             #     "Allowed": [NPCID],
             #     "Forbidden": [],
             #     "Flags": {"Open": 0},
@@ -1640,7 +1700,8 @@ def ImportNPC(NPCData):
         try:
             NPCLocation = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
             Globals.SoLEnviorementData["Locations"][NPCLocation]["inHere"].append(NPCID)
-        except:
+        except Exception as e:
+            print("EEE", e)
             ""
     except Exception as e:
         Log(4, "ERROR IMPORTING NPC DATA", e, NPCData)
@@ -1999,6 +2060,81 @@ def GetDescription(Area, NPCData, Options):
     # REMOVES LAST SPACE
     Final = Final[0:Length-1]
     return Final.lower()
+def TargetStateFlavor():
+    PCID = Globals.SoLPCData["ID"]
+    PCLocation = Globals.SoLNPCData[PCID]["Actions"]["CurrentTask"]["Location"]
+
+    ### Checks for Mood and Arousal. Then uses it to value it's ambivalent, negative, and positive flavor text. Then tries to call for customText togeTPPos with a flag which might negate the generic flavor text.
+    Target = Globals.SoLPCData["Targeting"]
+    if Target != None and Target != PCID:
+        TargetData = Globals.SoLNPCData[Target]
+        TargetState = TargetData["State"]
+        ActorData = Globals.SoLNPCData[PCID]
+        ActorState = ActorData["State"]
+        TEnergy = TargetState["Energy"]
+        TMaxEnergy = TargetData["GeneralAbilities"]["MaxEnergy"]
+        TMood = TargetState["Mood"]
+        TArousal = TargetState["Arousal"]
+        TAlcohol = TargetState["Alcohol"]
+        TDrugs = TargetState["Drugs"]
+        TSleep = TargetState["PConscious"]
+        TBodyData = TargetData["BodyData"]
+        TStructure = TBodyData["Sex"]
+        TPSub = TBodyData["Pronouns"]["PSub"]  # He
+        TPObj = TBodyData["Pronouns"]["PObj"]  # Him
+        TPPos = TBodyData["Pronouns"]["PPos"]  # His
+        TPIPos = TBodyData["Pronouns"]["PIPos"]  # His
+
+
+        TEnergySate = TEnergy / (TMaxEnergy / 5); TEnergySate = round(TEnergySate)
+        FlavorText = ""
+        if TEnergySate == 0:
+            FlavorText += TPSub + " looks completly exhausted and ready to give up on what " + TPSub.lower() + " is currently doing."
+        elif TEnergySate == 1:
+            FlavorText += "With just a glance you can tell " + TPSub.lower() + " is getting exhausted."
+        elif TEnergySate == 2:
+            FlavorText += TPSub + " looks like " + TPSub.lower() + " is starting to need a break but still having enough energy in reserve."
+        elif TEnergySate == 3:
+            FlavorText += TPSub + " looks slightly tired, but still having plenty of energy left."
+        elif TEnergySate == 4:
+            FlavorText += TPSub + "  is energetic with barely any hint of tiredness."
+        elif TEnergySate == 5:
+            FlavorText += TPSub + " seems to be fresh and full of energy to tackle on with the day."
+
+        FlavorText += " "
+        if TMood > 80:
+            FlavorText += TPSub + " has an exression full of excitement for whatever is to come, being in the very best kind of mood " + TPSub.lower() + " can be"
+        elif TMood > 60:
+            FlavorText += TPSub + " is obviously quite cheerful with his whole body portraying how eager " + TPSub.lower() + " is."
+        elif TMood > 40:
+            FlavorText += TPSub + " seems to be hapy with a nice smile across " + TPPos.lower() + " face."
+        elif TMood > 20:
+            FlavorText += TPSub + " looks comfortable around you with a nice pleased expression on " + TPPos.lower() + " face."
+        elif TMood > -20:
+            FlavorText += TPSub + " has a somewhat neutral expression on " + TPPos.lower() + " face."
+        elif TMood > -40:
+            FlavorText += TPSub + "  is a bit uncomfortable around you, still not being overly hostile but not being too friendly either."
+        elif TMood > -60:
+            FlavorText += TPSub + "  is looking bothered and just looking at how " + TPSub.lower() + " behaves " + TPSub.lower() + " is obviously getting upset."
+        elif TMood > -80:
+            FlavorText += TPSub + " is openly angry with an overly agressive way of behaving comapred to " + TPPos.lower() + " usual self."
+        elif TMood > -100:
+            FlavorText += TPSub + " acts and looks quite mad overall, being obviously not in the mood to have anyone come closer to " + TPPos.lower() + "."
+
+        FlavorText += " "
+        if TArousal > 80:
+            FlavorText += TPSub + "  has an expression of pure desire on it's eyes, with obvious signs of aroussal all over " + TPPos.lower() + " body."
+        elif TArousal > 60:
+            FlavorText += TPSub + "  gets a heavy blush all over " + TPPos.lower() + " face, rubbing " + TPPos.lower() + " thighs together as if to hide something."
+        elif TArousal > 40:
+            FlavorText += TPSub + "  fidgets with " + TPPos.lower() + " fingers a bit too much moving as if something was bothering " + TPPos.lower() + "."
+        elif TArousal > 20:
+            FlavorText += "You can spot a light blush developing on " + TPPos.lower() + " cheeks."
+    else:
+        FlavorText = ""
+
+    return FlavorText
+
 
 def GetPValueStaticWidget(PermanentID, Value):
     ValueLabel = QLabel()

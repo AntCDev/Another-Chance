@@ -303,7 +303,7 @@ def GetCommandButton(self, CommandID, PCID, NPCID):
             def BG():
                 try:
                     TriggerCommand(self, CommandID, NPCID, PCID, None)
-                    Globals.References["SoLFunctions"].Refresh(self)
+                    # Globals.References["SoLFunctions"].Refresh(self)
                 except Exception as e:
                     Log(3, "ERROR COMMAND PRESSED", e, CommandID, __name__)
             Button = QPushButton(clicked = lambda: BG())

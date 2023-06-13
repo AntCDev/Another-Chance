@@ -631,12 +631,15 @@ class UiLayoutNewGameMenuOld(object):
                 ""
 
         try:
-            NPCData
+            # NPCData
             Globals.CurrentSession = {}
             Globals.References["BasicMod"].SetBaseData()
+            # Globals.SoLNPCData[ID] = NPCData
+
+            Globals.References["SoLFunctions"].ImportNPC(NPCData)
             ID = NPCData["ID"]
-            Globals.SoLNPCData[ID] = NPCData
             Globals.SoLPCData["ID"] = ID
+
             Globals.Layouts["MainF"].gotoLayout("SoLUI")
         except Exception as e:
             ""

@@ -38,7 +38,8 @@ def CheckIdleAction(self, ID):
 
                 # CHECKS FOR RANDOM MOVEMENT
                 if Globals.SoLNPCData[ID]["Actions"]["InteractionParty"] == {}:
-                    if random.random() > 0.7:
+                    if random.randint(0,5) >= 5:
+                        # print("MOVE", ID)
                         CheckMovement(self, ID)
 
                 # CHECKS FOR POSSIBLE ACTIONS
