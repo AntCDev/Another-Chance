@@ -1068,9 +1068,9 @@ class UiLayoutMakerMenu(QWidget):
             NPCData["Descriptions"]["Legs"] = LegsDesc
             NPCData["Descriptions"]["Genitals"] = GenitalsDesc
 
-            NPCData["Actions"]["PreviousTask"] = Globals.SoLOtherData["IdlingTask"]
-            NPCData["Actions"]["CurrentTask"] = Globals.SoLOtherData["IdlingTask"]
-            NPCData["Actions"]["FutureTask"] = Globals.SoLOtherData["IdlingTask"]
+            # NPCData["Actions"]["PreviousTask"] = Globals.SoLOtherData["IdlingTask"]
+            # NPCData["Actions"]["CurrentTask"] = Globals.SoLOtherData["IdlingTask"]
+            # NPCData["Actions"]["FutureTask"] = Globals.SoLOtherData["IdlingTask"]
 
             for TraitID in self.TraitWidgetsDict:
                 Value = self.TraitWidgetsDict[TraitID].ReturnValue(self.TraitWidgetsDict[TraitID])

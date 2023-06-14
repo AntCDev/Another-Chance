@@ -71,13 +71,11 @@ class UiLayoutSleepMenu(object):
         # self.labelBack.setGeometry(5,5,1590,1014)
         # self.labelBack.setProperty("Color","Dark")
 
-
-
         self.EnhanceLabelBack = QLabel(self.GUI)
         self.EnhanceLabelBack.setGeometry(5,5,420,1014)
         self.EnhanceLabelBack.setProperty("Color","Dark")
 
-        self.EnhanceLabel = QLabel(self.GUI, objectName = "Title")
+        self.EnhanceLabel = QLabel("Enhance Relations", self.GUI, objectName = "Title")
         self.EnhanceLabel.setGeometry(10,10,410,35)
         self.EnhanceLabel.setProperty("Color","Light")
         self.EnhanceLabel.setAlignment(Qt.AlignCenter)
@@ -89,11 +87,11 @@ class UiLayoutSleepMenu(object):
 
         self.EnhanceForm = QGridLayout()
         self.EnhanceBox = QGroupBox()
-        self.EnhanceBox.setLayout(self.EnhanceForm)
-        self.EnhanceBox.setMinimumWidth(410)
         self.EnhanceScroll.setWidget(self.EnhanceBox)
         self.EnhanceForm.setContentsMargins(0, 0, 0, 0)
+        self.EnhanceBox.setLayout(self.EnhanceForm)
         self.EnhanceForm.WidgetsDict = {}
+
 
         self.BottomLabel = QLabel(self.GUI)
         self.BottomLabel.setGeometry(430,964,1165,55)
@@ -103,6 +101,9 @@ class UiLayoutSleepMenu(object):
         self.buttonContinue.setGeometry(435,969,200,45)
 
     def Refresh(self):
+        for Key in self.EnhanceForm.WidgetsDict:
+            self.EnhanceForm.removeWidget(self.EnhanceForm.WidgetsDict[Key])
+
         # Globals.References["SoLFunctions"].ResetGenericNPC()
         PCID = Globals.SoLPCData["ID"]
         for OtherID in Globals.SoLNPCData[PCID]["Relations"]:

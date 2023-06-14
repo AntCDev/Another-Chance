@@ -340,7 +340,9 @@ class GenericNPCObject:
 
 def CheckNPCActions(self):
     try:
-        ### FIRST IT CHECKS FOR ANY NPC THAT HAS ALREADY COMPLETED THEIR ACTION
+        # print('''
+        #
+        # AA''')
         IdleNPCList = []
         DateData = Globals.SoLEnviorementData["DateData"]
         PCID = Globals.SoLPCData["ID"]
@@ -358,159 +360,10 @@ def CheckNPCActions(self):
                 if Idle == 1:
                     IdleNPCList.append(NPCID)
                     ApplyIdleTask(NPCID)
+
         for NPCID in IdleNPCList:
             PersonalityID = Globals.SoLNPCData[NPCID]["Personality"]
             Globals.SoLPersonalities[PersonalityID]["Reference"].CheckIdleAction(self, NPCID)
-
-
-
-        if IdleNPCList != []:
-            if False:
-                if False:
-                    ### FROM THE LIST OF FINISHED NPCS THEN IT CHECKS FOR ANY POSSIBLE SCHEDULED ACTION
-                    NewList = []
-                    for NPCID in IdleNPCList:
-                        try:
-                            NPCSchedule = Globals.SoLNPCSchedules[NPCID]
-                            for Task in NPCSchedule:
-
-                                if Task["HourStart"] <= DateData["Hour"] and Task["HourFinish"] >= DateData["Hour"]:
-                                    Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"] = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]
-                                    Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"] = Task
-
-                                    Index = NPCSchedule.index(Task)
-                                    if len(NPCSchedule) > Index + 1:
-                                        NextTask = NPCSchedule[Index+1]
-                                        Globals.SoLNPCData[NPCID]["Actions"]["FutureTask"] = NextTask
-                                    else:
-                                        Globals.SoLNPCData[NPCID]["Actions"]["FutureTask"] = ""
-                                    break
-                            else:
-                                NewList.append(NPCID)
-                        except:
-                            NewList.append(NPCID)
-                    IdleNPCList = NewList
-
-                    ### IF THE NPCS DOESN'T HAVE ANY SCHEDULED ACTION THEN IT CHECKS FOR RANDOM MOVEMENT
-                    for NPCID in IdleNPCList:
-                        try:
-                            # TODO MAKE THIS PING FOR THE CHARACTER PERSONALITY TO CHECK MOVEMENT
-                            TODO
-                        except:
-                            RN = random.randint(1,5)
-                            if RN == 5:
-                                NPCLocation = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
-                                PossibleLocations = []
-                                try:
-                                    PrePossibleLocations = Globals.SoLEnviorementData["Locations"][NPCLocation]["CanAccess"]
-                                    for Location in PrePossibleLocations:
-                                        if NPCID not in Globals.SoLEnviorementData["Locations"][Location]["Forbidden"]:
-                                            PossibleLocations.append(Location)
-                                except Exception as e:
-                                    PossibleLocations = []
-
-                                if PossibleLocations != []:
-                                    PreviousLocation = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
-                                    Location = random.choice(PossibleLocations)
-                                    IdleTask = copy.deepcopy(Globals.SoLOtherData["IdlingTask"])
-                                    IdleTask["Location"] = Location
-                                    IdleTask["Task"][1]["BriefFluff"] = f'''Idling in {Globals.SoLEnviorementData["Locations"][Location]["Name"]}'''
-                                    IdleTask["Task"][1]["LongFluff"] = f'''{Globals.SoLNPCData[NPCID]["Name"]} is Idling at {Globals.SoLEnviorementData["Locations"][Location]["Name"]}'''
-                                    IdleTask["HourStart"] = DateData["Hour"]
-                                    if Globals.SoLNPCData[NPCID]["Actions"]["FutureTask"] != "":
-                                        if Globals.SoLNPCData[NPCID]["Actions"]["FutureTask"]["HourStart"] > DateData["Hour"] + 15:
-                                            IdleTask["HourFinish"] = DateData["Hour"] + 15
-                                        else:
-                                            IdleTask["HourFinish"] = Globals.SoLNPCData[NPCID]["Actions"]["FutureTask"]["HourStart"]
-                                    else:
-                                        IdleTask["HourFinish"] = DateData["Hour"] + 15
-                                    Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"] = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]
-                                    Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"] = IdleTask
-                                    try:
-                                        Globals.SoLEnviorementData["Locations"][PreviousLocation]["inHere"].remove(NPCID)
-                                        Globals.SoLEnviorementData["Locations"][Location]["inHere"].append(NPCID)
-                                    except Exception as e:
-                                        print(e)
-                            else:
-                                    PreviousLocation = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
-                                    Location = PreviousLocation
-                                    IdleTask = copy.deepcopy(Globals.SoLOtherData["IdlingTask"])
-                                    IdleTask["Location"] = Location
-                                    IdleTask["Task"][1]["BriefFluff"] = f'''Idling at {Globals.SoLEnviorementData["Locations"][Location]["Name"]}'''
-                                    IdleTask["Task"][1]["LongFluff"] = f'''{Globals.SoLNPCData[NPCID]["Name"]} is Idling at {Globals.SoLEnviorementData["Locations"][Location]["Name"]}'''
-                                    IdleTask["HourStart"] = DateData["Hour"]
-                                    if Globals.SoLNPCData[NPCID]["Actions"]["FutureTask"] != "":
-                                        if Globals.SoLNPCData[NPCID]["Actions"]["FutureTask"]["HourStart"] > DateData["Hour"] + 15:
-                                            IdleTask["HourFinish"] = DateData["Hour"] + 15
-                                        else:
-                                            IdleTask["HourFinish"] = Globals.SoLNPCData[NPCID]["Actions"]["FutureTask"]["HourStart"]
-                                    else:
-                                        IdleTask["HourFinish"] = DateData["Hour"] + 15
-                                    Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"] = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]
-                                    Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"] = IdleTask
-                                    try:
-                                        Globals.SoLEnviorementData["Locations"][PreviousLocation]["inHere"].remove(NPCID)
-                                    except Exception as e:
-                                        ""
-                                    try:
-                                        Globals.SoLEnviorementData["Locations"][Location]["inHere"].append(NPCID)
-                                    except:
-                                        ""
-
-                ### ONCE THE IDLE NPCS HAVE MOVED OR NOT, IT THEN CHECKS THE OTHER NPCS IN THEIR LOCATION AND CHECKS FOR A POSSIBLE INTERACTION
-                IdleNPCListPost = IdleNPCList
-                for NPCID in IdleNPCList:
-                    if NPCID in IdleNPCListPost:
-                        # TODO CALCULATE SOCIABILITY
-                        Sociability = 0.7
-                        RN = random.random()
-                        Sociability = 1.1
-                        if RN <= Sociability:
-                            try:
-                                NPCLocation = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
-                                inHere = Globals.SoLEnviorementData["Locations"][NPCLocation]["inHere"]
-                                if len(inHere) > 1:
-                                    # TODO CHECK IF THE PLAYER IS ALLOWING OR NOT FOR THE NPCS TO TARGET THEM
-                                    if PCID in inHere and False:
-                                        inHere.remove(PCID)
-
-                                    # CALCULATES THE WEIGHT OF EACH OTHER NPC IN THE AREA
-                                    NPCWeights = {}
-                                    TotalProbability = 0
-                                    for NPCOther in inHere:
-                                        if NPCOther != PCID:
-                                            try:
-                                                Weight = Globals.SoLNPCData[NPCID]["Relations"][NPCOther]["Permanent"]["Attraction"] + Globals.SoLNPCData[NPCID]["Relations"][NPCOther]["Permanent"]["Reliability"] + 100
-                                            except:
-                                                Weight = 100
-                                            NPCWeights[NPCOther] = Weight
-                                            TotalProbability += Weight
-                                            # TODO SEND THE WEIGHTS TO BE PROCESSED
-
-                                    NPCOther = random.choices(list(NPCWeights.keys()), list(NPCWeights.values()))[0]
-
-                                    if NPCOther != NPCID:
-                                        # GETS ALL THE AVAILABLE COMMANDS FOR THE SELECTED NPC AND GETS THEIR WEIGHT
-                                        Commands = {}
-                                        for CommandID in Globals.Commands:
-                                            Available = Globals.Commands[CommandID]["Reference"].CheckCommandAvailable(self, CommandID, NPCID, NPCOther)
-                                            if Available == 1:
-                                                # TODO IMPLEMENT CONNOTATIONS AND WEIGHTS SYSTEM
-                                                CommandWeight = 100
-                                                Commands[CommandID] = CommandWeight
-
-                                        # SELECTS THE COMMAND AND EXECUTES IT
-                                        CommandID = random.choices(list(Commands.keys()), list(Commands.values()))[0]
-                                        try:
-                                            IdleNPCListPost.remove(NPCID)
-                                            IdleNPCListPost.remove(NPCOther)
-                                        except:
-                                            ""
-                                        print("TRIGGER", CommandID, NPCID, NPCOther)
-                                        Globals.Commands[CommandID]["Reference"].TriggerCommand(self, CommandID, NPCOther, NPCID, None)
-                            except Exception as e:
-                                print("ERROR NPC ACTION", e)
-                                ""
     except Exception as e:
         Log(2, "ERROR NPC ACTION", e)
 def GetFlavorText2(self):
@@ -675,9 +528,10 @@ def GetFlavorText(self):
             FlavorText += "<br/>"
 
         for NPCOther in Globals.SoLEnviorementData["Locations"][PCLocation]["inHere"]:
-            if Globals.SoLNPCData[NPCOther]["Actions"]["CurrentTask"]["Task"][1]["LongFluff"] != "":
-                FlavorText += Globals.SoLNPCData[NPCOther]["Actions"]["CurrentTask"]["Task"][1]["LongFluff"]
-                FlavorText += "<br/>"
+            if NPCOther != PCID:
+                if Globals.SoLNPCData[NPCOther]["Actions"]["CurrentTask"]["Task"][1]["LongFluff"] != "":
+                    FlavorText += Globals.SoLNPCData[NPCOther]["Actions"]["CurrentTask"]["Task"][1]["LongFluff"]
+                    FlavorText += "<br/>"
     except Exception as e:
         print("ERR 3", e)
         ""
@@ -1242,48 +1096,52 @@ def CommandsProcessing(self, TargetDict, ActorDict, CommandID, Target, Actor, Mo
     # CPS5.EMIT
 
 def Move(self, Location, NPCID):
-    # curframe = inspect.currentframe()
-    # calframe = inspect.getouterframes(curframe, 2)
-    # print('caller name:', calframe[1][3])
-    PreLocation = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
     try:
-        Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"].remove(NPCID)
+        # curframe = inspect.currentframe()
+        # calframe = inspect.getouterframes(curframe, 2)
+        # print('caller name:', calframe[1][3])
+        PreLocation = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
+        try:
+            Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"].remove(NPCID)
+        except Exception as e:
+            ""
+
+
+        Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"] = Location
+        try:
+            if NPCID not in Globals.SoLEnviorementData["Locations"][Location]["inHere"]: Globals.SoLEnviorementData["Locations"][Location]["inHere"].append(NPCID)
+        except Exception as e:
+            # print(1, e, Location, Globals.SoLEnviorementData["Locations"][Location]["inHere"])
+            ""
+
+        PCID = Globals.SoLPCData["ID"]
+        PCLocation = Globals.SoLNPCData[PCID]["Actions"]["CurrentTask"]["Location"]
+        if NPCID != PCID:
+            # print("CCC")
+            if PCID in Globals.SoLEnviorementData["Locations"][Location]["inHere"]:
+                Globals.SoLFlavorDict["NPCActionsFlavor"].append(f'''{Globals.SoLNPCData[NPCID]["Name"]} arrives from {PreLocation}''')
+                # Globals.SoLFlavorDict["NPCActionsFlavor"].append(f'''{Globals.SoLNPCData[NPCID]["Name"]} arrives from {Globals.SoLEnviorementData["Locations"][PreLocation]["Name"]}''')
+            elif PCID in Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"]:
+                Globals.SoLFlavorDict["NPCActionsFlavor"].append(f'''{Globals.SoLNPCData[NPCID]["Name"]} leaves to {Location}''')
+                # Globals.SoLFlavorDict["NPCActionsFlavor"].append(f'''{Globals.SoLNPCData[NPCID]["Name"]} leaves to {Globals.SoLEnviorementData["Locations"][Location]["Name"]}''')
+            # else:
+            #     print(PreLocation, Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"])
+            #     print(Location, Globals.SoLEnviorementData["Locations"][Location]["inHere"])
+
+
+        for NPCOther in Globals.SoLNPCData[NPCID]["Actions"]["HasFollowing"]:
+            if NPCOther not in Globals.SoLEnviorementData["Locations"][Location]["inHere"]:
+                Move(self, Location, NPCOther)
+
+        if NPCID == Globals.SoLPCData["ID"]:
+            if Globals.SoLPCData["Targeting"] not in Globals.SoLEnviorementData["Locations"][Location]["inHere"]:
+                Globals.SoLPCData["Targeting"] = None
+            Refresh(self)
+        else:
+            if Globals.SoLPCData["Targeting"] == NPCID:
+                Globals.SoLPCData["Targeting"] = None
     except Exception as e:
-        ""
-
-
-    Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"] = Location
-    try:
-        if NPCID not in Globals.SoLEnviorementData["Locations"][Location]["inHere"]: Globals.SoLEnviorementData["Locations"][Location]["inHere"].append(NPCID)
-    except Exception as e:
-        # print(1, e, Location, Globals.SoLEnviorementData["Locations"][Location]["inHere"])
-        ""
-
-    PCID = Globals.SoLPCData["ID"]
-    PCLocation = Globals.SoLNPCData[PCID]["Actions"]["CurrentTask"]["Location"]
-    if NPCID != PCID:
-        # print("CCC")
-        if PCID in Globals.SoLEnviorementData["Locations"][Location]["inHere"]:
-            Globals.SoLFlavorDict["NPCActionsFlavor"].append(f'''{Globals.SoLNPCData[NPCID]["Name"]} arrives from {PreLocation}''')
-        elif PCID in Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"]:
-            Globals.SoLFlavorDict["NPCActionsFlavor"].append(f'''{Globals.SoLNPCData[NPCID]["Name"]} leaves to {Location}''')
-        # else:
-        #     print(PreLocation, Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"])
-        #     print(Location, Globals.SoLEnviorementData["Locations"][Location]["inHere"])
-
-
-    for NPCOther in Globals.SoLNPCData[NPCID]["Actions"]["HasFollowing"]:
-        if NPCOther not in Globals.SoLEnviorementData["Locations"][Location]["inHere"]:
-            Move(self, Location, NPCOther)
-
-    if NPCID == Globals.SoLPCData["ID"]:
-        if Globals.SoLPCData["Targeting"] not in Globals.SoLEnviorementData["Locations"][Location]["inHere"]:
-            Globals.SoLPCData["Targeting"] = None
-        Refresh(self)
-    else:
-        if Globals.SoLPCData["Targeting"] == NPCID:
-            Globals.SoLPCData["Targeting"] = None
-
+        Log(4, "ERROR MOVE", e, Location, NPCID)
 
 def Switch(self, NPCID):
     PCID = Globals.SoLPCData["ID"]
@@ -1680,29 +1538,35 @@ def RemoveNPC(NPCID):
 def ImportNPC(NPCData):
     try:
         NPCID = NPCData["ID"]
+        Name = NPCData["Name"]
+
+        if NPCData["OtherData"]["Home"] == None:
+            NPCData["OtherData"]["Home"] = f"{Name}{NPCID}Room"
+
+        LName = NPCData["OtherData"]["Home"]
+        if LName not in Globals.SoLEnviorementData["Locations"]:
+            Data = copy.deepcopy(Globals.SoLOtherData["BaseLocationData"])
+            Data["PrivacyLevel"] = 10
+            Data["Allowed"] = [NPCID]
+            Data["Flags"]["Open"] = 1
+            Data["Name"] = f"{Name} Room"
+            Data["BaseText"] = "A simple room."
+
+            AddLocation(LName, Data)
+            AddConnection(LName, "ResidentialArea")
+
         Globals.SoLNPCData[NPCID] = NPCData
 
-        Name = NPCData["Name"]
-        if NPCData["OtherData"]["Home"] == None:
-            NPCData["OtherData"]["Home"] = f"{Name}{NPCID} Room"
-            # TODO
-            # Data = {
-            #     "PrivacyLevel": 10,
-            #     "Allowed": [NPCID],
-            #     "Forbidden": [],
-            #     "Flags": {"Open": 0},
-            #     "Name": f"{Name}{NPCID} Room",
-            #     "FlavorText":"You are at the Southern Street, the main entrance connecting the city to the rest of the kingdom is here.",
-            # }
-            # AddLocation(f"{Name}{NPCID}Room", Data)
-            # AddLocationConnection(f"{Name}{NPCID}Room", "ResidentialArea")
+        if Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"] == {}:
+            ApplyIdleTask(NPCID)
 
         try:
+
             NPCLocation = Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"]["Location"]
             Globals.SoLEnviorementData["Locations"][NPCLocation]["inHere"].append(NPCID)
         except Exception as e:
-            print("EEE", e)
             ""
+
     except Exception as e:
         Log(4, "ERROR IMPORTING NPC DATA", e, NPCData)
 
@@ -1757,15 +1621,48 @@ def Sleep(NPCID):
     except Exception as e:
         print(e)
 def ApplyIdleTask(NPCID):
-    DateData = Globals.SoLEnviorementData["DateData"]
-    Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"] = copy.deepcopy(Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"])
-    Task = copy.deepcopy(Globals.SoLOtherData["IdlingTask"])
-    Task["HourStart"] == DateData["Hour"]
-    Task["HourFinish"] == DateData["Hour"] + 15
-    Task["Location"] = Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"]["Location"]
-    Task["Task"][1]["BriefFluff"] = "Idle at " + Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"]["Location"]
-    Task["Task"][1]["LongFluff"] = Globals.SoLNPCData[NPCID]["Name"] + " is idling at " + Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"]["Location"]
-    Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"] = Task
+    try:
+        DateData = Globals.SoLEnviorementData["DateData"]
+        Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"] = copy.deepcopy(Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"])
+        Task = copy.deepcopy(Globals.SoLOtherData["IdlingTask"])
+        Task["HourStart"] = DateData["Hour"]
+        Task["HourFinish"] = DateData["Hour"] + 15
+        try:
+            Location = Globals.SoLNPCData[NPCID]["Actions"]["PreviousTask"]["Location"]
+        except:
+            Location = "ResidentialArea"
+        Task["Location"] = Location
+        Task["Task"][1]["BriefFluff"] = "Idle at " + Globals.SoLEnviorementData["Locations"][Location]["Name"]
+        Task["Task"][1]["LongFluff"] = Globals.SoLNPCData[NPCID]["Name"] + " is idling at " + Globals.SoLEnviorementData["Locations"][Location]["Name"]
+        Globals.SoLNPCData[NPCID]["Actions"]["CurrentTask"] = Task
+    except Exception as e:
+        Log(4, "ERROR ApplyIdleTask", e, NPCID)
+def AddLocation(Location, Data):
+    try:
+        if Location not in Globals.SoLEnviorementData["Locations"]:
+            BaseData = copy.deepcopy(Globals.SoLOtherData["BaseLocationData"])
+            for Key in Data:
+                if type(BaseData[Key]) == type(Data[Key]):
+                    BaseData[Key] = Data[Key]
+            Globals.SoLEnviorementData["Locations"][Location] = Data
+    except Exception as e:
+        Log(4, "ERROR AddLocation", e, Location, Data)
+def AddConnection(L1, L2):
+    try:
+        # L1 CAN ACCESS L2
+        # L1 IS ACCESSED BY L2
+        if L2 not in Globals.SoLEnviorementData["Locations"][L1]["CanAccess"]:
+            Globals.SoLEnviorementData["Locations"][L1]["CanAccess"].append(L2)
+        if L2 not in Globals.SoLEnviorementData["Locations"][L1]["AccesedFrom"]:
+            Globals.SoLEnviorementData["Locations"][L1]["AccesedFrom"].append(L2)
+
+        if L1 not in Globals.SoLEnviorementData["Locations"][L2]["CanAccess"]:
+            Globals.SoLEnviorementData["Locations"][L2]["CanAccess"].append(L1)
+        if L1 not in Globals.SoLEnviorementData["Locations"][L2]["AccesedFrom"]:
+            Globals.SoLEnviorementData["Locations"][L2]["AccesedFrom"].append(L1)
+    except Exception as e:
+        Log(1, "ERROR AddConnection", e, L1, L2)
+        ""
 
 def GetDescription(Area, NPCData, Options):
     Desc = []

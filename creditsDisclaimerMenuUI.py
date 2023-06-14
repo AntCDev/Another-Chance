@@ -42,7 +42,7 @@ This software contains artistic and written depictions of sexual conduct. All ch
 
 Please check to make sure this software doesn't violate your nation or estate's laws before using it. No part of this software is intended, nor to be interpreted for use in any real-life situation. By continuing beyond this point, the user agrees that they does not find such content offensive nor obscene and acknowledges that they will use this software with due legal diligence and in good and responsible conduct.
 
-Any modification to the existing software, or implementation of new files, is responsibility of the user to corroborate that their contents, or effects doesn't violate or go against their nation and state laws.
+Any modification to the existing software, or implementation of new files, is responsibility of the user to corroborate that their contents or effects doesn't violate or go against their nation and state laws.
         ''')
 
         self.AcceptButton = QPushButton(self.GUI, clicked = lambda: MainWindow.gotoLayout("MainMenuUI"))

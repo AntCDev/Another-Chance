@@ -24,6 +24,7 @@ def TPSHandling():
 
 def CheckIdleAction(self, ID):
     try:
+        # print("CHECKED", ID)
         Personality = Globals.SoLNPCData[ID]["Personality"]
 
         if Personality == "Standard0":
@@ -38,20 +39,19 @@ def CheckIdleAction(self, ID):
 
                 # CHECKS FOR RANDOM MOVEMENT
                 if Globals.SoLNPCData[ID]["Actions"]["InteractionParty"] == {}:
-                    if random.randint(0,5) >= 5:
-                        # print("MOVE", ID)
+                    if random.random() < 0.3:
                         CheckMovement(self, ID)
 
                 # CHECKS FOR POSSIBLE ACTIONS
-                Sociability = 0.7
-                if random.random() > Sociability and Globals.PlayerConfig["Interactions"] == 1:
+                Sociability = 0.6
+                if random.random() < Sociability and Globals.PlayerConfig["Interactions"] == 1:
                     NPCLocation = Globals.SoLNPCData[ID]["Actions"]["CurrentTask"]["Location"]
 
                     List = Globals.SoLEnviorementData["Locations"][NPCLocation]["inHere"].copy()
                     if ID in List:
                         List.remove(ID)
 
-                        PCID = Globals.SoLPCData["ID"]
+                    PCID = Globals.SoLPCData["ID"]
                     if Globals.PlayerConfig["NPCtoPC"] == 0:
                         if PCID in List:
                             List.remove(PCID)

@@ -192,6 +192,10 @@ def CASHandling2():
 def TraitChange(TraitID, NPCID, Data, Value):
     Data["Level"] = Value
     Globals.SoLNPCData[NPCID]["Traits"][TraitID] = Data
+
+    # if TraitID == "Courage0":
+    #     ""
+
     Globals.LayoutsData["Active"].Refresh()
 
 def GetTraitSelection(self, TraitID):
@@ -2340,446 +2344,453 @@ def GetTraitConditions(TraitID, NPCID, OtherID, Flags):
 
 
 def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
-    Value = Data["Level"]
+    try:
+        if TraitID != "LewdBody0" and TraitID != "Dere0":
+            Value = Data["Level"]
 
-    Conditions = GetTraitConditions(TraitID, NPCID, OtherID, Flags)
-    if TraitID != "Dere0" and len(list(Conditions.keys())) > 0:
-        WidgetsList = []
-        Widget = QWidget(objectName = "Transparent")
+            Conditions = GetTraitConditions(TraitID, NPCID, OtherID, Flags)
+            if len(list(Conditions.keys())) > 0:
+                WidgetsList = []
+                Widget = QWidget(objectName = "Transparent")
 
-        TitleLabel = QLabel(f"{TraitID[:-1]}", Widget, objectName = "SubTitle")
-        TitleLabel.setProperty("Color","Light")
-        TitleLabel.setGeometry(0,0,250,40)
-        TitleLabel.setMinimumHeight(40)
-        TitleLabel.setMaximumHeight(40)
-        TitleLabel.setAlignment(QtCore.Qt.AlignCenter)
+                TitleLabel = QLabel(f"{TraitID[:-1]}", Widget, objectName = "SubTitle")
+                TitleLabel.setProperty("Color","Light")
+                TitleLabel.setGeometry(0,0,250,40)
+                TitleLabel.setMinimumHeight(40)
+                TitleLabel.setMaximumHeight(40)
+                TitleLabel.setAlignment(QtCore.Qt.AlignCenter)
 
-        Holder = QWidget(Widget)
-        Holder.setGeometry(0,45,250,0)
+                Holder = QWidget(Widget)
+                Holder.setGeometry(0,45,250,0)
 
-        Layout = QVBoxLayout()
-        Layout.setSpacing(0)
-        Layout.setContentsMargins(0, 0, 0, 0)
-        Widget.setContentsMargins(0, 0, 0, 0)
-        Holder.setLayout(Layout)
+                Layout = QVBoxLayout()
+                Layout.setSpacing(0)
+                Layout.setContentsMargins(0, 0, 0, 0)
+                Widget.setContentsMargins(0, 0, 0, 0)
+                Holder.setLayout(Layout)
 
-        Height = 0
+                Height = 0
 
-        Conditions = GetTraitConditions(TraitID, NPCID, OtherID, Flags)
-        if 0 in Conditions:
-            Widget0 = QWidget()
+                Conditions = GetTraitConditions(TraitID, NPCID, OtherID, Flags)
+                if 0 in Conditions:
+                    Widget0 = QWidget()
 
-            BackLabel0 = QLabel(Widget0)
-            BackLabel0.setProperty("Color","Dark")
-            Label0 = QLabel(Widget0, objectName = "SmallText")
-            Label0.setProperty("Color","Dark")
-            Label0.setProperty("Border","None")
-            Label0.setGeometry(0,0,215,35)
-            Label0.setWordWrap(True)
+                    BackLabel0 = QLabel(Widget0)
+                    BackLabel0.setProperty("Color","Dark")
+                    Label0 = QLabel(Widget0, objectName = "SmallText")
+                    Label0.setProperty("Color","Dark")
+                    Label0.setProperty("Border","None")
+                    Label0.setGeometry(0,0,215,35)
+                    Label0.setWordWrap(True)
 
-            Available = Conditions[0]["Available"]
-            if Available == 1:
-                def Click0():
-                    if Button0.Available == 1:
-                        TraitChange(TraitID, NPCID, Data, 0)
-                Button0 = QPushButton(Widget0, clicked = lambda: Click0())
-                Button0.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
-                Button0.setGeometry(215,1,33,33)
-                Button0.setProperty("Color","Dark")
-                Button0.Available = Available
+                    Available = Conditions[0]["Available"]
+                    if Available == 1:
+                        def Click0():
+                            if Button0.Available == 1:
+                                TraitChange(TraitID, NPCID, Data, 0)
+                        Button0 = QPushButton(Widget0, clicked = lambda: Click0())
+                        Button0.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                        Button0.setGeometry(215,1,33,33)
+                        Button0.setProperty("Color","Dark")
+                        Button0.Available = Available
+
+                        if Value != 0:
+                            Label0.setProperty("Selected",1)
+
+                    if Value != 0:
+                        Label0.setText(f'''{Conditions[0]["Title"]}: {Conditions[0]["Text"]}''')
+                    else:
+                        Label0.setText(f'''{Conditions[0]["Title"]}: Current Level''')
+
+                    LabelHeight = Globals.References["SoLFunctions"].AdjustSize(Label0)
+                    Label0.setGeometry(1,1,214,LabelHeight)
+                    BackLabel0.setGeometry(0,0,250,LabelHeight+2)
+
+                    Widget0.setMinimumHeight(BackLabel0.height())
+                    Widget0.setMaximumHeight(BackLabel0.height())
+
+                    Layout.addWidget(Widget0)
+                    Height += Widget0.height()
+
+                if 1 in Conditions:
+                    Widget1 = QWidget()
+
+                    BackLabel1 = QLabel(Widget1)
+                    BackLabel1.setProperty("Color","Dark")
+                    Label1 = QLabel(Widget1, objectName = "SmallText")
+                    Label1.setProperty("Color","Dark")
+                    Label1.setProperty("Border","None")
+                    Label1.setGeometry(0,0,215,35)
+                    Label1.setWordWrap(True)
+
+                    Available = Conditions[1]["Available"]
+                    if Available == 1:
+                        def Click1():
+                            if Button1.Available == 1:
+                                TraitChange(TraitID, NPCID, Data, 1)
+                        Button1 = QPushButton(Widget1, clicked = lambda: Click1())
+                        Button1.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                        Button1.setGeometry(215,1,33,33)
+                        Button1.setProperty("Color","Dark")
+                        Button1.Available = Available
+
+                        if Value != 1:
+                            Label1.setProperty("Selected",1)
+                    elif Value != 0 and Value != 1:
+                        Label1.setProperty("Selected",-1)
+                    if Value != 1:
+                        Label1.setText(f'''{Conditions[1]["Title"]}: {Conditions[1]["Text"]}''')
+                    else:
+                        Label1.setText(f'''{Conditions[1]["Title"]}: Current Level''')
+
+                    LabelHeight = Globals.References["SoLFunctions"].AdjustSize(Label1)
+                    Label1.setGeometry(1,1,214,LabelHeight)
+                    BackLabel1.setGeometry(0,0,250,LabelHeight+2)
+
+                    Widget1.setMinimumHeight(BackLabel1.height())
+                    Widget1.setMaximumHeight(BackLabel1.height())
+
+                    Layout.addWidget(Widget1)
+                    Height += Widget1.height()
+
+                if 2 in Conditions:
+                    Widget2 = QWidget()
+
+                    BackLabel2 = QLabel(Widget2)
+                    BackLabel2.setProperty("Color","Dark")
+                    Label2 = QLabel(Widget2, objectName = "SmallText")
+                    Label2.setProperty("Color","Dark")
+                    Label2.setProperty("Border","None")
+                    Label2.setGeometry(0,0,215,35)
+                    Label2.setWordWrap(True)
+
+                    Available = Conditions[2]["Available"]
+                    if Available == 1:
+                        def Click2():
+                            if Button2.Available == 1:
+                                TraitChange(TraitID, NPCID, Data, 2)
+                        Button2 = QPushButton(Widget2, clicked = lambda: Click2())
+                        Button2.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                        Button2.setGeometry(215,1,33,33)
+                        Button2.setProperty("Color","Dark")
+                        Button2.Available = Available
+
+                        if Value != 2:
+                            Label2.setProperty("Selected",1)
+                    elif Value != 0 and Value != 2:
+                        Label2.setProperty("Selected",-1)
+                    if Value != 2:
+                        Label2.setText(f'''{Conditions[2]["Title"]}: {Conditions[2]["Text"]}''')
+                    else:
+                        Label2.setText(f'''{Conditions[2]["Title"]}: Current Level''')
+
+                    LabelHeight = Globals.References["SoLFunctions"].AdjustSize(Label2)
+                    Label2.setGeometry(1,1,214,LabelHeight)
+                    BackLabel2.setGeometry(0,0,250,LabelHeight+2)
+
+                    Widget2.setMinimumHeight(BackLabel2.height())
+                    Widget2.setMaximumHeight(BackLabel2.height())
+
+                    Layout.addWidget(Widget2)
+                    Height += Widget2.height()
+
+                Holder.setMinimumHeight(Height)
+                Holder.setMaximumHeight(Height)
+
+                Widget.setMinimumHeight(Height+45)
+                Widget.setMaximumHeight(Height+45)
+
+                Widget.setMinimumWidth(250)
+                Widget.setMaximumWidth(250)
+
+                return Widget
+
+        elif TraitID == "Dere0":
+            Value = Data["Level"]
+
+            WidgetsList = []
+            Widget = QWidget(objectName = "Transparent")
+
+            TitleLabel = QLabel("Dere", Widget, objectName = "SubTitle")
+            TitleLabel.setProperty("Color","Light")
+            TitleLabel.setGeometry(0,0,250,40)
+            TitleLabel.setMinimumHeight(40)
+            TitleLabel.setMaximumHeight(40)
+            TitleLabel.setAlignment(QtCore.Qt.AlignCenter)
+
+            Holder = QWidget(Widget)
+            Holder.setGeometry(0,45,250,0)
+
+            Layout = QVBoxLayout()
+            Layout.setSpacing(0)
+            Layout.setContentsMargins(0, 0, 0, 0)
+            Widget.setContentsMargins(0, 0, 0, 0)
+            Holder.setLayout(Layout)
+
+            Height = 0
+
+            Conditions = GetTraitConditions(TraitID, NPCID, OtherID, Flags)
+            # NOT A DERE
+            if 0 in Conditions:
+                NaDWidget = QWidget()
+
+                NaDBackLabel = QLabel(NaDWidget)
+                NaDBackLabel.setProperty("Color","Dark")
+                NaDLabel = QLabel(NaDWidget, objectName = "SmallText")
+                NaDLabel.setProperty("Color","Dark")
+                NaDLabel.setProperty("Border","None")
+                NaDLabel.setGeometry(0,0,215,35)
+                NaDLabel.setWordWrap(True)
+
+                Available = Conditions[0]["Available"]
+                if Available == 1:
+                    def NaDClick():
+                        if NaDButton.Available == 1:
+                            TraitChange(TraitID, NPCID, Data, 0)
+                    NaDButton = QPushButton(NaDWidget, clicked = lambda: NaDClick())
+                    NaDButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    NaDButton.setGeometry(215,1,33,33)
+                    NaDButton.setProperty("Color","Dark")
+                    NaDButton.Available = Available
+
+                    if Value != 0:
+                        NaDLabel.setProperty("Selected",1)
 
                 if Value != 0:
-                    Label0.setProperty("Selected",1)
+                    NaDLabel.setText(f'''{Conditions[0]["Title"]}: {Conditions[0]["Text"]}''')
+                else:
+                    NaDLabel.setText(f'''{Conditions[0]["Title"]}: Current Level''')
 
-            if Value != 0:
-                Label0.setText(f'''{Conditions[0]["Title"]}: {Conditions[0]["Text"]}''')
-            else:
-                Label0.setText(f'''{Conditions[0]["Title"]}: Current Level''')
+                LabelHeight = Globals.References["SoLFunctions"].AdjustSize(NaDLabel)
+                NaDLabel.setGeometry(1,1,214,LabelHeight)
+                NaDBackLabel.setGeometry(0,0,250,LabelHeight+2)
 
-            LabelHeight = Globals.References["SoLFunctions"].AdjustSize(Label0)
-            Label0.setGeometry(1,1,214,LabelHeight)
-            BackLabel0.setGeometry(0,0,250,LabelHeight+2)
+                NaDWidget.setMinimumHeight(NaDBackLabel.height())
+                NaDWidget.setMaximumHeight(NaDBackLabel.height())
 
-            Widget0.setMinimumHeight(BackLabel0.height())
-            Widget0.setMaximumHeight(BackLabel0.height())
+                Layout.addWidget(NaDWidget)
+                Height += NaDWidget.height()
+            # TSUNDERE
+            if 1 in Conditions:
+                TsunWidget = QWidget()
 
-            Layout.addWidget(Widget0)
-            Height += Widget0.height()
+                TsunBackLabel = QLabel(TsunWidget)
+                TsunBackLabel.setProperty("Color","Dark")
+                TsunLabel = QLabel(TsunWidget, objectName = "SmallText")
+                TsunLabel.setProperty("Color","Dark")
+                TsunLabel.setProperty("Border","None")
+                TsunLabel.setGeometry(0,0,215,35)
+                TsunLabel.setWordWrap(True)
 
-        if 1 in Conditions:
-            Widget1 = QWidget()
+                Available = Conditions[1]["Available"]
+                if Available == 1:
+                    def TsunClick():
+                        if TsunButton.Available == 1:
+                            TraitChange(TraitID, NPCID, Data, 1)
+                    TsunButton = QPushButton(TsunWidget, clicked = lambda: TsunClick())
+                    TsunButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    TsunButton.setGeometry(215,1,33,33)
+                    TsunButton.setProperty("Color","Dark")
+                    TsunButton.Available = Available
 
-            BackLabel1 = QLabel(Widget1)
-            BackLabel1.setProperty("Color","Dark")
-            Label1 = QLabel(Widget1, objectName = "SmallText")
-            Label1.setProperty("Color","Dark")
-            Label1.setProperty("Border","None")
-            Label1.setGeometry(0,0,215,35)
-            Label1.setWordWrap(True)
-
-            Available = Conditions[1]["Available"]
-            if Available == 1:
-                def Click1():
-                    if Button1.Available == 1:
-                        TraitChange(TraitID, NPCID, Data, 1)
-                Button1 = QPushButton(Widget1, clicked = lambda: Click1())
-                Button1.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
-                Button1.setGeometry(215,1,33,33)
-                Button1.setProperty("Color","Dark")
-                Button1.Available = Available
-
+                    if Value != 1:
+                        TsunLabel.setProperty("Selected",1)
+                elif Value != 0 and Value != 1:
+                    TsunLabel.setProperty("Selected",-1)
                 if Value != 1:
-                    Label1.setProperty("Selected",1)
-            elif Value != 0 and Value != 1:
-                Label1.setProperty("Selected",-1)
-            if Value != 1:
-                Label1.setText(f'''{Conditions[1]["Title"]}: {Conditions[1]["Text"]}''')
-            else:
-                Label1.setText(f'''{Conditions[1]["Title"]}: Current Level''')
+                    TsunLabel.setText(f'''{Conditions[1]["Title"]}: {Conditions[1]["Text"]}''')
+                else:
+                    TsunLabel.setText(f'''{Conditions[1]["Title"]}: Current Level''')
 
-            LabelHeight = Globals.References["SoLFunctions"].AdjustSize(Label1)
-            Label1.setGeometry(1,1,214,LabelHeight)
-            BackLabel1.setGeometry(0,0,250,LabelHeight+2)
+                LabelHeight = Globals.References["SoLFunctions"].AdjustSize(TsunLabel)
+                TsunLabel.setGeometry(1,1,214,LabelHeight)
+                TsunBackLabel.setGeometry(0,0,250,LabelHeight+2)
 
-            Widget1.setMinimumHeight(BackLabel1.height())
-            Widget1.setMaximumHeight(BackLabel1.height())
+                TsunWidget.setMinimumHeight(TsunBackLabel.height())
+                TsunWidget.setMaximumHeight(TsunBackLabel.height())
 
-            Layout.addWidget(Widget1)
-            Height += Widget1.height()
+                Layout.addWidget(TsunWidget)
+                Height += TsunWidget.height()
+            # DANDERE
+            if 2 in Conditions:
+                DanWidget = QWidget()
 
-        if 2 in Conditions:
-            Widget2 = QWidget()
+                DanBackLabel = QLabel(DanWidget)
+                DanBackLabel.setProperty("Color","Dark")
+                DanLabel = QLabel(DanWidget, objectName = "SmallText")
+                DanLabel.setProperty("Color","Dark")
+                DanLabel.setProperty("Border","None")
+                DanLabel.setGeometry(0,0,215,35)
+                DanLabel.setWordWrap(True)
 
-            BackLabel2 = QLabel(Widget2)
-            BackLabel2.setProperty("Color","Dark")
-            Label2 = QLabel(Widget2, objectName = "SmallText")
-            Label2.setProperty("Color","Dark")
-            Label2.setProperty("Border","None")
-            Label2.setGeometry(0,0,215,35)
-            Label2.setWordWrap(True)
+                Available = Conditions[2]["Available"]
+                if Available == 1:
+                    def DanClick():
+                        if DanButton.Available == 1:
+                            TraitChange(TraitID, NPCID, Data, 2)
+                    DanButton = QPushButton(DanWidget, clicked = lambda: DanClick())
+                    DanButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    DanButton.setGeometry(215,1,33,33)
+                    DanButton.setProperty("Color","Dark")
+                    DanButton.Available = Available
 
-            Available = Conditions[2]["Available"]
-            if Available == 1:
-                def Click2():
-                    if Button2.Available == 1:
-                        TraitChange(TraitID, NPCID, Data, 2)
-                Button2 = QPushButton(Widget2, clicked = lambda: Click2())
-                Button2.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
-                Button2.setGeometry(215,1,33,33)
-                Button2.setProperty("Color","Dark")
-                Button2.Available = Available
-
+                    if Value != 2:
+                        DanLabel.setProperty("Selected",1)
+                elif Value != 0 and Value != 2:
+                    DanLabel.setProperty("Selected",-1)
                 if Value != 2:
-                    Label2.setProperty("Selected",1)
-            elif Value != 0 and Value != 2:
-                Label2.setProperty("Selected",-1)
-            if Value != 2:
-                Label2.setText(f'''{Conditions[2]["Title"]}: {Conditions[2]["Text"]}''')
-            else:
-                Label2.setText(f'''{Conditions[2]["Title"]}: Current Level''')
+                    DanLabel.setText(f'''{Conditions[2]["Title"]}: {Conditions[2]["Text"]}''')
+                else:
+                    DanLabel.setText(f'''{Conditions[2]["Title"]}: Current Level''')
 
-            LabelHeight = Globals.References["SoLFunctions"].AdjustSize(Label2)
-            Label2.setGeometry(1,1,214,LabelHeight)
-            BackLabel2.setGeometry(0,0,250,LabelHeight+2)
+                LabelHeight = Globals.References["SoLFunctions"].AdjustSize(DanLabel)
+                DanLabel.setGeometry(1,1,214,LabelHeight)
+                DanBackLabel.setGeometry(0,0,250,LabelHeight+2)
 
-            Widget2.setMinimumHeight(BackLabel2.height())
-            Widget2.setMaximumHeight(BackLabel2.height())
+                DanWidget.setMinimumHeight(DanBackLabel.height())
+                DanWidget.setMaximumHeight(DanBackLabel.height())
 
-            Layout.addWidget(Widget2)
-            Height += Widget2.height()
+                Layout.addWidget(DanWidget)
+                Height += DanWidget.height()
+            # KUUDERE
+            if 3 in Conditions:
+                KuuWidget = QWidget()
 
-        Holder.setMinimumHeight(Height)
-        Holder.setMaximumHeight(Height)
+                KuuBackLabel = QLabel(KuuWidget)
+                KuuBackLabel.setProperty("Color","Dark")
+                KuuLabel = QLabel(KuuWidget, objectName = "SmallText")
+                KuuLabel.setProperty("Color","Dark")
+                KuuLabel.setProperty("Border","None")
+                KuuLabel.setGeometry(0,0,215,35)
+                KuuLabel.setWordWrap(True)
 
-        Widget.setMinimumHeight(Height+45)
-        Widget.setMaximumHeight(Height+45)
+                Available = Conditions[3]["Available"]
+                if Available == 1:
+                    def KuuClick():
+                        if KuuButton.Available == 1:
+                            TraitChange(TraitID, NPCID, Data, 3)
+                    KuuButton = QPushButton(KuuWidget, clicked = lambda: KuuClick())
+                    KuuButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    KuuButton.setGeometry(215,1,33,33)
+                    KuuButton.setProperty("Color","Dark")
+                    KuuButton.Available = Available
 
-        Widget.setMinimumWidth(250)
-        Widget.setMaximumWidth(250)
-
-        return Widget
-
-    elif TraitID == "Dere0":
-        WidgetsList = []
-        Widget = QWidget(objectName = "Transparent")
-
-        TitleLabel = QLabel("Dere", Widget, objectName = "SubTitle")
-        TitleLabel.setProperty("Color","Light")
-        TitleLabel.setGeometry(0,0,250,40)
-        TitleLabel.setMinimumHeight(40)
-        TitleLabel.setMaximumHeight(40)
-        TitleLabel.setAlignment(QtCore.Qt.AlignCenter)
-
-        Holder = QWidget(Widget)
-        Holder.setGeometry(0,45,250,0)
-
-        Layout = QVBoxLayout()
-        Layout.setSpacing(0)
-        Layout.setContentsMargins(0, 0, 0, 0)
-        Widget.setContentsMargins(0, 0, 0, 0)
-        Holder.setLayout(Layout)
-
-        Height = 0
-
-        Conditions = GetTraitConditions(TraitID, NPCID, OtherID, Flags)
-        # NOT A DERE
-        if 0 in Conditions:
-            NaDWidget = QWidget()
-
-            NaDBackLabel = QLabel(NaDWidget)
-            NaDBackLabel.setProperty("Color","Dark")
-            NaDLabel = QLabel(NaDWidget, objectName = "SmallText")
-            NaDLabel.setProperty("Color","Dark")
-            NaDLabel.setProperty("Border","None")
-            NaDLabel.setGeometry(0,0,215,35)
-            NaDLabel.setWordWrap(True)
-
-            Available = Conditions[0]["Available"]
-            if Available == 1:
-                def NaDClick():
-                    if NaDButton.Available == 1:
-                        TraitChange(TraitID, NPCID, Data, 0)
-                NaDButton = QPushButton(NaDWidget, clicked = lambda: NaDClick())
-                NaDButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
-                NaDButton.setGeometry(215,1,33,33)
-                NaDButton.setProperty("Color","Dark")
-                NaDButton.Available = Available
-
-                if Value != 0:
-                    NaDLabel.setProperty("Selected",1)
-
-            if Value != 0:
-                NaDLabel.setText(f'''{Conditions[0]["Title"]}: {Conditions[0]["Text"]}''')
-            else:
-                NaDLabel.setText(f'''{Conditions[0]["Title"]}: Current Level''')
-
-            LabelHeight = Globals.References["SoLFunctions"].AdjustSize(NaDLabel)
-            NaDLabel.setGeometry(1,1,214,LabelHeight)
-            NaDBackLabel.setGeometry(0,0,250,LabelHeight+2)
-
-            NaDWidget.setMinimumHeight(NaDBackLabel.height())
-            NaDWidget.setMaximumHeight(NaDBackLabel.height())
-
-            Layout.addWidget(NaDWidget)
-            Height += NaDWidget.height()
-        # TSUNDERE
-        if 1 in Conditions:
-            TsunWidget = QWidget()
-
-            TsunBackLabel = QLabel(TsunWidget)
-            TsunBackLabel.setProperty("Color","Dark")
-            TsunLabel = QLabel(TsunWidget, objectName = "SmallText")
-            TsunLabel.setProperty("Color","Dark")
-            TsunLabel.setProperty("Border","None")
-            TsunLabel.setGeometry(0,0,215,35)
-            TsunLabel.setWordWrap(True)
-
-            Available = Conditions[1]["Available"]
-            if Available == 1:
-                def TsunClick():
-                    if TsunButton.Available == 1:
-                        TraitChange(TraitID, NPCID, Data, 1)
-                TsunButton = QPushButton(TsunWidget, clicked = lambda: TsunClick())
-                TsunButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
-                TsunButton.setGeometry(215,1,33,33)
-                TsunButton.setProperty("Color","Dark")
-                TsunButton.Available = Available
-
-                if Value != 1:
-                    TsunLabel.setProperty("Selected",1)
-            elif Value != 0 and Value != 1:
-                TsunLabel.setProperty("Selected",-1)
-            if Value != 1:
-                TsunLabel.setText(f'''{Conditions[1]["Title"]}: {Conditions[1]["Text"]}''')
-            else:
-                TsunLabel.setText(f'''{Conditions[1]["Title"]}: Current Level''')
-
-            LabelHeight = Globals.References["SoLFunctions"].AdjustSize(TsunLabel)
-            TsunLabel.setGeometry(1,1,214,LabelHeight)
-            TsunBackLabel.setGeometry(0,0,250,LabelHeight+2)
-
-            TsunWidget.setMinimumHeight(TsunBackLabel.height())
-            TsunWidget.setMaximumHeight(TsunBackLabel.height())
-
-            Layout.addWidget(TsunWidget)
-            Height += TsunWidget.height()
-        # DANDERE
-        if 2 in Conditions:
-            DanWidget = QWidget()
-
-            DanBackLabel = QLabel(DanWidget)
-            DanBackLabel.setProperty("Color","Dark")
-            DanLabel = QLabel(DanWidget, objectName = "SmallText")
-            DanLabel.setProperty("Color","Dark")
-            DanLabel.setProperty("Border","None")
-            DanLabel.setGeometry(0,0,215,35)
-            DanLabel.setWordWrap(True)
-
-            Available = Conditions[2]["Available"]
-            if Available == 1:
-                def DanClick():
-                    if DanButton.Available == 1:
-                        TraitChange(TraitID, NPCID, Data, 2)
-                DanButton = QPushButton(DanWidget, clicked = lambda: DanClick())
-                DanButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
-                DanButton.setGeometry(215,1,33,33)
-                DanButton.setProperty("Color","Dark")
-                DanButton.Available = Available
-
-                if Value != 2:
-                    DanLabel.setProperty("Selected",1)
-            elif Value != 0 and Value != 2:
-                DanLabel.setProperty("Selected",-1)
-            if Value != 2:
-                DanLabel.setText(f'''{Conditions[2]["Title"]}: {Conditions[2]["Text"]}''')
-            else:
-                DanLabel.setText(f'''{Conditions[2]["Title"]}: Current Level''')
-
-            LabelHeight = Globals.References["SoLFunctions"].AdjustSize(DanLabel)
-            DanLabel.setGeometry(1,1,214,LabelHeight)
-            DanBackLabel.setGeometry(0,0,250,LabelHeight+2)
-
-            DanWidget.setMinimumHeight(DanBackLabel.height())
-            DanWidget.setMaximumHeight(DanBackLabel.height())
-
-            Layout.addWidget(DanWidget)
-            Height += DanWidget.height()
-        # KUUDERE
-        if 3 in Conditions:
-            KuuWidget = QWidget()
-
-            KuuBackLabel = QLabel(KuuWidget)
-            KuuBackLabel.setProperty("Color","Dark")
-            KuuLabel = QLabel(KuuWidget, objectName = "SmallText")
-            KuuLabel.setProperty("Color","Dark")
-            KuuLabel.setProperty("Border","None")
-            KuuLabel.setGeometry(0,0,215,35)
-            KuuLabel.setWordWrap(True)
-
-            Available = Conditions[3]["Available"]
-            if Available == 1:
-                def KuuClick():
-                    if KuuButton.Available == 1:
-                        TraitChange(TraitID, NPCID, Data, 3)
-                KuuButton = QPushButton(KuuWidget, clicked = lambda: KuuClick())
-                KuuButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
-                KuuButton.setGeometry(215,1,33,33)
-                KuuButton.setProperty("Color","Dark")
-                KuuButton.Available = Available
-
+                    if Value != 3:
+                        KuuLabel.setProperty("Selected",1)
+                elif Value != 0 and Value != 3:
+                    KuuLabel.setProperty("Selected",-1)
                 if Value != 3:
-                    KuuLabel.setProperty("Selected",1)
-            elif Value != 0 and Value != 3:
-                KuuLabel.setProperty("Selected",-1)
-            if Value != 3:
-                KuuLabel.setText(f'''{Conditions[3]["Title"]}: {Conditions[3]["Text"]}''')
-            else:
-                KuuLabel.setText(f'''{Conditions[3]["Title"]}: Current Level''')
+                    KuuLabel.setText(f'''{Conditions[3]["Title"]}: {Conditions[3]["Text"]}''')
+                else:
+                    KuuLabel.setText(f'''{Conditions[3]["Title"]}: Current Level''')
 
-            LabelHeight = Globals.References["SoLFunctions"].AdjustSize(KuuLabel)
-            KuuLabel.setGeometry(1,1,214,LabelHeight)
-            KuuBackLabel.setGeometry(0,0,250,LabelHeight+2)
+                LabelHeight = Globals.References["SoLFunctions"].AdjustSize(KuuLabel)
+                KuuLabel.setGeometry(1,1,214,LabelHeight)
+                KuuBackLabel.setGeometry(0,0,250,LabelHeight+2)
 
-            KuuWidget.setMinimumHeight(KuuBackLabel.height())
-            KuuWidget.setMaximumHeight(KuuBackLabel.height())
+                KuuWidget.setMinimumHeight(KuuBackLabel.height())
+                KuuWidget.setMaximumHeight(KuuBackLabel.height())
 
-            Layout.addWidget(KuuWidget)
-            Height += KuuWidget.height()
-        # YANDERE
-        if 4 in Conditions:
-            YanWidget = QWidget()
+                Layout.addWidget(KuuWidget)
+                Height += KuuWidget.height()
+            # YANDERE
+            if 4 in Conditions:
+                YanWidget = QWidget()
 
-            YanBackLabel = QLabel(YanWidget)
-            YanBackLabel.setProperty("Color","Dark")
-            YanLabel = QLabel(YanWidget, objectName = "SmallText")
-            YanLabel.setProperty("Color","Dark")
-            YanLabel.setProperty("Border","None")
-            YanLabel.setGeometry(0,0,215,35)
-            YanLabel.setWordWrap(True)
+                YanBackLabel = QLabel(YanWidget)
+                YanBackLabel.setProperty("Color","Dark")
+                YanLabel = QLabel(YanWidget, objectName = "SmallText")
+                YanLabel.setProperty("Color","Dark")
+                YanLabel.setProperty("Border","None")
+                YanLabel.setGeometry(0,0,215,35)
+                YanLabel.setWordWrap(True)
 
-            Available = Conditions[4]["Available"]
-            if Available == 1:
-                def YanClick():
-                    if YanButton.Available == 1:
-                        TraitChange(TraitID, NPCID, Data, 4)
-                YanButton = QPushButton(YanWidget, clicked = lambda: YanClick())
-                YanButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
-                YanButton.setGeometry(215,1,33,33)
-                YanButton.setProperty("Color","Dark")
-                YanButton.Available = Available
+                Available = Conditions[4]["Available"]
+                if Available == 1:
+                    def YanClick():
+                        if YanButton.Available == 1:
+                            TraitChange(TraitID, NPCID, Data, 4)
+                    YanButton = QPushButton(YanWidget, clicked = lambda: YanClick())
+                    YanButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    YanButton.setGeometry(215,1,33,33)
+                    YanButton.setProperty("Color","Dark")
+                    YanButton.Available = Available
 
+                    if Value != 4:
+                        YanLabel.setProperty("Selected",1)
+                elif Value != 0 and Value != 4:
+                    YanLabel.setProperty("Selected",-1)
                 if Value != 4:
-                    YanLabel.setProperty("Selected",1)
-            elif Value != 0 and Value != 4:
-                YanLabel.setProperty("Selected",-1)
-            if Value != 4:
-                YanLabel.setText(f'''{Conditions[4]["Title"]}: {Conditions[4]["Text"]}''')
-            else:
-                YanLabel.setText(f'''{Conditions[4]["Title"]}: Current Level''')
+                    YanLabel.setText(f'''{Conditions[4]["Title"]}: {Conditions[4]["Text"]}''')
+                else:
+                    YanLabel.setText(f'''{Conditions[4]["Title"]}: Current Level''')
 
-            LabelHeight = Globals.References["SoLFunctions"].AdjustSize(YanLabel)
-            YanLabel.setGeometry(1,1,214,LabelHeight)
-            YanBackLabel.setGeometry(0,0,250,LabelHeight+2)
+                LabelHeight = Globals.References["SoLFunctions"].AdjustSize(YanLabel)
+                YanLabel.setGeometry(1,1,214,LabelHeight)
+                YanBackLabel.setGeometry(0,0,250,LabelHeight+2)
 
-            YanWidget.setMinimumHeight(YanBackLabel.height())
-            YanWidget.setMaximumHeight(YanBackLabel.height())
+                YanWidget.setMinimumHeight(YanBackLabel.height())
+                YanWidget.setMaximumHeight(YanBackLabel.height())
 
-            Layout.addWidget(YanWidget)
-            Height += YanWidget.height()
-        # DEREDERE
-        if 5 in Conditions:
-            DereWidget = QWidget()
+                Layout.addWidget(YanWidget)
+                Height += YanWidget.height()
+            # DEREDERE
+            if 5 in Conditions:
+                DereWidget = QWidget()
 
-            DereBackLabel = QLabel(DereWidget)
-            DereBackLabel.setProperty("Color","Dark")
-            DereLabel = QLabel(DereWidget, objectName = "SmallText")
-            DereLabel.setProperty("Color","Dark")
-            DereLabel.setProperty("Border","None")
-            DereLabel.setGeometry(0,0,215,35)
-            DereLabel.setWordWrap(True)
+                DereBackLabel = QLabel(DereWidget)
+                DereBackLabel.setProperty("Color","Dark")
+                DereLabel = QLabel(DereWidget, objectName = "SmallText")
+                DereLabel.setProperty("Color","Dark")
+                DereLabel.setProperty("Border","None")
+                DereLabel.setGeometry(0,0,215,35)
+                DereLabel.setWordWrap(True)
 
-            Available = Conditions[5]["Available"]
-            if Available == 1:
-                def DereClick():
-                    if DereButton.Available == 1:
-                        TraitChange(TraitID, NPCID, Data, 5)
-                DereButton = QPushButton(DereWidget, clicked = lambda: DereClick())
-                DereButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
-                DereButton.setGeometry(215,1,33,33)
-                DereButton.setProperty("Color","Dark")
-                DereButton.Available = Available
+                Available = Conditions[5]["Available"]
+                if Available == 1:
+                    def DereClick():
+                        if DereButton.Available == 1:
+                            TraitChange(TraitID, NPCID, Data, 5)
+                    DereButton = QPushButton(DereWidget, clicked = lambda: DereClick())
+                    DereButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    DereButton.setGeometry(215,1,33,33)
+                    DereButton.setProperty("Color","Dark")
+                    DereButton.Available = Available
 
+                    if Value != 5:
+                        DereLabel.setProperty("Selected",1)
+                elif Value != 0 and Value != 5:
+                    DereLabel.setProperty("Selected",-1)
                 if Value != 5:
-                    DereLabel.setProperty("Selected",1)
-            elif Value != 0 and Value != 5:
-                DereLabel.setProperty("Selected",-1)
-            if Value != 5:
-                DereLabel.setText(f'''{Conditions[5]["Title"]}: {Conditions[5]["Text"]}''')
-            else:
-                DereLabel.setText(f'''{Conditions[5]["Title"]}: Current Level''')
+                    DereLabel.setText(f'''{Conditions[5]["Title"]}: {Conditions[5]["Text"]}''')
+                else:
+                    DereLabel.setText(f'''{Conditions[5]["Title"]}: Current Level''')
 
-            LabelHeight = Globals.References["SoLFunctions"].AdjustSize(DereLabel)
-            DereLabel.setGeometry(1,1,214,LabelHeight)
-            DereBackLabel.setGeometry(0,0,250,LabelHeight+2)
+                LabelHeight = Globals.References["SoLFunctions"].AdjustSize(DereLabel)
+                DereLabel.setGeometry(1,1,214,LabelHeight)
+                DereBackLabel.setGeometry(0,0,250,LabelHeight+2)
 
-            DereWidget.setMinimumHeight(DereBackLabel.height())
-            DereWidget.setMaximumHeight(DereBackLabel.height())
+                DereWidget.setMinimumHeight(DereBackLabel.height())
+                DereWidget.setMaximumHeight(DereBackLabel.height())
 
-            Layout.addWidget(DereWidget)
-            Height += DereWidget.height()
+                Layout.addWidget(DereWidget)
+                Height += DereWidget.height()
 
-        Holder.setMinimumHeight(Height)
-        Holder.setMaximumHeight(Height)
+            Holder.setMinimumHeight(Height)
+            Holder.setMaximumHeight(Height)
 
-        Widget.setMinimumHeight(Height+45)
-        Widget.setMaximumHeight(Height+45)
+            Widget.setMinimumHeight(Height+45)
+            Widget.setMaximumHeight(Height+45)
 
-        Widget.setMinimumWidth(250)
-        Widget.setMaximumWidth(250)
+            Widget.setMinimumWidth(250)
+            Widget.setMaximumWidth(250)
 
-        return Widget
+            return Widget
 
-    return None
+        return None
+    except Exception as e:
+        Log(3, "ERROR GetTraitDynamicWidget", e, TraitID, Data, NPCID, OtherID, Flags)
+
 
 def CommandProcessTrait(self, OriginalData, FinalData, TraitID):
     Target = FinalData["Target"]

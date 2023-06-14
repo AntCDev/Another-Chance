@@ -60,7 +60,7 @@ class UiLayoutMainMenu(QWidget):
         self.buttonDiscord.setStyleSheet('''color:rgb(88, 101, 242);''')
         self.labelDiscord = QLabel(self.GUI)
         self.labelDiscord.setStyleSheet('''background:none;border:none;''')
-        self.labelDiscord.setPixmap(QPixmap("images/OtherResources/discord-mark-blue.png"))
+        self.labelDiscord.setPixmap(QPixmap("Resources/OtherResources/discord-mark-blue.png"))
         self.labelDiscord.setGeometry(619,522,30,26)
         self.labelDiscord.setScaledContents(True)
 
@@ -69,7 +69,7 @@ class UiLayoutMainMenu(QWidget):
         self.buttonPatreon.setStyleSheet('''color:rgb(249, 104, 84);''')
         self.labelPatreon = QLabel(self.GUI)
         self.labelPatreon.setStyleSheet('''background:none;border:none;''')
-        self.labelPatreon.setPixmap(QPixmap("images/OtherResources/Digital-Patreon-Logo_FieryCoral.png"))
+        self.labelPatreon.setPixmap(QPixmap("Resources/OtherResources/Digital-Patreon-Logo_FieryCoral.png"))
         self.labelPatreon.setGeometry(809,522,26,26)
         self.labelPatreon.setScaledContents(True)
 
@@ -85,7 +85,7 @@ class UiLayoutMainMenu(QWidget):
         self.buttonChangelog.setProperty("Color","Light")
         self.labelChangelog = QLabel(self.GUI)
         self.labelChangelog.setStyleSheet('''background:none;border:none;''')
-        self.labelChangelog.setPixmap(QPixmap("images/OtherResources/github-mark-white.png"))
+        self.labelChangelog.setPixmap(QPixmap("Resources/OtherResources/github-mark-white.png"))
         self.labelChangelog.setGeometry(429,562,26,26)
         self.labelChangelog.setScaledContents(True)
 

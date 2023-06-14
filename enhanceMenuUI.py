@@ -427,7 +427,7 @@ class UiLayoutEnhanceMenu:
                         Data = None
                         if AbilityID in TARelation["Abilities"]:
                             Data = TARelation["Abilities"][AbilityID]
-                        Widget = Globals.SoLAbilities[AbilityID]["Reference"].GetAbilityDynamicWidget(AbilityID, Data, Target, Actor, {"UpgradeForceAvailable":0, "DowngradeForceAvailable":0})
+                        Widget = Globals.SoLAbilities[AbilityID]["Reference"].GetAbilityDynamicWidget(AbilityID, Data, Target, Actor, {"UpgradeForceAvailable":1, "DowngradeForceAvailable":1})
                         if Widget != None:
                             WidgetsDict[AbilityID] = Widget
                     except Exception as e:
@@ -502,11 +502,12 @@ class UiLayoutEnhanceMenu:
                         Data = None
                         if TraitID in TargetData["Traits"]:
                             Data = TargetData["Traits"][TraitID]
-                        Widget = Globals.SoLTraits[TraitID]["Reference"].GetTraitDynamicWidget(TraitID, Data, Target, Actor, {"ForceAvailable":0})
+                        Widget = Globals.SoLTraits[TraitID]["Reference"].GetTraitDynamicWidget(TraitID, Data, Target, Actor, {"ForceAvailable":1})
                         if Widget != None:
                             WidgetsDict[TraitID] = Widget
                     except Exception as e:
-                        print("Error", e)
+                        ""
+                        # print("Error", e)
 
                 MaxWidth = 994
                 Width, Height = Globals.References["SoLFunctions"].GridLayoutMaker(self, self.TTLayout, WidgetsDict, MaxWidth, 10)

@@ -364,14 +364,14 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Conversation", {"BriefFluff": f'''Listening to {TName}.''', "LongFluff": f'''{TName} is listening to {TName} talk.'''}],
+                    "Task": ["Conversation", {"BriefFluff": f'''Listening to {AName}.''', "LongFluff": f'''{TName} is listening to {AName} talk.'''}],
                     "InterruptionPenalty": 20,
                     "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
                     },
                 "FailedTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Conversation", {"BriefFluff": f'''Bored listening to {TName}''', "LongFluff": f'''{TName} is unninteresed with {TName} conversation.'''}],
+                    "Task": ["Conversation", {"BriefFluff": f'''Bored listening to {AName}''', "LongFluff": f'''{TName} is unninteresed with {AName}'s conversation.'''}],
                     "InterruptionPenalty": -20,
                     "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
                     },
@@ -7047,28 +7047,22 @@ def ConfirmCommand(self, FinalData):
             if FinalData["CommandStatus"] == "Success" or FinalData["CommandStatus"] == "EnergyFailed":
                 Target = FinalData["Target"]
                 Actor = FinalData["Actor"]
-                # print(Actor, "Pushed Down", Target)
                 if Target not in Globals.SoLNPCData[Actor]["Actions"]["isInSexScene"]: Globals.SoLNPCData[Actor]["Actions"]["isInSexScene"].append(Target)
                 if Actor not in Globals.SoLNPCData[Target]["Actions"]["isInSexScene"]: Globals.SoLNPCData[Target]["Actions"]["isInSexScene"].append(Actor)
         elif FinalData["CommandID"] == "StopSex0":
             if FinalData["CommandStatus"] == "Success" or FinalData["CommandStatus"] == "EnergyFailed":
                 Target = FinalData["Target"]
                 Actor = FinalData["Actor"]
-                # print(Actor, "StopSex", Target)
                 if Target in Globals.SoLNPCData[Actor]["Actions"]["isInSexScene"]: Globals.SoLNPCData[Actor]["Actions"]["isInSexScene"].remove(Target)
                 if Actor in Globals.SoLNPCData[Target]["Actions"]["isInSexScene"]: Globals.SoLNPCData[Target]["Actions"]["isInSexScene"].remove(Actor)
-                # print("PUSHED DOWN")
-                # FinalData["CommandStatus"]
         elif FinalData["CommandID"] == "GetFollow0":
-            ""
             if FinalData["CommandStatus"] == "Success" or FinalData["CommandStatus"] == "EnergyFailed":
                 Target = FinalData["Target"]
                 Actor = FinalData["Actor"]
-                Globals.SoLNPCData[Target]["Actions"]["IsFollowing"] = Actor
+                Globals.SoLNPCData[Target]["Actions"]["IsFollowing"] = [Actor,5]
                 Globals.SoLNPCData[Actor]["Actions"]["HasFollowing"].append(Target)
     except Exception as e:
         Log(3,"ERROR ConfirmCommand", e, FinalData)
-        ""
 
 def GetConnotations(self, CommandID, Actor, Target, OtherData):
     if CommandID == "Conversation0":

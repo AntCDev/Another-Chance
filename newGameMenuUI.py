@@ -216,433 +216,104 @@ class UiLayoutNewGameMenuOld(object):
         #     # self.futanariCharacterButton.setChecked(0)
 
     def NewGame(self, Who):
-        if Who == "Female":
-            Name = self.nameCharacterLine.text()
-            if Name == "":
-                self.statusLabel.setText("Please introduce a name for your character.")
-            else:
-                NPCData = {
-                "Name": Name,
-                "ID": "0",
-                "Personality": "Standard0",
-                "State": {
-                    "Energy": 2000,
-                    "Mood": 0,
-                    "Arousal": 0,
-                    "Alcohol": 0,
-                    "Drugs": 0,
-                    "PConscious": 1,
-                    "MConscious": 1,
-                },
-                "Relations": {},
-                "BodyData": {
-                    "FullName": Name,
-                    "SkinColor": "Pale",
-                    "HairColor": "Dark",
-                    "PhysicalAge": 2,
-                    "Race": "Human",
-                    "Face": 5,
-                    "Eyes": "Brown",
-                    "Lips": 2,
-                    "Height": 4,
-                    "Complexion": 3,
-                    "Sex": "Female",
-                    "Pronouns": {"PSub": "She", "PObj": "Her", "PPos": "Her", "PIPos": "Hers"},
-                    "Hips": 3,
-                    "Ass": 3,
-                    "Chest": 4,
-                    "VTightness": 3,
-                    "ATightness": 3,
-                    "PenisSize": 0,
-                    "BallsSize": 0,
-                    "VVirgin": True,
-                    "AVirgin": True,
-                    "PVirgin": True,
-                    "MVirgin": True,
-                },
-                "OtherData": {"Home": f"{Name}'s Home"},
-                "Traits": {
-                    "Courage0": 0,
-                    "Attitude0": 0,
-                    "Pride0": 0,
-                    "Dere0": 0,
-                    "SelfControl0": 0,
-                    "Cheerfulness0": 0,
-                    "Shyness0": 0,
-                    "Gullible0": 0,
-                    "Charm0": 0,
-                    "SubstanceResistance0": 0,
-                    "SexualInterest0": 0,
-                    "Virtue0": 0,
-                    "Chastity0": 0,
-                    "Openess0": 0,
-                    "PainResistance0": 0,
-                    "ArousalEase0": 0,
-                    "ResponseToPleasure0": 0,
-                    "Perversion0": 0,
-                    "Dominance0": 0,
-                    "Forceful0": 0,
-                    "Loyalty0": 0,
-                    "Violence0": 0,
-                    "Beauty0": 0,
-                    "Shame0": 0,
-                    "Will0": 0,
-                    "Influence0": 0,
-                    "Fertility0": 0,
-                    "LewdBody0": {"V": False, "A": False, "B": False, "P": False, "M": False},
-                },
-                "GeneralFlags": {},
-                "GeneralAbilities": {"MaxEnergy": 2000},
-                "CombatAbilities": {"DeckName": None},
-                "Descriptions": {
-                    "Backstory": "",
-                    "Core": "",
-                    "Head": "",
-                    "Arms": "",
-                    "Legs": "",
-                    "Genitals": "",
-                },
-                "Actions": {
-                    "Intention": None,
-                    "Action": None,
-                    "PreviousTask": {
-                        "HourStart": 0,
-                        "HourFinish": 1,
-                        "Task": [
-                            "Idling",
-                            {"BriefFluff": "Idling in the streets of ", "LongFluff": ""},
-                        ],
-                        "InterruptionPenalty": 0,
-                        "Location": "ResidentialArea",
-                    },
-                    "CurrentTask": {
-                        "HourStart": 0,
-                        "HourFinish": 1,
-                        "Task": [
-                            "Idling",
-                            {"BriefFluff": "Idling in the streets of ", "LongFluff": ""},
-                        ],
-                        "InterruptionPenalty": 0,
-                        "Location": "ResidentialArea",
-                    },
-                    "FutureTask": {
-                        "HourStart": 0,
-                        "HourFinish": 1,
-                        "Task": [
-                            "Idling",
-                            {"BriefFluff": "Idling in the streets of ", "LongFluff": ""},
-                        ],
-                        "InterruptionPenalty": 0,
-                        "Location": "ResidentialArea",
-                    },
-                    "TaskData": {},
-                    "HasFollowing": [],
-                    "InteractionParty": {},
-                    "SexualPary": [],
-                    "IsFollowing": None,
-                    "isInSexScene": [],
-                    "Targeting": None,
-                },
-                "Items": {},
-                "isInSexScene": 0,
-                "Version": 2,
-            }
-        elif Who == "Male":
-            Name = self.nameCharacterLine.text()
-            if Name == "":
-                self.statusLabel.setText("Please introduce a name for your character.")
-            else:
-                NPCData = {
-                "Name": Name,
-                "ID": "0",
-                "Personality": "Standard0",
-                "State": {
-                    "Energy": 2000,
-                    "Mood": 0,
-                    "Arousal": 0,
-                    "Alcohol": 0,
-                    "Drugs": 0,
-                    "PConscious": 1,
-                    "MConscious": 1,
-                },
-                "Relations": {},
-                "BodyData": {
-                    "FullName": Name,
-                    "SkinColor": "Pale",
-                    "HairColor": "Dark",
-                    "PhysicalAge": 2,
-                    "Race": "Human",
-                    "Face": 5,
-                    "Eyes": "Brown",
-                    "Lips": 2,
-                    "Height": 4,
-                    "Complexion": 3,
-                    "Sex": "Male",
-                    "Pronouns": {"PSub": "He", "PObj": "Him", "PPos": "His", "PIPos": "His"},
-                    "Hips": 3,
-                    "Ass": 3,
-                    "Chest": 0,
-                    "VTightness": 0,
-                    "ATightness": 3,
-                    "PenisSize": 3,
-                    "BallsSize": 3,
-                    "VVirgin": True,
-                    "AVirgin": True,
-                    "PVirgin": True,
-                    "MVirgin": True,
-                },
-                "OtherData": {"Home": "Aria0 Room"},
-                "Traits": {
-                    "Courage0": 0,
-                    "Attitude0": 0,
-                    "Pride0": 0,
-                    "Dere0": 0,
-                    "SelfControl0": 0,
-                    "Cheerfulness0": 0,
-                    "Shyness0": 0,
-                    "Gullible0": 0,
-                    "Charm0": 0,
-                    "SubstanceResistance0": 0,
-                    "SexualInterest0": 0,
-                    "Virtue0": 0,
-                    "Chastity0": 0,
-                    "Openess0": 0,
-                    "PainResistance0": 0,
-                    "ArousalEase0": 0,
-                    "ResponseToPleasure0": 0,
-                    "Perversion0": 0,
-                    "Dominance0": 0,
-                    "Forceful0": 0,
-                    "Loyalty0": 0,
-                    "Violence0": 0,
-                    "Beauty0": 0,
-                    "Shame0": 0,
-                    "Will0": 0,
-                    "Influence0": 0,
-                    "Fertility0": 0,
-                    "LewdBody0": {"V": False, "A": False, "B": False, "P": False, "M": False},
-                },
-                "GeneralFlags": {},
-                "GeneralAbilities": {"MaxEnergy": 2000},
-                "CombatAbilities": {"DeckName": None},
-                "Descriptions": {
-                    "Backstory": "",
-                    "Core": "",
-                    "Head": "",
-                    "Arms": "",
-                    "Legs": "",
-                    "Genitals": "",
-                },
-                "Actions": {
-                    "Intention": None,
-                    "Action": None,
-                    "PreviousTask": {
-                        "HourStart": 0,
-                        "HourFinish": 1,
-                        "Task": [
-                            "Idling",
-                            {"BriefFluff": "Idling in the streets of ", "LongFluff": ""},
-                        ],
-                        "InterruptionPenalty": 0,
-                        "Location": "ResidentialArea",
-                    },
-                    "CurrentTask": {
-                        "HourStart": 0,
-                        "HourFinish": 1,
-                        "Task": [
-                            "Idling",
-                            {"BriefFluff": "Idling in the streets of ", "LongFluff": ""},
-                        ],
-                        "InterruptionPenalty": 0,
-                        "Location": "ResidentialArea",
-                    },
-                    "FutureTask": {
-                        "HourStart": 0,
-                        "HourFinish": 1,
-                        "Task": [
-                            "Idling",
-                            {"BriefFluff": "Idling in the streets of ", "LongFluff": ""},
-                        ],
-                        "InterruptionPenalty": 0,
-                        "Location": "ResidentialArea",
-                    },
-                    "TaskData": {},
-                    "HasFollowing": [],
-                    "InteractionParty": {},
-                    "SexualPary": [],
-                    "IsFollowing": None,
-                    "isInSexScene": [],
-                    "Targeting": None,
-                },
-                "Items": {},
-                "isInSexScene": 0,
-                "Version": 2,
-            }
-        elif Who == "Futanari":
-            Name = self.nameCharacterLine.text()
-            if Name == "":
-                self.statusLabel.setText("Please introduce a name for your character.")
-            else:
-                NPCData = {
-                "Name": Name,
-                "ID": "0",
-                "Personality": "Standard0",
-                "State": {
-                    "Energy": 2000,
-                    "Mood": 0,
-                    "Arousal": 0,
-                    "Alcohol": 0,
-                    "Drugs": 0,
-                    "PConscious": 1,
-                    "MConscious": 1,
-                },
-                "Relations": {},
-                "BodyData": {
-                    "FullName": Name,
-                    "SkinColor": "Pale",
-                    "HairColor": "Dark",
-                    "PhysicalAge": 2,
-                    "Race": "Human",
-                    "Face": 5,
-                    "Eyes": "Brown",
-                    "Lips": 2,
-                    "Height": 4,
-                    "Complexion": 3,
-                    "Sex": "Male",
-                    "Pronouns": {"PSub": "She", "PObj": "Her", "PPos": "Her", "PIPos": "Hers"},
-                    "Hips": 3,
-                    "Ass": 3,
-                    "Chest": 4,
-                    "VTightness": 3,
-                    "ATightness": 3,
-                    "PenisSize": 3,
-                    "BallsSize": 3,
-                    "VVirgin": True,
-                    "AVirgin": True,
-                    "PVirgin": True,
-                    "MVirgin": True,
-                },
-                "OtherData": {"Home": "Aria0 Room"},
-                "Traits": {
-                    "Courage0": 0,
-                    "Attitude0": 0,
-                    "Pride0": 0,
-                    "Dere0": 0,
-                    "SelfControl0": 0,
-                    "Cheerfulness0": 0,
-                    "Shyness0": 0,
-                    "Gullible0": 0,
-                    "Charm0": 0,
-                    "SubstanceResistance0": 0,
-                    "SexualInterest0": 0,
-                    "Virtue0": 0,
-                    "Chastity0": 0,
-                    "Openess0": 0,
-                    "PainResistance0": 0,
-                    "ArousalEase0": 0,
-                    "ResponseToPleasure0": 0,
-                    "Perversion0": 0,
-                    "Dominance0": 0,
-                    "Forceful0": 0,
-                    "Loyalty0": 0,
-                    "Violence0": 0,
-                    "Beauty0": 0,
-                    "Shame0": 0,
-                    "Will0": 0,
-                    "Influence0": 0,
-                    "Fertility0": 0,
-                    "LewdBody0": {"V": False, "A": False, "B": False, "P": False, "M": False},
-                },
-                "GeneralFlags": {},
-                "GeneralAbilities": {"MaxEnergy": 2000},
-                "CombatAbilities": {"DeckName": None},
-                "Descriptions": {
-                    "Backstory": "",
-                    "Core": "",
-                    "Head": "",
-                    "Arms": "",
-                    "Legs": "",
-                    "Genitals": "",
-                },
-                "Actions": {
-                    "Intention": None,
-                    "Action": None,
-                    "PreviousTask": {
-                        "HourStart": 0,
-                        "HourFinish": 1,
-                        "Task": [
-                            "Idling",
-                            {"BriefFluff": "Idling in the streets of ", "LongFluff": ""},
-                        ],
-                        "InterruptionPenalty": 0,
-                        "Location": "ResidentialArea",
-                    },
-                    "CurrentTask": {
-                        "HourStart": 0,
-                        "HourFinish": 1,
-                        "Task": [
-                            "Idling",
-                            {"BriefFluff": "Idling in the streets of ", "LongFluff": ""},
-                        ],
-                        "InterruptionPenalty": 0,
-                        "Location": "ResidentialArea",
-                    },
-                    "FutureTask": {
-                        "HourStart": 0,
-                        "HourFinish": 1,
-                        "Task": [
-                            "Idling",
-                            {"BriefFluff": "Idling in the streets of ", "LongFluff": ""},
-                        ],
-                        "InterruptionPenalty": 0,
-                        "Location": "ResidentialArea",
-                    },
-                    "TaskData": {},
-                    "HasFollowing": [],
-                    "InteractionParty": {},
-                    "SexualPary": [],
-                    "IsFollowing": None,
-                    "isInSexScene": [],
-                    "Targeting": None,
-                },
-                "Items": {},
-                "isInSexScene": 0,
-                "Version": 2,
-            }
-        elif Who == "Custom":
-            ID = None
+        Name = self.nameCharacterLine.text()
+        if Name.strip() == "":
+            self.statusLabel.setText("Please introduce a name for your character.")
+        else:
+            NPCData = Globals.SoLOtherData["BaseData"]
+
+            NPCData["Name"] = Name
+            NPCData["ID"] = "0"
+            NPCData["Personality"] = "Standard0"
+
+            NPCData["State"]["Energy"] - 2000
+            NPCData["BodyData"]["FullName"] = Name
+            NPCData["BodyData"]["SkinColor"] = "Pale"
+            NPCData["BodyData"]["HairColor"] = "Dark"
+            NPCData["BodyData"]["PhysicalAge"] = 2
+            NPCData["BodyData"]["Race"] = "Human"
+
+            NPCData["BodyData"]["Eyes"] = "Brown"
+            NPCData["BodyData"]["Lips"] = 2
+            NPCData["BodyData"]["Height"] = 4
+            NPCData["BodyData"]["Complexion"] = 4
+
+            NPCData["BodyData"]["ATightness"] = 3
+
+            NPCData["BodyData"]["VVirgin"] = True
+            NPCData["BodyData"]["AVirgin"] = True
+            NPCData["BodyData"]["PVirgin"] = True
+            NPCData["BodyData"]["MVirgin"] = True
+
+            NPCData["GeneralAbilities"]["MaxEnergy"] = 2000
+
+            if Who == "Female":
+                NPCData["BodyData"]["Face"] = 5
+
+                NPCData["BodyData"]["Sex"] = "Female"
+                NPCData["BodyData"]["Pronouns"] = {"PSub": "She", "PObj": "Her", "PPos": "Her", "PIPos": "Hers"}
+                NPCData["BodyData"]["Hips"] = 3
+                NPCData["BodyData"]["Ass"] = 3
+                NPCData["BodyData"]["Chest"] = 4
+                NPCData["BodyData"]["VTightness"] = 3
+                NPCData["BodyData"]["PenisSize"] = 0
+                NPCData["BodyData"]["BallsSize"] = 0
+            elif Who == "Male":
+                NPCData["BodyData"]["Face"] = 1
+
+                NPCData["BodyData"]["Sex"] = "Male"
+                NPCData["BodyData"]["Pronouns"] = {"PSub": "He", "PObj": "Him", "PPos": "His", "PIPos": "His"}
+                NPCData["BodyData"]["Hips"] = 1
+                NPCData["BodyData"]["Ass"] = 1
+                NPCData["BodyData"]["Chest"] = 1
+                NPCData["BodyData"]["VTightness"] = 0
+                NPCData["BodyData"]["PenisSize"] = 3
+                NPCData["BodyData"]["BallsSize"] = 3
+            elif Who == "Futanari":
+                NPCData["BodyData"]["Face"] = 5
+
+                NPCData["BodyData"]["Sex"] = "Female"
+                NPCData["BodyData"]["Pronouns"] = {"PSub": "She", "PObj": "Her", "PPos": "Her", "PIPos": "Hers"}
+                NPCData["BodyData"]["Hips"] = 3
+                NPCData["BodyData"]["Ass"] = 3
+                NPCData["BodyData"]["Chest"] = 4
+                NPCData["BodyData"]["VTightness"] = 3
+                NPCData["BodyData"]["PenisSize"] = 3
+                NPCData["BodyData"]["BallsSize"] = 3
+            elif Who == "Custom":
+                ID = None
+                try:
+                    ID = self.customCharacterLine.text()
+                    if ID.strip() == "" or ID == None:
+                        raise
+                    else:
+                        print(ID)
+                    # print(ID)
+                    NPCList = os.listdir("NPCData")
+                    for ItemName in NPCList:
+                        if ItemName.endswith(ID):
+                            NPCName = ItemName
+
+                    with open(f"NPCData/{NPCName}/{NPCName}Data.json", 'rb') as f:
+                        NPCData = json.load(f)
+                except:
+                    if ID == None or ID.strip() == "":
+                        self.statusLabel.setText("Please introduce the ID for your character.")
+                    ""
+
             try:
-                ID = self.customCharacterLine.text()
-                if ID.strip() == "" or ID == None:
-                    raise
-                else:
-                    print(ID)
-                # print(ID)
-                NPCList = os.listdir("NPCData")
-                for ItemName in NPCList:
-                    if ItemName.endswith(ID):
-                        NPCName = ItemName
+                # NPCData
+                Globals.CurrentSession = {}
+                Globals.References["BasicMod"].SetBaseData()
+                # Globals.SoLNPCData[ID] = NPCData
 
-                with open(f"NPCData/{NPCName}/{NPCName}Data.json", 'rb') as f:
-                    NPCData = json.load(f)
-            except:
-                if ID == None or ID.strip() == "":
-                    self.statusLabel.setText("Please introduce the ID for your character.")
+                Globals.References["SoLFunctions"].ImportNPC(NPCData)
+                ID = NPCData["ID"]
+                Globals.SoLPCData["ID"] = ID
+
+                Globals.Layouts["MainF"].gotoLayout("SoLUI")
+            except Exception as e:
                 ""
-
-        try:
-            # NPCData
-            Globals.CurrentSession = {}
-            Globals.References["BasicMod"].SetBaseData()
-            # Globals.SoLNPCData[ID] = NPCData
-
-            Globals.References["SoLFunctions"].ImportNPC(NPCData)
-            ID = NPCData["ID"]
-            Globals.SoLPCData["ID"] = ID
-
-            Globals.Layouts["MainF"].gotoLayout("SoLUI")
-        except Exception as e:
-            ""
 
 
 

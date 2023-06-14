@@ -233,7 +233,7 @@ def ProcessTAbility(NPCID, OtherID, TValueData):
     if Gems < 10:
         Gems = 0
 
-    if Gems > 0:
+    if Gems > 0 and Amount > 0:
         GemsID = TID
 
         try:
