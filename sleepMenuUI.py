@@ -10,6 +10,7 @@ import Globals
 import random
 import math
 import re
+import pathlib
 Log = Globals.Layouts["MainF"].Log
 class EnhanceGenericNPCObject:
     def __init__(self, NPCData):
@@ -41,9 +42,10 @@ class EnhanceGenericNPCObject:
             if ImageType == "FullBody" or ListPortraits == []:
                 ImageName = random.choice(ListFullBody)
 
-            NPCImage.setPixmap(QPixmap(f'''NPCData/{self.Data["Name"]}{self.Data["ID"]}/{ImageName}'''))
+            NPCImage.setPixmap(QPixmap(  os.path.abspath( pathlib.Path() / "NPCData" / f'''{self.Data["Name"]}{self.Data["ID"]}''' / ImageName )   ))
             NPCImage.setScaledContents(True)
         except Exception as e:
+            print(e)
             ""
         def CC():
             Globals.LayoutsData["EnhanceUI"]["TargetID"] = self.Data["ID"]

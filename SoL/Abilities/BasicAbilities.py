@@ -10,6 +10,7 @@ import Globals
 import random
 import math
 import os
+import pathlib
 
 def Initialize(self, Reference):
     AbilitiesList = ["Obedience", "Lust", "Intimacy", "Submission", "Superiority", "CSense", "VSense", "ASense", "PSense", "MSense", "Service", "Sadism", "Masochism", "Exhibitionism"]
@@ -1525,11 +1526,16 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
+
+            "            "
+
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
 
@@ -1580,11 +1586,14 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
+
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())
 
@@ -1651,10 +1660,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
@@ -1706,10 +1717,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())
@@ -1776,10 +1789,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
@@ -1831,10 +1846,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())
@@ -1901,10 +1918,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
@@ -1956,10 +1975,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())
@@ -2026,10 +2047,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
@@ -2081,10 +2104,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())
@@ -2151,10 +2176,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
@@ -2206,10 +2233,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())
@@ -2276,10 +2305,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
@@ -2331,10 +2362,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())
@@ -2401,10 +2434,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
@@ -2456,10 +2491,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())
@@ -2526,10 +2563,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
@@ -2581,10 +2620,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())
@@ -2651,10 +2692,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
@@ -2706,10 +2749,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())
@@ -2776,10 +2821,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
@@ -2831,10 +2878,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())
@@ -2901,10 +2950,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
@@ -2956,10 +3007,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())
@@ -3026,10 +3079,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
@@ -3081,10 +3136,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())
@@ -3151,10 +3208,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, 1)
                     except Exception as e:
                         print(e)
-            ULButton = QPushButton(UL, clicked = lambda: ULClick())
-            ULButton.setStyleSheet("border-image: url(Resources/SoLResources/UpArrow.png); ")
+            ULButton = QLabel(UL)
             ULButton.setGeometry(215,1,33,33)
-            ULButton.setProperty("Color","Dark")
+            ULButton.mouseReleaseEvent = lambda event: ULClick()
+            ULButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "UpArrow.png" ) ))
+            ULButton.setProperty("Color","None")
+            ULButton.setScaledContents(True)
             ULButton.Available = Available
             UL.setMinimumHeight(ULBackLabel.height())
             UL.setMaximumHeight(ULBackLabel.height())
@@ -3206,10 +3265,12 @@ def GetAbilityDynamicWidget(AbilityID, Data, NPCID, OtherID, Flags):
                         AbilityChange(AbilityID, NPCID, OtherID, -1)
                     except Exception as e:
                         print(e)
-            DLButton = QPushButton(DL, clicked = lambda: DLClick())
-            DLButton.setStyleSheet("border-image: url(Resources/SoLResources/DownArrow.png); ")
+            DLButton = QLabel(DL)
             DLButton.setGeometry(215,1,33,33)
-            DLButton.setProperty("Color","Dark")
+            DLButton.mouseReleaseEvent = lambda event: DLClick()
+            DLButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "DownArrow.png" ) ))
+            DLButton.setProperty("Color","None")
+            DLButton.setScaledContents(True)
             DLButton.Available = Available
             DL.setMinimumHeight(DLBackLabel.height())
             DL.setMaximumHeight(DLBackLabel.height())

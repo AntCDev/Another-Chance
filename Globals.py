@@ -36,29 +36,6 @@ Decks = {}
 
 Effects = {}
 
-def retrieveEnemies():
-
-    EnemiesPath = os.path.abspath(__file__)
-    nameLength = len(os.path.basename(__file__))
-    fullLength = len(EnemiesPath)
-    EnemiesPath = EnemiesPath[0:fullLength-nameLength]
-    EnemiesPath += "Combat\\Enemies"
-    if EnemiesPath not in sys.path:
-        sys.path.insert(0, EnemiesPath)
-
-    x = os.listdir("Combat/Enemies")
-    EnemyData = {}
-    for file in x:
-        if ".py" in file:
-            file = file[0:len(file)-3]
-            try:
-                Enemy = __import__(file)
-                BaseData = Enemy.Enemy.BaseData("Oh")
-                EnemyData[file] = BaseData
-            except:
-                print("NOoo")
-    return EnemyData
-
 References = {}
 
 PartyObjects = {}

@@ -8,6 +8,7 @@ from PyQt5.QtGui import QTextCursor, QFont, QFontDatabase
 import json
 import os
 import Globals
+import pathlib
 
 def Log(*args):
     # 0 Non Issue
@@ -33,7 +34,6 @@ def Log(*args):
 class MainWindow(QMainWindow):
     resized = QtCore.pyqtSignal()
     def __init__(self, parent=None):
-        print(__file__)
         super(MainWindow, self).__init__(parent)
         QFontDatabase.addApplicationFont("Resources/OtherResources/Segoe UI.ttf")
 
@@ -220,7 +220,9 @@ class MainWindow(QMainWindow):
         except:
             Globals.CurrentSession = {}
 
-        CurrentPath = os.path.dirname(os.path.realpath(__file__))
+        # CurrentPath = os.path.dirname(os.path.realpath(__file__))
+        # CurrentPath = os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "FilledHeart" )
+        CurrentPath = pathlib.Path()
 
         # IMPORTS THE BASIC MOD AND FUNCTIONS
         Reference = __import__("Globals")
@@ -229,7 +231,8 @@ class MainWindow(QMainWindow):
         Reference = __import__("SoLFunctions")
         Reference.Initialize(self, Reference)
 
-        ModsPath = CurrentPath + "\\SoL\\Mods"
+        ModsPath = os.path.abspath( pathlib.Path() / "SoL" / "Mods" )
+        # ModsPath = CurrentPath + "\\SoL\\Mods"
         if ModsPath not in sys.path:
             sys.path.insert(0, ModsPath)
         try:
@@ -253,10 +256,12 @@ class MainWindow(QMainWindow):
                     Log(4, "ERROR INITIALIZE FILES", e, File)
 
         # IMPORTS THE MODS
-        ModsPath = CurrentPath + "\\SoL\\Mods"
+        ModsPath = os.path.abspath( pathlib.Path() / "SoL" / "Mods" )
+        # ModsPath = CurrentPath + "\\SoL\\Mods"
         if ModsPath not in sys.path:
             sys.path.insert(0, ModsPath)
-        FileList = os.listdir("SoL/Mods")
+        # FileList = os.listdir("SoL/Mods")
+        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Mods" ))
         for File in FileList:
             try:
                 if File.endswith(".py") and File != "BasicMod.py":
@@ -267,10 +272,12 @@ class MainWindow(QMainWindow):
                 Log(3, "ERROR INITIALIZE Mods", e, File)
 
         # IMPORTS THE LOCATIONS
-        LocationsPath = CurrentPath + "\\SoL\\Locations"
+        LocationsPath = os.path.abspath( pathlib.Path() / "SoL" / "Locations" )
+        # LocationsPath = CurrentPath + "\\SoL\\Locations"
         if LocationsPath not in sys.path:
             sys.path.insert(0, LocationsPath)
-        FileList = os.listdir("SoL/Locations")
+        # FileList = os.listdir("SoL/Locations")
+        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Locations" ))
         for File in FileList:
             try:
                 if File.endswith(".py"):
@@ -282,10 +289,12 @@ class MainWindow(QMainWindow):
 
 
         # IMPORTS THE COMMANDS
-        CommandsPath = CurrentPath + "\\SoL\\Commands"
+        CommandsPath = os.path.abspath( pathlib.Path() / "SoL" / "Commands" )
+        # CommandsPath = CurrentPath + "\\SoL\\Commands"
         if CommandsPath not in sys.path:
             sys.path.insert(0, CommandsPath)
-        FileList = os.listdir("SoL/Commands")
+        # FileList = os.listdir("SoL/Commands")
+        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Commands" ))
         for File in FileList:
             try:
                 if File.endswith(".py"):
@@ -296,10 +305,11 @@ class MainWindow(QMainWindow):
                 Log(2, "ERROR INITIALIZE Commands", e, File)
 
         # IMPORTS THE ABILITIES
-        AbilitiesPath = CurrentPath + "\\SoL\\Abilities"
+        AbilitiesPath = os.path.abspath( pathlib.Path() / "SoL" / "Abilities" )
+        # AbilitiesPath = CurrentPath + "\\SoL\\Abilities"
         if AbilitiesPath not in sys.path:
             sys.path.insert(0, AbilitiesPath)
-        FileList = os.listdir("SoL/Abilities")
+        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Abilities" ))
         for File in FileList:
             try:
                 if File.endswith(".py"):
@@ -310,10 +320,12 @@ class MainWindow(QMainWindow):
                 Log(2, "ERROR INITIALIZE Abilities", e, File)
 
         # IMPORTS THE TRAITS
-        TraitsPath = CurrentPath + "\\SoL\\Traits"
+        TraitsPath = os.path.abspath( pathlib.Path() / "SoL" / "Traits" )
+        # TraitsPath = CurrentPath + "\\SoL\\Traits"
         if TraitsPath not in sys.path:
             sys.path.insert(0, TraitsPath)
-        FileList = os.listdir("SoL/Traits")
+        # FileList = os.listdir("SoL/Traits")
+        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Traits" ))
         for File in FileList:
             try:
                 if File.endswith(".py"):
@@ -324,10 +336,12 @@ class MainWindow(QMainWindow):
                 Log(2, "ERROR INITIALIZE Traits", e, File)
 
         # IMPORTS THE PERSONALITIES
-        PersonalitiesPath = CurrentPath + "\\SoL\\Personalities"
+        PersonalitiesPath = os.path.abspath( pathlib.Path() / "SoL" / "Personalities" )
+        # PersonalitiesPath = CurrentPath + "\\SoL\\Personalities"
         if PersonalitiesPath not in sys.path:
             sys.path.insert(0, PersonalitiesPath)
-        FileList = os.listdir("SoL/Personalities")
+        # FileList = os.listdir("SoL/Personalities")
+        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Personalities" ))
         for File in FileList:
             try:
                 if File.endswith(".py"):
@@ -339,11 +353,14 @@ class MainWindow(QMainWindow):
 
         # IMPORTS THE NPC FUNCTIONS
         for NPCFullID in os.listdir("NPCData"):
-            if os.path.isdir("NPCData/" + NPCFullID):
+            # if os.path.isdir("NPCData/" + NPCFullID):
+            if os.path.isdir(os.path.abspath( pathlib.Path() / "NPCData" / NPCFullID )):
                 try:
-                    FilesList = os.listdir(f"NPCData/{NPCFullID}")
+                    # FilesList = os.listdir(f"NPCData/{NPCFullID}")
+                    FilesList = os.listdir(os.path.abspath( pathlib.Path() / "NPCData" / NPCFullID ))
                     if f"{NPCFullID}Functions.py" in FilesList:
-                        Path = f'''{CurrentPath}\\NPCData\\{NPCFullID}'''
+                        # Path = f'''{CurrentPath}\\NPCData\\{NPCFullID}'''
+                        Path = os.path.abspath( pathlib.Path() / "NPCData" / NPCFullID )
                         if Path not in sys.path:
                             sys.path.insert(0, Path)
                         File = f"{NPCFullID}Functions.py"

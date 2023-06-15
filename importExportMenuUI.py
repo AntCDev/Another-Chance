@@ -8,13 +8,15 @@ import json
 import os
 import Globals
 import random
+import pathlib
 
 class GenericNPCObject:
     def __init__(self, ID, Name, Status):
         self.ID = ID
         self.Name = Name
         self.Status = Status
-        with open(f'''NPCData/{self.Name}{ID}/{Name}{ID}Data.json''', 'rb') as f:
+        # with open(f'''NPCData/{self.Name}{ID}/{Name}{ID}Data.json''', 'rb') as f:
+        with open(pathlib.Path() / "NPCData" / f"{self.Name}{ID}" / f"{Name}{ID}Data.json" , 'rb') as f:
             self.Data = json.load(f)
 
     def GetWidget(self):
@@ -40,6 +42,7 @@ class GenericNPCObject:
 
         try:
             ListPortraits, ListFullBody = Globals.References["SoLFunctions"].GetImages(self.Data)
+
             ImageType = "Portrait"
 
             if ImageType == "Portrait" or ListFullBody == []:
@@ -49,7 +52,7 @@ class GenericNPCObject:
 
             LabelImage = QLabel(NPCWidget)
             LabelImage.setGeometry(20,0,130,130)
-            LabelImage.setPixmap(QPixmap(f'''NPCData/{self.Name}{self.ID}/{ImageName}'''))
+            LabelImage.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "NPCData" / f"{self.Name}{self.ID}" / ImageName ) ))
             LabelImage.setScaledContents(True)
         except Exception as e:
             LabelImage = QLabel(NPCWidget)
@@ -73,7 +76,8 @@ class GenericNPCObject:
         ButtonDetails.setFont(QFont('Segoe UI', 12))
 
         def ImportFunc(self):
-            with open(f'''NPCData/{self.Name}{self.ID}/{self.Name}{self.ID}Data.json''', 'rb') as f:
+            # with open(f'''NPCData/{self.Name}{self.ID}/{self.Name}{self.ID}Data.json''', 'rb') as f:
+            with open(pathlib.Path() / "NPCData" / f"{self.Name}{self.ID}" / f"{self.Name}{self.ID}Data.json" , 'rb') as f:
                 NPCData = json.load(f)
             try:
                 Globals.References["SoLFunctions"].ImportNPC(NPCData)
@@ -203,7 +207,7 @@ class UiLayoutImportMenu(object):
         DirList = os.listdir("NPCData")
         for DirName in DirList:
             try:
-                with open(f'''NPCData/{DirName}/{DirName}Data.json''', 'rb') as f:
+                with open(pathlib.Path() / "NPCData" / DirName / f"{DirName}Data.json" , 'rb') as f:
                     NPCData = json.load(f)
                 Name = NPCData["Name"]
                 ID = NPCData["ID"]

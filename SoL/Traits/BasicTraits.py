@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+import os
+import pathlib
 Log = Globals.Layouts["MainF"].Log
 
 def Initialize(self, Reference):
@@ -2388,11 +2390,21 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                         def Click0():
                             if Button0.Available == 1:
                                 TraitChange(TraitID, NPCID, Data, 0)
-                        Button0 = QPushButton(Widget0, clicked = lambda: Click0())
-                        Button0.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                        # Button0 = QPushButton(Widget0, clicked = lambda: Click0())
+                        # Button0.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                        # Button0.setGeometry(215,1,33,33)
+                        # Button0.setProperty("Color","Dark")
+                        # Button0.Available = Available
+
+                        Button0 = QLabel(Widget0)
                         Button0.setGeometry(215,1,33,33)
-                        Button0.setProperty("Color","Dark")
+                        Button0.mouseReleaseEvent = lambda event: Click0()
+                        Button0.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Cycle.png" ) ))
+                        # Button0.setStyleSheet("border:none; background:none;")
+                        Button0.setProperty("Color","None")
+                        Button0.setScaledContents(True)
                         Button0.Available = Available
+
 
                         if Value != 0:
                             Label0.setProperty("Selected",1)
@@ -2428,11 +2440,21 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                         def Click1():
                             if Button1.Available == 1:
                                 TraitChange(TraitID, NPCID, Data, 1)
-                        Button1 = QPushButton(Widget1, clicked = lambda: Click1())
-                        Button1.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                        # Button1 = QPushButton(Widget1, clicked = lambda: Click1())
+                        # Button1.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                        # Button1.setGeometry(215,1,33,33)
+                        # Button1.setProperty("Color","Dark")
+                        # Button1.Available = Available
+
+                        Button1 = QLabel(Widget1)
                         Button1.setGeometry(215,1,33,33)
-                        Button1.setProperty("Color","Dark")
+                        Button1.mouseReleaseEvent = lambda event: Click2()
+                        Button1.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Cycle.png" ) ))
+                        # Button1.setStyleSheet("border:none; background:none;")
+                        Button1.setProperty("Color","None")
+                        Button1.setScaledContents(True)
                         Button1.Available = Available
+
 
                         if Value != 1:
                             Label1.setProperty("Selected",1)
@@ -2469,11 +2491,22 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                         def Click2():
                             if Button2.Available == 1:
                                 TraitChange(TraitID, NPCID, Data, 2)
-                        Button2 = QPushButton(Widget2, clicked = lambda: Click2())
-                        Button2.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                        # Button2 = QPushButton(Widget2, clicked = lambda: Click2())
+                        # Button2.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                        # Button2.setGeometry(215,1,33,33)
+                        # Button2.setProperty("Color","Dark")
+                        # Button2.Available = Available
+
+                        Button2 = QLabel(Widget2)
                         Button2.setGeometry(215,1,33,33)
-                        Button2.setProperty("Color","Dark")
+                        Button2.mouseReleaseEvent = lambda event: Click2()
+                        Button2.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Cycle.png" ) ))
+                        # Button2.setStyleSheet("border:none; background:none;")
+                        Button2.setProperty("Color","None")
+                        Button2.setScaledContents(True)
                         Button2.Available = Available
+
+
 
                         if Value != 2:
                             Label2.setProperty("Selected",1)
@@ -2547,11 +2580,21 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     def NaDClick():
                         if NaDButton.Available == 1:
                             TraitChange(TraitID, NPCID, Data, 0)
-                    NaDButton = QPushButton(NaDWidget, clicked = lambda: NaDClick())
-                    NaDButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    # NaDButton = QPushButton(NaDWidget, clicked = lambda: NaDClick())
+                    # NaDButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    # NaDButton.setGeometry(215,1,33,33)
+                    # NaDButton.setProperty("Color","Dark")
+                    # NaDButton.Available = Available
+
+                    NaDButton = QLabel(NaDWidget)
                     NaDButton.setGeometry(215,1,33,33)
-                    NaDButton.setProperty("Color","Dark")
+                    NaDButton.mouseReleaseEvent = lambda event: NaDClick()
+                    NaDButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Cycle.png" ) ))
+                    # NaDButton.setStyleSheet("border:none; background:none;")
+                    NaDButton.setProperty("Color","None")
+                    NaDButton.setScaledContents(True)
                     NaDButton.Available = Available
+
 
                     if Value != 0:
                         NaDLabel.setProperty("Selected",1)
@@ -2587,11 +2630,21 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     def TsunClick():
                         if TsunButton.Available == 1:
                             TraitChange(TraitID, NPCID, Data, 1)
-                    TsunButton = QPushButton(TsunWidget, clicked = lambda: TsunClick())
-                    TsunButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    # TsunButton = QPushButton(TsunWidget, clicked = lambda: TsunClick())
+                    # TsunButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    # TsunButton.setGeometry(215,1,33,33)
+                    # TsunButton.setProperty("Color","Dark")
+                    # TsunButton.Available = Available
+
+                    TsunButton = QLabel(TsunWidget)
                     TsunButton.setGeometry(215,1,33,33)
-                    TsunButton.setProperty("Color","Dark")
+                    TsunButton.mouseReleaseEvent = lambda event: TsunClick()
+                    TsunButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Cycle.png" ) ))
+                    # TsunButton.setStyleSheet("border:none; background:none;")
+                    TsunButton.setProperty("Color","None")
+                    TsunButton.setScaledContents(True)
                     TsunButton.Available = Available
+
 
                     if Value != 1:
                         TsunLabel.setProperty("Selected",1)
@@ -2628,11 +2681,21 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     def DanClick():
                         if DanButton.Available == 1:
                             TraitChange(TraitID, NPCID, Data, 2)
-                    DanButton = QPushButton(DanWidget, clicked = lambda: DanClick())
-                    DanButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    # DanButton = QPushButton(DanWidget, clicked = lambda: DanClick())
+                    # DanButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    # DanButton.setGeometry(215,1,33,33)
+                    # DanButton.setProperty("Color","Dark")
+                    # DanButton.Available = Available
+
+                    DanButton = QLabel(DanWidget)
                     DanButton.setGeometry(215,1,33,33)
-                    DanButton.setProperty("Color","Dark")
+                    DanButton.mouseReleaseEvent = lambda event: DanClick()
+                    DanButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Cycle.png" ) ))
+                    # DanButton.setStyleSheet("border:none; background:none;")
+                    DanButton.setProperty("Color","None")
+                    DanButton.setScaledContents(True)
                     DanButton.Available = Available
+
 
                     if Value != 2:
                         DanLabel.setProperty("Selected",1)
@@ -2669,10 +2732,19 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     def KuuClick():
                         if KuuButton.Available == 1:
                             TraitChange(TraitID, NPCID, Data, 3)
-                    KuuButton = QPushButton(KuuWidget, clicked = lambda: KuuClick())
-                    KuuButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    # KuuButton = QPushButton(KuuWidget, clicked = lambda: KuuClick())
+                    # KuuButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    # KuuButton.setGeometry(215,1,33,33)
+                    # KuuButton.setProperty("Color","Dark")
+                    # KuuButton.Available = Available
+
+                    KuuButton = QLabel(KuuWidget)
                     KuuButton.setGeometry(215,1,33,33)
-                    KuuButton.setProperty("Color","Dark")
+                    KuuButton.mouseReleaseEvent = lambda event: KuuClick()
+                    KuuButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Cycle.png" ) ))
+                    # KuuButton.setStyleSheet("border:none; background:none;")
+                    KuuButton.setProperty("Color","None")
+                    KuuButton.setScaledContents(True)
                     KuuButton.Available = Available
 
                     if Value != 3:
@@ -2710,10 +2782,19 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     def YanClick():
                         if YanButton.Available == 1:
                             TraitChange(TraitID, NPCID, Data, 4)
-                    YanButton = QPushButton(YanWidget, clicked = lambda: YanClick())
-                    YanButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    # YanButton = QPushButton(YanWidget, clicked = lambda: YanClick())
+                    # YanButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    # YanButton.setGeometry(215,1,33,33)
+                    # YanButton.setProperty("Color","Dark")
+                    # YanButton.Available = Available
+
+                    YanButton = QLabel(YanWidget)
                     YanButton.setGeometry(215,1,33,33)
-                    YanButton.setProperty("Color","Dark")
+                    YanButton.mouseReleaseEvent = lambda event: YanClick()
+                    YanButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Cycle.png" ) ))
+                    # YanButton.setStyleSheet("border:none; background:none;")
+                    YanButton.setProperty("Color","None")
+                    YanButton.setScaledContents(True)
                     YanButton.Available = Available
 
                     if Value != 4:
@@ -2751,10 +2832,19 @@ def GetTraitDynamicWidget(TraitID, Data, NPCID, OtherID, Flags):
                     def DereClick():
                         if DereButton.Available == 1:
                             TraitChange(TraitID, NPCID, Data, 5)
-                    DereButton = QPushButton(DereWidget, clicked = lambda: DereClick())
-                    DereButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    # DereButton = QPushButton(DereWidget, clicked = lambda: DereClick())
+                    # DereButton.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                    # DereButton.setGeometry(215,1,33,33)
+                    # DereButton.setProperty("Color","Dark")
+                    # DereButton.Available = Available
+
+                    DereButton = QLabel(DereWidget)
                     DereButton.setGeometry(215,1,33,33)
-                    DereButton.setProperty("Color","Dark")
+                    DereButton.mouseReleaseEvent = lambda event: DereClick()
+                    DereButton.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Cycle.png" ) ))
+                    # DereButton.setStyleSheet("border:none; background:none;")
+                    DereButton.setProperty("Color","None")
+                    DereButton.setScaledContents(True)
                     DereButton.Available = Available
 
                     if Value != 5:

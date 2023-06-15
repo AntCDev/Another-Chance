@@ -1247,10 +1247,19 @@ def GetFallenDynamicWidget(FallenID, Data, NPCID, OtherID, Flags):
                 def Click0():
                     if Button0.Available == 1:
                         FallenChange(FallenID, NPCID, OtherID, Data, 0)
-                Button0 = QPushButton(Widget0, clicked = lambda: Click0())
-                Button0.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                # Button0 = QPushButton(Widget0, clicked = lambda: Click0())
+                # Button0.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                # Button0.setGeometry(215,1,33,33)
+                # Button0.setProperty("Color","Dark")
+                # Button0.Available = Available
+                #
+                Button0 = QLabel(Widget0)
                 Button0.setGeometry(215,1,33,33)
-                Button0.setProperty("Color","Dark")
+                Button0.mouseReleaseEvent = lambda event: Click0()
+                Button0.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Cycle.png" ) ))
+                # Button0.setStyleSheet("border:none; background:none;")
+                Button0.setProperty("Color","None")
+                Button0.setScaledContents(True)
                 Button0.Available = Available
 
                 if Value != 0:
@@ -1294,10 +1303,19 @@ def GetFallenDynamicWidget(FallenID, Data, NPCID, OtherID, Flags):
                 def Click1():
                     if Button1.Available == 1:
                         FallenChange(FallenID, NPCID, OtherID, Data, 1)
-                Button1 = QPushButton(Widget1, clicked = lambda: Click1())
-                Button1.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                # Button1 = QPushButton(Widget1, clicked = lambda: Click1())
+                # Button1.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                # Button1.setGeometry(215,1,33,33)
+                # Button1.setProperty("Color","Dark")
+                # Button1.Available = Available
+
+                Button1 = QLabel(Widget1)
                 Button1.setGeometry(215,1,33,33)
-                Button1.setProperty("Color","Dark")
+                Button1.mouseReleaseEvent = lambda event: Click2()
+                Button1.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Cycle.png" ) ))
+                # Button1.setStyleSheet("border:none; background:none;")
+                Button1.setProperty("Color","None")
+                Button1.setScaledContents(True)
                 Button1.Available = Available
 
                 if Value != 1:
@@ -1343,10 +1361,19 @@ def GetFallenDynamicWidget(FallenID, Data, NPCID, OtherID, Flags):
                 def Click2():
                     if Button2.Available == 1:
                         FallenChange(FallenID, NPCID, OtherID, Data, 2)
-                Button2 = QPushButton(Widget2, clicked = lambda: Click2())
-                Button2.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                # Button2 = QPushButton(Widget2, clicked = lambda: Click2())
+                # Button2.setStyleSheet("border-image: url(Resources/SoLResources/Cycle.png); ")
+                # Button2.setGeometry(215,1,33,33)
+                # Button2.setProperty("Color","Dark")
+                # Button2.Available = Available
+
+                Button2 = QLabel(Widget2)
                 Button2.setGeometry(215,1,33,33)
-                Button2.setProperty("Color","Dark")
+                Button2.mouseReleaseEvent = lambda event: Click2()
+                Button2.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Cycle.png" ) ))
+                # Button2.setStyleSheet("border:none; background:none;")
+                Button2.setProperty("Color","None")
+                Button2.setScaledContents(True)
                 Button2.Available = Available
 
                 if Value != 2:

@@ -7,6 +7,8 @@ import sys
 import random
 import os
 import Globals
+import pathlib
+
 Log = Globals.Layouts["MainF"].Log
 class UiLayoutMakerMenu(QWidget):
     def __init__(self):
@@ -15,11 +17,13 @@ class UiLayoutMakerMenu(QWidget):
         Globals.LayoutsData["MakerUI"] = {"Source":"makerMenuUI", "Initialized":0}
         self.TraitWidgetsDict = {}
 
-        CurrentPath = os.path.dirname(os.path.realpath(__file__))
-        CommandsPath = CurrentPath + "\\SoL\\Traits"
-        if CommandsPath not in sys.path:
-            sys.path.insert(0, CommandsPath)
-        FileList = os.listdir("SoL/Traits")
+        # CurrentPath = os.path.dirname(os.path.realpath(__file__))
+        # CommandsPath = CurrentPath + "\\SoL\\Traits"
+        TraitsPath = os.path.abspath( pathlib.Path() / "SoL" / "Traits" )
+        if TraitsPath not in sys.path:
+            sys.path.insert(0, TraitsPath)
+        # FileList = os.listdir("SoL/Traits")
+        FileList = os.listdir( os.path.abspath( pathlib.Path() / "SoL" / "Traits" ) )
         for FileName in FileList:
             try:
                 if FileName.endswith(".py"):
@@ -820,7 +824,8 @@ class UiLayoutMakerMenu(QWidget):
         DirList = os.listdir(Path)
         for DirName in DirList:
             try:
-                with open(f'''NPCData/{DirName}/{DirName}Data.json''', 'rb') as f:
+                # with open(f'''NPCData/{DirName}/{DirName}Data.json''', 'rb') as f:
+                with open(pathlib.Path() / "NPCData" / DirName / f"{DirName}Data.json" , 'rb') as f:
                     NPCData = json.load(f)
                 Name = NPCData["Name"]
                 ID = NPCData["ID"]
@@ -1080,10 +1085,13 @@ class UiLayoutMakerMenu(QWidget):
                 self.LabelStatus.setText("Please fill the ID or Name")
             else:
                 self.LabelStatus.setText(f'''Succesfully saved {Name} {ID}''')
-                Path = "NPCData/" + Name + ID
+
+                Path = os.path.abspath( pathlib.Path() / "NPCData" / f"{Name}{ID}" )
+                # Path = "NPCData/" + Name + ID
                 if not os.path.exists(Path):
                     os.makedirs(Path)
-                FullPath = f'''{Path}/{Name}{ID}Data.json'''
+                FullPath = os.path.abspath( Path / f"{Name}{ID}Data.json" )
+                # FullPath = f'''{Path}/{Name}{ID}Data.json'''
                 with open(FullPath, 'w') as f:
                     json.dump(NPCData, f)
 

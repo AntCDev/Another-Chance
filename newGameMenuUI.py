@@ -7,6 +7,7 @@ from PyQt5.QtGui import QTextCursor
 import json
 import os
 import Globals
+import pathlib
 
 class UiLayoutNewGameMenuOld(object):
     def __init__(self):
@@ -294,7 +295,8 @@ class UiLayoutNewGameMenuOld(object):
                         if ItemName.endswith(ID):
                             NPCName = ItemName
 
-                    with open(f"NPCData/{NPCName}/{NPCName}Data.json", 'rb') as f:
+                    # with open(f"NPCData/{NPCName}/{NPCName}Data.json", 'rb') as f:
+                    with open(pathlib.Path() / "NPCData" / NPCName / f"{NPCName}Data.json" , 'rb') as f:
                         NPCData = json.load(f)
                 except:
                     if ID == None or ID.strip() == "":
@@ -319,7 +321,8 @@ class UiLayoutNewGameMenuOld(object):
 
     def saveFunction(self):
         #### FIRST GETS THE CHARACTER OF THE PLAYER
-        with open("ResetData/baseRelationship.json", 'rb') as f:
+        # with open("ResetData/baseRelationship.json", 'rb') as f:
+        with open(pathlib.Path() / "NPCData" / NPCName / f"{NPCName}Data.json" , 'rb') as f:
             baseRelationship = json.load(f)
         Character = ""
         if self.customCharacterButton.isChecked() == False:

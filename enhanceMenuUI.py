@@ -10,6 +10,7 @@ import Globals
 import random
 import math
 import re
+import pathlib
 Log = Globals.Layouts["MainF"].Log
 
 class UiLayoutEnhanceMenu:
@@ -81,32 +82,39 @@ class UiLayoutEnhanceMenu:
                 self.PLabel.setAlignment(Qt.AlignCenter)
 
                 def POpenClose():
-                    if self.PWidget.Status == "Open":
-                        TotalHeight = 45
-                        self.PWidget.setMaximumHeight(TotalHeight)
-                        self.PWidget.setMinimumHeight(TotalHeight)
+                    try:
+                        if self.PWidget.Status == "Open":
+                            TotalHeight = 45
+                            self.PWidget.setMaximumHeight(TotalHeight)
+                            self.PWidget.setMinimumHeight(TotalHeight)
 
-                        Height = self.MainBox.height() - self.PWidget.height() + TotalHeight
-                        self.MainBox.setMinimumHeight(Height)
-                        self.MainBox.setMaximumHeight(Height)
+                            Height = self.MainBox.height() - self.PWidget.height() + TotalHeight
+                            self.MainBox.setMinimumHeight(Height)
+                            self.MainBox.setMaximumHeight(Height)
+                            self.PCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Down.png" ) ))
+                            self.PCloser.setScaledContents(True)
 
-                        self.PCloser.setStyleSheet("border-image: url(Resources/SoLResources/Down.png); ")
-                        self.PWidget.Status = "Closed"
-                    elif self.PWidget.Status == "Closed":
-                        TotalHeight = self.PWidget.TotalHeight
-                        self.PWidget.setMaximumHeight(TotalHeight)
-                        self.PWidget.setMinimumHeight(TotalHeight)
+                            self.PWidget.Status = "Closed"
+                        elif self.PWidget.Status == "Closed":
+                            TotalHeight = self.PWidget.TotalHeight
+                            self.PWidget.setMaximumHeight(TotalHeight)
+                            self.PWidget.setMinimumHeight(TotalHeight)
 
-                        Height = self.MainBox.height() - 45 + TotalHeight
-                        self.MainBox.setMinimumHeight(Height)
-                        self.MainBox.setMaximumHeight(Height)
+                            Height = self.MainBox.height() - 45 + TotalHeight
+                            self.MainBox.setMinimumHeight(Height)
+                            self.MainBox.setMaximumHeight(Height)
+                            self.PCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Up.png" ) ))
+                            self.PCloser.setScaledContents(True)
 
-                        self.PCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
-                        self.PWidget.Status = "Open"
-                self.PCloser = QPushButton(self.PWidget, clicked = lambda: POpenClose())
-                self.PCloser.setProperty("Color","Light")
+                            self.PWidget.Status = "Open"
+                    except Exception as e:
+                        print(e)
+                self.PCloser = QLabel(self.PWidget)
                 self.PCloser.setGeometry(950,5,30,30)
-                self.PCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
+                self.PCloser.setProperty("Color","None")
+                self.PCloser.mouseReleaseEvent = lambda event: POpenClose()
+                self.PCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Up.png" ) ))
+                self.PCloser.setScaledContents(True)
 
 
                 self.PLayout = QGridLayout()
@@ -228,8 +236,9 @@ class UiLayoutEnhanceMenu:
                         Height = self.MainBox.height() - self.TWidget.height() + TotalHeight
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
+                        self.TCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Down.png" ) ))
+                        self.TCloser.setScaledContents(True)
 
-                        self.TCloser.setStyleSheet("border-image: url(Resources/SoLResources/Down.png); ")
                         self.TWidget.Status = "Closed"
                     elif self.TWidget.Status == "Closed":
                         TotalHeight = self.TWidget.TotalHeight
@@ -239,13 +248,16 @@ class UiLayoutEnhanceMenu:
                         Height = self.MainBox.height() - 45 + TotalHeight
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
+                        self.TCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Up.png" ) ))
+                        self.TCloser.setScaledContents(True)
 
-                        self.TCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
                         self.TWidget.Status = "Open"
-                self.TCloser = QPushButton(self.TWidget, clicked = lambda: TOpenClose())
-                self.TCloser.setProperty("Color","Light")
+                self.TCloser = QLabel(self.TWidget)
                 self.TCloser.setGeometry(950,5,30,30)
-                self.TCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
+                self.TCloser.setProperty("Color","None")
+                self.TCloser.mouseReleaseEvent = lambda event: TOpenClose()
+                self.TCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Up.png" ) ))
+                self.TCloser.setScaledContents(True)
 
 
 
@@ -312,8 +324,9 @@ class UiLayoutEnhanceMenu:
                         Height = self.MainBox.height() - self.GWidget.height() + TotalHeight
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
+                        self.GCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Down.png" ) ))
+                        self.GCloser.setScaledContents(True)
 
-                        self.GCloser.setStyleSheet("border-image: url(Resources/SoLResources/Down.png); ")
                         self.GWidget.Status = "Closed"
                     elif self.GWidget.Status == "Closed":
                         TotalHeight = self.GWidget.TotalHeight
@@ -323,13 +336,16 @@ class UiLayoutEnhanceMenu:
                         Height = self.MainBox.height() - 45 + TotalHeight
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
+                        self.GCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Up.png" ) ))
+                        self.GCloser.setScaledContents(True)
 
-                        self.GCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
                         self.GWidget.Status = "Open"
-                self.GCloser = QPushButton(self.GWidget, clicked = lambda: GOpenClose())
-                self.GCloser.setProperty("Color","Light")
+                self.GCloser = QLabel(self.GWidget)
                 self.GCloser.setGeometry(950,5,30,30)
-                self.GCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
+                self.GCloser.setProperty("Color","None")
+                self.GCloser.mouseReleaseEvent = lambda event: GOpenClose()
+                self.GCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Up.png" ) ))
+                self.GCloser.setScaledContents(True)
 
                 self.GLayout = QGridLayout()
                 self.GLayout.setContentsMargins(5, 5, 5, 5)
@@ -394,8 +410,9 @@ class UiLayoutEnhanceMenu:
                         Height = self.MainBox.height() - self.AWidget.height() + TotalHeight
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
+                        self.ACloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Down.png" ) ))
+                        self.ACloser.setScaledContents(True)
 
-                        self.ACloser.setStyleSheet("border-image: url(Resources/SoLResources/Down.png); ")
                         self.AWidget.Status = "Closed"
                     elif self.AWidget.Status == "Closed":
                         TotalHeight = self.AWidget.TotalHeight
@@ -405,13 +422,18 @@ class UiLayoutEnhanceMenu:
                         Height = self.MainBox.height() - 45 + TotalHeight
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
+                        self.ACloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Up.png" ) ))
+                        self.ACloser.setScaledContents(True)
 
-                        self.ACloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
                         self.AWidget.Status = "Open"
-                self.ACloser = QPushButton(self.AWidget, clicked = lambda: AOpenClose())
-                self.ACloser.setProperty("Color","Light")
+
+                self.ACloser = QLabel(self.AWidget)
                 self.ACloser.setGeometry(950,5,30,30)
-                self.ACloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
+                self.ACloser.setProperty("Color","None")
+                self.ACloser.mouseReleaseEvent = lambda event: AOpenClose()
+                self.ACloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Up.png" ) ))
+                self.ACloser.setScaledContents(True)
+
 
                 self.ALayout = QGridLayout()
                 self.ALayout.setContentsMargins(5, 5, 5, 5)
@@ -427,7 +449,7 @@ class UiLayoutEnhanceMenu:
                         Data = None
                         if AbilityID in TARelation["Abilities"]:
                             Data = TARelation["Abilities"][AbilityID]
-                        Widget = Globals.SoLAbilities[AbilityID]["Reference"].GetAbilityDynamicWidget(AbilityID, Data, Target, Actor, {"UpgradeForceAvailable":1, "DowngradeForceAvailable":1})
+                        Widget = Globals.SoLAbilities[AbilityID]["Reference"].GetAbilityDynamicWidget(AbilityID, Data, Target, Actor, {"UpgradeForceAvailable":0, "DowngradeForceAvailable":0})
                         if Widget != None:
                             WidgetsDict[AbilityID] = Widget
                     except Exception as e:
@@ -469,8 +491,9 @@ class UiLayoutEnhanceMenu:
                         Height = self.MainBox.height() - self.TTWidget.height() + TotalHeight
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
+                        self.TTCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Down.png" ) ))
+                        self.TTCloser.setScaledContents(True)
 
-                        self.TTCloser.setStyleSheet("border-image: url(Resources/SoLResources/Down.png); ")
                         self.TTWidget.Status = "Closed"
                     elif self.TTWidget.Status == "Closed":
                         TotalHeight = self.TTWidget.TotalHeight
@@ -480,13 +503,17 @@ class UiLayoutEnhanceMenu:
                         Height = self.MainBox.height() - 45 + TotalHeight
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
+                        self.TTCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Up.png" ) ))
+                        self.TTCloser.setScaledContents(True)
 
-                        self.TTCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
                         self.TTWidget.Status = "Open"
-                self.TTCloser = QPushButton(self.TTWidget, clicked = lambda: TTOpenClose())
-                self.TTCloser.setProperty("Color","Light")
+
+                self.TTCloser = QLabel(self.TTWidget)
                 self.TTCloser.setGeometry(950,5,30,30)
-                self.TTCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
+                self.TTCloser.setProperty("Color","None")
+                self.TTCloser.mouseReleaseEvent = lambda event: TTOpenClose()
+                self.TTCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Up.png" ) ))
+                self.TTCloser.setScaledContents(True)
 
                 self.TTLayout = QGridLayout()
                 self.TTLayout.setContentsMargins(0, 0, 0, 0)
@@ -502,7 +529,7 @@ class UiLayoutEnhanceMenu:
                         Data = None
                         if TraitID in TargetData["Traits"]:
                             Data = TargetData["Traits"][TraitID]
-                        Widget = Globals.SoLTraits[TraitID]["Reference"].GetTraitDynamicWidget(TraitID, Data, Target, Actor, {"ForceAvailable":1})
+                        Widget = Globals.SoLTraits[TraitID]["Reference"].GetTraitDynamicWidget(TraitID, Data, Target, Actor, {"ForceAvailable":0})
                         if Widget != None:
                             WidgetsDict[TraitID] = Widget
                     except Exception as e:
@@ -545,8 +572,9 @@ class UiLayoutEnhanceMenu:
                         Height = self.MainBox.height() - self.FWidget.height() + TotalHeight
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
+                        self.FCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Down.png" ) ))
+                        self.FCloser.setScaledContents(True)
 
-                        self.FCloser.setStyleSheet("border-image: url(Resources/SoLResources/Down.png); ")
                         self.FWidget.Status = "Closed"
                     elif self.FWidget.Status == "Closed":
                         TotalHeight = self.FWidget.TotalHeight
@@ -556,13 +584,17 @@ class UiLayoutEnhanceMenu:
                         Height = self.MainBox.height() - 45 + TotalHeight
                         self.MainBox.setMinimumHeight(Height)
                         self.MainBox.setMaximumHeight(Height)
+                        self.FCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Up.png" ) ))
+                        self.FCloser.setScaledContents(True)
 
-                        self.FCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
                         self.FWidget.Status = "Open"
-                self.FCloser = QPushButton(self.FWidget, clicked = lambda: FOpenClose())
-                self.FCloser.setProperty("Color","Light")
+
+                self.FCloser = QLabel(self.FWidget)
                 self.FCloser.setGeometry(950,5,30,30)
-                self.FCloser.setStyleSheet("border-image: url(Resources/SoLResources/Up.png); ")
+                self.FCloser.setProperty("Color","None")
+                self.FCloser.mouseReleaseEvent = lambda event: FOpenClose()
+                self.FCloser.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Up.png" ) ))
+                self.FCloser.setScaledContents(True)
 
                 self.FLayout = QGridLayout()
                 self.FLayout.setContentsMargins(0, 0, 0, 0)
