@@ -1,5 +1,7 @@
 import random
+
 import Globals
+
 Log = Globals.Layouts["MainF"].Log
 
 
@@ -56,10 +58,7 @@ def CheckIdleAction(self, ID):
                         if PCID in List:
                             List.remove(PCID)
                     if Globals.PlayerConfig["BetweenNPC"] == 0:
-                        if PCID in List:
-                            List = [PCID]
-                        else:
-                            List = []
+                        List = [PCID] if PCID in List else []
 
                     if List != []:
                         NPCWeights = {}

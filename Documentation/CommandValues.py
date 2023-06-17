@@ -66,7 +66,7 @@ TargetDict = {
         "HourFinish": DateData["Hour"] + 10,
         "Task": ["Idlying", {"BriefFluff": f'''Listening to {Globals.SoLNPCData[Actor]["Name"]}''', "LongFluff": f'''{Globals.SoLNPCData[Target]["Name"]} is listening to {Globals.SoLNPCData[Actor]["Name"]}.'''}],
         "InterruptionPenalty": -50,
-        "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+        "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
         },
     "Connotations":{
         "Simple":[0,0],
@@ -163,7 +163,7 @@ TargetDict = {
     "Connotations":{
 
         },
-    "Resistance":0
+    "Resistance":0,
     }
 ActorDict = {
     "State":{
@@ -182,8 +182,8 @@ ActorDict = {
     "Connotations":{
 
         },
-    "Resistance":0
+    "Resistance":0,
     }
 OtherData = {
-    "Success":2
+    "Success":2,
     }

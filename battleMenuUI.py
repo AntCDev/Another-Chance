@@ -1,42 +1,28 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtWidgets import QLineEdit, QHBoxLayout, QPushButton, QSpacerItem, QSizePolicy, QApplication
-
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
 import json
+import math
 import os
-import Globals
 import random
-import Globals
+import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import random, math
-import time
-
-from PyQt5 import QtGui, QtSvg
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsScene, QGraphicsView, QGraphicsItem
-from PyQt5.QtGui import QPen, QBrush, QPolygonF
 from PyQt5.Qt import Qt
-from PyQt5.QtGui import QPainter
-
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+from PyQt5.QtGui import QBrush, QPen, QPolygonF
 from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import (
+    QHBoxLayout,
+    QPushButton,
+)
 
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+import Globals
+import pathlib
 
-from PyQt5.QtSvg import QGraphicsSvgItem
 path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0,path)
 Log = Globals.Layouts["MainF"].Log
 
 
-from math import sqrt
 class UiLayoutBattleMenu(QWidget):
     def __init__(self):
         Globals.Layouts["BattleMenu"] = self
@@ -1187,9 +1173,9 @@ class UiLayoutBattleMenu(QWidget):
         self.refresh()
         ####
     def allyCreate(self, AllyID):
-        with open('tempData.json', 'rb') as f:
+        with pathlib.Path.open('tempData.json', 'rb') as f:
             tempData = json.load(f)
-        with open('NPCData.json', 'rb') as f:
+        with pathlib.Path.open('NPCData.json', 'rb') as f:
             NPCData = json.load(f)
 
         # TRIES TO CHECK FOR CUSTOM OBJECTS FOR THE CHARACTER
@@ -1678,7 +1664,7 @@ class SRObject:
         # elif self.State == "Preset":
         #     TextBody += f'''<span style=" font-size:20pt; font-weight:600; color:#ffff7f;">'''
         # else:
-        TextBody += f'''<span style=" font-size:20pt; font-weight:600; color:#ffff00;">'''
+        TextBody += '''<span style=" font-size:20pt; font-weight:600; color:#ffff00;">'''
 
         if self.Selected == 1:
             SRLabel.setStyleSheet('''
@@ -1883,7 +1869,7 @@ class RectItem(QtWidgets.QGraphicsRectItem):
 
 class AllyClass:
     def __init__(self, ID, Stats):
-        with open('NPCData.json', 'rb') as f:
+        with pathlib.Path.open('NPCData.json', 'rb') as f:
             NPCfullData = json.load(f)
         NPCData = NPCfullData[ID]
 
@@ -1905,7 +1891,7 @@ class AllyClass:
         self.SR = Stats["SR"]
 
     def __del__(self):
-        print(f"")
+        print("")
 
     def Testa(self):
         print("Ohno")
@@ -2315,8 +2301,8 @@ class UiLayoutBattleScene(QWidget):
         self.hbox.addWidget(self.window)
 
         self.layoutWidget = QWidget(self.GUI)
-        self.layoutWidget.setLayout(self.hbox);
-        self.layoutWidget.setGeometry(0,0,1600,970);
+        self.layoutWidget.setLayout(self.hbox)
+        self.layoutWidget.setGeometry(0,0,1600,970)
 
 
 
@@ -2519,9 +2505,9 @@ class UiLayoutBattleScene(QWidget):
     def Intiliaze(self):
         try:
             ### PULLS FROM THE CURRENT PARTY MEMEBERS TO GENERATE THE WHOLE DECK AS WELL AS THE DRAWING DECK
-            # with open('NPCData.json', 'rb') as f:
+            # with pathlib.Path.open('NPCData.json', 'rb') as f:
             #     NPCfullData = json.load(f)
-            # with open('tempData.json', 'rb') as f:
+            # with pathlib.Path.open('tempData.json', 'rb') as f:
             #     tempData = json.load(f)
             NPCfullData = Globals.SoLNPCData
             tempData = Globals.SoLTempData
@@ -2688,7 +2674,7 @@ class UiLayoutBattleScene(QWidget):
 
                 FileList = os.listdir(PathEffects)
                 for FileName in FileList:
-                    if FileName.endswith(('.py')):
+                    if FileName.endswith('.py'):
                         FileName = FileName[0:-3]
 
                         try:
@@ -2714,7 +2700,7 @@ class UiLayoutBattleScene(QWidget):
 
                 FileList = os.listdir(PathEffects)
                 for FileName in FileList:
-                    if FileName.endswith(('.py')):
+                    if FileName.endswith('.py'):
                         FileName = FileName[0:-3]
 
                         try:
@@ -2961,17 +2947,11 @@ class UiLayoutBattleScene(QWidget):
                 try:
                     LB = list(Map[Layer].keys())[Index-1]
                 except:
-                    if Node != 0:
-                        LB = 0
-                    else:
-                        LB = Node
+                    LB = 0 if Node != 0 else Node
                 try:
                     UB = list(Map[Layer].keys())[Index+1]
                 except:
-                    if Node != Width:
-                        UB = Width
-                    else:
-                        UB = Node
+                    UB = Width if Node != Width else Node
                     ""
 
                 Range = []
@@ -3119,15 +3099,15 @@ class UiLayoutBattleScene(QWidget):
                 # SETS UP THE ICONS ON TOP OF THE POLYGONS
                 Type = Map[Layer][Node]["Type"]
                 if Type == "Enemy":
-                    Path = f'''Resources/CombatResources/BasicEncounter.png'''
+                    Path = '''Resources/CombatResources/BasicEncounter.png'''
                 elif Type == "Elite":
-                    Path = f'''Resources/CombatResources/EliteEncounter.png'''
+                    Path = '''Resources/CombatResources/EliteEncounter.png'''
                 elif Type == "Event":
-                    Path = f'''Resources/CombatResources/Event.png'''
+                    Path = '''Resources/CombatResources/Event.png'''
                 elif Type == "Treasure":
-                    Path = f'''Resources/CombatResources/Treasure.png'''
+                    Path = '''Resources/CombatResources/Treasure.png'''
                 elif Type == "Boss":
-                    Path = f'''Resources/CombatResources/BossEncounter.png'''
+                    Path = '''Resources/CombatResources/BossEncounter.png'''
 
                 image_qt = QImage(Path)
 
@@ -3258,7 +3238,7 @@ class UiLayoutBattleScene(QWidget):
                 sys.path.insert(0, PathEnemies)
             FileList = os.listdir(PathEnemies)
             for FileName in FileList:
-                if FileName.endswith(('.py')):
+                if FileName.endswith('.py'):
                     FileName = FileName[0:-3]
                     # print(FileName)
                     try:
@@ -3306,7 +3286,7 @@ class UiLayoutBattleScene(QWidget):
                 sys.path.insert(0, PathEvents)
             FileList = os.listdir(PathEvents)
             for FileName in FileList:
-                if FileName.endswith(('.py')):
+                if FileName.endswith('.py'):
                     FileName = FileName[0:-3]
                     try:
                         FileReference = __import__(FileName)

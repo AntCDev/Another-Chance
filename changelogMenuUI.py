@@ -1,14 +1,10 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
+
 from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
-import json
-import os
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
 
-class UiLayoutChangelogMenu(object):
+class UiLayoutChangelogMenu:
     def Ui(self, MainWindow):
         self.changeologMenuUI = QWidget(MainWindow)
         # mainwindow.setWindowIcon(QtGui.QIcon('PhotoIcon.png'))

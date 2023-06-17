@@ -1,14 +1,14 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor, QIntValidator
 import json
-import os
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtGui import QIntValidator
+from PyQt5.QtWidgets import *
+
 import Globals
 
-class UiLayoutOptionsMenuOld(object):
+
+class UiLayoutOptionsMenuOld:
     def Ui(self, MainWindow):
         self.optionsMenuUI = QWidget(MainWindow)
         # mainwindow.setWindowIcon(QtGui.QIcon('PhotoIcon.png'))
@@ -391,7 +391,7 @@ class UiLayoutOptionsMenuOld(object):
         self.labelPage.setText("Page: "+str(page))
 
     def startCheck(self):
-        with open('playerConfig.json', 'rb') as f:
+        with pathlib.Path.open('playerConfig.json', 'rb') as f:
             configurations = json.load(f)
         if configurations["Interact"]: self.buttonNPCinteractCan.setChecked(1); self.buttonNPCinteractCant.setChecked(0)
         else: self.buttonNPCinteractCan.setChecked(0); self.buttonNPCinteractCant.setChecked(1)
@@ -413,27 +413,19 @@ class UiLayoutOptionsMenuOld(object):
         ""
 
     def saveCheck(self):
-        if self.buttonNPCinteractCan.isChecked(): interact = 1
-        else: interact = 0
-        if self.buttonNPCrelationsCan.isChecked(): relations = 1
-        else: relations = 0
-        if self.buttonNPCviolenceCan.isChecked(): violence = 1
-        else: violence = 0
-        if self.buttonNPCeroticCan.isChecked(): erotic = 1
-        else: erotic = 0
+        interact = 1 if self.buttonNPCinteractCan.isChecked() else 0
+        relations = 1 if self.buttonNPCrelationsCan.isChecked() else 0
+        violence = 1 if self.buttonNPCviolenceCan.isChecked() else 0
+        erotic = 1 if self.buttonNPCeroticCan.isChecked() else 0
 
 
-        if self.buttonFetishWatersports.isChecked(): watersports = 1
-        else: watersports = 0
-        if self.buttonFetishPregnancy.isChecked(): pregnancy = 1
-        else: pregnancy = 0
-        if self.buttonFetishNetorare.isChecked(): netorare = 1
-        else: netorare = 0
-        if self.buttonFetishRyona.isChecked(): ryona = 1
-        else: ryona = 0
+        watersports = 1 if self.buttonFetishWatersports.isChecked() else 0
+        pregnancy = 1 if self.buttonFetishPregnancy.isChecked() else 0
+        netorare = 1 if self.buttonFetishNetorare.isChecked() else 0
+        ryona = 1 if self.buttonFetishRyona.isChecked() else 0
 
         configurations = {"Interact":interact, "Relations":relations, "Violence":violence, "Erotic":erotic, "Watersports":watersports, "Pregnancy":pregnancy, "Netorare":netorare, "Ryona":ryona}
-        with open("playerConfig.json", 'w') as f:
+        with pathlib.Path.open("playerConfig.json", 'w') as f:
             json.dump(configurations, f)
 
     ####### NPC Interactions

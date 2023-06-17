@@ -1,16 +1,13 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
-import json
-import os
-import Globals
-import random
-import math
 import os
 import pathlib
+
+from PyQt5 import QtCore
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
+
 
 def Initialize(self, Reference):
     AbilitiesList = ["Obedience", "Lust", "Intimacy", "Submission", "Superiority", "CSense", "VSense", "ASense", "PSense", "MSense", "Service", "Sadism", "Masochism", "Exhibitionism"]

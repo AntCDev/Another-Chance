@@ -1,16 +1,13 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
-import json
 import os
-import Globals
-import random
-import math
-import re
 import pathlib
+import random
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
+
 Log = Globals.Layouts["MainF"].Log
 class EnhanceGenericNPCObject:
     def __init__(self, NPCData):
@@ -60,7 +57,7 @@ class EnhanceGenericNPCObject:
 
 
 
-class UiLayoutSleepMenu(object):
+class UiLayoutSleepMenu:
     def __init__(self):
         Globals.Layouts["SleepUI"] = self
         Globals.LayoutsData["SleepUI"] = {"Source":"sleepMenuUI"}

@@ -1,26 +1,11 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
-import json
-import os
-
-
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-import sys
 import random
-import pathlib
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
 import Globals
-import time
-import threading
-from PyQt5.QtCore import QObject, QThread, pyqtSignal
-from time import sleep
-from battleMenuUI import SRObject
+
 Log = Globals.Layouts["MainF"].Log
 
 def getEvents(self, Reference, FullList, Signal):

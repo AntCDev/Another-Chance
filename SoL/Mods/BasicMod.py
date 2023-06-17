@@ -1,15 +1,13 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
 import json
 import os
-import Globals
-import random
-import math
 
+from PyQt5 import QtCore
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
+import pathlib
 
 def Initialize(self, Reference):
     Globals.References["BasicMod"] = Reference
@@ -71,7 +69,7 @@ def SetBaseData():
                 },
             "Gems": {},
             "Flags": {
-                "HasConsent": 0
+                "HasConsent": 0,
                 },
             "Abilities": {},
             "Preferences": {},
@@ -128,7 +126,7 @@ def SetBaseData():
                 "VVirgin":0,
                 "AVirgin":0,
                 "PVirgin":0,
-                "MVirgin":0
+                "MVirgin":0,
                 },
             "OtherData":{"Home":""},
             "Traits":{},
@@ -143,7 +141,7 @@ def SetBaseData():
                 "Head": "",
                 "Arms": "",
                 "Legs": "",
-                "Genitals": ""
+                "Genitals": "",
                 },
             "Actions": {
                 "Intention": None,
@@ -186,7 +184,7 @@ def SetBaseData():
         "NPCtoPC":0,
         "RandomNPC":1,
         "RandomAmount":15,
-        "RandomRatio":{"Male":35,"Female":55,"FutaRatio":10}
+        "RandomRatio":{"Male":35,"Female":55,"FutaRatio":10},
         }
 
     # if "SoLEnviorementData" in Globals.CurrentSession:
@@ -1420,9 +1418,9 @@ def GetFallenDynamicWidget(FallenID, Data, NPCID, OtherID, Flags):
 def GetStaticFallenWidget(FallenID, FallenData, RelationData):
     def check(Amount,Needed):
         if Amount >= Needed:
-            return f'''<font color=#FFFF00>'''
+            return '''<font color=#FFFF00>'''
         else:
-            return f'''<font color=#FFFFFF>'''
+            return '''<font color=#FFFFFF>'''
     Attraction = RelationData["Permanent"]["Attraction"]
     Reliability = RelationData["Permanent"]["Reliability"]
 
@@ -1592,7 +1590,7 @@ def TriggerControlCommand(self, ControlID, PCID, NPCID):
         Globals.CurrentSession["SoLEnviorementData"] = Globals.SoLEnviorementData
         Globals.CurrentSession["SoLNPCSchedules"] = Globals.SoLNPCSchedules
         Globals.CurrentSession["SoLFlavorDict"] = Globals.SoLFlavorDict
-        with open('CurrentSession.json', 'w') as f:
+        with pathlib.Path.open('CurrentSession.json', 'w') as f:
             json.dump(Globals.CurrentSession, f)
     else:
         print(ControlID)

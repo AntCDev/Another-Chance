@@ -100,18 +100,18 @@ def getDialogue(self, Action):
                         if RN == 0:
                             P1 = f'''"So {Actor} have you been doing well in this lovely town of ours? If you ahven't already i'd recommend you check out every place around here, except maybe the back gate unless you want to check what would've been of you if we hadn't found you first." '''
                         elif RN == 1:
-                            P1 = f'''"Hmm? What i'm doing? '''
+                            P1 = '''"Hmm? What i'm doing? '''
                             if TData["Actions"]["CurrentTask"] == "Idlying":
-                                P1 += f'''I guess not much, jsut enjoying to see the people pass, ro waiting for anything to happen. What abotu you, do you want to go do something interesting?" '''
+                                P1 += '''I guess not much, jsut enjoying to see the people pass, ro waiting for anything to happen. What abotu you, do you want to go do something interesting?" '''
                             elif TData["Actions"]["CurrentTask"] == "Working":
-                                P1 += f'''I'm working which is to say not much more than walking around, this job used to be a lot more exciting a few years back, but well i guess that just shows we did a good job." '''
+                                P1 += '''I'm working which is to say not much more than walking around, this job used to be a lot more exciting a few years back, but well i guess that just shows we did a good job." '''
                             elif TData["Actions"]["CurrentTask"] == "Following":
                                 if PCID == TData["Actions"]["IsFollowing"]:
-                                    P1 += f'''Well i'm following you, what else would i be doing? I'm also curious about where you are leading me, but i like surprises so don't spoil me." '''
+                                    P1 += '''Well i'm following you, what else would i be doing? I'm also curious about where you are leading me, but i like surprises so don't spoil me." '''
                                 else:
                                     P1 += f'''I'm following {NPCdata[TData["Actions"]["IsFollowing"]]["Name"]}, not exactly sure where we are going but it's always interesting to find out."'''
                             else:
-                                P1 += f'''...Good question, not sure what i'm doing here, i guess we can find out together."'''
+                                P1 += '''...Good question, not sure what i'm doing here, i guess we can find out together."'''
                         elif RN == 2:
                             list = []
                             if "02" in list(AData["Relations"].keys()):
@@ -129,7 +129,7 @@ def getDialogue(self, Action):
                                 if "06" in list(AData["Relations"].keys()):
                                     P2+= f''' So she is {NPCdata["06"]["Name"]} property? Interesting i wouldn't have guessed that, i wonder what kind of business a girl like her has with that kind of slave, if anything i'd expect someone who can help with paperwork, i've heard nobles have to deal with a ton of that, but i doubt {NPCdata["07"]["Name"]} is really cappable of that."'''
                                 else:
-                                    P2 += f'''"'''
+                                    P2 += '''"'''
                                 list.append(P2)
                             if "08" in list(AData["Relations"].keys()):
                                 list.append(f'''"Are you asking about the trader {NPCdata["08"]["Name"]}? I guess i've met him a few times, he gives good prices for us so he is our go to with whatever we need, and sometimes i've had to do the talking. I'm not sure, i don't trust those traders in general, specially those as succesfull as him, but leaving aside how untrustful i am, well he has done good things for the town so i can't really say anything negative about him, maybe if you get on his good side you could get in his kind of trade too."''')
@@ -138,7 +138,7 @@ def getDialogue(self, Action):
                             P1 = random.choice(list)
                 else:
                     RN = random.randint(0,2)
-                    P1 = f'''"It's a bit boring to just talk, do you have something more itneresting to do?" '''
+                    P1 = '''"It's a bit boring to just talk, do you have something more itneresting to do?" '''
             else:
                 if Success == 1:
                     P1 = f'''{Target} is having a cordial conversation with {Actor}.'''
@@ -150,18 +150,18 @@ def getDialogue(self, Action):
                 if Success == 1:
                     RN = random.randint(0,2)
                     if RN == 0:
-                        P1 = f'''"You want to do something for me?... I'm feeling kind of thirsty so i guess something nice to drink could do.'''
+                        P1 = '''"You want to do something for me?... I'm feeling kind of thirsty so i guess something nice to drink could do.'''
                         RN2 = random.randing(0,2)
                         if RN2 == 0:
-                            P1 += f''' Some Tea? I guess that works too, never been too much a fan of it, but i don't dislike it either."'''
+                            P1 += ''' Some Tea? I guess that works too, never been too much a fan of it, but i don't dislike it either."'''
                         elif RN2 == 1:
-                            P1 += f''' Coffee, that's a lot better, i've been trying to not abuse it as much recently, but since you are offering it so nicely i think ic an make an exception."'''
+                            P1 += ''' Coffee, that's a lot better, i've been trying to not abuse it as much recently, but since you are offering it so nicely i think ic an make an exception."'''
                         elif RN2 == 2:
-                            P1 += f''' Water is nice too, not my first choice whiel trying to relax but it's good to stay healthy."'''
+                            P1 += ''' Water is nice too, not my first choice whiel trying to relax but it's good to stay healthy."'''
                     elif RN == 1:
-                        P1 = f'''"Hmm... I'm not in need for anything you can do, but a moment of rest is always good so let's go sit over there for a bit."'''
+                        P1 = '''"Hmm... I'm not in need for anything you can do, but a moment of rest is always good so let's go sit over there for a bit."'''
                 else:
-                    P1 = f'''"Not in the mood for anything right now."'''
+                    P1 = '''"Not in the mood for anything right now."'''
             else:
                 if Success == 1:
                     P1 = f'''{TName} is enjoying a break while being served by {AName}.'''
@@ -172,31 +172,31 @@ def getDialogue(self, Action):
                 if Success == 1:
                     RN = random.randint(0,2)
                     if RN == 0:
-                        P1 = f'''"Are you curious about my body? This uniform might not show that off but i'm pretty strong, liek this feel how firm is my belly." '''
+                        P1 = '''"Are you curious about my body? This uniform might not show that off but i'm pretty strong, liek this feel how firm is my belly." '''
                     elif RN == 1:
-                        P1 = f'''"I'm glad you are interesed in my body, not many can guess how nice it's with these fancy clothes on me, they aren't my taste but i've been told they make the publc feel safer than with my other clothes." '''
+                        P1 = '''"I'm glad you are interesed in my body, not many can guess how nice it's with these fancy clothes on me, they aren't my taste but i've been told they make the publc feel safer than with my other clothes." '''
                 else:
-                    P1 = f''' '''
+                    P1 = ''' '''
             else:
                 if Success == 1:
-                    P1 = f''' '''
+                    P1 = ''' '''
                 else:
-                    P1 = f''' '''
+                    P1 = ''' '''
         elif Action == "GetLapPillow":
             if Actor == PCID:
                 if Success == 1:
                     RN = random.randint(0,2)
                     if RN == 0:
-                        P1 = f''' '''
+                        P1 = ''' '''
                     elif RN == 1:
-                        P1 = f''' '''
+                        P1 = ''' '''
                 else:
-                    P1 = f''' '''
+                    P1 = ''' '''
             else:
                 if Success == 1:
-                    P1 = f''' '''
+                    P1 = ''' '''
                 else:
-                    P1 = f''' '''
+                    P1 = ''' '''
 
 
 
@@ -206,13 +206,13 @@ def getDialogue(self, Action):
                 if Success == 1:
                     RN = random.randint(0,2)
                     if RN == 0:
-                        P1 = f''' '''
+                        P1 = ''' '''
                     elif RN == 1:
-                        P1 = f''' '''
+                        P1 = ''' '''
                 else:
-                    P1 = f''' '''
+                    P1 = ''' '''
             else:
                 if Success == 1:
-                    P1 = f''' '''
+                    P1 = ''' '''
                 else:
-                    P1 = f''' '''
+                    P1 = ''' '''

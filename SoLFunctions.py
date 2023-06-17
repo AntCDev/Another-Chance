@@ -1,20 +1,20 @@
 
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
 import json
+import math
 import os
 import random
-import math
+import sys
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
 import Globals
+
 Log = Globals.Layouts["MainF"].Log
 import copy
-import time
-import inspect
 import pathlib
+
 
 class GenericNPCObject:
     def __init__(self, ID):
@@ -1152,6 +1152,7 @@ def Move(self, Location, NPCID):
         if NPCID == Globals.SoLPCData["ID"]:
             if Globals.SoLPCData["Targeting"] not in Globals.SoLEnviorementData["Locations"][Location]["inHere"]:
                 Globals.SoLPCData["Targeting"] = None
+                ApplyIdleTask(Globals.SoLPCData["ID"])
             Refresh(self)
         else:
             if Globals.SoLPCData["Targeting"] == NPCID:
@@ -1238,7 +1239,7 @@ def CheckButtonFontSize(self, Button):
             TextW = Button.fontMetrics().boundingRect(Button.text()).width()
 
             newSize = font.pointSizeF() - 1
-            font.setPointSizeF(newSize);
+            font.setPointSizeF(newSize)
             Button.setFont(font)
             if TextH < ButtonH and TextW < ButtonW:
                 break
@@ -1341,10 +1342,7 @@ def GridLayoutMaker(self, Layout, WidgetsDict, MaxWidth, Separation):
             TotalHeight += LineHeight + Separation
 
 
-        if Layer > 0:
-            Width = MaxWidth
-        else:
-            Width = LineWidth
+        Width = MaxWidth if Layer > 0 else LineWidth
         Height = TotalHeight
     # Width += 5
     return Width, Height
@@ -1357,7 +1355,7 @@ def GetImages(NPCData):
         Files = os.listdir( os.path.abspath( pathlib.Path() / "NPCData" / f"{Name}{ID}" ) )
         # Files = os.listdir(f'''NPCData/{Name}{ID}''')
 
-        list = [File for File in Files if File.endswith((".png")) or File.endswith((".jpg")) or File.endswith((".jpeg"))]
+        list = [File for File in Files if File.endswith((".png", ".jpg", ".jpeg"))]
         ListPortraits, ListFullBody = [], []
         ListPortraits = [File for File in list if File.startswith("Portrait")]
         ListFullBody = [File for File in list if File.startswith("FullBody")]
@@ -1417,9 +1415,9 @@ def ResetGenericNPC():
             # Skin: Fair, light, tanned, dark, brown, black
             # Hair: red, black, blonde, blue, brown, orange, grey, silver, white
 
-            with open(pathlib.Path() / "Resources" / "Generic" / "FemenineNames.txt" , 'rb') as f:
+            with pathlib.Path.open(pathlib.Path() / "Resources" / "Generic" / "FemenineNames.txt" , 'rb') as f:
                 FemenineNames = json.load(f)
-            with open(pathlib.Path() / "Resources" / "Generic" / "MasculineNames.txt" , 'rb') as f:
+            with pathlib.Path.open(pathlib.Path() / "Resources" / "Generic" / "MasculineNames.txt" , 'rb') as f:
                 MasculineNames = json.load(f)
             SkinList = ["Ivory", "Pale", "Fair", "Light", "Tanned", "Olive", "Dark", "Brown"]
             HairList = ["Auburn", "Black", "Red", "Blonde", "Blue", "Brown", "Dark Blue", "Dark Brown", "Dark Red", "Ginger", "Golden", "Grey", "Hazel", "Silver", "White"]
@@ -1449,10 +1447,7 @@ def ResetGenericNPC():
                 Sex = random.choices(SexKeys, SexValues)
 
                 # Sex = random.choice(["Male", "Female", "Futanari"])
-                if Sex == "Female" or "Futanari":
-                    FullName = random.choice(FemenineNames)
-                else:
-                    FullName = random.choice(MasculineNames)
+                FullName = random.choice(FemenineNames) if True else random.choice(MasculineNames)
                 ShortName = FullName.split(' ', 1)[0]
 
                 Energy = random.randint(500,2000)
@@ -1705,7 +1700,7 @@ def GetDescription(Area, NPCData, Options):
     BallsSize = BodyType["BallsSize"]
     Age = BodyType["PhysicalAge"]
 
-    # with open('NPCData.json', 'rb') as f:
+    # with pathlib.Path.open('NPCData.json', 'rb') as f:
     #     NPCData = json.load(f)
     Arousal = NPCData["State"]["Arousal"]
     Mood = NPCData["State"]["Mood"]

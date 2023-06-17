@@ -1,11 +1,12 @@
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
-import Globals
-import random
 import os
+import random
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
+
 Log = Globals.Layouts["MainF"].Log
 
 class Worker(QObject):
@@ -387,7 +388,7 @@ class Enemy:
             Attack = self.Attack
             Target = self.Target
             if Attack == {}:
-                return
+                return None
             if Attack["AttackID"] == "Slash0":
                 if Results["DamageDealt"] > 0 or Results["ShieldDamage"] > 0:
                     AnimationID = FinalData["AnimationID"]
@@ -573,7 +574,7 @@ class Enemy:
             Attack = self.Attack
             Target = self.Target
             if Attack == {}:
-                return
+                return None
             if Attack["AttackID"] == "Slash0":
                 Text = f'''
                 <html><head/><body>
@@ -584,7 +585,7 @@ class Enemy:
                 '''
                 return Text
             elif Attack["AttackID"] == "Defend0":
-                Text = f'''
+                Text = '''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Gain <span style="color:red;"><b>5</b></span> Shield<br>

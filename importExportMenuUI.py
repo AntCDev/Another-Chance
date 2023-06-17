@@ -1,22 +1,23 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
 import json
 import os
-import Globals
-import random
 import pathlib
+import random
+
+from PyQt5 import QtCore
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
+
 
 class GenericNPCObject:
     def __init__(self, ID, Name, Status):
         self.ID = ID
         self.Name = Name
         self.Status = Status
-        # with open(f'''NPCData/{self.Name}{ID}/{Name}{ID}Data.json''', 'rb') as f:
-        with open(pathlib.Path() / "NPCData" / f"{self.Name}{ID}" / f"{Name}{ID}Data.json" , 'rb') as f:
+        # with pathlib.Path.open(f'''NPCData/{self.Name}{ID}/{Name}{ID}Data.json''', 'rb') as f:
+        with pathlib.Path.open(pathlib.Path() / "NPCData" / f"{self.Name}{ID}" / f"{Name}{ID}Data.json" , 'rb') as f:
             self.Data = json.load(f)
 
     def GetWidget(self):
@@ -76,8 +77,8 @@ class GenericNPCObject:
         ButtonDetails.setFont(QFont('Segoe UI', 12))
 
         def ImportFunc(self):
-            # with open(f'''NPCData/{self.Name}{self.ID}/{self.Name}{self.ID}Data.json''', 'rb') as f:
-            with open(pathlib.Path() / "NPCData" / f"{self.Name}{self.ID}" / f"{self.Name}{self.ID}Data.json" , 'rb') as f:
+            # with pathlib.Path.open(f'''NPCData/{self.Name}{self.ID}/{self.Name}{self.ID}Data.json''', 'rb') as f:
+            with pathlib.Path.open(pathlib.Path() / "NPCData" / f"{self.Name}{self.ID}" / f"{self.Name}{self.ID}Data.json" , 'rb') as f:
                 NPCData = json.load(f)
             try:
                 Globals.References["SoLFunctions"].ImportNPC(NPCData)
@@ -145,7 +146,7 @@ class GenericNPCObject:
 
 
 
-class UiLayoutImportMenu(object):
+class UiLayoutImportMenu:
     def __init__(self):
         Globals.Layouts["ImportUI"] = self
         Globals.LayoutsData["ImportUI"] = {"Source":"importMenuUI", "Initialized":0}
@@ -207,7 +208,7 @@ class UiLayoutImportMenu(object):
         DirList = os.listdir("NPCData")
         for DirName in DirList:
             try:
-                with open(pathlib.Path() / "NPCData" / DirName / f"{DirName}Data.json" , 'rb') as f:
+                with pathlib.Path.open(pathlib.Path() / "NPCData" / DirName / f"{DirName}Data.json" , 'rb') as f:
                     NPCData = json.load(f)
                 Name = NPCData["Name"]
                 ID = NPCData["ID"]

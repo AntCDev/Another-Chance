@@ -1,17 +1,14 @@
 
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
-import Globals
 # from UiStyle import *
 # from SoLMenuFunctions import *
-from time import sleep
-import os
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
+
 Log = Globals.Layouts["MainF"].Log
-import pathlib
 
 class UiLayoutSoLMenu(QWidget):
     RefreshSignal1 = pyqtSignal()

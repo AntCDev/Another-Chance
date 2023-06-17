@@ -1,16 +1,12 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
-import json
 import os
-import Globals
-import random
-import math
-import re
 import pathlib
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
+
 Log = Globals.Layouts["MainF"].Log
 
 class UiLayoutEnhanceMenu:
@@ -453,7 +449,8 @@ class UiLayoutEnhanceMenu:
                         if Widget != None:
                             WidgetsDict[AbilityID] = Widget
                     except Exception as e:
-                        print(e)
+                        # print(e)
+                        ""
 
                 MaxWidth = 994
                 Width, Height = Globals.References["SoLFunctions"].GridLayoutMaker(self, self.ALayout, WidgetsDict, MaxWidth, 10)

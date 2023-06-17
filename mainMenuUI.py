@@ -1,13 +1,13 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
-import Globals
 import os
-import webbrowser
 import pathlib
+import webbrowser
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
+
 Log = Globals.Layouts["MainF"].Log
 
 class UiLayoutMainMenu(QWidget):

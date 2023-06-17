@@ -1,16 +1,16 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
 import json
-import os
-import Globals
-import random
 import math
-import re
+import os
 import pathlib
+import random
+import re
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
+
 Log = Globals.Layouts["MainF"].Log
 class ValueWidget:
     def __init__(self, ID, Value):
@@ -183,13 +183,13 @@ class UiLayoutDetailsMenu:
                 ID = Globals.LayoutsData["DetailsUI"]["ID"]
                 Name = Globals.LayoutsData["DetailsUI"]["Name"]
 
-                with open(pathlib.Path() / "NPCData" / f"{Name}{ID}" / f"{Name}{ID}Data.json" , 'rb') as f:
+                with pathlib.Path.open(pathlib.Path() / "NPCData" / f"{Name}{ID}" / f"{Name}{ID}Data.json" , 'rb') as f:
                     NPCData = json.load(f)
 
                 Files = os.listdir( os.path.abspath( pathlib.Path() / "NPCData" / f"{Name}{ID}" ) )
                 # Files = os.listdir(f'''NPCData/{Name}{ID}''')
                 ImageType = "Portrait"
-                list = [File for File in Files if File.endswith((".png")) or File.endswith((".jpg")) or File.endswith((".jpeg"))]
+                list = [File for File in Files if File.endswith((".png", ".jpg", ".jpeg"))]
                 ListPortraits, ListFullBody = [], []
                 ListPortraits = [File for File in list if File.startswith("Portrait")]
                 ListFullBody = [File for File in list if File.startswith("FullBody")]
@@ -208,7 +208,7 @@ class UiLayoutDetailsMenu:
                 try:
                     Files = os.listdir( os.path.abspath( pathlib.Path() / "NPCData" / f"{Name}{ID}" ) )
                     ImageType = "Portrait"
-                    list = [File for File in Files if File.endswith((".png")) or File.endswith((".jpg")) or File.endswith((".jpeg"))]
+                    list = [File for File in Files if File.endswith((".png", ".jpg", ".jpeg"))]
                     ListPortraits, ListFullBody = [], []
                     ListPortraits = [File for File in list if File.startswith("Portrait")]
                     ListFullBody = [File for File in list if File.startswith("FullBody")]
@@ -300,12 +300,12 @@ class UiLayoutDetailsMenu:
         if NPCData["BodyData"]["VTightness"] > 0:
             FlavorText += f'''{PSub.capitalize()} has a '''
             if NPCData["BodyData"]["VVirgin"] == 1:
-                FlavorText += f'''virgin '''
+                FlavorText += '''virgin '''
             FlavorText += f'''{Desc("VTightness", NPCData, "DP")}. '''
         if NPCData["BodyData"]["PenisSize"] > 0:
             FlavorText += f'''{PSub.capitalize()} has a '''
             if NPCData["BodyData"]["PVirgin"] == 1:
-                FlavorText += f'''virgin '''
+                FlavorText += '''virgin '''
             FlavorText += f'''{Desc("PenisSize", NPCData, "DP")}. '''
         if NPCData["BodyData"]["BallsSize"] > 0:
             FlavorText += f'''{PSub.capitalize()} has {Desc("BallsSize", NPCData, "DP")}. '''
@@ -313,7 +313,7 @@ class UiLayoutDetailsMenu:
         if NPCData["BodyData"]["ATightness"] > 0:
             FlavorText += f'''{PSub.capitalize()} has a '''
             if NPCData["BodyData"]["AVirgin"] == 1:
-                FlavorText += f'''virgin '''
+                FlavorText += '''virgin '''
             FlavorText += f'''{Desc("ATightness", NPCData, "DP")}. '''
 
         self.DescriptionLabel.setText(FlavorText)
@@ -363,10 +363,7 @@ class UiLayoutDetailsMenu:
         LetterWidth = FontWidth / len(CleanText)
         PerLineS = math.floor(MaxWidth / LetterWidth)
         PerLineL = math.floor((MaxWidth + 200) / LetterWidth)
-        if ImageName != "":
-            PerLine = PerLineS
-        else:
-            PerLine = PerLineL
+        PerLine = PerLineS if ImageName != "" else PerLineL
 
         Count = 0
         Lines = 0
@@ -621,10 +618,7 @@ class UiLayoutDetailsMenu:
 
                     AbilitiesWidgetsDict = {}
                     for AbilityID in Globals.SoLAbilities:
-                        if AbilityID in RelationData["Abilities"]:
-                            Data = RelationData["Abilities"][AbilityID]
-                        else:
-                            Data = {}
+                        Data = RelationData["Abilities"][AbilityID] if AbilityID in RelationData["Abilities"] else {}
                         Widget = Globals.SoLAbilities[AbilityID]["Reference"].GetAbilityStaticWidget(AbilityID, Data)
                         if Widget != None:
                             AbilitiesWidgetsDict[AbilityID] = Widget
@@ -945,10 +939,7 @@ class UiLayoutDetailsMenu:
                     for FallenID in Globals.SoLFallenStates:
                         try:
                             # if FallenID in RelationData["FallenData"]:
-                            if False:
-                                FallenData = RelationData["FallenData"][FallenID]
-                            else:
-                                FallenData = {}
+                            FallenData = RelationData["FallenData"][FallenID] if False else {}
                             Widget = Globals.SoLFallenStates[FallenID]["Reference"].GetStaticFallenWidget(FallenID, FallenData, RelationData)
                             if Widget != None:
                                 WidgetsDict[FallenID] = Widget

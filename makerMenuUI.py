@@ -1,13 +1,14 @@
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
 import json
-import sys
-import random
 import os
-import Globals
 import pathlib
+import sys
+
+from PyQt5 import QtCore
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
 
 Log = Globals.Layouts["MainF"].Log
 class UiLayoutMakerMenu(QWidget):
@@ -824,8 +825,8 @@ class UiLayoutMakerMenu(QWidget):
         DirList = os.listdir(Path)
         for DirName in DirList:
             try:
-                # with open(f'''NPCData/{DirName}/{DirName}Data.json''', 'rb') as f:
-                with open(pathlib.Path() / "NPCData" / DirName / f"{DirName}Data.json" , 'rb') as f:
+                # with pathlib.Path.open(f'''NPCData/{DirName}/{DirName}Data.json''', 'rb') as f:
+                with pathlib.Path.open(pathlib.Path() / "NPCData" / DirName / f"{DirName}Data.json" , 'rb') as f:
                     NPCData = json.load(f)
                 Name = NPCData["Name"]
                 ID = NPCData["ID"]
@@ -1009,8 +1010,7 @@ class UiLayoutMakerMenu(QWidget):
             PObj = self.PObjLine.text()
             PPos = self.PPosLine.text()
             PIPos = self.PIPosLine.text()
-            if self.PStructureButtonM.isChecked(): Sex = "Male"
-            else: Sex = "Female"
+            Sex = "Male" if self.PStructureButtonM.isChecked() else "Female"
 
             Hips = self.HipBox.currentIndex()
             Ass = self.AssBox.currentIndex()
@@ -1088,15 +1088,15 @@ class UiLayoutMakerMenu(QWidget):
 
                 Path = os.path.abspath( pathlib.Path() / "NPCData" / f"{Name}{ID}" )
                 # Path = "NPCData/" + Name + ID
-                if not os.path.exists(Path):
-                    os.makedirs(Path)
-                FullPath = os.path.abspath( Path / f"{Name}{ID}Data.json" )
+                if not pathlib.Path.exists(Path):
+                    pathlib.Path.mkdir(Path, parents=True)
+                FullPath = os.path.abspath( pathlib.Path() / "NPCData" / f"{Name}{ID}" / f"{Name}{ID}Data.json" )
                 # FullPath = f'''{Path}/{Name}{ID}Data.json'''
-                with open(FullPath, 'w') as f:
+                with pathlib.Path.open(FullPath, 'w') as f:
                     json.dump(NPCData, f)
 
         except Exception as e:
-            self.LabelStatus.setText(f'''Something went wrong''')
+            self.LabelStatus.setText('''Something went wrong''')
             Log(2, "ERROR SAVING CHARACTER DATA", e, NPCData)
             print(e)
 

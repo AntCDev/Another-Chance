@@ -1,24 +1,12 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
-import json
-import os
 
-
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-import sys
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
 import Globals
 
-import pathlib
 
-
-class UiLayoutDisclaimerMenu(object):
+class UiLayoutDisclaimerMenu:
     def __init__(self):
         Globals.Layouts["DisclaimerUI"] = self
         Globals.LayoutsData["DisclaimerUI"] = {"Source":"creditsDisclaimerMenuUI", "Initialized":0}
@@ -35,7 +23,7 @@ class UiLayoutDisclaimerMenu(object):
         self.LabelMain.setGeometry(288,5,1024,954)
         self.LabelMain.setProperty("Color","Dark")
         self.LabelMain.setWordWrap(True)
-        self.LabelMain.setText(f'''
+        self.LabelMain.setText('''
 The contents of this computer software are entirely a work of fiction. Use of this game software or its files in any way is exclusively restricted to use by adults. You must be above 18 years old or older in order to use this computer software in any way, shape, or form. You must also meet the minimum requirement for adulthood in your nation and state of residence in order to use this software in any way, shape, or form. Usage or viewing of this computer software by minors is expressly prohibited.
 
 This software contains artistic and written depictions of sexual conduct. All characters, or any human-like representation of characters, engaged in sexual conduct in any way, shape, or form, are all fictional human being and 18 years of age or older consenting to the actions represented. No actual or identifiable human being was used during the development of this computer software. Any similarities to real or imagined person(s), place(s), and/or group(s) are purely coincidental.
@@ -55,7 +43,7 @@ Any modification to the existing software, or implementation of new files, is re
 
 ################################
 
-class UiLayoutCreditsMenu(object):
+class UiLayoutCreditsMenu:
     def __init__(self):
         Globals.Layouts["CreditsUI"] = self
         Globals.LayoutsData["CreditsUI"] = {"Source":"creditsDisclaimerMenuUI", "Initialized":0}
@@ -107,7 +95,7 @@ www.discord.com
     def Refresh(self):
         ""
 
-class UiLayoutLicenseMenu(object):
+class UiLayoutLicenseMenu:
     def __init__(self):
         Globals.Layouts["LicenseUI"] = self
         Globals.LayoutsData["LicenseUI"] = {"Source":"creditsDisclaimerMenuUI", "Initialized":0}
@@ -129,7 +117,7 @@ class UiLayoutLicenseMenu(object):
         self.LabelContent.setAlignment(Qt.AlignLeft | Qt.AlignTop)
 
         try:
-            with open('License.txt', 'r', encoding='UTF-8') as file:
+            with pathlib.Path.open('License.txt', 'r', encoding='UTF-8') as file:
                 LicenseText = file.read()
             self.LabelContent.setText(LicenseText)
         except Exception as e:

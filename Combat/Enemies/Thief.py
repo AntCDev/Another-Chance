@@ -1,9 +1,9 @@
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
 import Globals
+
 
 class Enemy:
     def __init__(self, Name, HP, EnemyID):
@@ -14,7 +14,7 @@ class Enemy:
         self.Status = "Alive"
 
     def __del__(self):
-        print(f"")
+        print("")
 
     def Testa(self):
         print("Ohno")

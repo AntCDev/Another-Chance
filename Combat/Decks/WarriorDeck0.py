@@ -1,26 +1,16 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
 import json
 import os
-
-
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-import sys
 import random
-import pathlib
-import Globals
-import time
-import threading
-from PyQt5.QtCore import QObject, QThread, pyqtSignal
 from time import sleep
+
+from PyQt5.QtCore import *
+from PyQt5.QtCore import QObject, QThread, pyqtSignal
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
 from battleMenuUI import SRObject
+
 Log = Globals.Layouts["MainF"].Log
 
 
@@ -239,7 +229,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal 5 Damage<br>
@@ -358,7 +348,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal 5 Damage<br>
@@ -2099,7 +2089,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal 4 Damage<br>
@@ -2220,7 +2210,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal 4 Damage<br>
@@ -2377,7 +2367,7 @@ def getCard(self, Attack, Type):
                 border:0px solid black
                 ''')
                 # TODO
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal Vulnerable x 4 as Damage<br>
@@ -2539,7 +2529,7 @@ def getCard(self, Attack, Type):
                 border:0px solid black
                 ''')
                 # TODO
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal Vulnerable x 4 as Damage<br>
@@ -2658,7 +2648,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal 4 Damage<br>
@@ -2779,7 +2769,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal 4 Damage<br>
@@ -2861,7 +2851,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal 4 Damage<br>
@@ -2944,7 +2934,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal 4 Damage<br>
@@ -3149,7 +3139,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal 8 Damage 3 times<br>
@@ -3362,7 +3352,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal 8 Damage 3 times<br>
@@ -4149,7 +4139,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal 25 Damage to every enemy<br>
@@ -4308,7 +4298,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal 25 Damage to every enemy<br>
@@ -4427,7 +4417,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal Shield as Damage<br>
@@ -4549,7 +4539,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal Shield as Damage<br>
@@ -4667,7 +4657,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Gain 5 Block<br>
@@ -4787,7 +4777,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Gain 5 Block<br>
@@ -5722,7 +5712,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Reduce incoming Damage by 1/2<br>
@@ -5881,7 +5871,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Reduce incoming Damage by 1/2<br>
@@ -6559,7 +6549,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Draw a card<br>
@@ -6725,7 +6715,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Draw a card<br>
@@ -6850,7 +6840,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Gain 2 D6+2<br>
@@ -6977,7 +6967,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Gain 2 D6+2<br>
@@ -7131,7 +7121,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Apply 1 Vulnerable to all enemies<br>
@@ -7293,7 +7283,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Apply 1 Vulnerable to all enemies<br>
@@ -7413,7 +7403,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 For every card Echausted draw one more<br>
@@ -7533,7 +7523,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 For every card Echausted draw one more<br>
@@ -7616,7 +7606,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Gain 3 D8+2<br>
@@ -7699,7 +7689,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Gain 3 D8+2<br>
@@ -7798,7 +7788,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Draw 2 cards<br>
@@ -7897,7 +7887,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Draw 2 cards<br>
@@ -9529,7 +9519,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal missing health as Mental<br>
@@ -9694,7 +9684,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Deal missing health as Mental<br>
@@ -10463,7 +10453,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 If the target has Fear, apply 1 Fear to every enemy<br>
@@ -10583,7 +10573,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 If the target has Fear, apply 1 Fear to every enemy<br>
@@ -10701,7 +10691,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 If the enemy has Fear, apply 1 Weak and Vulnerable<br>
@@ -10821,7 +10811,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 If the enemy has Fear, apply 1 Weak and Vulnerable<br>
@@ -10939,7 +10929,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Upon being hit deal 3 Mental<br>
@@ -11059,7 +11049,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Upon being hit deal 3 Mental<br>
@@ -11177,7 +11167,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Draw two cards<br>
@@ -11300,7 +11290,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Draw two cards<br>
@@ -11398,7 +11388,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Apply 1 Fear to every enemy Damaged this turn.<br>
@@ -11497,7 +11487,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Apply 1 Fear to every enemy Damaged this turn.<br>
@@ -11614,7 +11604,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Randomly change enemy target<br>
@@ -11737,7 +11727,7 @@ def getCard(self, Attack, Type):
                 CardText.setStyleSheet('''
                 border:0px solid black
                 ''')
-                CardText.setText(f'''
+                CardText.setText('''
                 <html><head/><body>
                 <p style="line-height:1.3"><span>
                 Randomly change enemy target<br>
@@ -12027,7 +12017,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''Resources/CombatResources/AttackEffect1.png''')
+                image = QImage('''Resources/CombatResources/AttackEffect1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12353,7 +12343,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''Resources/CombatResources/PunchEffect1.png''')
+                image = QImage('''Resources/CombatResources/PunchEffect1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12405,7 +12395,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''Resources/CombatResources/AttackEffect4.png''')
+                image = QImage('''Resources/CombatResources/AttackEffect4.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12513,7 +12503,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''Resources/CombatResources/Flame.png''')
+                image = QImage('''Resources/CombatResources/Flame.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12885,7 +12875,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''Resources/CombatResources/Shield1.png''')
+                image = QImage('''Resources/CombatResources/Shield1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -12938,7 +12928,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''Resources/CombatResources/Buff1.png''')
+                image = QImage('''Resources/CombatResources/Buff1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13101,7 +13091,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''Resources/CombatResources/Buff1.png''')
+                image = QImage('''Resources/CombatResources/Buff1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13152,7 +13142,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''Resources/CombatResources/Buff1.png''')
+                image = QImage('''Resources/CombatResources/Buff1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13478,7 +13468,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''Resources/CombatResources/Fear1.png''')
+                image = QImage('''Resources/CombatResources/Fear1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -13786,7 +13776,7 @@ def AttackAnimation(self, AnimationID, Cast):
                 border: 0px solid black;
                 background-color: rgba(0,0,0,0%);
                 ''')
-                image = QImage(f'''Resources/CombatResources/Buff1.png''')
+                image = QImage('''Resources/CombatResources/Buff1.png''')
                 imagepix = QPixmap.fromImage(image)
                 widget.setPixmap(imagepix)
                 Globals.Layouts["BattleMenu"].Fade(widget)
@@ -15193,7 +15183,7 @@ def AttackConfirmed(OriginalData, FinalData, Results):
                     for EnemyID in Globals.BattleObjects["Enemies"]:
                         if Globals.BattleObjects["Enemies"][EnemyID]["Object"].Status == "Alive":
                             Parent = Attack["Parent"]
-                            AttackData = { "Target":EnemyID, "Parent":Parent, "AttackID":Move, "Type":"Attack", "Flags":{ "Confirmation":1, "EffectsTrigger":1, "Fear":1 }, "Source":Source, "Damage":0, "Healing":0, "ShieldDamage":0, "Shield":0, "MentalDamage":Damage, "MentalHealing":0, "MentalHealing":0, "Effects":{}, "AnimationID":AnimationID, "OtherData":{"Attack":Attack, "Button":Button} }
+                            AttackData = { "Target":EnemyID, "Parent":Parent, "AttackID":Move, "Type":"Attack", "Flags":{ "Confirmation":1, "EffectsTrigger":1, "Fear":1 }, "Source":Source, "Damage":0, "Healing":0, "ShieldDamage":0, "Shield":0, "MentalDamage":Damage, "MentalHealing":0, "Effects":{}, "AnimationID":AnimationID, "OtherData":{"Attack":Attack, "Button":Button} }
                             Globals.Layouts["BattleMenu"].CastAttack( AttackData )
 
 

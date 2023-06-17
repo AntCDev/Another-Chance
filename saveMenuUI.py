@@ -1,14 +1,15 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
 import json
 import os
 import os.path
-import Globals
 import pathlib
+
+from PyQt5 import QtCore
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
+
 Log = Globals.Layouts["MainF"].Log
 
 class SaveObject:
@@ -36,7 +37,12 @@ class SaveObject:
         # Name = self.Path[6:]
         # Name = Name[:-4]
         #
-        Name = os.path.basename(self.Path)[:-4]
+        # try:
+        #     print("GGG", pathlib.Path(self.Path).name[:-4] )
+        # except Exception as e:
+        #     print("BB", e)
+
+        Name = pathlib.Path(self.Path).name[:-4]
 
         SaveName.setText(Name)
         SaveName.setGeometry(0,0,1115,45)
@@ -71,7 +77,7 @@ class SaveObject:
 
         return SaveWidget
 
-class UiLayoutSaveMenu(object):
+class UiLayoutSaveMenu:
     def __init__(self):
         Globals.Layouts["SaveUI"] = self
         Globals.LayoutsData["SaveUI"] = {"Source":"SoLMenuUI", "Initialized":0}
@@ -297,11 +303,11 @@ class UiLayoutSaveMenu(object):
             Globals.CurrentSession["SoLEnviorementData"] = Globals.SoLEnviorementData
             Globals.CurrentSession["SoLNPCSchedules"] = Globals.SoLNPCSchedules
             Globals.CurrentSession["SoLFlavorDict"] = Globals.SoLFlavorDict
-            with open(FilePath, 'w') as f:
+            with pathlib.Path.open(FilePath, 'w') as f:
                 json.dump(Globals.CurrentSession, f)
             self.Refresh()
 
-            Name = os.path.basename(FilePath)[:-4]
+            Name = pathlib.Path(FilePath).name[:-4]
             self.LabelStatus.setText(f'''Successfully  saved {Name}''')
 
     def Load(self, FilePath):
@@ -315,7 +321,7 @@ class UiLayoutSaveMenu(object):
                 if not FilePath.endswith(".sav"):
                     FilePath = f'''{FilePath}.sav'''
 
-                with open(FilePath, 'rb') as f:
+                with pathlib.Path.open(FilePath, 'rb') as f:
                     NewSession = json.load(f)
 
                 Globals.CurrentSession = NewSession
@@ -331,10 +337,10 @@ class UiLayoutSaveMenu(object):
 
                 self.Refresh()
 
-                Name = os.path.basename(FilePath)[:-4]
+                Name = pathlib.Path(FilePath).name[:-4]
                 self.LabelStatus.setText(f'''Successfully  loaded {Name}''')
             except:
-                Name = os.path.basename(FilePath)[:-4]
+                Name = pathlib.Path(FilePath).name[:-4]
                 self.LabelStatus.setText(f'''Couldn't load {Name}''')
 
     def Remove(self, FilePath):
@@ -344,11 +350,11 @@ class UiLayoutSaveMenu(object):
         if not FilePath.endswith(".sav"):
             FilePath = f'''{FilePath}.sav'''
 
-        os.remove(FilePath)
+        pathlib.Path.unlink(FilePath)
 
         self.Refresh()
 
-        Name = os.path.basename(FilePath)[:-4]
+        Name = pathlib.Path(FilePath).name[:-4]
         self.LabelStatus.setText(f'''Successfully  removed {Name}''')
 
 

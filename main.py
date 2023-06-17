@@ -1,14 +1,16 @@
-import sys
-import PyQt5
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor, QFont, QFontDatabase
 import json
 import os
-import Globals
 import pathlib
+import sys
+
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtGui import QFontDatabase
+from PyQt5.QtWidgets import *
+
+import Globals
+
 
 def Log(*args):
     # 0 Non Issue
@@ -45,8 +47,8 @@ class MainWindow(QMainWindow):
         self.setFixedSize(1600, 1024)
         self.LayoutsBox = QHBoxLayout()
         self.LayoutsWidget = QWidget(self)
-        self.LayoutsWidget.setLayout(self.LayoutsBox);
-        self.LayoutsWidget.setGeometry(0,0,1650,1024);
+        self.LayoutsWidget.setLayout(self.LayoutsBox)
+        self.LayoutsWidget.setGeometry(0,0,1650,1024)
 
         self.LayoutsBox.setContentsMargins(0, 0, 0, 0)
 
@@ -215,7 +217,7 @@ class MainWindow(QMainWindow):
         self.LayoutsBox.LayoutsList = []
 
         try:
-            with open('CurrentSession.json', 'rb') as f:
+            with pathlib.Path.open('CurrentSession.json', 'rb') as f:
                 Globals.CurrentSession = json.load(f)
         except:
             Globals.CurrentSession = {}
@@ -354,7 +356,7 @@ class MainWindow(QMainWindow):
         # IMPORTS THE NPC FUNCTIONS
         for NPCFullID in os.listdir("NPCData"):
             # if os.path.isdir("NPCData/" + NPCFullID):
-            if os.path.isdir(os.path.abspath( pathlib.Path() / "NPCData" / NPCFullID )):
+            if pathlib.Path.is_dir(os.path.abspath( pathlib.Path() / "NPCData" / NPCFullID )):
                 try:
                     # FilesList = os.listdir(f"NPCData/{NPCFullID}")
                     FilesList = os.listdir(os.path.abspath( pathlib.Path() / "NPCData" / NPCFullID ))
@@ -489,12 +491,12 @@ class MainWindow(QMainWindow):
         except:
             ""
         try:
-            if "Control" in Globals.Keys.keys() and "Shift" in Globals.Keys.keys() and "1" in Globals.Keys.keys():
+            if "Control" in Globals.Keys and "Shift" in Globals.Keys and "1" in Globals.Keys:
                 try:
                     self.gotoPreviousLayout()
                 except:
                     ""
-            if "Control" in Globals.Keys.keys() and "Shift" in Globals.Keys.keys() and "2" in Globals.Keys.keys():
+            if "Control" in Globals.Keys and "Shift" in Globals.Keys and "2" in Globals.Keys:
                 try:
                     if Globals.LayoutsData["Active"] != Globals.Layouts["MainMenuUI"]:
                         self.gotoLayout("MainMenuUI")

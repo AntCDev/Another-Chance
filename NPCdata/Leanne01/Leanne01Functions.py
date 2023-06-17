@@ -1,25 +1,13 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
 import json
 import os
-
-
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-import sys
 import random
-import pathlib
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
 import Globals
-import time
-import threading
-from PyQt5.QtCore import QObject, QThread, pyqtSignal
-from time import sleep
+
 # from battleMenuUI import SRObject
 Log = Globals.Layouts["MainF"].Log
 
@@ -41,7 +29,7 @@ class NPCObject:
         try:
             # self.Data = Globals.InteractNPCData[ID]
 
-            with open(f'''NPCdata.json''', 'rb') as f:
+            with open('''NPCdata.json''', 'rb') as f:
                 self.Data = json.load(f)
             self.ID = ID
             self.Data = self.Data["01"]
@@ -82,7 +70,7 @@ class NPCObject:
             Files = os.listdir(f'''NPCdata/{self.Name}{self.ID}''')
             # if self.ImageType == "Portrait":
             ImageType = "Portrait"
-            list = [File for File in Files if File.endswith((".png")) or File.endswith((".jpg")) or File.endswith((".jpeg"))]
+            list = [File for File in Files if File.endswith((".png", ".jpg", ".jpeg"))]
             ListPortraits, ListFullBody = [], []
             ListPortraits = [File for File in list if File.startswith("Portrait")]
             ListFullBody = [File for File in list if File.startswith("FullBody")]
@@ -153,29 +141,29 @@ class NPCObject:
 
             self.Data["State"]["Arousal"] = 67
             if self.Data["State"]["Arousal"] >= 20:
-                LabelArousal1.setPixmap(QPixmap(f'''images/SoLResources/FilledHeart'''))
+                LabelArousal1.setPixmap(QPixmap('''images/SoLResources/FilledHeart'''))
             else:
-                LabelArousal1.setPixmap(QPixmap(f'''images/SoLResources/EmptyHeart'''))
+                LabelArousal1.setPixmap(QPixmap('''images/SoLResources/EmptyHeart'''))
 
             if self.Data["State"]["Arousal"] >= 40:
-                LabelArousal2.setPixmap(QPixmap(f'''images/SoLResources/FilledHeart'''))
+                LabelArousal2.setPixmap(QPixmap('''images/SoLResources/FilledHeart'''))
             else:
-                LabelArousal2.setPixmap(QPixmap(f'''images/SoLResources/EmptyHeart'''))
+                LabelArousal2.setPixmap(QPixmap('''images/SoLResources/EmptyHeart'''))
 
             if self.Data["State"]["Arousal"] >= 60:
-                LabelArousal3.setPixmap(QPixmap(f'''images/SoLResources/FilledHeart'''))
+                LabelArousal3.setPixmap(QPixmap('''images/SoLResources/FilledHeart'''))
             else:
-                LabelArousal3.setPixmap(QPixmap(f'''images/SoLResources/EmptyHeart'''))
+                LabelArousal3.setPixmap(QPixmap('''images/SoLResources/EmptyHeart'''))
 
             if self.Data["State"]["Arousal"] >= 80:
-                LabelArousal4.setPixmap(QPixmap(f'''images/SoLResources/FilledHeart'''))
+                LabelArousal4.setPixmap(QPixmap('''images/SoLResources/FilledHeart'''))
             else:
-                LabelArousal4.setPixmap(QPixmap(f'''images/SoLResources/EmptyHeart'''))
+                LabelArousal4.setPixmap(QPixmap('''images/SoLResources/EmptyHeart'''))
 
             if self.Data["State"]["Arousal"] >= 100:
-                LabelArousal5.setPixmap(QPixmap(f'''images/SoLResources/FilledHeart'''))
+                LabelArousal5.setPixmap(QPixmap('''images/SoLResources/FilledHeart'''))
             else:
-                LabelArousal5.setPixmap(QPixmap(f'''images/SoLResources/EmptyHeart'''))
+                LabelArousal5.setPixmap(QPixmap('''images/SoLResources/EmptyHeart'''))
 
         if True:
             LabelEnergy1 = QLabel(NPCWidget)
@@ -204,29 +192,29 @@ class NPCObject:
             LabelEnergy5.setStyleSheet('''QLabel{background: none;}''')
 
             if self.Data["State"]["Energy"] >= self.Data["GeneralAbilities"]["MaxEnergy"] / 5:
-                LabelEnergy1.setPixmap(QPixmap(f'''images/SoLResources/FilledEnergy'''))
+                LabelEnergy1.setPixmap(QPixmap('''images/SoLResources/FilledEnergy'''))
             else:
-                LabelEnergy1.setPixmap(QPixmap(f'''images/SoLResources/EmptyEnergy'''))
+                LabelEnergy1.setPixmap(QPixmap('''images/SoLResources/EmptyEnergy'''))
 
             if self.Data["State"]["Energy"] >= (self.Data["GeneralAbilities"]["MaxEnergy"] / 5) * 2:
-                LabelEnergy2.setPixmap(QPixmap(f'''images/SoLResources/FilledEnergy'''))
+                LabelEnergy2.setPixmap(QPixmap('''images/SoLResources/FilledEnergy'''))
             else:
-                LabelEnergy2.setPixmap(QPixmap(f'''images/SoLResources/EmptyEnergy'''))
+                LabelEnergy2.setPixmap(QPixmap('''images/SoLResources/EmptyEnergy'''))
 
             if self.Data["State"]["Energy"] >= (self.Data["GeneralAbilities"]["MaxEnergy"] / 5) * 3:
-                LabelEnergy3.setPixmap(QPixmap(f'''images/SoLResources/FilledEnergy'''))
+                LabelEnergy3.setPixmap(QPixmap('''images/SoLResources/FilledEnergy'''))
             else:
-                LabelEnergy3.setPixmap(QPixmap(f'''images/SoLResources/EmptyEnergy'''))
+                LabelEnergy3.setPixmap(QPixmap('''images/SoLResources/EmptyEnergy'''))
 
             if self.Data["State"]["Energy"] >= (self.Data["GeneralAbilities"]["MaxEnergy"] / 5) * 4:
-                LabelEnergy4.setPixmap(QPixmap(f'''images/SoLResources/FilledEnergy'''))
+                LabelEnergy4.setPixmap(QPixmap('''images/SoLResources/FilledEnergy'''))
             else:
-                LabelEnergy4.setPixmap(QPixmap(f'''images/SoLResources/EmptyEnergy'''))
+                LabelEnergy4.setPixmap(QPixmap('''images/SoLResources/EmptyEnergy'''))
 
             if self.Data["State"]["Energy"] >= (self.Data["GeneralAbilities"]["MaxEnergy"] / 5) * 5:
-                LabelEnergy5.setPixmap(QPixmap(f'''images/SoLResources/FilledEnergy'''))
+                LabelEnergy5.setPixmap(QPixmap('''images/SoLResources/FilledEnergy'''))
             else:
-                LabelEnergy5.setPixmap(QPixmap(f'''images/SoLResources/EmptyEnergy'''))
+                LabelEnergy5.setPixmap(QPixmap('''images/SoLResources/EmptyEnergy'''))
 
         if True:
             LabelMood1 = QLabel(NPCWidget)
@@ -256,54 +244,54 @@ class NPCObject:
 
             if self.Data["State"]["Mood"] >= 0:
                 if self.Data["State"]["Mood"] >= 20:
-                    LabelMood1.setPixmap(QPixmap(f'''images/SoLResources/BlueDiamond'''))
+                    LabelMood1.setPixmap(QPixmap('''images/SoLResources/BlueDiamond'''))
                 else:
-                    LabelMood1.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                    LabelMood1.setPixmap(QPixmap('''images/SoLResources/EmptyDiamond'''))
 
                 if self.Data["State"]["Mood"] >= 40:
-                    LabelMood2.setPixmap(QPixmap(f'''images/SoLResources/BlueDiamond'''))
+                    LabelMood2.setPixmap(QPixmap('''images/SoLResources/BlueDiamond'''))
                 else:
-                    LabelMood2.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                    LabelMood2.setPixmap(QPixmap('''images/SoLResources/EmptyDiamond'''))
 
                 if self.Data["State"]["Mood"] >= 60:
-                    LabelMood3.setPixmap(QPixmap(f'''images/SoLResources/BlueDiamond'''))
+                    LabelMood3.setPixmap(QPixmap('''images/SoLResources/BlueDiamond'''))
                 else:
-                    LabelMood3.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                    LabelMood3.setPixmap(QPixmap('''images/SoLResources/EmptyDiamond'''))
 
                 if self.Data["State"]["Mood"] >= 80:
-                    LabelMood4.setPixmap(QPixmap(f'''images/SoLResources/BlueDiamond'''))
+                    LabelMood4.setPixmap(QPixmap('''images/SoLResources/BlueDiamond'''))
                 else:
-                    LabelMood4.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                    LabelMood4.setPixmap(QPixmap('''images/SoLResources/EmptyDiamond'''))
 
                 if self.Data["State"]["Mood"] >= 100:
-                    LabelMood5.setPixmap(QPixmap(f'''images/SoLResources/BlueDiamond'''))
+                    LabelMood5.setPixmap(QPixmap('''images/SoLResources/BlueDiamond'''))
                 else:
-                    LabelMood5.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                    LabelMood5.setPixmap(QPixmap('''images/SoLResources/EmptyDiamond'''))
             elif self.Data["State"]["Mood"] <= 0:
                 if self.Data["State"]["Mood"] <= 20:
-                    LabelMood1.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
+                    LabelMood1.setPixmap(QPixmap('''images/SoLResources/RedDiamond'''))
                 else:
-                    LabelMood1.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                    LabelMood1.setPixmap(QPixmap('''images/SoLResources/EmptyDiamond'''))
 
                 if self.Data["State"]["Mood"] <= 40:
-                    LabelMood2.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
+                    LabelMood2.setPixmap(QPixmap('''images/SoLResources/RedDiamond'''))
                 else:
-                    LabelMood2.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                    LabelMood2.setPixmap(QPixmap('''images/SoLResources/EmptyDiamond'''))
 
                 if self.Data["State"]["Mood"] <= 60:
-                    LabelMood3.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
+                    LabelMood3.setPixmap(QPixmap('''images/SoLResources/RedDiamond'''))
                 else:
-                    LabelMood3.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                    LabelMood3.setPixmap(QPixmap('''images/SoLResources/EmptyDiamond'''))
 
                 if self.Data["State"]["Mood"] <= 80:
-                    LabelMood4.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
+                    LabelMood4.setPixmap(QPixmap('''images/SoLResources/RedDiamond'''))
                 else:
-                    LabelMood4.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                    LabelMood4.setPixmap(QPixmap('''images/SoLResources/EmptyDiamond'''))
 
                 if self.Data["State"]["Mood"] <= 100:
-                    LabelMood5.setPixmap(QPixmap(f'''images/SoLResources/RedDiamond'''))
+                    LabelMood5.setPixmap(QPixmap('''images/SoLResources/RedDiamond'''))
                 else:
-                    LabelMood5.setPixmap(QPixmap(f'''images/SoLResources/EmptyDiamond'''))
+                    LabelMood5.setPixmap(QPixmap('''images/SoLResources/EmptyDiamond'''))
 
 
         return NPCWidget

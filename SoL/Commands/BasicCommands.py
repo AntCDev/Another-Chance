@@ -1,15 +1,14 @@
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
+
 from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
 import Globals
-import random
-import os
+
 Log = Globals.Layouts["MainF"].Log
 
 def GetCommands(self, Reference):
-    CommandsList = ["Conversation0", "Skinship0", "ServeThem0", "GetLapPillow0", "GiveLapPillow0", "BellyCaress0", "PinchCheek0", "ButtCaress0", "Hug0", "Kiss0", "BreastCaress0", "AnalCaress0", "PussyCaress0", "PenisCaress0" "ServeAlcohol0", "PushDown0", "GetFollow0"]
+    CommandsList = ["Conversation0", "Skinship0", "ServeThem0", "GetLapPillow0", "GiveLapPillow0", "BellyCaress0", "PinchCheek0", "ButtCaress0", "Hug0", "Kiss0", "BreastCaress0", "AnalCaress0", "PussyCaress0", "PenisCaress0", "ServeAlcohol0", "PushDown0", "GetFollow0"]
     CommandsList +=["CaressSex0", "GetCaressSex0", "PussyCaressSex0", "GetPussyCaressSex0", "FingeringSex0", "GetFingeringSex0", "CunnilingusSex0", "GetCunnilingusSex0", "PenissCaressSex0", "GetPenisCaressSex0", "HandJobSex0", "GetHandjobSex0", "BlowjobSex0", "GetBlowjobSex0", "BreastCaressSex0", "GetBreastCaressSex0", "NippleTeaseSex0", "GetNippleTeaseSex0", "NippleSuckingSex0", "GetNippleSuckingSex0", "AnalCaressSex0", "GetAnalCaressSex0", "AnalFingeringSex0", "GetAnalFingeringSex0", "RimjobSex0", "GetRimjobSex0", "MasturbateSex0", "GetMasturbateSex0", "AMasturbateSex0", "GetAMasturbateSex0", "ThighjobSex0", "GetThighjobSex0", "FootjobSex0", "GetFootjobSex0", "TitjobSex0", "GetTitjobSex0", "ButtjonbSex0", "GetButtjobSex0", "FacesittingSex0", "GetFacesittingSex0", "AFacesittingSex0", "GetAFacesittingSex0", "AssSpankingSex0", "GetAssSpankingSex0", "BreastSlappingSex0", "GetBreastSlappingSex0", "MissionarySex0", "GetMissionarySex0", "DoggyStyleSex0", "GetDoggyStyleSex0", "CowgirlSex0", "GetCowgirlSex0", "LotusSex0", "GetLotusSex0", "AMissionarySex0", "GetAMissionarySex0", "ADoggyStyleSex0", "GetADoggyStyleSex0", "ACowgirlSex0", "GetACowgirlSex0", "ALotusSex0", "GetALotusSex0", "StopSex0"]
 
     # CommandsList = ["Conversation0"]
@@ -366,17 +365,25 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Conversation", {"BriefFluff": f'''Listening to {AName}.''', "LongFluff": f'''{TName} is listening to {AName} talk.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
-                "FailedTask":{
+                "ForcefulTask":{},
+                "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Conversation", {"BriefFluff": f'''Bored listening to {AName}''', "LongFluff": f'''{TName} is unninteresed with {AName}'s conversation.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
+                    },
+                "EnergyTask":{
+                    "HourStart": DateData["Hour"],
+                    "HourFinish": DateData["Hour"] + 15,
+                    "Task": ["Conversation", {"BriefFluff": f'''Tiredly listening to {AName}.''', "LongFluff": f'''{TName} is tiredly trying to listen to {AName} talk.'''}],
+                    "InterruptionPenalty": 20,
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":-20
+                "Resistance":-20,
                 }
             ActorDict = {
                 "State":{
@@ -392,20 +399,28 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Conversation", {"BriefFluff": f'''Talking with {TName}.''', "LongFluff": f'''{AName} is talking with {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
-                "FailedTask":{
+                "ForcefulTask":{},
+                "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Conversation", {"BriefFluff": f'''Fails to talk with {TName}.''', "LongFluff": f'''{AName} is failing to talk with {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
+                "EnergyTask":{
+                    "HourStart": DateData["Hour"],
+                    "HourFinish": DateData["Hour"] + 15,
+                    "Task": ["Conversation", {"BriefFluff": f'''Tiredly talking with {TName}.''', "LongFluff": f'''{AName} is tiredly talking with {TName}.'''}],
+                    "InterruptionPenalty": 20,
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
+                },
                 "Connotations":{},
-                "Resistance":0
+                "Resistance":0,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "Skinship0":
             TargetDict = {
@@ -428,7 +443,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Playing with {AName}.''', "LongFluff": f'''{TName} is messing around with {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -436,17 +451,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s attempt of playing.''', "LongFluff": f'''{TName} resists {AName}'s attempts of messing around.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Tries to keep up with {AName}'s playing.''', "LongFluff": f'''{TName} doesn't have enough energy to keep up with {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":-10
+                "Resistance":-10,
                 }
             ActorDict = {
                 "State":{
@@ -463,7 +478,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Playing with {TName}.''', "LongFluff": f'''{AName} is messing around with {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -471,20 +486,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Fails to play with {TName}.''', "LongFluff": f'''{AName} attempts to play with {TName} but fails to do it.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Tries to play with {TName}.''', "LongFluff": f'''{AName} attempts to play with {TName} but doesn't have the energy.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":0
+                "Resistance":0,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "ServeThem0":
             TargetDict = {
@@ -504,7 +519,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Being cared by {AName}.''', "LongFluff": f'''{TName} is being cared and serviced by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -512,17 +527,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Rejecting {AName}'s care.''', "LongFluff": f'''{TName} is recjecting any attempt to be serviced by {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to keep up with {AName}'s care. ''', "LongFluff": f'''{TName} is trying to keep up with {AName}'s servicing.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":5
+                "Resistance":5,
                 }
             ActorDict = {
                 "State":{
@@ -540,7 +555,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Servicing {TName}.''', "LongFluff": f'''{AName} is caring and servicing for {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -548,20 +563,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Forcing {APObj}self to service {TName}.''', "LongFluff": f'''{AName} is trying to force {APObj}self to care and service {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to servcie {TName}.''', "LongFluff": f'''{AName} is trying to keep up servicing and caring for {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":15
+                "Resistance":15,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetLapPillow0":
             TargetDict = {
@@ -582,7 +597,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Giving a lap pillow to {AName}.''', "LongFluff": f'''{TName} is letting {AName} use {TPPos} lap to rest {APPos} head.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -590,17 +605,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Rejecting giving {AName} a lap pillow.''', "LongFluff": f'''{TName} rejects giving a lap pillow to {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to give {AName} a lap pillow.''', "LongFluff": f'''{TName} tries to focus on giving {AName} a lap pillow.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":20
+                "Resistance":20,
                 }
             ActorDict = {
                 "State":{
@@ -619,7 +634,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting a lap pillow from {TName}.''', "LongFluff": f'''{AName} is resting {APPos} head on {TName}'s lap.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -627,20 +642,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Forcing {APObj}self to get a lap pillow from {TName}.''', "LongFluff": f'''{AName} is forcing {APObj}self to get a lap pillow from {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to get a lap pillow from {TName}.''', "LongFluff": f'''{AName} is trying to focus and get a lap pillow from {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":5
+                "Resistance":5,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GiveLapPillow0":
             TargetDict = {
@@ -662,7 +677,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Receiving a lap pillow from {AName}.''', "LongFluff": f'''{TName} is resting {TPPos} head on {AName}'s lap.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -670,17 +685,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting Receiving a lap pillow from {AName}.''', "LongFluff": f'''{TName} is rejecting {AName}'s offer for a lap pillow.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to Receive a lap pillow from {AName}.''', "LongFluff": f'''{TName} is trying to focus on Receiving a lap pillow from {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":15
+                "Resistance":15,
                 }
             ActorDict = {
                 "State":{
@@ -696,7 +711,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Gving a lap pillow to {TName} ''', "LongFluff": f'''{AName} is giving a lap pillow to {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -704,20 +719,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Forcing {APObj}self to give {TName} a lap pillow.''', "LongFluff": f'''{AName} is trying to foce {APObj}self to give {TName} a lap pillow.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to give {TName} a lap pillow.''', "LongFluff": f'''{AName} is trying to focus {APObj}self on giving {TName} a lap pillow.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":0
+                "Resistance":0,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "BellyCaress0":
             TargetDict = {
@@ -739,7 +754,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting {TPPos} belly caressed by {AName}.''', "LongFluff": f'''{TName} is having {TPPos} belly caressed '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -747,17 +762,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s attempt to caress {TPPos} belly.''', "LongFluff": f'''{TName} is rejecting {AName}'s attempts at caressing {TPPos} belly.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while {AName} caresses {TPPos} belly.''', "LongFluff": f'''{TName} is trying to focus while {AName} caresses {TPPos} belly.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":15
+                "Resistance":15,
                 }
             ActorDict = {
                 "State":{
@@ -776,7 +791,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressing {TName}'s belly.''', "LongFluff": f'''{AName} is caressing {TName}'s belly.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -784,20 +799,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Fails to caress {TName}'s belly.''', "LongFluff": f'''{AName} fails to caress {TName}'s belly.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Forcing {APObj}self to caress {TName}'s belly.''', "LongFluff": f'''{AName} tries to focus {APObj}self to caress {TName}'s belly.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":5
+                "Resistance":5,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "PinchCheek0":
             TargetDict = {
@@ -819,7 +834,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting {TPPos} cheeks pinched by {AName}.''', "LongFluff": f'''{TName} is having {TPPos} cheeks playfully pinched by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -827,17 +842,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting as {AName} tries to pinch {TPPos} cheeks.''', "LongFluff": f'''{TName} is resisting as {AName} attempts to pinch {TPPos} cheeks.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus as {AName} pinches {TPPos} cheeks.''', "LongFluff": f'''{TName} is trying to focus as {AName} pinches {TPPos} cheeks.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":10
+                "Resistance":10,
                 }
             ActorDict = {
                 "State":{
@@ -853,7 +868,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Pinching {TName}'s cheeks.''', "LongFluff": f'''{AName} is playfully pinching {TName}'s cheeks.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -861,20 +876,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to pinch {TName}'s cheeks.''', "LongFluff": f'''{AName} fails to pinch on {AName}'s cheeks.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Tries to focus on pinching {TName}'s cheeks.''', "LongFluff": f'''{AName} tries to focus while pinching on {TName}'s cheeks.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":5
+                "Resistance":5,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "ButtCaress0":
             TargetDict = {
@@ -898,7 +913,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Letting {AName} caress {TPPos} {Desc("AssSize", TargetData, "P")}.''', "LongFluff": f'''{TName} is letting {AName} caress {TPPos} {Desc("AssSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -906,17 +921,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName} trying to caress {TPPos} {Desc("AssSize", TargetData, "P")}.''', "LongFluff": f'''{TName} is resisting as {AName} is trying to caress {TPPos} {Desc("AssSize", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus as {AName} caresses {TPPos} {Desc("AssSize", TargetData, "P")}.''', "LongFluff": f'''{TName} is trying to focus while {AName} caresses {TPPos} {Desc("AssSize", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":25
+                "Resistance":25,
                 }
             ActorDict = {
                 "State":{
@@ -934,7 +949,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressing {TName}'s {Desc("AssSize", TargetData, "P")}.''', "LongFluff": f'''{AName} is caressing {TName}'s {Desc("AssSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -942,20 +957,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("AssSize", TargetData, "P")}.''', "LongFluff": f'''{AName} failed to try and caress {TName}'s {Desc("AssSize", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to caress {TName}'s {Desc("AssSize", TargetData, "P")}.''', "LongFluff": f'''{AName} is trying to focus on caressing {TName}'s {Desc("AssSize", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":15
+                "Resistance":15,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "Hug0":
             TargetDict = {
@@ -977,7 +992,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Being hugged by {AName}.''', "LongFluff": f'''{TName} is being hugged by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -985,17 +1000,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s hug.''', "LongFluff": f'''{TName} is resisting as {AName} attempts to hug {TPObj} '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on {AName}'s hug.''', "LongFluff": f'''{TName} is trying to stay focused as {AName} hugs {TPObj},'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":15
+                "Resistance":15,
                 }
             ActorDict = {
                 "State":{
@@ -1015,7 +1030,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Hugging {TName}''', "LongFluff": f'''{AName} is hugging {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1023,20 +1038,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to hug {TName}.''', "LongFluff": f'''{AName} fails to hug {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on hugging {TName}.''', "LongFluff": f'''{AName} is trying to focus on hugging {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":10
+                "Resistance":10,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "Kiss0":
             TargetDict = {
@@ -1062,7 +1077,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting kissed by {AName}.''', "LongFluff": f'''{TName} is getting kissed by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1070,17 +1085,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resising {AName}'s kiss.''', "LongFluff": f'''{TName} is resisting as {AName} attempts to kiss {TPObj}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on {AName}'s kiss.''', "LongFluff": f'''{TName} is trying to focus as {AName} kisses {TPObj}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":40
+                "Resistance":40,
                 }
             ActorDict = {
                 "State":{
@@ -1103,7 +1118,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Kissing {TName}.''', "LongFluff": f'''{AName} is kissing {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1111,20 +1126,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to kiss {TName}.''', "LongFluff": f'''{AName} tries but fails to kiss {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Tries to focus on kissint {TName}.''', "LongFluff": f'''{AName} tries to keep {TPPos} focus while kissing {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "BreastCaress0":
             TargetDict = {
@@ -1148,7 +1163,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {TPPos} {Desc("ChestSize", TargetData, "P")} caressed by {AName}.''', "LongFluff": f'''{TName} is having {TPPos} {Desc("ChestSize", TargetData, "DSP")} caressed by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1156,17 +1171,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s attempt to caress {TPPos} {Desc("ChestSize", TargetData, "P")}.''', "LongFluff": f'''{TName} resists as {AName} attempts to caress {TPPos} {Desc("ChestSize", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus as {AName} caresses {TPPos} {Desc("ChestSize", TargetData, "P")}.''', "LongFluff": f'''{TName} is trying to focus while {AName} is caressing {TPPos} {Desc("ChestSize", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             ActorDict = {
                 "State":{
@@ -1184,7 +1199,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressing {TName}'s {Desc("ChestSize", TargetData, "P")}.''', "LongFluff": f'''{AName} is caressing {TName}'s {Desc("ChestSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1192,20 +1207,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("ChestSize", TargetData, "P")}. ''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("ChestSize", TargetData, "P")}, but fails to do so.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on caressing {TName}'s {Desc("ChestSize", TargetData, "P")}.''', "LongFluff": f'''[AName] attempts to focuas as {APSub} caresses {TPPos} {Desc("ChestSize", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":15
+                "Resistance":15,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "AnalCaress0":
             TargetDict = {
@@ -1229,7 +1244,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {TPPos} {Desc("ATightness", TargetData, "P")} caressed by {AName}.''', "LongFluff": f'''{TName} is having {TPPos} {Desc("ATightness", TargetData, "DSP")} caressed by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1237,17 +1252,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s attempt to caress {TPPos} {Desc("ATightness", TargetData, "P")}.''', "LongFluff": f'''{TName} resists as {AName} attempts to caress {TPPos} {Desc("ATightness", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus as {AName} caresses {TPPos} {Desc("ATightness", TargetData, "P")}.''', "LongFluff": f'''{TName} is trying to focus while {AName} is caressing {TPPos} {Desc("ATightness", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":40
+                "Resistance":40,
                 }
             ActorDict = {
                 "State":{
@@ -1264,7 +1279,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressing {TName}'s {Desc("ATightness", TargetData, "P")}.''', "LongFluff": f'''{AName} is caressing {TName}'s {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1272,20 +1287,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("ATightness", TargetData, "P")}. ''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("ATightness", TargetData, "P")}, but fails to do so.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on caressing {TName}'s {Desc("ATightness", TargetData, "P")}.''', "LongFluff": f'''[AName] attempts to focuas as {APSub} caresses {TPPos} {Desc("ATightness", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":25
+                "Resistance":25,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "PussyCaress0":
             TargetDict = {
@@ -1309,7 +1324,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {TPPos} {Desc("VTightness", TargetData, "P")} caressed by {AName}''', "LongFluff": f'''{TName} is having {TPPos} {Desc("VTightness", TargetData, "DSP")} caressed by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1317,17 +1332,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s attempt to caress {TPPos} {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{TName} resists as {AName} attempts to caress {TPPos} {Desc("VTightness", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus as {AName} caresses {TPPos} {Desc("VTightness", TargetData, "P")}.''', "LongFluff": f'''{TName} is trying to focus while {AName} is caressing {TPPos} {Desc("VTightness", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":35
+                "Resistance":35,
                 }
             ActorDict = {
                 "State":{
@@ -1346,7 +1361,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressing {TName}'s {Desc("VTightness", TargetData, "P")}.''', "LongFluff": f'''{AName} is caressing {TName}'s {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1354,20 +1369,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("VTightness", TargetData, "P")}. ''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("VTightness", TargetData, "P")}, but fails to do so.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on caressing {TName}'s {Desc("VTightness", TargetData, "P")}.''', "LongFluff": f'''[AName] attempts to focuas as {APSub} caresses {TPPos} {Desc("VTightness", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":20
+                "Resistance":20,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "PenisCaress0":
             TargetDict = {
@@ -1391,7 +1406,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {TPPos} {Desc("PenisSize", TargetData, "P")} caressed by {AName}.''', "LongFluff": f'''{TName} is having {TPPos} {Desc("PenisSize", TargetData, "DSP")} caressed by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1399,17 +1414,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s attempt to caress {TPPos} {Desc("PenisSize", TargetData, "P")}.''', "LongFluff": f'''{TName} resists as {AName} attempts to caress {TPPos} {Desc("PenisSize", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus as {AName} caresses {TPPos} {Desc("PenisSize", TargetData, "P")}.''', "LongFluff": f'''{TName} is trying to focus while {AName} is caressing {TPPos} {Desc("PenisSize", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":35
+                "Resistance":35,
                 }
             ActorDict = {
                 "State":{
@@ -1428,7 +1443,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressing {TName}'s {Desc("PenisSize", TarTargetDataget, "P")}.''', "LongFluff": f'''{AName} is caressing {TName}'s {Desc("PenisSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1436,20 +1451,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("PenisSize", TargetData, "P")}. ''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("PenisSize", TargetData, "P")}, but fails to do so.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on caressing {TName}'s {Desc("PenisSize", TargetData, "P")}.''', "LongFluff": f'''[AName] attempts to focuas as {APSub} caresses {TPPos} {Desc("PenisSize", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":20
+                "Resistance":20,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "ServeAlcohol0":
             TargetDict = {
@@ -1471,7 +1486,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Has a drink poured by {AName}.''', "LongFluff": f'''{TName} is sharing a drink with {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1479,17 +1494,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Denying a drink by {AName}.''', "LongFluff": f'''{TName} is denying a drink offered by {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on drinking with {AName}.''', "LongFluff": f'''{TName} is trying to focus as {TPSub} shares a drink with {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":15
+                "Resistance":15,
                 }
             ActorDict = {
                 "State":{
@@ -1505,7 +1520,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Pouring some alcohol for {TName}.''', "LongFluff": f'''{AName} is porung some alcohol for {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1513,20 +1528,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Fails to share some alcohol with {TName}.''', "LongFluff": f'''{AName} fails to share some alcohol with {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Tries to focus on sharingg alcohol with {TName}.''', "LongFluff": f'''{AName} attempts to focus while serving some alcohol to {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":10
+                "Resistance":10,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "PushDown0":
             TargetDict = {
@@ -1546,7 +1561,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Getting pushed down by {AName}''', "LongFluff": f'''{TName} is getting pushed down by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                 },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1554,17 +1569,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Resisting being pushed down by {AName}''', "LongFluff": f'''{TName} is resisting being pushed down by {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                 },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Trying to focus as {AName} pushes {TPObj} down''', "LongFluff": f'''{TName} is trying to focus while being pushed down by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                 },
                 "Connotations":{},
-                "Resistance":55
+                "Resistance":55,
                 }
             ActorDict = {
                 "State":{
@@ -1583,7 +1598,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Pushing down {TName}''', "LongFluff": f'''{AName} is pushing down {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                 },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1591,20 +1606,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Trying push down {TName}''', "LongFluff": f'''{AName} is trying to push down {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                 },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Trying to focus on pushing down {TName}''', "LongFluff": f'''{AName} is trying to focus while pushing down {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                 },
                 "Connotations":{},
-                "Resistance":50
+                "Resistance":50,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetFollow0":
             TargetDict = {
@@ -1621,7 +1636,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Starting to follow {AName}''', "LongFluff": f'''{TName} is starting to follow {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                 },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1629,17 +1644,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Refusing to follow {AName}''', "LongFluff": f'''{TName} is refusing to follow {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                 },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Trying to focus on following {AName}''', "LongFluff": f'''{TName} is trying to focus while following {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                 },
                 "Connotations":{},
-                "Resistance":-5
+                "Resistance":-5,
                 }
             ActorDict = {
                 "State":{
@@ -1658,7 +1673,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Getting {TName} to follow {APObj}''', "LongFluff": f'''{AName} is getting {TName} to follow {APObj}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                 },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1666,20 +1681,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Failing to get {TName} to follow {APObj}''', "LongFluff": f'''{AName} is trying and failing to get {TName} to follow {APObj}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                 },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Tiredly makiing {TName} follow {APObj}''', "LongFluff": f'''{AName} is tiredly making {TName} follow {APObj}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                 },
                 "Connotations":{},
-                "Resistance":-5
+                "Resistance":-5,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
 
 
@@ -1703,7 +1718,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Being caressed by {AName}''', "LongFluff": f'''{TName} is being caressed by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1711,17 +1726,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting being caressed by {AName}''', "LongFluff": f'''{TName} is resisting being caressed by {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on {AName}'s caressing.''', "LongFluff": f'''{TName} is trying to focus while being caressed by {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             if Globals.SoLNPCData[Target]["BodyData"]["VTightness"] >= 1:
                 TargetDict["Temporal"]["VPlea"] = 5
@@ -1746,7 +1761,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressing {TName}''', "LongFluff": f'''{AName} is caressing {TName}'s body.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1754,20 +1769,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to caress {TName} ''', "LongFluff": f'''{AName} is refusing to caress {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus and caress {TName}.''', "LongFluff": f'''{AName} is trying to focus on caressing {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":15
+                "Resistance":15,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetCaressSex0":
             TargetDict = {
@@ -1791,7 +1806,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressing {AName}''', "LongFluff": f'''{TName} is caressing {AName}'s body at {APPos} request.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1799,17 +1814,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to caress {AName}''', "LongFluff": f'''{TName} is refussing to caress {AName}'s body.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Tiredly caressing {AName}.''', "LongFluff": f'''{TName} is tiredly trying to do as instructed and caress {AName}'s body '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":35
+                "Resistance":35,
                 }
             ActorDict = {
                 "State":{
@@ -1829,7 +1844,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting caressed by {TName}.''', "LongFluff": f'''{AName} is getting {APPos} caressed by {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1837,17 +1852,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to make {TName} caress {APObj}.''', "LongFluff": f'''{AName} is trying to convince {TName} to caress {TPPos} body.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on {TName}'s caress.''', "LongFluff": f'''{AName} is trying to focus while {TName} caresses {APPos} body.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":25
+                "Resistance":25,
                 }
             if Globals.SoLNPCData[Actor]["BodyData"]["VTightness"] >= 1:
                 ActorDict["Temporal"]["VPlea"] = 5
@@ -1856,7 +1871,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 ActorDict["Temporal"]["PPlea"] = 5
                 ActorDict["Connotations"]["P"] = [1,5]
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
 
         elif CommandID == "PussyCaressSex0":
@@ -1883,7 +1898,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {TPPos} {Desc("VTightness", TargetData, "P")} caressed''', "LongFluff": f'''{TName} is having {TPPos} {Desc("VTightness", TargetData, "DSP")} caressed by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1891,17 +1906,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s attempt to caress {TPPos} {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{TName} resists as {AName} attempts to caress {TPPos} {Desc("VTightness", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus as {AName} caresses {TPPos} {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{TName} is trying to focus while {AName} is caressing {TPPos} {Desc("VTightness", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":35
+                "Resistance":35,
                 }
             ActorDict = {
                 "State":{
@@ -1919,7 +1934,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressing {TName}'s {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{AName} is caressing {TName}'s {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1927,20 +1942,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("VTightness", TargetData, "P")}, but fails to do so.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on caressing {TName}'s {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{AName} attempts to focuas as {APSub} caresses {TPPos} {Desc("VTightness", TargetData, "P")}'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":25
+                "Resistance":25,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetPussyCaressSex0":
             TargetDict = {
@@ -1962,7 +1977,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressingg {AName}'s {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{TName} is caressing {AName}'s {Desc("VTightness", ActorData, "DSP")} after being asked to.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -1970,17 +1985,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to caress {AName}'s {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{TName} is refusing to caress {AName}'s {Desc("VTightness", ActorData, "DSP")} after being asked to.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus and caress [AName]'s {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{TName} is trying to focus while caressing {AName}'s {Desc("VTightness", ActorData, "DSP")} after being asked to.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             ActorDict = {
                 "State":{
@@ -2000,7 +2015,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {TName} caress {APPos} {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{AName} is having {APPos} {Desc("VTightness", ActorData, "DSP")} caresed by {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2008,20 +2023,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to have {TName} caress {APPos} {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{AName} is failing to get {TName} to caress {APPos} {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while {TName} is caressing {APPos} {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{AName} is trying to focus while having {AName} caress {APPos} {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":20
+                "Resistance":20,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "FingeringSex0":
             TargetDict = {
@@ -2044,7 +2059,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Being fingered by {AName}''', "LongFluff": f'''{TName} is having {TPPos} {Desc("VTightness", TargetData, "DSP")} fingered by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2052,17 +2067,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s attempts to Finger {TPObj}''', "LongFluff": f'''{TName} is resisting {AName}'s attempts at fingering {TPPos} {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''{TName} is trying to focus while being fingered''', "LongFluff": f'''{TName} is trying to focus while {AName} fingers {TPPos} {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":0
+                "Resistance":0,
                 }
             ActorDict = {
                 "State":{
@@ -2081,7 +2096,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Fingering {TName}'s {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{AName} is fingering {TName}'s {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2089,20 +2104,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to finger {TName}'s {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{TName} is failing to finger {TPPos} {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on fingering {TName}''', "LongFluff": f'''{AName} is trying to focus on fingering {TName}'s {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":0
+                "Resistance":0,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetFingeringSex0":
             TargetDict = {
@@ -2127,7 +2142,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Fingering {AName}'s {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{TName} is fingering {AName}'s {Desc("VTightness", ActorData, "DSP")} after being asked to.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2135,17 +2150,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to finger {AName}'s {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{TName} is refusinng to finger {AName}'s {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on fingering {AName}'s {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{TName} is trying to focus while fingering {AName}'s {Desc("VTightness", ActorData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance": 40
+                "Resistance": 40,
                 }
             ActorDict = {
                 "State":{
@@ -2164,7 +2179,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting fingered by {TName}''', "LongFluff": f'''{AName} is getting {APPos} {Desc("VTightness", ActorData, "DSP")} fingered by {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2172,20 +2187,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to get {TName} to finger {APObj}''', "LongFluff": f'''{AName} is failing to get {TName} to finger {APPos} {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while {TName} fingers {APObj}''', "LongFluff": f'''{AName} is trying to focus while {TName} fingers {APPos} {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "CunnilingusSex0":
             TargetDict = {
@@ -2212,7 +2227,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting {TPPos} {Desc("VTightness", TargetData, "P")} eaten''', "LongFluff": f'''{TName} is having {TPPos} {Desc("VTightness", TargetData, "DSP")} eaten by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2220,17 +2235,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to get {TPPos} {Desc("VTightness", TargetData, "P")} eaten by {AName}''', "LongFluff": f'''{TName} is refusing to have {AName} eat {TPPos} {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while {AName} eats {TPPos} {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{TName} is trying to focus while {AName} eats {TPPos} {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":65
+                "Resistance":65,
                 }
             ActorDict = {
                 "State":{
@@ -2249,7 +2264,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Eating {TName}'s {Desc("VTightness", TargetData, "P")}.''', "LongFluff": f'''{AName} is eating {TName}'s {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2257,20 +2272,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to eat {TName}'s {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{AName} is failing to eat {TName}'s {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on eating {TName}'s {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{AName} is trying to focus on eating {TName}'s {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":55
+                "Resistance":55,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetCunnilingusSex0":
             TargetDict = {
@@ -2295,7 +2310,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Eating {AName}'s {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{TName} is eating {AName}'s {Desc("VTightness", ActorData, "DSP")} at {APPos} request.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2303,17 +2318,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to eat {AName}'s {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{TName} is refusin to eat {AName}'s {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on eating {AName}'s {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{TName} is trying to focus on eating {AName}'s {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":75
+                "Resistance":75,
                 }
             ActorDict = {
                 "State":{
@@ -2336,7 +2351,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {TName} eat {APPos} {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{AName} is having {TName} eat {APPos} {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2344,20 +2359,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get {TName} to eat {APPos} {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{AName} is failing to get {TName} to eat {APPos} {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while {TName} eats {APPos} {Desc("VTightness", ActorData, "P")}''', "LongFluff": f'''{AName} is trying to focus while {TName} eats {APPos} {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":55
+                "Resistance":55,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
 
         elif CommandID == "PenisCaressSex0":
@@ -2384,7 +2399,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {TPPos} {Desc("PenisSize", TargetData, "P")} caressed''', "LongFluff": f'''{TName} is having {TPPos} {Desc("PenisSize", TargetData, "DSP")} caressed by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2392,17 +2407,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting having {TPPos} {Desc("PenisSize", TargetData, "P")} caressed.''', "LongFluff": f'''{TName} is resisting {AName}'s attempts at caressing {TPPos} {Desc("PenisSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus as {AName} caresses {TPPos} {Desc("PenisSize", TargetData, "P")}''', "LongFluff": f'''{TName} is trying to focus while {AName} caresses {TPPos} {Desc("PenisSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":35
+                "Resistance":35,
                 }
             ActorDict = {
                 "State":{
@@ -2420,7 +2435,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressing {TName}'s {Desc("PenisSize", TargetData, "P")}''', "LongFluff": f'''{AName} is caressing {TName}'s {Desc("PenisSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2428,20 +2443,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("PenisSize", TargetData, "P")}''', "LongFluff": f'''{AName} is attemtpign and failing to caress [TName]'s {Desc("PenisSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on caressing {TName}'s {Desc("PenisSize", TargetData, "P")}''', "LongFluff": f'''{AName} is trying to focus on caressing {TName}'s {Desc("PenisSize", TargetData, "DSP")}. '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":25
+                "Resistance":25,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetPenisCaressSex0":
             TargetDict = {
@@ -2463,7 +2478,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressing {AName}'s {Desc("PenisSize", ActorData, "P")}''', "LongFluff": f'''{TName} is caressingg {AName}'s {Desc("PenisSize", ActorData, "DSP")} after being asked to.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2471,17 +2486,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to caress {AName}'s {Desc("PenisSize", ActorData, "P")}.''', "LongFluff": f'''{TName} is refusinng to caress {AName}' {Desc("PenisSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on caressingn {AName}'s {Desc("PenisSize", ActorData, "P")} ''', "LongFluff": f'''{TName} is trying to focus on caressing {AName}'s {Desc("PenisSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             ActorDict = {
                 "State":{
@@ -2501,7 +2516,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting {APPos} {Desc("PenisSize", ActorData, "P")}.''', "LongFluff": f'''{AName} is getting {APPos} {Desc("PenisSize", ActorData, "DSP")} caressed by {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2509,20 +2524,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failign to get {TName} to caress {APPos} {Desc("PenisSize", ActorData, "P")}.''', "LongFluff": f'''{AName} is failing to get {TName} to caress [APPos] {Desc("PenisSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus as {TName} caresses {APPos} {Desc("PenisSize", ActorData, "P")}''', "LongFluff": f'''{AName} is trying to focus as {TName} caresses {APPos} {Desc("PenisSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":20
+                "Resistance":20,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "HandJobSex0":
             TargetDict = {
@@ -2543,27 +2558,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Receiving a handjob''', "LongFluff": f'''{TName} is receiving a handjob by {AName}.'''}],
+                    "Task": ["Skinship", {"BriefFluff": '''Receiving a handjob''', "LongFluff": f'''{TName} is receiving a handjob by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Refusing to get a handjob''', "LongFluff": f'''{TName} is refusing to get a handjob by {AName}.'''}],
+                    "Task": ["Skinship", {"BriefFluff": '''Refusing to get a handjob''', "LongFluff": f'''{TName} is refusing to get a handjob by {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while getting a handjob''', "LongFluff": f'''{TName} is trying to focus while getting a handjob by {AName}.'''}],
+                    "Task": ["Skinship", {"BriefFluff": '''Trying to focus while getting a handjob''', "LongFluff": f'''{TName} is trying to focus while getting a handjob by {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":0
+                "Resistance":0,
                 }
             ActorDict = {
                 "State":{
@@ -2582,7 +2597,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Giving a handjob to {TName}''', "LongFluff": f'''{AName} is using {APPos} hands to pleasure {TName}'s {Desc("PenisSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2590,20 +2605,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to give a handjob to {TName}''', "LongFluff": f'''{AName} is failing to use {APPos} hands to pleasure {TName}'s {Desc("PenisSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on giving a handjob to {TName}''', "LongFluff": f'''{AName} is trying to focus while pleasuring {TName}'s {Desc("PenisSize", TargetData, "DSP")} with {APPos} hands.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":0
+                "Resistance":0,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetHandjobSex0":
             TargetDict = {
@@ -2628,7 +2643,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Giving a handjob to {AName}''', "LongFluff": f'''{TName} is pleasuring {AName}'s {Desc("PenisSize", ActorData, "DSP")} with {TPPos} hands.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2636,17 +2651,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to give a handjob to {AName}''', "LongFluff": f'''{TName} is refusing to give {AName} a handjob.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while giving a handjob to {AName}''', "LongFluff": f'''{TName} is trying to focus while using {TPPos} hands to pleasure {Desc("PenisSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance": 40
+                "Resistance": 40,
                 }
             ActorDict = {
                 "State":{
@@ -2665,28 +2680,28 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting a handjob from {TName}.''', "LongFluff": f'''{AName} is getting a handjob from {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Failing to get a handjob''', "LongFluff": f'''{AName} is failing to get a handjob from {TName}.'''}],
+                    "Task": ["Skinship", {"BriefFluff": '''Failing to get a handjob''', "LongFluff": f'''{AName} is failing to get a handjob from {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while getting a handjob''', "LongFluff": f'''{AName} is trying to focus while getting a handjob from {TName}.'''}],
+                    "Task": ["Skinship", {"BriefFluff": '''Trying to focus while getting a handjob''', "LongFluff": f'''{AName} is trying to focus while getting a handjob from {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "BlowjobSex0":
             TargetDict = {
@@ -2713,7 +2728,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting {TPPos} {Desc("PenisSize", TargetData, "P")} sucked off. ''', "LongFluff": f'''{TName} is getting {TPPos} {Desc("PenisSize", TargetData, "DSP")} sucked off by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2721,17 +2736,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisiting {AName}'s attempts at giving {TPObj} a blowjob''', "LongFluff": f'''{TName} is resisitngn {AName}'s attempt at giving {TPObj} a blowjob.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while gettingn a blowjob.''', "LongFluff": f'''{TName} is trying to focus while {AName} is sucking off {TPPos} {Desc("PenisSize", TargetData, "DSP")} '''}],
+                    "Task": ["Skinship", {"BriefFluff": '''Trying to focus while gettingn a blowjob.''', "LongFluff": f'''{TName} is trying to focus while {AName} is sucking off {TPPos} {Desc("PenisSize", TargetData, "DSP")} '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":65
+                "Resistance":65,
                 }
             ActorDict = {
                 "State":{
@@ -2751,7 +2766,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Giving a blowjob to {TName}.''', "LongFluff": f'''{AName} is sucking off {TName}'s {Desc("PenisSize", TargetData, "DSP")}'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2759,20 +2774,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to give a blowjob to {TName}''', "LongFluff": f'''{AName} is failing to give a blowjob to {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while giving a blowjob to {TName}''', "LongFluff": f'''{AName} is trying to focus while giving a blowjob to {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":55
+                "Resistance":55,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetBlowjobSex0":
             TargetDict = {
@@ -2797,7 +2812,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Giving a blowjob to {AName}''', "LongFluff": f'''{TName} is sucking off [AName]'s {Desc("PenisSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2805,17 +2820,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to give a blowjob to {AName}.''', "LongFluff": f'''{TName} is refusing to give a blowjob to {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while giving a blowjob to {AName}''', "LongFluff": f'''{TName} is trying to focus while sucking off {AName}'s {Desc("PenisSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":75
+                "Resistance":75,
                 }
             ActorDict = {
                 "State":{
@@ -2838,7 +2853,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting a blowjob from {TName} ''', "LongFluff": f'''{AName} is getting {APPos} {Desc("PenisSize", ActorData, "DSP")} sucked off by {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2846,20 +2861,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get a blowjob from {TName} ''', "LongFluff": f'''{AName} is failing to get a blowjob from {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while getting a blowjob''', "LongFluff": f'''{AName} is trying to focus while {AName} is sucking off {APPos} {Desc("PenisSize", ActorData, "DSP")}.'''}],
+                    "Task": ["Skinship", {"BriefFluff": '''Trying to focus while getting a blowjob''', "LongFluff": f'''{AName} is trying to focus while {AName} is sucking off {APPos} {Desc("PenisSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":55
+                "Resistance":55,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
 
         elif CommandID == "BreastCaressSex0":
@@ -2884,7 +2899,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting {TPPos} {Desc("ChestSize", TargetData, "P")} caressed''', "LongFluff": f'''{TName} is having {TPPos} {Desc("ChestSize", TargetData, "DSP")} caressed by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2892,17 +2907,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting to have {TPPos} {Desc("ChestSize", TargetData, "P")} caressed.''', "LongFluff": f'''{TName} is reisting {AName}'s attempt at caressing {TPPos} {Desc("ChestSize", TargetData, "DSP")} '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while having {TPPos} {Desc("ChestSize", TargetData, "P")} caressed''', "LongFluff": f'''{TName} is tryingn to focus while {AName} caresses {TPPos} {Desc("ChestSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             ActorDict = {
                 "State":{
@@ -2919,7 +2934,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caresing {TName}'s {Desc("ChestSize", TargetData, "P")}''', "LongFluff": f'''{AName} is caressing {TName}'s {Desc("ChestSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2927,20 +2942,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("ChestSize", TargetData, "P")}''', "LongFluff": f'''{AName} is failingn to caress {TName}'s {Desc("ChestSize", TargetData, "DSP")} '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on caressing {TName}'s {Desc("ChestSize", TargetData, "P")}''', "LongFluff": f'''{AName} is trying to focus while caressing {TName}'s {Desc("ChestSize", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":20
+                "Resistance":20,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetBreastCaressSex0":
             TargetDict = {
@@ -2961,7 +2976,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressing {AName}'s {Desc("ChestSize", ActorData, "P")}''', "LongFluff": f'''{TName} is caressing {AName}'s {Desc("ChestSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -2969,17 +2984,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to caress {AName}'s {Desc("ChestSize", ActorData, "P")}''', "LongFluff": f'''{TName} is refusing to caress {AName}'s {Desc("ChestSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on caressing {AName}'s {Desc("ChestSize", ActorData, "P")}''', "LongFluff": f'''{TName} is trying to focus while caressing {AName}'s {Desc("ChestSize", ActorData, "DSP")}. '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":35
+                "Resistance":35,
                 }
             ActorDict = {
                 "State":{
@@ -2998,7 +3013,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting {APPos} {Desc("ChestSize", ActorData, "P")} caressed''', "LongFluff": f'''{AName} is having [APPos] {Desc("ChestSize", ActorData, "DSP")} caressed by {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3006,20 +3021,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get {TName} to caress {APPos} {Desc("ChestSize", ActorData, "P")}''', "LongFluff": f'''{AName} is failing to get {TName} to caress [APPos] {Desc("ChestSize", ActorData, "DSP")} '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while having {APPos} {Desc("ChestSize", ActorData, "P")} caressed.''', "LongFluff": f'''{AName} is trying to stay focused while {TName} caresses {APPos} {Desc("ChestSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":25
+                "Resistance":25,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "NippleTeaseSex0":
             TargetDict = {
@@ -3041,7 +3056,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {TPPos} nipples teased.''', "LongFluff": f'''{TName} is having {TPPos} nipples caressed by [AName].'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3049,17 +3064,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting having {TPPos} nipples teased''', "LongFluff": f'''{TName} is resisting {AName}'s attempts at teasing {TPPos} nipples.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while having {TPPos} nipples teased.''', "LongFluff": f'''{TName} is trying to focus while {AName} plays with {TPPos} nipples.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":35
+                "Resistance":35,
                 }
             ActorDict = {
                 "State":{
@@ -3076,7 +3091,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Teasing {TName}'s nipples ''', "LongFluff": f'''{AName} is playing with {TName}'s nipples.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3084,20 +3099,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to tease {TName}'s nipples.''', "LongFluff": f'''{AName} is failing to tease {TName}'s nipples.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on teasing {TName}'s nipples.''', "LongFluff": f'''{AName} is trying to focus while teasing {TName}'s nipples.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":25
+                "Resistance":25,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetNippleTeaseSex0":
             TargetDict = {
@@ -3119,7 +3134,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Teasing {AName}'s nipples''', "LongFluff": f'''{TName} is playing wiht {AName}'s nipples.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3127,17 +3142,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to tease {AName}'s nipples''', "LongFluff": f'''{TName} is refusing to tease {AName}'s nipples.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on teasing {AName}'s nipples''', "LongFluff": f'''{TName} is trying to focus while teasing [AName]'s nipples.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":40
+                "Resistance":40,
                 }
             ActorDict = {
                 "State":{
@@ -3156,7 +3171,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {APPos} nippleas teased''', "LongFluff": f'''{AName} is having {APPos} nipples teased by {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3164,20 +3179,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get {TName} to tease {APPos} nipples.''', "LongFluff": f'''{AName} is failing to get {TName} to play with {APPos} nipples.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while having {APPos} nipples played with.''', "LongFluff": f'''{AName} is trying to focus while {TName} plays with {APPos} nipples.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "NippleSuckingSex0":
             TargetDict = {
@@ -3203,7 +3218,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {TPPos} {Desc("ChestSize", TargetData, "P")} sucked''', "LongFluff": f'''{TName} is having {TPPos} {Desc("ChestSize", TargetData, "DSP")} sucked.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3211,17 +3226,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s attempts at sucking on {TPPos} {Desc("ChestSize", TargetData, "P")}''', "LongFluff": f'''{TName} is refusing {AName}'s attempts at sucking on her {Desc("ChestSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while having {TPPos} {Desc("ChestSize", TargetData, "P")} sucked''', "LongFluff": f'''{TName} is trying to stay focused while {AName} sucks on {TPPos} {Desc("ChestSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":50
+                "Resistance":50,
                 }
             ActorDict = {
                 "State":{
@@ -3240,7 +3255,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Sucking on {TName}'s {Desc("ChestSize", TargetData, "P")}''', "LongFluff": f'''{AName} is scuking on {TName}'s {Desc("ChestSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3248,20 +3263,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to suck on {TName}'s {Desc("ChestSize", TargetData, "P")}''', "LongFluff": f'''{AName} is failing to suck on {TName}'s {Desc("ChestSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on sucking on {TName}'s {Desc("ChestSize", TargetData, "P")}''', "LongFluff": f'''{AName} is trying to stay focused on sucking on {TName}'s {Desc("ChestSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":40
+                "Resistance":40,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetNippleSuckingSex0":
             TargetDict = {
@@ -3285,7 +3300,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Sucking on {AName}'s {Desc("ChestSize", ActorData, "P")}''', "LongFluff": f'''{TName} is sucking on {AName}'s {Desc("ChestSize", ActorData, "DSP")} after being asked to.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3293,17 +3308,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to suck on {AName}'s {Desc("ChestSize", ActorData, "P")}''', "LongFluff": f'''{TName} is refusing to suck on {AName}'s {Desc("ChestSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on sucking on {AName}'s {Desc("ChestSize", ActorData, "P")} ''', "LongFluff": f'''{TName} is trying to stay focused while sucking on {AName}'s {Desc("ChestSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":55
+                "Resistance":55,
                 }
             ActorDict = {
                 "State":{
@@ -3322,7 +3337,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {APPos} {Desc("ChestSize", ActorData, "P")} sucked''', "LongFluff": f'''{AName} is having {APPos} {Desc("ChestSize", ActorData, "DSP")} sucked by {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3330,20 +3345,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get {TName} to scuk on {APPos} {Desc("ChestSize", ActorData, "P")}''', "LongFluff": f'''{AName} is failing to get {TName} to suck on {APPos} {Desc("ChestSize", ActorData, "DSP")} '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while having {APPos} {Desc("ChestSize", ActorData, "P")} sucked on''', "LongFluff": f'''{AName} is trying to stay focused while {TName} sucks on {APPos} {Desc("ChestSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":45
+                "Resistance":45,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
 
         elif CommandID == "AnalCaressSex0":
@@ -3368,7 +3383,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {TPPos} {Desc("ATightness", TargetData, "P")} caressed''', "LongFluff": f'''{TName} is having {TPPos} {Desc("ATightness", TargetData, "DSP")} caressed by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3376,17 +3391,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s attempt to caress {TPPos} {Desc("ATightness", TargetData, "P")}''', "LongFluff": f'''{TName} resists as {AName} attempts to caress {TPPos} {Desc("ATightness", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus as {AName} caresses {TPPos} {Desc("VTightness", TargetData, "P")}''', "LongFluff": f'''{TName} is trying to focus while {AName} is caressing {TPPos} {Desc("VTightness", TargetData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":40
+                "Resistance":40,
                 }
             ActorDict = {
                 "State":{
@@ -3402,7 +3417,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressing {TName}'s {Desc("ATightness", TargetData, "P")}''', "LongFluff": f'''{AName} is caressing {TName}'s {Desc("ATightness", TargetData, "DSP")}. '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3410,20 +3425,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to caress {TName}'s {Desc("ATightness", TargetData, "P")}''', "LongFluff": f'''{AName} tries to caress {TName}'S {Desc("ATightness", TargetData, "P")}, but fails to do so. '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on caressing {TName}'s {Desc("ATightness", TargetData, "P")}''', "LongFluff": f'''{AName} attempts to focuas as {APSub} caresses {TPPos} {Desc("ATightness", TargetData, "P")}'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetAnalCaressSex0":
             TargetDict = {
@@ -3444,7 +3459,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Caressingg {AName}'s {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{TName} is caressing {AName}'s {Desc("ATightness", ActorData, "DSP")} after being asked to.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3452,17 +3467,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to caress {AName}'s {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{TName} is refusing to caress {AName}'s {Desc("ATightness", ActorData, "DSP")} after being asked to.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus and caress [AName]'s {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{TName} is trying to focus while caressing {AName}'s {Desc("ATightness", ActorData, "DSP")} after being asked to.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":50
+                "Resistance":50,
                 }
             ActorDict = {
                 "State":{
@@ -3482,7 +3497,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {TName} caress {APPos} {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{AName} is having {APPos} {Desc("ATightness", ActorData, "DSP")} caresed by {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3490,20 +3505,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to have {TName} caress {APPos} {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{AName} is failing to get {TName} to caress {APPos} {Desc("ATightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while {TName} is caressing {APPos} {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{AName} is trying to focus while having {AName} caress {APPos} {Desc("ATightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":40
+                "Resistance":40,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "AnalFingeringSex0":
             TargetDict = {
@@ -3526,7 +3541,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Being anally fingered by {AName}''', "LongFluff": f'''{TName} is having {TPPos} {Desc("ATightness", TargetData, "DSP")} fingered by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3534,17 +3549,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting {AName}'s attempts to anally Finger {TPObj}''', "LongFluff": f'''{TName} is resisting {AName}'s attempts at fingering {TPPos} {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''{TName} is trying to focus while being anally fingered''', "LongFluff": f'''{TName} is trying to focus while {AName} fingers {TPPos} {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance": 50
+                "Resistance": 50,
                 }
             ActorDict = {
                 "State":{
@@ -3560,7 +3575,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Fingering {TName}'s {Desc("ATightness", TargetData, "P")}''', "LongFluff": f'''{AName} is fingering {TName}'s {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3568,20 +3583,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to finger {TName}'s {Desc("ATightness", TargetData, "P")}''', "LongFluff": f'''{TName} is failing to finger {TPPos} {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on anally fingering {TName}''', "LongFluff": f'''{AName} is trying to focus on fingering {TName}'s {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":40
+                "Resistance":40,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetAnalFingeringSex0":
             TargetDict = {
@@ -3602,7 +3617,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Fingering {AName}'s {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{TName} is fingering {AName}'s {Desc("ATightness", ActorData, "DSP")} after being asked to.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3610,17 +3625,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to finger {AName}'s {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{TName} is refusinng to finger {AName}'s {Desc("ATightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on fingering {AName}'s {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{TName} is trying to focus while fingering {AName}'s {Desc("ATightness", ActorData, "P")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":60
+                "Resistance":60,
                 }
             ActorDict = {
                 "State":{
@@ -3640,7 +3655,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting anally fingered by {TName}''', "LongFluff": f'''{AName} is getting {APPos} {Desc("ATightness", ActorData, "DSP")} fingered by {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3648,20 +3663,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to get {TName} to anally finger {APObj}''', "LongFluff": f'''{AName} is failing to get {TName} to finger {APPos} {Desc("ATightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while {TName} anally fingers {APObj}''', "LongFluff": f'''{AName} is trying to focus while {TName} fingers {APPos} {Desc("ATightness", ActorData, "DSP")} '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":50
+                "Resistance":50,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "RimjobSex0":
             TargetDict = {
@@ -3686,7 +3701,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting {TPPos} {Desc("ATightness", TargetData, "P")} eaten''', "LongFluff": f'''{TName} is having {TPPos} {Desc("ATightness", TargetData, "DSP")} eaten by {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3694,17 +3709,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to get {TPPos} {Desc("ATightness", TargetData, "P")} eaten by {AName} ''', "LongFluff": f'''{TName} is refusing to have {AName} eat {TPPos} {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while {AName} eats {TPPos} {Desc("ATightness", TargetData, "P")}''', "LongFluff": f'''{TName} is trying to focus while {AName} eats {TPPos} {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance": 70
+                "Resistance": 70,
                 }
             ActorDict = {
                 "State":{
@@ -3723,7 +3738,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Eating {TName}'s {Desc("ATightness", TargetData, "P")}''', "LongFluff": f'''{AName} is eating {TName}'s {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3731,20 +3746,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to eat {TName}'s {Desc("ATightness", TargetData, "P")}''', "LongFluff": f'''{AName} is failing to eat {TName}'s {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on eating {TName}'s {Desc("ATightness", TargetData, "P")}''', "LongFluff": f'''{AName} is trying to focus on eating {TName}'s {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":60
+                "Resistance":60,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetRimjobSex0":
             TargetDict = {
@@ -3768,7 +3783,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Eating {AName}'s {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{TName} is eating {AName}'s {Desc("ATightness", ActorData, "DSP")} at {APPos} request.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3776,17 +3791,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to eat {AName}'s {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{TName} is refusin to eat {AName}'s {Desc("ATightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus on eating {AName}'s {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{TName} is trying to focus on eating {AName}'s {Desc("ATightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":80
+                "Resistance":80,
                 }
             ActorDict = {
                 "State":{
@@ -3805,7 +3820,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Having {TName} eat {APPos} {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{AName} is having {TName} eat {APPos} {Desc("ATightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -3813,20 +3828,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get {TName} to eat {APPos} {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{AName} is failing to get {TName} to eat {APPos} {Desc("ATightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''rying to focus while {TName} eats {APPos} {Desc("ATightness", ActorData, "P")}''', "LongFluff": f'''{AName} is trying to focus while {TName} eats {APPos} {Desc("ATightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":70
+                "Resistance":70,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
 
         ####
@@ -3846,27 +3861,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":15
+                "Resistance":15,
                 }
             ActorDict = {
                 "State":{
@@ -3884,30 +3899,30 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":5
+                "Resistance":5,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
             if Globals.SoLNPCData[Actor]["BodyData"]["VTightness"] >= 1:
                 ActorDict["Temporal"]["VPlea"] = 10
@@ -3935,27 +3950,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":35
+                "Resistance":35,
                 }
             ActorDict = {
                 "State":{
@@ -3970,30 +3985,30 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":25
+                "Resistance":25,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "AMasturbateSex0":
             TargetDict = {
@@ -4011,27 +4026,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":20
+                "Resistance":20,
                 }
             ActorDict = {
                 "State":{
@@ -4050,30 +4065,30 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":5
+                "Resistance":5,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetAMasturbateSex0":
             TargetDict = {
@@ -4095,27 +4110,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":45
+                "Resistance":45,
                 }
             ActorDict = {
                 "State":{
@@ -4130,30 +4145,30 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":35
+                "Resistance":35,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
 
         elif CommandID == "FootjobSex0":
@@ -4177,10 +4192,10 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Footjob", {"BriefFluff": f'''Giving a footjob to  {Globals.SoLNPCData[Actor]["Name"]}''', "LongFluff": f'''{Globals.SoLNPCData[Target]["Name"]} is pleasuring {Globals.SoLNPCData[Actor]["Name"]} with their feet.'''}],
                     "InterruptionPenalty": 30,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":25
+                "Resistance":25,
                 }
             ActorDict = {
                 "State":{
@@ -4199,13 +4214,13 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Footjob", {"BriefFluff": f'''Receiving a footjob from {Globals.SoLNPCData[Actor]["Name"]}''', "LongFluff": f'''{Globals.SoLNPCData[Target]["Name"]} is being pleasured with  {Globals.SoLNPCData[Actor]["Name"]}'s feet'''}],
                     "InterruptionPenalty": 30,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":20
+                "Resistance":20,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
             if Globals.SoLNPCData[Target]["BodyData"]["VTightness"] >= 1:
                 TargetDict["Permanent"]["VExp"] = 1
@@ -4233,27 +4248,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":35
+                "Resistance":35,
                 }
             ActorDict = {
                 "State":{
@@ -4270,30 +4285,30 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":25
+                "Resistance":25,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
             if Globals.SoLNPCData[Actor]["BodyData"]["VTightness"] >= 1:
                 ActorDict["Permanent"]["VExp"] = 1
@@ -4327,7 +4342,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Receiving a buttjob from {AName}''', "LongFluff": f'''{TName} is getting {TPPos} {Desc("PenisSize", TargetData, "DSP")} pleasure by {AName} with {APPos} {Desc("AssSize", ActorData, "DP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4335,17 +4350,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting to get a buttjob from {AName}''', "LongFluff": f'''{TName} is refusing to get a buttjob by {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while receiving a buttjob by {AName}''', "LongFluff": f'''{TName} is trying to stay focused while getting {TPPos} {Desc("PenisSize", TargetData, "DSP")} pleasure by {AName} with {APPos} {Desc("AssSize", ActorData, "DP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             ActorDict = {
                 "State":{
@@ -4364,7 +4379,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Giving {TName} a buttjob''', "LongFluff": f'''{AName} is using {APPos} {Desc("AssSize", ActorData, "DP")} to pleasure {TName}'s {Desc("PenisSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4372,20 +4387,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to give {TName} a buttjob''', "LongFluff": f'''{AName} is failing to give {TName} a buttjob.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while giving {TName} a buttjob.''', "LongFluff": f'''{AName} is trying to stay focused while using {APPos} {Desc("AssSize", ActorData, "DP")} to pleasure {TName}'s {Desc("PenisSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":25
+                "Resistance":25,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetButtjonbSex0":
             TargetDict = {
@@ -4407,7 +4422,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Giving a buttjob to {AName}''', "LongFluff": f'''{TName} is using {TPPos} {Desc("AssSize", TargetData, "DP")} to pleasure {TName}'s {Desc("PenisSize", ActorData, "DSP")} after being asked to.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4415,17 +4430,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to give a buttjob to {AName}''', "LongFluff": f'''{TName} is refusing to give a buttjob to {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while giving a buttjob to {AName}''', "LongFluff": f'''{TName} is trying to stay focused while using {TPPos} {Desc("AssSize", TargetData, "DP")} to pleasure {TName}'s {Desc("PenisSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":40
+                "Resistance":40,
                 }
             ActorDict = {
                 "State":{
@@ -4446,7 +4461,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting a buttjob from {TName}''', "LongFluff": f'''{AName} is getting {APPos} {Desc("PenisSize", ActorData, "DSP")} pleasured by {TName} using {TPPos} {Desc("AssSize", TargetData, "DP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4454,20 +4469,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get a buttjob from {TName}''', "LongFluff": f'''{AName} is failing to get a buttjob from {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focusd while getting a buttjob from {TName}''', "LongFluff": f'''{AName} is trying to stay focused while getting {APPos} {Desc("PenisSize", ActorData, "DSP")} pleasured by {TName} using {TPPos} {Desc("AssSize", TargetData, "DP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "ThighjobSex0":
             TargetDict = {
@@ -4492,7 +4507,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Receiving a thighjob from {AName}''', "LongFluff": f'''{TName} is getting {TPPos} {Desc("PenisSize", TargetData, "DSP")} pleasure by {AName} with {APPos} thighs.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4500,17 +4515,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting to get a thighjob from {AName}''', "LongFluff": f'''{TName} is refusing to get a thighjob by {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while receiving a thighjob by {AName}''', "LongFluff": f'''{TName} is trying to stay focused while getting {TPPos} {Desc("PenisSize", TargetData, "DSP")} pleasure by {AName} with {APPos} thighs.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":40
+                "Resistance":40,
                 }
             ActorDict = {
                 "State":{
@@ -4530,7 +4545,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Giving {TName} a thighjob''', "LongFluff": f'''{AName} is using {APPos} thighs to pleasure {TName}'s {Desc("PenisSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4538,20 +4553,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to give {TName} a thighjob''', "LongFluff": f'''{AName} is failing to give {TName} a thighjob.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while giving {TName} a thighjob.''', "LongFluff": f'''{AName} is trying to stay focused while using {APPos} thighs to pleasure {TName}'s {Desc("PenisSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":35
+                "Resistance":35,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetThighjobSex0":
             TargetDict = {
@@ -4573,7 +4588,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f''''Giving a thighjob to {AName}''', "LongFluff": f'''{TName} is using {TPPos} thighs to pleasure {TName}'s {Desc("PenisSize", ActorData, "DSP")} after being asked to.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4581,17 +4596,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to give a thighjob to {AName}''', "LongFluff": f'''{TName} is refusing to give a thighjob to {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while giving a thighjob to {AName}''', "LongFluff": f'''{TName} is trying to stay focused while using {TPPos} thighs to pleasure {TName}'s {Desc("PenisSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":50
+                "Resistance":50,
                 }
             ActorDict = {
                 "State":{
@@ -4612,7 +4627,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting a thighjob from {TName}''', "LongFluff": f'''{AName} is getting {APPos} {Desc("PenisSize", ActorData, "DSP")} pleasured by {TName} using {TPPos} thighs.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4620,20 +4635,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get a thighjob from {TName}''', "LongFluff": f'''{AName} is failing to get a thighjob from {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focusd while getting a thighjob from {TName}''', "LongFluff": f'''{AName} is trying to stay focused while getting {APPos} {Desc("PenisSize", ActorData, "DSP")} pleasured by {TName} using {TPPos} thighs.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":40
+                "Resistance":40,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "TitjobSex0":
             TargetDict = {
@@ -4658,7 +4673,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Receiving a titjob from {AName}''', "LongFluff": f'''{TName} is getting {TPPos} {Desc("PenisSize", TargetData, "DSP")} pleasure by {AName} with {APPos} {Desc("ChestSize", ActorData, "DP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4666,17 +4681,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting to get a titjob from {AName}''', "LongFluff": f'''{TName} is refusing to get a titjob by {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while receiving a titjob by {AName}''', "LongFluff": f'''{TName} is trying to stay focused while getting {TPPos} {Desc("PenisSize", TargetData, "DSP")} pleasure by {AName} with {APPos} {Desc("ChestSize", ActorData, "DP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":35
+                "Resistance":35,
                 }
             ActorDict = {
                 "State":{
@@ -4695,7 +4710,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Giving {TName} a titjob''', "LongFluff": f'''{AName} is using {APPos} {Desc("ChestSize", ActorData, "DP")} to pleasure {TName}'s {Desc("PenisSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4703,20 +4718,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to give {TName} a titjob''', "LongFluff": f'''{AName} is failing to give {TName} a titjob.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while giving {TName} a titjob.''', "LongFluff": f'''{AName} is trying to stay focused while using {APPos} {Desc("ChestSize", ActorData, "DP")} to pleasure {TName}'s {Desc("PenisSize", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetTitjobSex0":
             TargetDict = {
@@ -4738,7 +4753,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Giving a titjob to {AName}''', "LongFluff": f'''{TName} is using {TPPos} {Desc("ChestSize", TargetData, "DP")} to pleasure {TName}'s {Desc("PenisSize", ActorData, "DSP")} after being asked to.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4746,17 +4761,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to give a titjob to {AName}''', "LongFluff": f'''{TName} is refusing to give a titjob to {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while giving a titjob to {AName}''', "LongFluff": f'''{TName} is trying to stay focused while using {TPPos} {Desc("ChestSize", TargetData, "DP")} to pleasure {TName}'s {Desc("PenisSize", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":50
+                "Resistance":50,
                 }
             ActorDict = {
                 "State":{
@@ -4777,7 +4792,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting a titjob from {TName}''', "LongFluff": f'''{AName} is getting {APPos} {Desc("PenisSize", ActorData, "DSP")} pleasured by {TName} using {TPPos} {Desc("ChestSize", TargetData, "DP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4785,20 +4800,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get a titjob from {TName}''', "LongFluff": f'''{AName} is failing to get a titjob from {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focusd while getting a titjob from {TName}''', "LongFluff": f'''{AName} is trying to stay focused while getting {APPos} {Desc("PenisSize", ActorData, "DSP")} pleasured by {TName} using {TPPos} {Desc("ChestSize", TargetData, "DP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":40
+                "Resistance":40,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
 
         elif CommandID == "FacesittingSex0":
@@ -4823,7 +4838,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting facesit by {AName}''', "LongFluff": f'''{TName} is using her face to support, and pleasure {AName}'s {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4831,17 +4846,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to be facesit by {AName}''', "LongFluff": f'''{TName} is refusing to let {AName} sit on {TPPos} face.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while being facesit by {AName}''', "LongFluff": f'''{TName} is trying to stay focused while using {TPPos} face to support, and pleasure {AName}'s {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":80
+                "Resistance":80,
                 }
             ActorDict = {
                 "State":{
@@ -4859,7 +4874,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Sitting on {TName}'s face''', "LongFluff": f'''{AName} is using {TName}'s face as a seat and to pleasure {APPos} {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4867,20 +4882,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failling to sit on {TName}'s face''', "LongFluff": f'''{AName} is failling to sit on {TName}'s face.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while sitting on {TName}'s face''', "LongFluff": f'''{AName} is trying to stay focuse while using {TName}'s face as a seat and to pleasure {APPos} {Desc("VTightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":70
+                "Resistance":70,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
             if Globals.SoLNPCData[Actor]["BodyData"]["VTightness"] >= 1:
                 ActorDict["Permanent"]["VExp"] = 1
@@ -4911,7 +4926,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Sitting on {AName}'s face''', "LongFluff": f'''{TName} is using {AName}'s face as a seat and to pleasure {TPPos} {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4919,17 +4934,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to sit on {AName}'s face''', "LongFluff": f'''{TName} is refusing to sit on {AName}'s face.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while sitting on {AName}'s face''', "LongFluff": f'''{TName} is trying to stay focuse while using {AName}'s face as a seat and to pleasure {TPPos} {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance": 75
+                "Resistance": 75,
                 }
             ActorDict = {
                 "State":{
@@ -4949,7 +4964,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting facesit by {TName}''', "LongFluff": f'''{AName} is using her face to support, and pleasure {TName}'s {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -4957,20 +4972,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to be facesit by {TName}''', "LongFluff": f'''{AName} is failing to be facesit by {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while being facesit by {TName}''', "LongFluff": f'''{AName} is trying to stay focused while using {APPos} face to support, and pleasure {TName}'s {Desc("VTightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":65
+                "Resistance":65,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
             if Globals.SoLNPCData[Target]["BodyData"]["VTightness"] >= 1:
                 TargetDict["Permanent"]["VExp"] = 1
@@ -5004,7 +5019,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting anally facesit by {AName}''', "LongFluff": f'''{TName} is using her face to support, and pleasure {AName}'s {Desc("ATightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -5012,17 +5027,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to be anally facesit by {AName}''', "LongFluff": f'''{TName} is refusing to let {AName} anally sit on {TPPos} face.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while being anally facesit by {AName}''', "LongFluff": f'''{TName} is trying to stay focused while using {TPPos} face to support, and pleasure {AName}'s {Desc("ATightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":95
+                "Resistance":95,
                 }
             ActorDict = {
                 "State":{
@@ -5044,7 +5059,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Anally sitting on {TName}'s face''', "LongFluff": f'''{AName} is using {TName}'s face as a seat and to pleasure {APPos} {Desc("ATightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -5052,20 +5067,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failling to anally sit on {TName}'s face''', "LongFluff": f'''{AName} is failling to anally sit on {TName}'s face.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while anally sitting on {TName}'s face''', "LongFluff": f'''{AName} is trying to stay focuse while using {TName}'s face as a seat and to pleasure {APPos} {Desc("ATightness", ActorData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":85
+                "Resistance":85,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetAFacesittingSex0":
             TargetDict = {
@@ -5089,7 +5104,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Anally sitting on {AName}'s face''', "LongFluff": f'''{TName} is using {AName}'s face as a seat and to pleasure {TPPos} {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -5097,17 +5112,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Refusing to anally sit on {AName}'s face''', "LongFluff": f'''{TName} is refusing to anally sit on {AName}'s face.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while anally sitting on {AName}'s face''', "LongFluff": f'''{TName} is trying to stay focuse while using {AName}'s face as a seat and to pleasure {TPPos} {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":90
+                "Resistance":90,
                 }
             ActorDict = {
                 "State":{
@@ -5128,7 +5143,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting anally facesit by {TName}''', "LongFluff": f'''{AName} is using her face to support, and pleasure {TName}'s {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -5136,20 +5151,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to be anally facesit by {TName}''', "LongFluff": f'''{AName} is failing to be anally facesit by {TName}. '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while being anally facesit by {TName}''', "LongFluff": f'''{AName} is trying to stay focused while using {APPos} face to support, and pleasure {TName}'s {Desc("ATightness", TargetData, "DSP")}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":80
+                "Resistance":80,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
 
         #####
@@ -5173,27 +5188,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":10
+                "Resistance":10,
                 }
             ActorDict = {
                 "State":{
@@ -5207,30 +5222,30 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":0
+                "Resistance":0,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetAssSpankingSex0":
             TargetDict = {
@@ -5249,27 +5264,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":40
+                "Resistance":40,
                 }
             ActorDict = {
                 "State":{
@@ -5287,30 +5302,30 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "BreastSlappingSex0":
             TargetDict = {
@@ -5333,27 +5348,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":10
+                "Resistance":10,
                 }
             ActorDict = {
                 "State":{
@@ -5367,30 +5382,30 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":0
+                "Resistance":0,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetBreastSlappingSex0":
             TargetDict = {
@@ -5409,27 +5424,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":40
+                "Resistance":40,
                 }
             ActorDict = {
                 "State":{
@@ -5447,30 +5462,30 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":30
+                "Resistance":30,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         ####
 
@@ -5498,7 +5513,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting fucked by {AName}''', "LongFluff": f'''{TName} is having {TPPos} {Desc("VTightness", TargetData, "DSP")} fucked by {AName}'s {Desc("PenisSize", ActorData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -5506,17 +5521,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting being fucked by {AName}''', "LongFluff": f'''{TName} is reisting {AName}'s attempts at fucking {TPPos} {Desc("VTightness", TargetData, "P")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while being fucked by {AName}''', "LongFluff": f'''{TName} is trying to stay focused while having {TPPos} {Desc("VTightness", TargetData, "DSP")} fucked by {AName}'s {Desc("PenisSize", ActorData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":100
+                "Resistance":100,
                 }
             ActorDict = {
                 "State":{
@@ -5541,7 +5556,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Fucking {TName}''', "LongFluff": f'''{AName} is using {APPos} {Desc("PenisSize", ActorData, "DSP")} to fuck {TName}'s {Desc("VTightness", TargetData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -5549,20 +5564,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to fuck {TName}''', "LongFluff": f'''{AName} is failing to fuck {TName}'s {Desc("VTightness", TargetData, "P")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while fucking {TName}''', "LongFluff": f'''{AName} is trying to stay focused while using {APPos} {Desc("PenisSize", ActorData, "DSP")} to fuck {TName}'s {Desc("VTightness", TargetData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":90
+                "Resistance":90,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetMissionarySex0":
             TargetDict = {
@@ -5591,7 +5606,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Fucking {AName}''', "LongFluff": f'''{TName} is using {TPPos} {Desc("PenisSize", TargetData, "DSP")} to fuck {AName}'s {Desc("VTightness", ActorData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -5599,17 +5614,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting fucking {AName}''', "LongFluff": f'''{TName} is resisting fucking {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while fucking {AName}''', "LongFluff": f'''{TName} is trying t o stay focused while using {TPPos} {Desc("PenisSize", TargetData, "DSP")} to fuck {AName}'s {Desc("VTightness", ActorData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":100
+                "Resistance":100,
                 }
             ActorDict = {
                 "State":{
@@ -5634,7 +5649,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting fucked by {TName}''', "LongFluff": f'''{AName} is having {APPos} {Desc("VTightness", ActorData, "DSP")} fucked by {TName}'s {Desc("PenisSize", TargetData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -5642,20 +5657,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get fucked by {TName}''', "LongFluff": f'''{AName} is failing to get fucked by {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focuse while getting fucked by {TName}''', "LongFluff": f'''{AName} is trying to focus while having {APPos} {Desc("VTightness", ActorData, "DSP")} fucked by {TName}'s {Desc("PenisSize", TargetData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":90
+                "Resistance":90,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "DoggyStyleSex0":
             TargetDict = {
@@ -5680,7 +5695,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting fucked by {AName}''', "LongFluff": f'''{TName} is having {TPPos} {Desc("VTightness", TargetData, "DSP")} fucked by {AName}'s {Desc("PenisSize", ActorData, "DSP")} in the doggystyle position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -5688,17 +5703,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting being fucked by {AName}''', "LongFluff": f'''{TName} is reisting {AName}'s attempts at fucking {TPPos} {Desc("VTightness", TargetData, "P")} in the doggystyle position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while being fucked by {AName}''', "LongFluff": f'''{TName} is trying to stay focused while having {TPPos} {Desc("VTightness", TargetData, "DSP")} fucked by {AName}'s {Desc("PenisSize", ActorData, "DSP")} in the doggystyle position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":80
+                "Resistance":80,
                 }
             ActorDict = {
                 "State":{
@@ -5720,7 +5735,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Fucking {TName}''', "LongFluff": f'''{AName} is using {APPos} {Desc("PenisSize", ActorData, "DSP")} to fuck {TName}'s {Desc("VTightness", TargetData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -5728,20 +5743,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to fuck {TName}''', "LongFluff": f'''{AName} is failing to fuck {TName}'s {Desc("VTightness", TargetData, "P")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while fucking {TName}''', "LongFluff": f'''{AName} is trying to stay focused while using {APPos} {Desc("PenisSize", ActorData, "DSP")} to fuck {TName}'s {Desc("VTightness", TargetData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":70
+                "Resistance":70,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetDoggyStyleSex0":
             TargetDict = {
@@ -5768,7 +5783,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Fucking {AName}''', "LongFluff": f'''{TName} is using {TPPos} {Desc("PenisSize", TargetData, "DSP")} to fuck {AName}'s {Desc("VTightness", ActorData, "DSP")} in the doggystyle position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -5776,17 +5791,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting fucking {AName}''', "LongFluff": f'''{TName} is resisting fucking {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while fucking {AName}''', "LongFluff": f'''{TName} is trying t o stay focused while using {TPPos} {Desc("PenisSize", TargetData, "DSP")} to fuck {AName}'s {Desc("VTightness", ActorData, "DSP")} in the doggystyle position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":80
+                "Resistance":80,
                 }
             ActorDict = {
                 "State":{
@@ -5808,7 +5823,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting fucked by {TName}''', "LongFluff": f'''{AName} is having {APPos} {Desc("VTightness", ActorData, "DSP")} fucked by {TName}'s {Desc("PenisSize", TargetData, "DSP")} in the doggystyle position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -5816,20 +5831,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get fucked by {TName}''', "LongFluff": f'''{AName} is failing to get fucked by {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focuse while getting fucked by {TName}''', "LongFluff": f'''{AName} is trying to focus while having {APPos} {Desc("VTightness", ActorData, "DSP")} fucked by {TName}'s {Desc("PenisSize", TargetData, "DSP")} in the doggystyle position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":70
+                "Resistance":70,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         ####
         elif CommandID == "GetCowgirlSex0":
@@ -5855,27 +5870,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":100
+                "Resistance":100,
                 }
             ActorDict = {
                 "State":{
@@ -5895,30 +5910,30 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":90
+                "Resistance":90,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "CowgirlSex0":
             TargetDict = {
@@ -5943,27 +5958,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":100
+                "Resistance":100,
                 }
             ActorDict = {
                 "State":{
@@ -5986,30 +6001,30 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":90
+                "Resistance":90,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         ####
         elif CommandID == "LotusSex0":
@@ -6039,7 +6054,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting fucked by {AName}''', "LongFluff": f'''{TName} is having {TPPos} {Desc("VTightness", TargetData, "DSP")} fucked by {AName}'s {Desc("PenisSize", ActorData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6047,17 +6062,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting being fucked by {AName}''', "LongFluff": f'''{TName} is reisting {AName}'s attempts at fucking {TPPos} {Desc("VTightness", TargetData, "P")} in the lotus position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while being fucked by {AName}''', "LongFluff": f'''{TName} is trying to stay focused while having {TPPos} {Desc("VTightness", TargetData, "DSP")} fucked by {AName}'s {Desc("PenisSize", ActorData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":120
+                "Resistance":120,
                 }
             ActorDict = {
                 "State":{
@@ -6083,7 +6098,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Fucking {TName}''', "LongFluff": f'''{AName} is using {APPos} {Desc("PenisSize", ActorData, "DSP")} to fuck {TName}'s {Desc("VTightness", TargetData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6091,20 +6106,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to fuck {TName}''', "LongFluff": f'''{AName} is failing to fuck {TName}'s {Desc("VTightness", TargetData, "P")} in the lotus position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while fucking {TName}''', "LongFluff": f'''{AName} is trying to stay focused while using {APPos} {Desc("PenisSize", ActorData, "DSP")} to fuck {TName}'s {Desc("VTightness", TargetData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":110
+                "Resistance":110,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetLotusSex0":
             TargetDict = {
@@ -6135,7 +6150,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Fucking {AName}''', "LongFluff": f'''{TName} is using {TPPos} {Desc("PenisSize", TargetData, "DSP")} to fuck {AName}'s {Desc("VTightness", ActorData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6143,17 +6158,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f''''Resisting fucking {AName}''', "LongFluff": f'''{TName} is resisting fucking {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while fucking {AName}''', "LongFluff": f'''{TName} is trying t o stay focused while using {TPPos} {Desc("PenisSize", TargetData, "DSP")} to fuck {AName}'s {Desc("VTightness", ActorData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":120
+                "Resistance":120,
                 }
             ActorDict = {
                 "State":{
@@ -6180,7 +6195,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting fucked by {TName}''', "LongFluff": f'''{AName} is having {APPos} {Desc("VTightness", ActorData, "DSP")} fucked by {TName}'s {Desc("PenisSize", TargetData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6188,20 +6203,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get fucked by {TName}''', "LongFluff": f'''{AName} is failing to get fucked by {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focuse while getting fucked by {TName}''', "LongFluff": f'''{AName} is trying to focus while having {APPos} {Desc("VTightness", ActorData, "DSP")} fucked by {TName}'s {Desc("PenisSize", TargetData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":110
+                "Resistance":110,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
 
         elif CommandID == "AMissionarySex0":
@@ -6231,7 +6246,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting anally fucked by {AName}''', "LongFluff": f'''{TName} is having {TPPos} {Desc("ATightness", TargetData, "DSP")} fucked by {AName}'s {Desc("PenisSize", ActorData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6239,17 +6254,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting being anally fucked by {AName}''', "LongFluff": f'''{TName} is reisting {AName}'s attempts at fucking {TPPos} {Desc("ATightness", TargetData, "P")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while being ANALLY fucked by {AName}''', "LongFluff": f'''{TName} is trying to stay focused while having {TPPos} {Desc("ATightness", TargetData, "DSP")} fucked by {AName}'s {Desc("PenisSize", ActorData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":110
+                "Resistance":110,
                 }
             ActorDict = {
                 "State":{
@@ -6274,7 +6289,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Anally fucking {TName}''', "LongFluff": f'''{AName} is using {APPos} {Desc("PenisSize", ActorData, "DSP")} to fuck {TName}'s {Desc("ATightness", TargetData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6282,20 +6297,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to anally fuck {TName}''', "LongFluff": f'''{AName} is failing to fuck {TName}'s {Desc("ATightness", TargetData, "P")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while ANALLY fucking {TName}''', "LongFluff": f'''{AName} is trying to stay focused while using {APPos} {Desc("PenisSize", ActorData, "DSP")} to fuck {TName}'s {Desc("ATightness", TargetData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":100
+                "Resistance":100,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetAMissionarySex0":
             TargetDict = {
@@ -6324,7 +6339,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Anally fucking {AName}''', "LongFluff": f'''{TName} is using {TPPos} {Desc("PenisSize", TargetData, "DSP")} to fuck {AName}'s {Desc("ATightness", ActorData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6332,17 +6347,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting anally fucking {AName}''', "LongFluff": f'''{TName} is resisting anally fucking {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while anally fucking {AName}''', "LongFluff": f'''{TName} is trying t o stay focused while using {TPPos} {Desc("PenisSize", TargetData, "DSP")} to fuck {AName}'s {Desc("ATightness", ActorData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":110
+                "Resistance":110,
                 }
             ActorDict = {
                 "State":{
@@ -6367,7 +6382,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting anally fucked by {TName}''', "LongFluff": f'''{AName} is having {APPos} {Desc("ATightness", ActorData, "DSP")} fucked by {TName}'s {Desc("PenisSize", TargetData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6375,20 +6390,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get anally fucked by {TName}''', "LongFluff": f'''{AName} is failing to get anally fucked by {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focuse while getting anally fucked by {TName}''', "LongFluff": f'''{AName} is trying to focus while having {APPos} {Desc("ATightness", ActorData, "DSP")} fucked by {TName}'s {Desc("PenisSize", TargetData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":100
+                "Resistance":100,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "ADoggyStyleSex0":
             TargetDict = {
@@ -6402,7 +6417,6 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "APlea": 25,
                     "Desire": 10,
                     "Submission": 15,
-                    "Shame": 15,
                     "Discomfort": 90,
                     },
                 "Permanent":{
@@ -6415,7 +6429,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting anally fucked by {AName}''', "LongFluff": f'''{TName} is having {TPPos} {Desc("ATightness", TargetData, "DSP")} fucked by {AName}'s {Desc("PenisSize", ActorData, "DSP")} in the doggystyle position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6423,17 +6437,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting being anally fucked by {AName}''', "LongFluff": f'''{TName} is reisting {AName}'s attempts at fucking {TPPos} {Desc("ATightness", TargetData, "P")} in the doggystyle position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while being anally fucked by {AName}''', "LongFluff": f'''{TName} is trying to stay focused while having {TPPos} {Desc("ATightness", TargetData, "DSP")} fucked by {AName}'s {Desc("PenisSize", ActorData, "DSP")} in the doggystyle position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":90
+                "Resistance":90,
                 }
             ActorDict = {
                 "State":{
@@ -6455,7 +6469,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Anally fucking {TName}''', "LongFluff": f'''{AName} is using {APPos} {Desc("PenisSize", ActorData, "DSP")} to fuck {TName}'s {Desc("ATightness", TargetData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6463,20 +6477,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to anally fuck {TName}''', "LongFluff": f'''{AName} is failing to fuck {TName}'s {Desc("ATightness", TargetData, "P")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while anally fucking {TName}''', "LongFluff": f'''{AName} is trying to stay focused while using {APPos} {Desc("PenisSize", ActorData, "DSP")} to fuck {TName}'s {Desc("ATightness", TargetData, "DSP")} in the doggystyle position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":80
+                "Resistance":80,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetADoggyStyleSex0":
             TargetDict = {
@@ -6503,7 +6517,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Anally fucking {AName} ''', "LongFluff": f'''{TName} is using {TPPos} {Desc("PenisSize", TargetData, "DSP")} to fuck {AName}'s {Desc("ATightness", ActorData, "DSP")} in the doggystyle position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6511,17 +6525,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting anally fucking {AName}''', "LongFluff": f'''{TName} is resisting anally fucking {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while anally fucking {AName}''', "LongFluff": f'''{TName} is trying t o stay focused while using {TPPos} {Desc("PenisSize", TargetData, "DSP")} to fuck {AName}'s {Desc("ATightness", ActorData, "DSP")} in the doggystyle position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":90
+                "Resistance":90,
                 }
             ActorDict = {
                 "State":{
@@ -6543,7 +6557,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting anally fucked by {TName}''', "LongFluff": f'''{AName} is having {APPos} {Desc("ATightness", ActorData, "DSP")} fucked by {TName}'s {Desc("PenisSize", TargetData, "DSP")} in the doggystyle position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6551,20 +6565,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get anally fucked by {TName}''', "LongFluff": f'''{AName} is failing to get anally fucked by {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focuse while getting anally fucked by {TName}''', "LongFluff": f'''{AName} is trying to focus while having {APPos} {Desc("ATightness", ActorData, "DSP")} fucked by {TName}'s {Desc("PenisSize", TargetData, "DSP")} in the doggystyle position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":80
+                "Resistance":80,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         ####
         elif CommandID == "GetCowgirlSex0":
@@ -6591,27 +6605,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":100
+                "Resistance":100,
                 }
             ActorDict = {
                 "State":{
@@ -6631,30 +6645,30 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":90
+                "Resistance":90,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "CowgirlSex0":
             TargetDict = {
@@ -6679,27 +6693,27 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":110
+                "Resistance":110,
                 }
             ActorDict = {
                 "State":{
@@ -6721,30 +6735,30 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                 "Task":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
-                    "Task": ["Skinship", {"BriefFluff": f''' ''', "LongFluff": f''' '''}],
+                    "Task": ["Skinship", {"BriefFluff": ''' ''', "LongFluff": ''' '''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":100
+                "Resistance":100,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         ####
         elif CommandID == "LotusSex0":
@@ -6774,7 +6788,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting anally fucked by {AName}''', "LongFluff": f'''{TName} is having {TPPos} {Desc("ATightness", TargetData, "DSP")} fucked by {AName}'s {Desc("PenisSize", ActorData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6782,17 +6796,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting being anally fucked by {AName}''', "LongFluff": f'''{TName} is reisting {AName}'s attempts at fucking {TPPos} {Desc("ATightness", TargetData, "P")} in the lotus position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focus while being anally fucked by {AName}''', "LongFluff": f'''{TName} is trying to stay focused while having {TPPos} {Desc("ATightness", TargetData, "DSP")} fucked by {AName}'s {Desc("PenisSize", ActorData, "DSP")} in the missionary position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":130
+                "Resistance":130,
                 }
             ActorDict = {
                 "State":{
@@ -6818,7 +6832,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Anally fucking {TName} ''', "LongFluff": f'''{AName} is using {APPos} {Desc("PenisSize", ActorData, "DSP")} to fuck {TName}'s {Desc("ATightness", TargetData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6826,20 +6840,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to anally fuck {TName}''', "LongFluff": f'''{AName} is failing to fuck {TName}'s {Desc("ATightness", TargetData, "P")} in the lotus position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while anally fucking {TName}''', "LongFluff": f'''{AName} is trying to stay focused while using {APPos} {Desc("PenisSize", ActorData, "DSP")} to fuck {TName}'s {Desc("ATightness", TargetData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":120
+                "Resistance":120,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
         elif CommandID == "GetALotusSex0":
             TargetDict = {
@@ -6870,7 +6884,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Anally fucking {AName} ''', "LongFluff": f'''{TName} is using {TPPos} {Desc("PenisSize", TargetData, "DSP")} to fuck {AName}'s {Desc("ATightness", ActorData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6878,17 +6892,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Resisting anally fucking {AName}''', "LongFluff": f'''{TName} is resisting anally fucking {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to stay focused while anally fucking {AName}''', "LongFluff": f'''{TName} is trying t o stay focused while using {TPPos} {Desc("PenisSize", TargetData, "DSP")} to fuck {AName}'s {Desc("ATightness", ActorData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":130
+                "Resistance":130,
                 }
             ActorDict = {
                 "State":{
@@ -6915,7 +6929,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Getting anally fucked by {TName}''', "LongFluff": f'''{AName} is having {APPos} {Desc("ATightness", ActorData, "DSP")} fucked by {TName}'s {Desc("PenisSize", TargetData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6923,20 +6937,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Failing to get anally fucked by {TName}''', "LongFluff": f'''{AName} is failing to get anally fucked by {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 15,
                     "Task": ["Skinship", {"BriefFluff": f'''Trying to focuse while getting anally fucked by {TName}''', "LongFluff": f'''{AName} is trying to focus while having {APPos} {Desc("ATightness", ActorData, "DSP")} fucked by {TName}'s {Desc("PenisSize", TargetData, "DSP")} in the lotus position.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                     },
                 "Connotations":{},
-                "Resistance":110
+                "Resistance":110,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
 
         elif CommandID == "StopSex0":
@@ -6954,7 +6968,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Stopping being intimate with {AName}''', "LongFluff": f'''{TName} is stopping being intimate with {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                 },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6962,17 +6976,17 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Refusing to stop being intimate with {AName}''', "LongFluff": f'''{TName} is refusing to stop being intimate with {AName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                 },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Focuing on stopping being intimate with {AName}''', "LongFluff": f'''{TName} is trying to focus on stopping being intimate with {AName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Target]["Actions"]["CurrentTask"]["Location"],
                 },
                 "Connotations":{},
-                "Resistance":15
+                "Resistance":15,
                 }
             ActorDict = {
                 "State":{
@@ -6988,7 +7002,7 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Stopping being intimate with {TName}''', "LongFluff": f'''{AName} is stopping being intimate with {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                 },
                 "ForcefulTask":{},
                 "ResistanceTask":{
@@ -6996,20 +7010,20 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Trying stop being intimate with {TName}''', "LongFluff": f'''{AName} is trying to stop being intimate with {TName}.'''}],
                     "InterruptionPenalty": -20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                 },
                 "EnergyTask":{
                     "HourStart": DateData["Hour"],
                     "HourFinish": DateData["Hour"] + 5,
                     "Task": ["PushedDown", {"BriefFluff": f'''Trying to focus on stopping being intiamte with {TName}''', "LongFluff": f'''{AName} is trying to focus while stopping being intimate with {TName}.'''}],
                     "InterruptionPenalty": 20,
-                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"]
+                    "Location": Globals.SoLNPCData[Actor]["Actions"]["CurrentTask"]["Location"],
                 },
                 "Connotations":{},
-                "Resistance":15
+                "Resistance":15,
                 }
             OtherData = {
-                "Success":2
+                "Success":2,
                 }
 
         if TargetDict != {} and ActorDict != {}:

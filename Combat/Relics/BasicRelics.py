@@ -1,27 +1,12 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
-import json
 import os
 
-
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-import sys
-import random
-import pathlib
+from PyQt5.QtCore import QObject, pyqtSignal
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
 import Globals
-import time
-import threading
-from PyQt5.QtCore import QObject, QThread, pyqtSignal
-from time import sleep
-from battleMenuUI import SRObject
-import copy
+
 Log = Globals.Layouts["MainF"].Log
 
 
@@ -224,7 +209,7 @@ def getIcon(self, Relic):
 
         if 16777248 in Globals.Keys:
             IconWidget.setText(str(Level))
-        IconWidget.setToolTip(f'''Band Aid, Heal 1 more hp each healing action''')
+        IconWidget.setToolTip('''Band Aid, Heal 1 more hp each healing action''')
     elif Relic == "SharpeningStone":
         IconWidget = QLabel()
         IconWidget.setScaledContents(True)
@@ -242,7 +227,7 @@ def getIcon(self, Relic):
 
         if 16777248 in Globals.Keys:
             IconWidget.setText(str(Level))
-        IconWidget.setToolTip(f'''Sharpening Stone, Deal 1 more damage each damaging action''')
+        IconWidget.setToolTip('''Sharpening Stone, Deal 1 more damage each damaging action''')
     elif Relic == "ClothArmor":
         IconWidget = QLabel()
         IconWidget.setScaledContents(True)
@@ -260,7 +245,7 @@ def getIcon(self, Relic):
 
         if 16777248 in Globals.Keys:
             IconWidget.setText(str(Level))
-        IconWidget.setToolTip(f'''Cloth Armor, Start of combat gain 5 Shield. Gain 1 more shield each shielding action''')
+        IconWidget.setToolTip('''Cloth Armor, Start of combat gain 5 Shield. Gain 1 more shield each shielding action''')
     return IconWidget
 
 def EffectTrigger(self, Data):

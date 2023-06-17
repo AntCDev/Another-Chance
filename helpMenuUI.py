@@ -1,21 +1,12 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
-import json
-import os
 
-
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-import sys
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
 import Globals
 
-class UiLayoutHelpMenu(object):
+
+class UiLayoutHelpMenu:
     def __init__(self):
         Globals.Layouts["HelpUI"] = self
         Globals.LayoutsData["HelpUI"] = {"Source":"helpMenuUI", "Initialized":0}

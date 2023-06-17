@@ -1,15 +1,15 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
 import json
 import os
-import Globals
 import pathlib
 
-class UiLayoutNewGameMenuOld(object):
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
+
+
+class UiLayoutNewGameMenuOld:
     def __init__(self):
         Globals.Layouts["NewGameUI"] = self
         Globals.LayoutsData["NewGameUI"] = {"Source":"sleepMenuUI"}
@@ -295,8 +295,8 @@ class UiLayoutNewGameMenuOld(object):
                         if ItemName.endswith(ID):
                             NPCName = ItemName
 
-                    # with open(f"NPCData/{NPCName}/{NPCName}Data.json", 'rb') as f:
-                    with open(pathlib.Path() / "NPCData" / NPCName / f"{NPCName}Data.json" , 'rb') as f:
+                    # with pathlib.Path.open(f"NPCData/{NPCName}/{NPCName}Data.json", 'rb') as f:
+                    with pathlib.Path.open(pathlib.Path() / "NPCData" / NPCName / f"{NPCName}Data.json" , 'rb') as f:
                         NPCData = json.load(f)
                 except:
                     if ID == None or ID.strip() == "":
@@ -321,8 +321,8 @@ class UiLayoutNewGameMenuOld(object):
 
     def saveFunction(self):
         #### FIRST GETS THE CHARACTER OF THE PLAYER
-        # with open("ResetData/baseRelationship.json", 'rb') as f:
-        with open(pathlib.Path() / "NPCData" / NPCName / f"{NPCName}Data.json" , 'rb') as f:
+        # with pathlib.Path.open("ResetData/baseRelationship.json", 'rb') as f:
+        with pathlib.Path.open(pathlib.Path() / "NPCData" / NPCName / f"{NPCName}Data.json" , 'rb') as f:
             baseRelationship = json.load(f)
         Character = ""
         if self.customCharacterButton.isChecked() == False:
@@ -352,10 +352,10 @@ class UiLayoutNewGameMenuOld(object):
                 print("Please fill the ID or Short Name")
             else:
                 path = "NPCData/" + ShortName + ID
-                if not os.path.exists(path):
-                    os.makedirs(path)
+                if not pathlib.Path.exists(path):
+                    pathlib.Path.mkdir(path, parents=True)
                 x = path + "/" + ShortName + ID + "Data.json"
-                with open(x, 'w') as f:
+                with pathlib.Path.open(x, 'w') as f:
                     json.dump(NPCData, f)
 
         else:
@@ -374,18 +374,18 @@ class UiLayoutNewGameMenuOld(object):
                         if NPCID == ID:
                             NameWhole = NPC
                     path = "NPCData/" + str(NameWhole) + "/" + str(NameWhole) + "Data.json"
-                    with open(path, 'rb') as f:
+                    with pathlib.Path.open(path, 'rb') as f:
                         NPCData = json.load(f)
         #### WITH THE NPCData RETRIEVED THEN IT RESETS THE FILES
                 except:
                     print("An error occured when reading the NPC data")
         # enviorementData
-        with open("ResetData/enviorementData.json", 'rb') as f:
+        with pathlib.Path.open("ResetData/enviorementData.json", 'rb') as f:
             enviorementData = json.load(f)
-        with open("enviorementData.json", 'w') as f:
+        with pathlib.Path.open("enviorementData.json", 'w') as f:
             json.dump(enviorementData, f)
 
-        # with open("enviorementData.json", 'rb') as f:
+        # with pathlib.Path.open("enviorementData.json", 'rb') as f:
         #     enviorementData = json.load(f)
         # locations = enviorementData["Locations"]
         # for i in locations:
@@ -403,11 +403,11 @@ class UiLayoutNewGameMenuOld(object):
         #
         # enviorementData["DateData"] = dateData
         # print(enviorementData)
-        # # with open("enviorementData.json", 'w') as f:
+        # # with pathlib.Path.open("enviorementData.json", 'w') as f:
         # #     json.dump(enviorementData, f)
 
         #PCdata
-        with open("PCdata.json", 'rb') as f:
+        with pathlib.Path.open("PCdata.json", 'rb') as f:
             PCdata = json.load(f)
         PCdata["Name"] = NPCData["Name"]
         PCdata["ID"] = NPCData["ID"]
@@ -415,15 +415,15 @@ class UiLayoutNewGameMenuOld(object):
         PCdata["Items"] = {"Alcohol": 60}
         PCdata["Others"] = {"Others": "Others", "PinnedText": ""}
         PCdata["Status"] = {"Energy": 6000}
-        with open("PCdata.json", 'w') as f:
+        with pathlib.Path.open("PCdata.json", 'w') as f:
             json.dump(PCdata, f)
         #NPCData
         NPCDataWhole = {ID:NPCData}
-        with open("NPCData.json", 'w') as f:
+        with pathlib.Path.open("NPCData.json", 'w') as f:
             json.dump(NPCDataWhole, f)
 
         #tempData
-        with open("tempData.json", 'rb') as f:
+        with pathlib.Path.open("tempData.json", 'rb') as f:
             tempData = json.load(f)
         tempData["Name"] = NPCData["Name"]
         tempData["commandPage"] = 1
@@ -435,14 +435,14 @@ class UiLayoutNewGameMenuOld(object):
         tempData["Location"] = "Home"
         tempData["PlayerTargetID"] = "0"
         tempData["FlavorText"] = {"LocationText": "", "NPCtext": "", "AttitudeText": "", "CommandText": ""}
-        with open("tempData.json", 'w') as f:
+        with pathlib.Path.open("tempData.json", 'w') as f:
             json.dump(tempData, f)
         print("Everything alright")
 
     def Refresh(self):
         ""
 
-class UiLayoutNewGameMenu(object):
+class UiLayoutNewGameMenu:
     def __init__(self):
         Globals.Layouts["NewGameUI"] = self
         Globals.LayoutsData["NewGameUI"] = {"Source":"sleepMenuUI"}

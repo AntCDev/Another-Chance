@@ -1,11 +1,10 @@
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
+
 from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
 import Globals
-import random
-import os
+
 Log = Globals.Layouts["MainF"].Log
 
 def Initialize(self, Reference):

@@ -1,27 +1,13 @@
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import QTextCursor
-import json
 import os
-
-
-from PyQt5.QtWidgets import *
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-import sys
 import random
-import pathlib
-import Globals
-import time
-import threading
+
+from PyQt5.QtCore import *
 from PyQt5.QtCore import QObject, QThread, pyqtSignal
-from time import sleep
-from battleMenuUI import SRObject
-import copy
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import Globals
+
 Log = Globals.Layouts["MainF"].Log
 
 
@@ -581,10 +567,7 @@ def EffectTrigger(self, Data):
                         Damage = Data["FinalData"]["Damage"]
                         Data["FinalData"]["Damage"] = 0
                         ParryLevel = Globals.BattleObjects[TargetType][Target]["Object"].Effects["Parry"]["Level"]
-                        if Damage > ParryLevel:
-                            ParryDamage = ParryLevel
-                        else:
-                            ParryDamage = Damage
+                        ParryDamage = ParryLevel if Damage > ParryLevel else Damage
                         Globals.BattleObjects[TargetType][Target]["Object"].Effects.pop("Parry")
 
                         # SETTING INITIAL DATA FOR THE ANIMATIONS
