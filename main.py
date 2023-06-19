@@ -356,7 +356,7 @@ class MainWindow(QMainWindow):
         # IMPORTS THE NPC FUNCTIONS
         for NPCFullID in os.listdir("NPCData"):
             # if os.path.isdir("NPCData/" + NPCFullID):
-            if pathlib.Path.is_dir(os.path.abspath( pathlib.Path() / "NPCData" / NPCFullID )):
+            if pathlib.Path.is_dir( pathlib.Path() / "NPCData" / NPCFullID ):
                 try:
                     # FilesList = os.listdir(f"NPCData/{NPCFullID}")
                     FilesList = os.listdir(os.path.abspath( pathlib.Path() / "NPCData" / NPCFullID ))

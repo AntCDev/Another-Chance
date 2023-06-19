@@ -2,5 +2,3 @@ Idle action when the PC moves
 Add sexuality selector
 Upon a character that isn't the PC sleeping, call for ProcessGems to modify existing abilities, traits, and fallenstates of every relationship they have.
 Add processing of negative gems
-Fix Issue sleeping with a single enhance target halving the portraits
-Add flavor text for characters leavingn or coming
