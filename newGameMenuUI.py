@@ -19,27 +19,28 @@ class UiLayoutNewGameMenuOld:
         MainWindow = Globals.Layouts["MainF"]
         self.GUI = QWidget(MainWindow)
 
-        self.labelBack = QLabel(self.GUI)
-        self.labelBack.setGeometry(288,5,1024,954)
-        self.labelBack.setFont(QFont('Segoe UI', 14))
-        self.labelBack.setProperty("Color","Dark")
+        # self.labelBack = QLabel(self.GUI)
+        # self.labelBack.setGeometry(288,5,1024,954)
+        # self.labelBack.setFont(QFont('Segoe UI', 14))
+        # self.labelBack.setProperty("Color","Dark")
 
-        self.statusLabelBack = QLabel(self.GUI)
-        self.statusLabelBack.setGeometry(5,964,1592,55)
-        self.statusLabelBack.setProperty("Color","Dark")
+        self.ControlWidget = QWidget(self.GUI)
+        self.ControlWidget.setGeometry(5,964,1592,55)
+        self.ControlWidget.setProperty("Color","Dark")
 
-        self.statusLabel = QLabel(self.GUI, objectName = "Title")
-        self.statusLabel.setGeometry(505,964,600,55)
+        self.statusLabel = QLabel(self.ControlWidget, objectName = "Title")
+        self.statusLabel.setGeometry(500,0,600,55)
         self.statusLabel.setProperty("Color","Dark")
         self.statusLabel.setAlignment(Qt.AlignCenter)
 
-        self.buttonBack = QPushButton("Back", self.GUI, clicked = lambda: MainWindow.gotoPreviousLayout())
-        self.buttonBack.setGeometry(15,970,200,45)
+        self.buttonBack = QPushButton("Back", self.ControlWidget, clicked = lambda: MainWindow.gotoPreviousLayout())
+        self.buttonBack.setGeometry(10,6,200,45)
 
         self.scroll = QScrollArea(self.GUI)
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll.setGeometry(288,5,1024,954)
+        self.scroll.setProperty("Color","Dark")
 
         myform = QVBoxLayout()
 
@@ -442,6 +443,15 @@ class UiLayoutNewGameMenuOld:
     def Refresh(self):
         ""
 
+    def ResizeEvent(self):
+        Width = Globals.Layouts["MainF"].width()
+        Height = Globals.Layouts["MainF"].height()
+        Diff = 1024 - Height
+
+        self.scroll.setGeometry(288,5,1024,954-Diff)
+        self.ControlWidget.setGeometry(5,964-Diff,1592,55)
+
+
 class UiLayoutNewGameMenu:
     def __init__(self):
         Globals.Layouts["NewGameUI"] = self
@@ -452,15 +462,16 @@ class UiLayoutNewGameMenu:
         MainWindow = Globals.Layouts["MainF"]
         self.GUI = QWidget(MainWindow)
 
-        BoxLabel = QLabel("Maker", self.GUI)
-        BoxLabel.setGeometry(50,50,1014,45)
-        BoxLabel.setProperty("Color","Dark")
+        # BoxLabel = QLabel("Maker", self.GUI)
+        # BoxLabel.setGeometry(50,50,1014,45)
+        # BoxLabel.setProperty("Color","Dark")
 
 
         self.MakerScroll = QScrollArea(self.GUI)
         self.MakerScroll.setGeometry(50,100,1014,904)
         self.MakerScroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.MakerScroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.MakerScroll.setProperty("Color","Dark")
         # self.MakerScroll.setStyleSheet('''background-color:rgb(23,23,23)''')
 
         self.MakerForm = QGridLayout()
@@ -494,6 +505,10 @@ class UiLayoutNewGameMenu:
     def Refresh(self):
         ""
 
+    def ResizeEvent(self):
+        Width = Globals.Layouts["MainF"].width()
+        Height = Globals.Layouts["MainF"].height()
+        Diff = 1024 - Height
 
 def Initialize(self, Reference):
     if "NewGameUI" not in Globals.Layouts:

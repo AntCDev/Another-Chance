@@ -218,29 +218,32 @@ class UiLayoutMakerMenu(QWidget):
         self.MainBox.setMinimumHeight(Height)
         self.MainBox.setMaximumHeight(Height)
 
-        self.LabelControl = QLabel(self.GUI)
-        self.LabelControl.setGeometry(5,964,1592,55)
-        self.LabelControl.setStyleSheet('''
-        QLabel{
+
+
+        self.ControlWidget = QWidget(self.GUI)
+        self.ControlWidget.setGeometry(5,964,1592,55)
+
+        self.ControlWidget.setStyleSheet('''
+        .QWidget{
         background-color:rgb(23,23,23);
         }
         ''')
 
-        self.ButtonMenu = QPushButton("Back", self.GUI, clicked = lambda: MainWindow.gotoPreviousLayout())
-        self.ButtonMenu.setGeometry(15,970,200,45)
+        self.ButtonMenu = QPushButton("Back", self.ControlWidget, clicked = lambda: MainWindow.gotoPreviousLayout())
+        self.ButtonMenu.setGeometry(10,6,200,45)
 
-        self.ButtonSave = QPushButton("Save", self.GUI, clicked = lambda: self.Save())
-        self.ButtonSave.setGeometry(225,970,200,45)
+        self.ButtonSave = QPushButton("Save", self.ControlWidget, clicked = lambda: self.Save())
+        self.ButtonSave.setGeometry(220,6,200,45)
 
-        self.ButtonLoad = QPushButton("Load", self.GUI, clicked = lambda: self.Load())
-        self.ButtonLoad.setGeometry(1075,970,200,45)
-        self.LoadBox = QComboBox(self.GUI)
-        self.LoadBox.setGeometry(1285,970,300,45)
+        self.ButtonLoad = QPushButton("Load", self.ControlWidget, clicked = lambda: self.Load())
+        self.ButtonLoad.setGeometry(1070,6,200,45)
+        self.LoadBox = QComboBox(self.ControlWidget)
+        self.LoadBox.setGeometry(1280,6,300,45)
         self.LoadBox.addItem("---")
         self.LoadBox.NPCData = {}
         self.CheckLoad()
 
-        self.LabelStatus = QLabel(self.GUI, objectName = "MainTitle")
+        self.LabelStatus = QLabel(self.ControlWidget, objectName = "MainTitle")
         self.LabelStatus.setStyleSheet('''
         QLabel{
         background-color:rgb(23,23,23);
@@ -249,7 +252,7 @@ class UiLayoutMakerMenu(QWidget):
         font-family: Segoe UI;
         }
         ''')
-        self.LabelStatus.setGeometry(595,970,400,45)
+        self.LabelStatus.setGeometry(590,6,400,45)
         self.LabelStatus.setAlignment(QtCore.Qt.AlignCenter)
 
 
@@ -1102,6 +1105,13 @@ class UiLayoutMakerMenu(QWidget):
 
     def Refresh(self):
         ""
+    def ResizeEvent(self):
+        Width = Globals.Layouts["MainF"].width()
+        Height = Globals.Layouts["MainF"].height()
+        Diff = 1024 - Height
+
+        self.MainScroll.setGeometry(5,5,1592,955-Diff)
+        self.ControlWidget.setGeometry(5,964-Diff,1592,55)
 
 
 def Initialize(self, Reference):

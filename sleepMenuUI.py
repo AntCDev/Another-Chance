@@ -92,12 +92,12 @@ class UiLayoutSleepMenu:
         self.EnhanceForm.WidgetsDict = {}
 
 
-        self.BottomLabel = QLabel(self.GUI)
-        self.BottomLabel.setGeometry(430,964,1165,55)
-        self.BottomLabel.setProperty("Color", "Dark")
+        self.ControlWidget = QWidget(self.GUI)
+        self.ControlWidget.setGeometry(430,964,1165,55)
+        self.ControlWidget.setProperty("Color", "Dark")
 
-        self.buttonContinue = QPushButton('Wake Up', self.GUI, clicked = lambda: MainWindow.gotoLayout("SoLUI"))
-        self.buttonContinue.setGeometry(435,969,200,45)
+        self.buttonContinue = QPushButton('Wake Up', self.ControlWidget, clicked = lambda: MainWindow.gotoLayout("SoLUI"))
+        self.buttonContinue.setGeometry(5,5,200,45)
 
     def Refresh(self):
         for Key in self.EnhanceForm.WidgetsDict:
@@ -117,6 +117,14 @@ class UiLayoutSleepMenu:
         self.EnhanceBox.setMinimumHeight(Height)
         self.EnhanceBox.setMaximumWidth(Width)
         self.EnhanceBox.setMinimumWidth(Width)
+
+    def ResizeEvent(self):
+        Width = Globals.Layouts["MainF"].width()
+        Height = Globals.Layouts["MainF"].height()
+        Diff = 1024 - Height
+
+        self.EnhanceScroll.setGeometry(10,50,410,964-Diff)
+        self.ControlWidget.setGeometry(430,964-Diff,1165,55)
 
 
 

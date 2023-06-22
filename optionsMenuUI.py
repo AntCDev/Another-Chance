@@ -481,14 +481,11 @@ class UiLayoutOptionsMenu:
         MainWindow = Globals.Layouts["MainF"]
         self.GUI = QWidget(MainWindow)
 
-        self.LabelBack = QLabel(self.GUI)
-        self.LabelBack.setGeometry(288,5,1024,954)
-        self.LabelBack.setProperty("Color","Dark")
-
         self.OptionsScroll = QScrollArea(self.GUI)
         self.OptionsScroll.setGeometry(288,5,1024,954)
         self.OptionsScroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.OptionsScroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.OptionsScroll.setProperty("Color","Dark")
 
         self.OptionsForm = QGridLayout()
         self.OptionsBox = QGroupBox()
@@ -801,15 +798,15 @@ class UiLayoutOptionsMenu:
 
 
 
-        self.LabelControl = QLabel(self.GUI)
-        self.LabelControl.setGeometry(5,964,1592,55)
-        self.LabelControl.setProperty("Color","Dark")
+        self.ControlWidget = QWidget(self.GUI)
+        self.ControlWidget.setGeometry(5,964,1592,55)
+        self.ControlWidget.setProperty("Color","Dark")
 
-        self.ButtonMenu = QPushButton("Back", self.GUI, clicked = lambda: MainWindow.gotoPreviousLayout())
-        self.ButtonMenu.setGeometry(15,970,200,45)
+        self.ButtonMenu = QPushButton("Back", self.ControlWidget, clicked = lambda: MainWindow.gotoPreviousLayout())
+        self.ButtonMenu.setGeometry(10,6,200,45)
 
-        self.ButtonSave = QPushButton("Save", self.GUI, clicked = lambda: self.Save())
-        self.ButtonSave.setGeometry(225,970,200,45)
+        self.ButtonSave = QPushButton("Save", self.ControlWidget, clicked = lambda: self.Save())
+        self.ButtonSave.setGeometry(220,6,200,45)
 
 
     def Refresh(self):
@@ -886,6 +883,16 @@ class UiLayoutOptionsMenu:
         Globals.PlayerConfig["RandomAmount"] = RandomAmount
         Globals.PlayerConfig["RandomRatio"] = {"Male":MaleRatio, "Female":FemaleRatio, "FutaRatio":FutaRatio}
         print(Globals.PlayerConfig)
+
+    def ResizeEvent(self):
+        Width = Globals.Layouts["MainF"].width()
+        Height = Globals.Layouts["MainF"].height()
+        Diff = 1024 - Height
+
+        self.OptionsScroll.setGeometry(288,5,1024,954-Diff)
+        self.ControlWidget.setGeometry(5,964-Diff,1592,55)
+
+
 
 def Initialize(self, Reference):
     if "OptionsUI" not in Globals.Layouts:

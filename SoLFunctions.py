@@ -629,6 +629,7 @@ def Refresh(self):
                         Button = Globals.Commands[CommandID]["Reference"].GetCommandButton(self, CommandID, PCID, NPCID)
                         self.FormSoLButtons.addWidget(Button, Layer, Row)
                         self.FormSoLButtons.WidgetsList.append(Button)
+                    Globals.References["SoLFunctions"].CheckButtonFontSize(self, Button)
                     Row += 1
             self.GroupBoxSoLButtons.setMinimumHeight((Layer + 1)*45)
             self.GroupBoxSoLButtons.setMaximumHeight((Layer + 1)*45)
@@ -1230,19 +1231,33 @@ def ToggleFavorite(NPCID):
         print(e)
 
 def CheckButtonFontSize(self, Button):
-    if Button.fontMetrics().boundingRect(Button.text()).height() > Button.rect().height() or Button.fontMetrics().boundingRect(Button.text()).width() > Button.rect().width():
+    try:
+        Font = Globals.Layouts["MainF"].StyleData(Button, "Font")
+        FontSize = Globals.Layouts["MainF"].StyleData(Button, "FontSize")
+        FM = QFontMetrics(QFont(Font, FontSize))
+
         ButtonH = Button.rect().height()
         ButtonW = Button.rect().width()
-        font = Button.property("font")
-        while True:
-            TextH = Button.fontMetrics().boundingRect(Button.text()).height()
-            TextW = Button.fontMetrics().boundingRect(Button.text()).width()
 
-            newSize = font.pointSizeF() - 1
-            font.setPointSizeF(newSize)
-            Button.setFont(font)
-            if TextH < ButtonH and TextW < ButtonW:
-                break
+        if FM.boundingRect(Button.text()).height() > ButtonH or FM.boundingRect(Button.text()).width() > ButtonW:
+            while True:
+
+                FM = QFontMetrics(QFont(Font, FontSize))
+
+                TextH = FM.boundingRect(Button.text()).height()
+                TextW = FM.boundingRect(Button.text()).width()
+
+                FontSize -= 1
+
+
+                if (TextH < ButtonH and TextW < ButtonW) or FontSize < 1:
+                    break
+
+            Button.setStyleSheet(f'''font-size:{FontSize}pt''')
+    except Exception as e:
+        Log(2, "ERROR CheckButtonFontSize", e, Button)
+        print(e)
+
 def AdjustSize(Widget):
     Font = Globals.Layouts["MainF"].StyleData(Widget, "Font")
     FontSize = Globals.Layouts["MainF"].StyleData(Widget, "FontSize")

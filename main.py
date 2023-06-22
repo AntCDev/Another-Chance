@@ -44,7 +44,12 @@ class MainWindow(QMainWindow):
         Globals.Layouts["MainF"] = self
         self.setWindowTitle('Another Chance')
         self.setWindowIcon(QtGui.QIcon('logo.jpg'))
-        self.setFixedSize(1600, 1024)
+        self.resize(1600, 1024)
+        self.setMaximumWidth(1600)
+        self.setMinimumWidth(1600)
+        self.setMaximumHeight(1024)
+        self.setMinimumHeight(700)
+
         self.LayoutsBox = QHBoxLayout()
         self.LayoutsWidget = QWidget(self)
         self.LayoutsWidget.setLayout(self.LayoutsBox)
@@ -84,9 +89,11 @@ class MainWindow(QMainWindow):
                 }
                 .QScrollArea[Color = "Dark"]{
                     background-color:rgb(23,23,23);
+                    border: 1px solid black;
                     }
                 .QScrollArea[Color = "Light"]{
                     background-color:rgb(35,35,35);
+                    border: 1px solid black;
                     }
 
             QPushButton{
@@ -204,12 +211,15 @@ class MainWindow(QMainWindow):
             if Type == "Font":
                 return "Segoe UI"
             if Type == "FontSize":
-                ObjectName = Object.objectName()
-                if ObjectName == "MainTitle": return 20
-                elif ObjectName == "Title": return 16
-                elif ObjectName == "SubTitle": return 14
-                elif ObjectName == "SmallText": return 10
-                else: return 12
+                if isinstance(Object, QPushButton):
+                    return 14
+                else:
+                    ObjectName = Object.objectName()
+                    if ObjectName == "MainTitle": return 20
+                    elif ObjectName == "Title": return 16
+                    elif ObjectName == "SubTitle": return 14
+                    elif ObjectName == "SmallText": return 10
+                    else: return 12
 
         self.StyleData = SD
 
@@ -353,6 +363,23 @@ class MainWindow(QMainWindow):
             except Exception as e:
                 Log(2, "ERROR INITIALIZE Personalities", e, File)
 
+        # IMPORTS THE CLOTHES
+        ClothesPath = os.path.abspath( pathlib.Path() / "SoL" / "Clothes" )
+        # ClothesPath = CurrentPath + "\\SoL\\Clothes"
+        if ClothesPath not in sys.path:
+            sys.path.insert(0, ClothesPath)
+        # FileList = os.listdir("SoL/Clothes")
+        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Clothes" ))
+        for File in FileList:
+            try:
+                if File.endswith(".py"):
+                    Reference = __import__(File[:-3])
+                    Globals.References[File[:-3]] = Reference
+                    Reference.Initialize(self, Reference)
+            except Exception as e:
+                Log(2, "ERROR INITIALIZE Clothes", e, File)
+
+
         # IMPORTS THE NPC FUNCTIONS
         for NPCFullID in os.listdir("NPCData"):
             # if os.path.isdir("NPCData/" + NPCFullID):
@@ -400,6 +427,10 @@ class MainWindow(QMainWindow):
                 LayoutOther.hide()
                 if LayoutOther == Object.GUI:
                     Object.Refresh()
+                    try:
+                        Globals.LayoutsData["Active"].ResizeEvent()
+                    except:
+                        ""
                     LayoutOther.show()
 
             self.show()
@@ -411,8 +442,17 @@ class MainWindow(QMainWindow):
         Globals.LayoutsData["Active"].comesFrom.GUI.show()
         Globals.LayoutsData["Active"] = Globals.LayoutsData["Active"].comesFrom
         Globals.LayoutsData["Active"].Refresh()
+        try:
+            Globals.LayoutsData["Active"].ResizeEvent()
+        except:
+            ""
 
     def resizeEvent(self, event):
+        try:
+            Globals.LayoutsData["Active"].ResizeEvent()
+        except:
+            ""
+
         self.resized.emit()
 
     def someFunction(self):

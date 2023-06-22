@@ -27,76 +27,79 @@ class UiLayoutMainMenu(QWidget):
         self.labelTitle.setAlignment(Qt.AlignCenter)
         self.labelTitle.setProperty("Color","Dark")
 
-        self.labelCommandsHolder = QLabel(self.GUI)
-        self.labelCommandsHolder.setGeometry(415,470,770,130)
-        self.labelCommandsHolder.setProperty("Color","Dark")
+        # self.labelCommandsHolder = QLabel(self.GUI)
+        # self.labelCommandsHolder.setGeometry(415,470,770,130)
+        # self.labelCommandsHolder.setProperty("Color","Dark")
 
+        self.ButtonHolder = QWidget(self.GUI)
+        self.ButtonHolder.setGeometry(415,470,770,130)
+        self.ButtonHolder.setProperty("Color", "Dark")
 
-        self.buttonContinue = QPushButton('Continue', self.GUI, clicked = lambda: MainWindow.gotoLayout("SoLUI"))
-        self.buttonContinue.setGeometry(425, 480, 180, 30)
+        self.buttonContinue = QPushButton('Continue', self.ButtonHolder, clicked = lambda: MainWindow.gotoLayout("SoLUI"))
+        self.buttonContinue.setGeometry(10, 10, 180, 30)
         self.buttonContinue.setProperty("Color","Light")
 
 
-        self.buttonData = QPushButton('Save/Load', self.GUI, clicked = lambda: MainWindow.gotoLayout("SaveUI"))
-        self.buttonData.setGeometry(615, 480, 180, 30)
+        self.buttonData = QPushButton('Save/Load', self.ButtonHolder, clicked = lambda: MainWindow.gotoLayout("SaveUI"))
+        self.buttonData.setGeometry(200, 10, 180, 30)
         self.buttonData.setProperty("Color","Light")
 
-        self.buttonImport = QPushButton('Manage Characters', self.GUI, clicked = lambda: MainWindow.gotoLayout("ImportUI"))
-        self.buttonImport.setGeometry(805, 480, 180, 30)
+        self.buttonImport = QPushButton('Manage Characters', self.ButtonHolder, clicked = lambda: MainWindow.gotoLayout("ImportUI"))
+        self.buttonImport.setGeometry(390, 10, 180, 30)
         self.buttonImport.setProperty("Color","Light")
 
-        self.buttonMaker = QPushButton('Character Maker', self.GUI, clicked = lambda: MainWindow.gotoLayout("MakerUI"))
-        self.buttonMaker.setGeometry(995, 480, 180, 30)
+        self.buttonMaker = QPushButton('Character Maker', self.ButtonHolder, clicked = lambda: MainWindow.gotoLayout("MakerUI"))
+        self.buttonMaker.setGeometry(580, 10, 180, 30)
         self.buttonMaker.setProperty("Color","Light")
 
 
-        self.buttonOptions = QPushButton('Options', self.GUI, clicked = lambda: MainWindow.gotoLayout("OptionsUI"))
-        self.buttonOptions.setGeometry(425, 520, 180, 30)
+        self.buttonOptions = QPushButton('Options', self.ButtonHolder, clicked = lambda: MainWindow.gotoLayout("OptionsUI"))
+        self.buttonOptions.setGeometry(10, 50, 180, 30)
         self.buttonOptions.setProperty("Color","Light")
         # self.buttonOptions.setProperty("Enabled","0")
         # self.buttonOptions.setEnabled(False)
 
-        self.buttonDiscord = QPushButton('Discord', self.GUI, clicked = lambda: webbrowser.open("https://discord.gg/rjBW7Uj48g"))
-        self.buttonDiscord.setGeometry(615, 520, 180, 30)
+        self.buttonDiscord = QPushButton('Discord', self.ButtonHolder, clicked = lambda: webbrowser.open("https://discord.gg/rjBW7Uj48g"))
+        self.buttonDiscord.setGeometry(200, 50, 180, 30)
         self.buttonDiscord.setStyleSheet('''color:rgb(88, 101, 242);''')
-        self.labelDiscord = QLabel(self.GUI)
+        self.labelDiscord = QLabel(self.ButtonHolder)
         self.labelDiscord.setStyleSheet('''background:none;border:none;''')
         self.labelDiscord.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "OtherResources" / "discord-mark-blue.png" ) ))
-        self.labelDiscord.setGeometry(619,522,30,26)
+        self.labelDiscord.setGeometry(204,52,30,26)
         self.labelDiscord.setScaledContents(True)
 
-        self.buttonPatreon = QPushButton('Patreon', self.GUI, clicked = lambda: webbrowser.open("https://patreon.com/AntCDev"))
-        self.buttonPatreon.setGeometry(805, 520, 180, 30)
+        self.buttonPatreon = QPushButton('Patreon', self.ButtonHolder, clicked = lambda: webbrowser.open("https://patreon.com/AntCDev"))
+        self.buttonPatreon.setGeometry(390, 50, 180, 30)
         self.buttonPatreon.setStyleSheet('''color:rgb(249, 104, 84);''')
-        self.labelPatreon = QLabel(self.GUI)
+        self.labelPatreon = QLabel(self.ButtonHolder)
         self.labelPatreon.setStyleSheet('''background:none;border:none;''')
         self.labelPatreon.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "OtherResources" / "Digital-Patreon-Logo_FieryCoral.png" ) ))
-        self.labelPatreon.setGeometry(809,522,26,26)
+        self.labelPatreon.setGeometry(394,52,26,26)
         self.labelPatreon.setScaledContents(True)
 
-        self.buttonHelp = QPushButton('Help', self.GUI, clicked = lambda: MainWindow.gotoLayout("HelpUI"))
-        self.buttonHelp.setGeometry(995, 520, 180, 30)
+        self.buttonHelp = QPushButton('Help', self.ButtonHolder, clicked = lambda: MainWindow.gotoLayout("HelpUI"))
+        self.buttonHelp.setGeometry(580, 50, 180, 30)
         self.buttonHelp.setProperty("Color","Light")
         # self.buttonHelp.setProperty("Enabled","0")
         # self.buttonHelp.setEnabled(False)
 
 
-        self.buttonChangelog = QPushButton('V. M1', self.GUI, clicked = lambda: webbrowser.open("https://github.com/AntCDev/Another-Chance"))
-        self.buttonChangelog.setGeometry(425, 560, 180, 30)
+        self.buttonChangelog = QPushButton('V. M1', self.ButtonHolder, clicked = lambda: webbrowser.open("https://github.com/AntCDev/Another-Chance"))
+        self.buttonChangelog.setGeometry(10, 90, 180, 30)
         self.buttonChangelog.setProperty("Color","Light")
-        self.labelChangelog = QLabel(self.GUI)
+        self.labelChangelog = QLabel(self.ButtonHolder)
         self.labelChangelog.setStyleSheet('''background:none;border:none;''')
         self.labelChangelog.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "OtherResources" / "github-mark-white.png" ) ))
-        self.labelChangelog.setGeometry(429,562,26,26)
+        self.labelChangelog.setGeometry(14,92,26,26)
         self.labelChangelog.setScaledContents(True)
 
-        # self.buttonCredits = QPushButton('Credits (Bat)', self.GUI, clicked = lambda: MainWindow.gotoLayout("BattleScene"))
-        self.buttonCredits = QPushButton('Credits', self.GUI, clicked = lambda: MainWindow.gotoLayout("CreditsUI"))
-        self.buttonCredits.setGeometry(615, 560, 180, 30)
+        # self.buttonCredits = QPushButton('Credits (Bat)', self.ButtonHolder, clicked = lambda: MainWindow.gotoLayout("BattleScene"))
+        self.buttonCredits = QPushButton('Credits', self.ButtonHolder, clicked = lambda: MainWindow.gotoLayout("CreditsUI"))
+        self.buttonCredits.setGeometry(200, 90, 180, 30)
         self.buttonCredits.setProperty("Color","Light")
 
-        self.buttonDisclaimer = QPushButton('Disclaimer', self.GUI, clicked = lambda: MainWindow.gotoLayout("DisclaimerUI"))
-        self.buttonDisclaimer.setGeometry(805, 560, 180, 30)
+        self.buttonDisclaimer = QPushButton('Disclaimer', self.ButtonHolder, clicked = lambda: MainWindow.gotoLayout("DisclaimerUI"))
+        self.buttonDisclaimer.setGeometry(390, 90, 180, 30)
         self.buttonDisclaimer.setProperty("Color","Light")
 
         def NG(MainWindow):
@@ -111,8 +114,8 @@ class UiLayoutMainMenu(QWidget):
                 print(e)
                 ""
 
-        self.buttonReset = QPushButton('New Game', self.GUI, clicked = lambda: MainWindow.gotoLayout("NewGameUI"))
-        self.buttonReset.setGeometry(995, 560, 180, 30)
+        self.buttonReset = QPushButton('New Game', self.ButtonHolder, clicked = lambda: MainWindow.gotoLayout("NewGameUI"))
+        self.buttonReset.setGeometry(580, 90, 180, 30)
         self.buttonReset.setProperty("Color","Light")
 
     def Refresh(self):
@@ -129,6 +132,22 @@ class UiLayoutMainMenu(QWidget):
             self.buttonImport.setProperty("Enabled","1")
             self.buttonImport.style().polish(self.buttonImport)
 
+
+    def ResizeEvent(self):
+        Width = Globals.Layouts["MainF"].width()
+        Height = Globals.Layouts["MainF"].height()
+
+        HeightDifference = 1024 - Height
+        TopSpacing = 110 - int(HeightDifference / 6)
+
+        BottomSpacing = 550 - int(HeightDifference / 6) * 5
+        # 110
+        # 550
+        self.labelTitle.move(450, TopSpacing)
+        self.ButtonHolder.move(415, TopSpacing + 360)
+        print(Height)
+
+        # TopSpacing = 110
 
 
 

@@ -1560,6 +1560,7 @@ def TriggerControlCommand(self, ControlID, PCID, NPCID):
             Layer, Row = 0, 0
             for Location in Globals.SoLEnviorementData["Locations"][PCLocation]["CanAccess"]:
                 Button = GetMoveButtons(self, Location, PCID)
+                Globals.References["SoLFunctions"].CheckButtonFontSize(self, Button)
                 if Row > 4:
                     Row = 0
                     Layer += 1

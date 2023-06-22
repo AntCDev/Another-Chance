@@ -85,110 +85,10 @@ class UiLayoutSaveMenu:
     def UI(self):
         MainWindow = Globals.Layouts["MainF"]
         self.GUI = QWidget(MainWindow)
-        self.GUI.setStyleSheet('''
-        QWidget{
-        background-color:rgb(35,35,35);
-        }
-        .QGroupBox{
-        border:none;
-        background:none;
-        }
-
-        .QScrollArea{
-        border:none;
-        background-color:rgba(23,23,23,0)
-        }
-
-        QPushButton{
-        color:rgb(255, 255, 255);
-        font-size: 14pt;
-        font-family: Segoe UI;
-        }
-        QPushButton:hover{
-        color:rgb(255, 255, 0);
-        }
-
-        QLabel{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        font-size: 16pt;
-        font-family: Segoe UI;
-        }
-        QLabel:hover{
-        color:rgb(255, 255, 0);
-        }
-
-        QLabel#MainTitle{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        font-size: 20pt;
-        font-family: Segoe UI;
-        }
-
-        QLabel#SubTitle{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        font-size: 18pt;
-        font-family: Segoe UI;
-        }
-        QLabel#SubTitle:hover{
-        color:rgb(255, 255, 0);
-        }
-
-        QLineEdit{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        background-color:rgb(23,23,23);
-        font-size: 14pt;
-        font-family: Segoe UI;
-        }
-
-        QTextEdit{
-        color:rgb(255, 255, 255);
-        border:1px solid black;
-        background-color:rgb(35,35,35);
-        font-size: 14pt;
-        font-family: Segoe UI;
-        }
-
-        QComboBox{
-        background-color:rgb(23,23,23);
-        color:rgb(255, 255, 255);
-        font-size: 14pt;
-        font-family: Segoe UI;
-        }
-        QComboBox:hover{
-        color:rgb(255, 255, 0);
-        }
-		QComboBox QAbstractItemView {
-        border: 1px solid grey;
-        color: white;
-        selection-color: yellow;
-		}
-
-        QRadioButton{
-        color:rgb(255, 255, 255);
-        font-size: 14pt;
-        font-family: Segoe UI;
-        }
-        QRadioButton:hover{
-        color:rgb(255, 255, 0);
-        }
-
-        QToolTip{
-        background-color: rgb(23,23,23);
-        color: white;
-        border: 1px solid black;
-        font-size: 14pt;
-        font-family: Segoe UI;
-
-
-        }
-
-        ''')
 
         self.LineSave = QLineEdit(self.GUI)
         self.LineSave.setGeometry(237,5,1125,45)
+        self.LineSave.setProperty("Color","Dark")
 
         self.ButtonSave = QLabel(self.GUI)
         self.ButtonSave.setGeometry(1272,7,40,40)
@@ -228,29 +128,16 @@ class UiLayoutSaveMenu:
         self.FormSaves.WigetsDict = {}
         self.FormSaves.setContentsMargins(5, 0, 0, 0)
 
+        self.ControlWidget = QWidget(self.GUI)
+        self.ControlWidget.setProperty("Color", "Dark")
+        self.ControlWidget.setGeometry(5,964,1592,55)
 
-        self.LabelControl = QLabel(self.GUI)
-        self.LabelControl.setGeometry(5,964,1592,55)
-        self.LabelControl.setStyleSheet('''
-        QLabel{
-        background-color:rgb(23,23,23);
-        }
-        ''')
+        self.ButtonMenu = QPushButton("Back", self.ControlWidget, clicked = lambda: MainWindow.gotoPreviousLayout())
+        self.ButtonMenu.setGeometry(10,5,200,45)
 
-        self.ButtonMenu = QPushButton("Back", self.GUI, clicked = lambda: MainWindow.gotoPreviousLayout())
-        self.ButtonMenu.setGeometry(15,970,200,45)
-
-        self.LabelStatus = QLabel(self.GUI)
-        self.LabelStatus.setGeometry(595,970,400,45)
+        self.LabelStatus = QLabel(self.ControlWidget, objectName = "SubTitle")
+        self.LabelStatus.setGeometry(590,5,400,45)
         self.LabelStatus.setAlignment(QtCore.Qt.AlignCenter)
-        self.LabelStatus.setStyleSheet('''
-        QLabel{
-        background-color:rgb(23,23,23);
-        color:white;
-        font-size: 16pt;
-        font-family: Segoe UI;
-        }
-        ''')
 
         self.Refresh()
 
@@ -356,6 +243,14 @@ class UiLayoutSaveMenu:
 
         Name = pathlib.Path(FilePath).name[:-4]
         self.LabelStatus.setText(f'''Successfully  removed {Name}''')
+
+    def ResizeEvent(self):
+        Width = Globals.Layouts["MainF"].width()
+        Height = Globals.Layouts["MainF"].height()
+        Diff = 1024 - Height
+
+        self.ScrollSaves.setGeometry(237,55,1125,905-Diff)
+        self.ControlWidget.setGeometry(5,964-Diff,1592,55)
 
 
 def Initialize(self, Reference):

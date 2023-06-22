@@ -158,38 +158,29 @@ class UiLayoutImportMenu:
         self.GUI = QWidget(MainWindow)
 
 
-        self.labelBack = QLabel(self.GUI)
-        self.labelBack.setGeometry(237,5,1125,950)
-        self.labelBack.setProperty("Color","Dark")
+        # self.labelBack = QLabel(self.GUI)
+        # self.labelBack.setGeometry(237,5,1125,950)
+        # self.labelBack.setProperty("Color","Dark")
 
         self.scrollNPC = QScrollArea(self.GUI)
         self.scrollNPC.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scrollNPC.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scrollNPC.setGeometry(237,5,1125,950)
+        self.scrollNPC.setProperty("Color","Dark")
 
 
-        self.LabelControl = QLabel(self.GUI)
-        self.LabelControl.setGeometry(5,964,1592,55)
-        self.LabelControl.setStyleSheet('''
-        QLabel{
-        background-color:rgb(23,23,23);
-        }
-        ''')
+        self.ControlWidget = QWidget(self.GUI)
+        self.ControlWidget.setGeometry(5,964,1592,55)
+        self.ControlWidget.setProperty("Color","Dark")
 
-        self.ButtonMenu = QPushButton("Back", self.GUI, clicked = lambda: MainWindow.gotoPreviousLayout())
-        self.ButtonMenu.setGeometry(15,970,200,45)
 
-        self.LabelStatus = QLabel(self.GUI)
-        self.LabelStatus.setGeometry(595,970,400,45)
+        self.ButtonMenu = QPushButton("Back", self.ControlWidget, clicked = lambda: MainWindow.gotoPreviousLayout())
+        self.ButtonMenu.setGeometry(10,6,200,45)
+
+        self.LabelStatus = QLabel(self.ControlWidget, objectName = "SubTitle")
+        self.LabelStatus.setGeometry(590,6,400,45)
         self.LabelStatus.setAlignment(QtCore.Qt.AlignCenter)
-        self.LabelStatus.setStyleSheet('''
-        QLabel{
-        background-color:rgb(23,23,23);
-        color:white;
-        font-size: 16pt;
-        font-family: Segoe UI;
-        }
-        ''')
+        self.LabelStatus.setProperty("Color","Dark")
 
         self.myformNPC = QGridLayout()
         self.myformNPC.WidgetsList = []
@@ -260,6 +251,13 @@ class UiLayoutImportMenu:
         # self.scrollNPC.setMaximumHeight(950)
         # self.myformNPC.setContentsMargins(10, 0, 5, 5)
 
+    def ResizeEvent(self):
+        Width = Globals.Layouts["MainF"].width()
+        Height = Globals.Layouts["MainF"].height()
+        Diff = 1024 - Height
+
+        self.scrollNPC.setGeometry(237,5,1125,950-Diff)
+        self.ControlWidget.setGeometry(5,964-Diff,1592,55)
 
 def Initialize(self, Reference):
     if "ImportUI" not in Globals.Layouts:

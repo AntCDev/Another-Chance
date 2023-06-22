@@ -69,7 +69,6 @@ class UiLayoutSoLMenu(QWidget):
         self.ScrollNPC.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.ScrollNPC.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.ScrollNPC.setGeometry(1245,5,355,1015)
-
         self.GroupBoxNPC = QGroupBox()
         self.GroupBoxNPC.setLayout(self.FormNPC)
         self.GroupBoxNPC.setMinimumWidth(350)
@@ -87,10 +86,10 @@ class UiLayoutSoLMenu(QWidget):
         self.GroupBoxPC = QGroupBox()
         self.GroupBoxPC.setLayout(self.FormPC)
         self.ScrollPC.setWidget(self.GroupBoxPC)
-        self.ScrollPC.setMinimumWidth(355)
-        self.ScrollPC.setMaximumWidth(355)
-        self.ScrollPC.setMinimumHeight(1015)
-        self.ScrollPC.setMaximumHeight(1015)
+        # self.ScrollPC.setMinimumWidth(355)
+        # self.ScrollPC.setMaximumWidth(355)
+        # self.ScrollPC.setMinimumHeight(1015)
+        # self.ScrollPC.setMaximumHeight(1015)
         self.GroupBoxPC.setMinimumWidth(355)
         self.GroupBoxPC.setMaximumWidth(355)
         self.FormPC.setContentsMargins(3, 5, 3, 5)
@@ -102,6 +101,7 @@ class UiLayoutSoLMenu(QWidget):
 
 
         self.ScrollSoLButtons = QScrollArea(self.GUI)
+        # self.ScrollSoLButtons.setProperty("Color","Dark")
         self.ScrollSoLButtons.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.ScrollSoLButtons.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.ScrollSoLButtons.setGeometry(370,630,870,245)
@@ -146,13 +146,21 @@ class UiLayoutSoLMenu(QWidget):
     def Refresh(self):
         Globals.References["SoLFunctions"].Refresh(self)
 
+    def ResizeEvent(self):
+        Width = Globals.Layouts["MainF"].width()
+        Height = Globals.Layouts["MainF"].height()
+        Diff = 1024 - Height
 
-class UiLayoutBattleWindow(QWidget):
-    def Ui(self, MainWindow):
+        self.scrollMain.setGeometry(365,40,875,580-Diff)
+        self.ScrollPC.setGeometry(5,5,355,1015-Diff)
+        self.ScrollNPC.setGeometry(1245,5,355,1015-Diff)
 
-        self.GUI = QWidget(MainWindow)
-        self.backButton = QPushButton("Back", self.GUI)
-        MainWindow.setCentralWidget(self.GUI)
+        self.ScrollSoLButtons.setGeometry(370,630-Diff,870,245)
+
+        self.labelButtons.setGeometry(365,625-Diff,875,395)
+
+        self.ScrollSoLEventButtons.setGeometry(370,885-Diff,870,80)
+        self.ScrollControlCommands.setGeometry(370,970-Diff,870,50)
 
 def Initialize(self, Reference):
     if "SoLUI" not in Globals.Layouts:

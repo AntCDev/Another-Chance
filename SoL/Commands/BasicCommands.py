@@ -232,6 +232,7 @@ def GetCommandButton(self, CommandID, PCID, NPCID):
             elif CommandID == "BreastCaress0": Text = "Breasts Caress"
             elif CommandID == "AnalCaress0": Text = "Anal Caress"
             elif CommandID == "PussyCaress0": Text = "Pussy Caress"
+            elif CommandID == "PenisCaress0": Text = "Penis Caress"
             elif CommandID == "ServeAlcohol0": Text = "Serve Alcohol"
             elif CommandID == "PushDown0": Text = "Push Down"
             elif CommandID == "GetFollow0": Text = "Ask to Follow"

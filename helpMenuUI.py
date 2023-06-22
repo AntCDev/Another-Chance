@@ -15,14 +15,12 @@ class UiLayoutHelpMenu:
         MainWindow = Globals.Layouts["MainF"]
         self.GUI = QWidget(MainWindow)
 
-        self.LabelBack = QLabel(self.GUI)
-        self.LabelBack.setGeometry(288,5,1024,954)
-        self.LabelBack.setProperty("Color", "Dark")
 
         self.MainScroll = QScrollArea(self.GUI)
-        self.MainScroll.setGeometry(293,5,1014,954)
+        self.MainScroll.setGeometry(288,5,1024,954)
         self.MainScroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.MainScroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.MainScroll.setProperty("Color", "Dark")
 
         self.MainForm = QVBoxLayout()
         self.MainBox = QGroupBox()
@@ -268,15 +266,24 @@ class UiLayoutHelpMenu:
         ###
 
 
-        self.LabelControl = QLabel(self.GUI)
-        self.LabelControl.setGeometry(5,964,1592,55)
-        self.LabelControl.setProperty("Color","Dark")
+        self.ControlWidget = QLabel(self.GUI)
+        self.ControlWidget.setGeometry(5,964,1592,55)
+        self.ControlWidget.setProperty("Color","Dark")
 
-        self.ButtonMenu = QPushButton("Back", self.GUI, clicked = lambda: MainWindow.gotoPreviousLayout())
-        self.ButtonMenu.setGeometry(15,970,200,45)
+        self.ButtonMenu = QPushButton("Back", self.ControlWidget, clicked = lambda: MainWindow.gotoPreviousLayout())
+        self.ButtonMenu.setGeometry(10,6,200,45)
 
     def Refresh(self):
         ""
+
+    def ResizeEvent(self):
+        Width = Globals.Layouts["MainF"].width()
+        Height = Globals.Layouts["MainF"].height()
+        Diff = 1024 - Height
+
+        self.MainScroll.setGeometry(293,5,1014,954-Diff)
+        self.ControlWidget.setGeometry(5,964-Diff,1592,55)
+
 
 def Initialize(self, Reference):
     if "HelpUI" not in Globals.Layouts:
