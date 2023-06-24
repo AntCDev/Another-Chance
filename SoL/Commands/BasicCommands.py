@@ -340,8 +340,8 @@ def TriggerCommand(self, CommandID, Target, Actor, Modification):
         DateData = Globals.SoLEnviorementData["DateData"]
         TargetData = Globals.SoLNPCData[Target]
         ActorData = Globals.SoLNPCData[Actor]
-        TName = Globals.SoLNPCData[Target]["Name"].capitalize()
-        AName = Globals.SoLNPCData[Actor]["Name"].capitalize()
+        TName = Globals.SoLNPCData[Target]["Name"]
+        AName = Globals.SoLNPCData[Actor]["Name"]
         TPSub, TPObj, TPPos, TPIPos = Globals.SoLNPCData[Target]["BodyData"]["Pronouns"]["PSub"].lower(), Globals.SoLNPCData[Target]["BodyData"]["Pronouns"]["PObj"].lower(), Globals.SoLNPCData[Target]["BodyData"]["Pronouns"]["PPos"].lower(), Globals.SoLNPCData[Target]["BodyData"]["Pronouns"]["PIPos"].lower()
         APSub, APObj, APPos, APIPos = Globals.SoLNPCData[Actor]["BodyData"]["Pronouns"]["PSub"].lower(), Globals.SoLNPCData[Actor]["BodyData"]["Pronouns"]["PObj"].lower(), Globals.SoLNPCData[Actor]["BodyData"]["Pronouns"]["PPos"].lower(), Globals.SoLNPCData[Actor]["BodyData"]["Pronouns"]["PIPos"].lower()
         # TPSub = She He

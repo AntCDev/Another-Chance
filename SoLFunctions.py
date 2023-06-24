@@ -14,6 +14,109 @@ import Globals
 Log = Globals.Layouts["MainF"].Log
 import copy
 import pathlib
+class ListWidget:
+    def __init__(self, Width, Height):
+        self.Width = Width
+        self.Height = Height
+
+    def GetWidget(self):
+        Width = self.Width
+        Height = self.Height
+
+        self.Widget = QWidget()
+
+        self.Widget.addWidget = self.addWidget
+        self.Widget.removeWidget = self.removeWidget
+        self.Widget.AdjustSize = self.AdjustSize
+
+        self.MainScroll = QScrollArea(self.Widget)
+        self.MainScroll.setMinimumSize(Width,Height)
+        self.MainScroll.setMaximumSize(Width,Height)
+        self.MainScroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.MainScroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.MainScroll.setProperty("Color", "Dark")
+
+        self.MainForm = QGridLayout()
+        self.MainBox = QGroupBox()
+        self.MainBox.setLayout(self.MainForm)
+        self.MainBox.setMinimumWidth(Width)
+        self.MainScroll.setWidget(self.MainBox)
+        self.MainForm.setContentsMargins(0, 0, 0, 0)
+        self.MainForm.WidgetList = []
+        self.Widget.WidgetList = self.MainForm.WidgetList
+
+        self.MainBox.setMaximumHeight(5)
+        self.MainBox.setMinimumHeight(5)
+
+
+        return self.Widget
+
+    def addWidget(self, Widget):
+        try:
+            self.MainForm.addWidget(Widget)
+            self.MainForm.WidgetList.append(Widget)
+            Widget.show()
+
+            self.AdjustSize()
+        except Exception as e:
+            print("AA", e)
+
+    def removeWidget(self, Widget):
+        try:
+            self.MainForm.removeWidget(Widget)
+            self.MainForm.WidgetList.remove(Widget)
+            Widget.hide()
+
+            self.AdjustSize()
+        except Exception as e:
+            print("EEE", e)
+
+    def AdjustSize(self):
+        Column = -1
+        Row = 0
+
+        MaxWidth = self.Width
+
+        TotalWidth = 0
+        TotalHeight = 0
+
+        RowHeight = 0
+        ColumnWidth = 0
+
+        LeftOver = 0
+
+        for Object in self.MainForm.WidgetList:
+            ObjectWidth = Object.width()
+            ObjectHeight = Object.height()
+
+            if RowHeight < ObjectHeight + 5:
+                RowHeight = ObjectHeight + 5
+
+            if ColumnWidth != 0 and ColumnWidth + ObjectWidth > MaxWidth:
+                LeftOver = 0
+
+                Row += 1
+                Column = 0
+
+                TotalHeight += RowHeight
+
+                RowHeight = ObjectHeight + 5
+                ColumnWidth = ObjectWidth + 5
+            else:
+                LeftOver = 1
+                Column += 1
+
+                ColumnWidth += ObjectWidth + 5
+
+            self.MainForm.addWidget(Object, Row, Column)
+
+        else:
+            TotalHeight += RowHeight
+
+
+        self.MainBox.setMinimumHeight( TotalHeight )
+        self.MainBox.setMaximumHeight( TotalHeight )
+
 
 
 class GenericNPCObject:
@@ -1139,7 +1242,7 @@ def Move(self, Location, NPCID):
                 Globals.SoLFlavorDict["NPCActionsFlavor"].append(f'''{Globals.SoLNPCData[NPCID]["Name"]} arrives from {PreLocation}''')
                 # Globals.SoLFlavorDict["NPCActionsFlavor"].append(f'''{Globals.SoLNPCData[NPCID]["Name"]} arrives from {Globals.SoLEnviorementData["Locations"][PreLocation]["Name"]}''')
             elif PCID in Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"]:
-                Globals.SoLFlavorDict["NPCActionsFlavor"].append(f'''{Globals.SoLNPCData[NPCID]["Name"]} leaves to {Location}''')
+                Globals.SoLFlavorDict["NPCActionsFlavor"].append(f'''{Globals.SoLNPCData[NPCID]["Name"]} leaves to {Globals.SoLEnviorementData["Locations"][Location]["Name"]}''')
                 # Globals.SoLFlavorDict["NPCActionsFlavor"].append(f'''{Globals.SoLNPCData[NPCID]["Name"]} leaves to {Globals.SoLEnviorementData["Locations"][Location]["Name"]}''')
             # else:
             #     print(PreLocation, Globals.SoLEnviorementData["Locations"][PreLocation]["inHere"])
@@ -2094,6 +2197,300 @@ def GetGValueStaticWidget(GemsID, Value):
     ValueLabel.setMinimumHeight(35)
 
     return ValueLabel
+
+def GetClothesWidget():
+    ClothesWidget = QWidget()
+    ClothesWidget.setProperty("Color","Dark")
+    ClothesWidget.setMinimumSize(600,300)
+    ClothesWidget.setMaximumSize(600,300)
+    ClothesWidget.SelectedWidgets = []
+
+    ListPicker = ListWidget(141,256).GetWidget()
+    ListPicker.setParent(ClothesWidget)
+    ListPicker.setGeometry(10,10,141,256)
+
+    ListPicked = ListWidget(141,256).GetWidget()
+    ListPicked.setParent(ClothesWidget)
+    ListPicked.setGeometry(160,10,141,256)
+
+
+    def RF():
+        for Widget in ClothesWidget.SelectedWidgets.copy():
+            if Widget in ListPicked.WidgetList:
+                ListPicked.removeWidget(Widget)
+                ListPicker.addWidget(Widget)
+                LC(Widget)
+        RefreshClothes()
+    ButtonLeft = QPushButton(ClothesWidget, clicked = lambda:RF())
+    ButtonLeft.setGeometry(95,270,25,25)
+    ButtonLeft.setText('''<-''')
+
+    def AF():
+        for Widget in ClothesWidget.SelectedWidgets.copy():
+            if Widget in ListPicker.WidgetList:
+                ListPicker.removeWidget(Widget)
+                ListPicked.addWidget(Widget)
+                LC(Widget)
+        RefreshClothes()
+    ButtonRight = QPushButton(ClothesWidget, clicked = lambda:AF())
+    ButtonRight.setGeometry(125,270,25,25)
+    ButtonRight.setText('''->''')
+
+
+    def DF():
+        for Widget in ClothesWidget.SelectedWidgets.copy():
+            if Widget in ListPicked.WidgetList:
+                Index = ListPicked.WidgetList.index(Widget) + 1
+                if Index < 0: Index = 0
+                ListPicked.WidgetList.remove(Widget)
+                ListPicked.WidgetList.insert(Index, Widget)
+        ListPicked.AdjustSize()
+        RefreshClothes()
+    ButtonDown = QPushButton(ClothesWidget, clicked = lambda:DF())
+    ButtonDown.setGeometry(245,270,25,25)
+    ButtonDown.setText('''↓''')
+
+    def UF():
+        for Widget in ClothesWidget.SelectedWidgets.copy():
+            if Widget in ListPicked.WidgetList:
+                Index = ListPicked.WidgetList.index(Widget) - 1
+                if Index < 0: Index = 0
+                ListPicked.WidgetList.remove(Widget)
+                ListPicked.WidgetList.insert(Index, Widget)
+        ListPicked.AdjustSize()
+        RefreshClothes()
+    ButtonUp = QPushButton(ClothesWidget, clicked = lambda:UF())
+    ButtonUp.setGeometry(275,270,25,25)
+    ButtonUp.setText('''↑''')
+
+    def RefreshClothes():
+        for ClothID in HeadForm.WidgetsDict:
+            HeadForm.removeWidget(HeadForm.WidgetsDict[ClothID])
+        HeadForm.WidgetsDict = {}
+
+        for ClothID in UpperForm.WidgetsDict:
+            UpperForm.removeWidget(UpperForm.WidgetsDict[ClothID])
+        UpperForm.WidgetsDict = {}
+
+        for ClothID in LowerForm.WidgetsDict:
+            LowerForm.removeWidget(LowerForm.WidgetsDict[ClothID])
+        LowerForm.WidgetsDict = {}
+
+        for ClothID in LegsForm.WidgetsDict:
+            LegsForm.removeWidget(LegsForm.WidgetsDict[ClothID])
+        LegsForm.WidgetsDict = {}
+
+
+        for Widget in ListPicked.WidgetList:
+            ClothID = Widget.ClothID
+            Positions = Globals.SolClothes[ClothID]["Reference"].GetClothesPosition(ClothID)
+
+            # Label = QLabel()
+            # Label.setMinimumSize(64,64)
+            # Label.setMaximumSize(64,64)
+            # Label.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "Clothes" / f"{ClothID}.png" ) ))
+            # Label.setScaledContents(True)
+
+            if "Head" in Positions:
+                HeadLabel = QLabel()
+                HeadLabel.setMinimumSize(64,64)
+                HeadLabel.setMaximumSize(64,64)
+                HeadLabel.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "Clothes" / f"{ClothID}.png" ) ))
+                HeadLabel.setScaledContents(True)
+
+                HeadForm.addWidget(HeadLabel)
+                HeadForm.WidgetsDict[ClothID] = HeadLabel
+
+            if "Upper" in Positions:
+                UpperLabel = QLabel()
+                UpperLabel.setMinimumSize(64,64)
+                UpperLabel.setMaximumSize(64,64)
+                UpperLabel.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "Clothes" / f"{ClothID}.png" ) ))
+                UpperLabel.setScaledContents(True)
+
+                UpperForm.addWidget(UpperLabel)
+                UpperForm.WidgetsDict[ClothID] = UpperLabel
+
+            if "Lower" in Positions:
+                LowerLabel = QLabel()
+                LowerLabel.setMinimumSize(64,64)
+                LowerLabel.setMaximumSize(64,64)
+                LowerLabel.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "Clothes" / f"{ClothID}.png" ) ))
+                LowerLabel.setScaledContents(True)
+
+                LowerForm.addWidget(LowerLabel)
+                LowerForm.WidgetsDict[ClothID] = LowerLabel
+
+            if "Legs" in Positions:
+                LegsLabel = QLabel()
+                LegsLabel.setMinimumSize(64,64)
+                LegsLabel.setMaximumSize(64,64)
+                LegsLabel.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "Clothes" / f"{ClothID}.png" ) ))
+                LegsLabel.setScaledContents(True)
+
+                LegsForm.addWidget(LegsLabel)
+                LegsForm.WidgetsDict[ClothID] = LegsLabel
+
+
+
+        HeadHeight = 68
+        for ClothID in HeadForm.WidgetsDict:
+            HeadHeight += HeadForm.WidgetsDict[ClothID].height() + 5
+        HeadBox.setMinimumHeight(HeadHeight)
+        HeadBox.setMaximumHeight(HeadHeight)
+
+        UpperHeight = 68
+        for ClothID in UpperForm.WidgetsDict:
+            UpperHeight += UpperForm.WidgetsDict[ClothID].height() + 5
+        UpperBox.setMinimumHeight(UpperHeight)
+        UpperBox.setMaximumHeight(UpperHeight)
+
+        LowerHeight = 68
+        for ClothID in LowerForm.WidgetsDict:
+            LowerHeight += LowerForm.WidgetsDict[ClothID].height() + 5
+        LowerBox.setMinimumHeight(LowerHeight)
+        LowerBox.setMaximumHeight(LowerHeight)
+
+        LegsHeight = 68
+        for ClothID in LegsForm.WidgetsDict:
+            LegsHeight += LegsForm.WidgetsDict[ClothID].height() + 5
+        LegsBox.setMinimumHeight(LegsHeight)
+        LegsBox.setMaximumHeight(LegsHeight)
+
+    ####
+    HeadScroll = QScrollArea(ClothesWidget)
+    HeadScroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+    HeadScroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+    HeadScroll.setProperty("Color", "Dark")
+    HeadScroll.setGeometry(305,10,68,285)
+
+    HeadForm = QVBoxLayout()
+    HeadBox = QGroupBox()
+    HeadBox.setLayout(HeadForm)
+    HeadBox.setMinimumWidth(68)
+    HeadScroll.setWidget(HeadBox)
+    HeadForm.setContentsMargins(0, 0, 0, 0)
+    HeadForm.WidgetsDict = {}
+
+    HeadLabel = QLabel()
+    HeadLabel.setMinimumSize(64,64)
+    HeadLabel.setMaximumSize(64,64)
+    HeadLabel.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Head.png" ) ))
+    HeadLabel.setScaledContents(True)
+    HeadForm.addWidget(HeadLabel)
+    HeadBox.setMinimumHeight(66)
+    HeadBox.setMaximumHeight(66)
+    ####
+
+    ####
+    UpperScroll = QScrollArea(ClothesWidget)
+    UpperScroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+    UpperScroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+    UpperScroll.setProperty("Color", "Dark")
+    UpperScroll.setGeometry(378,10,68,285)
+
+    UpperForm = QVBoxLayout()
+    UpperBox = QGroupBox()
+    UpperBox.setLayout(UpperForm)
+    UpperBox.setMinimumWidth(68)
+    UpperScroll.setWidget(UpperBox)
+    UpperForm.setContentsMargins(0, 0, 0, 0)
+    UpperForm.WidgetsDict = {}
+
+    UpperLabel = QLabel()
+    UpperLabel.setMinimumSize(64,64)
+    UpperLabel.setMaximumSize(64,64)
+    UpperLabel.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Upper.png" ) ))
+    UpperLabel.setScaledContents(True)
+    UpperForm.addWidget(UpperLabel)
+    UpperBox.setMinimumHeight(66)
+    UpperBox.setMaximumHeight(66)
+    ####
+
+
+    ####
+    LowerScroll = QScrollArea(ClothesWidget)
+    LowerScroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+    LowerScroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+    LowerScroll.setProperty("Color", "Dark")
+    LowerScroll.setGeometry(451,10,68,285)
+
+    LowerForm = QVBoxLayout()
+    LowerBox = QGroupBox()
+    LowerBox.setLayout(LowerForm)
+    LowerBox.setMinimumWidth(68)
+    LowerScroll.setWidget(LowerBox)
+    LowerForm.setContentsMargins(0, 0, 0, 0)
+    LowerForm.WidgetsDict = {}
+
+    LowerLabel = QLabel()
+    LowerLabel.setMinimumSize(64,64)
+    LowerLabel.setMaximumSize(64,64)
+    LowerLabel.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Lower.png" ) ))
+    LowerLabel.setScaledContents(True)
+    LowerForm.addWidget(LowerLabel)
+    LowerBox.setMinimumHeight(66)
+    LowerBox.setMaximumHeight(66)
+    ####
+
+    ####
+    LegsScroll = QScrollArea(ClothesWidget)
+    LegsScroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+    LegsScroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+    LegsScroll.setProperty("Color", "Dark")
+    LegsScroll.setGeometry(524,10,68,285)
+
+    LegsForm = QVBoxLayout()
+    LegsBox = QGroupBox()
+    LegsBox.setLayout(LegsForm)
+    LegsBox.setMinimumWidth(68)
+    LegsScroll.setWidget(LegsBox)
+    LegsForm.setContentsMargins(0, 0, 0, 0)
+    LegsForm.WidgetsDict = {}
+
+    LegsLabel = QLabel()
+    LegsLabel.setMinimumSize(64,64)
+    LegsLabel.setMaximumSize(64,64)
+    LegsLabel.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "SoLResources" / "Legs.png" ) ))
+    LegsLabel.setScaledContents(True)
+    LegsForm.addWidget(LegsLabel)
+    LegsBox.setMinimumHeight(66)
+    LegsBox.setMaximumHeight(66)
+    ####
+
+
+    # Head
+    def LC(Object):
+        if Object in ClothesWidget.SelectedWidgets:
+            ClothesWidget.SelectedWidgets.remove(Object)
+            Object.setProperty("Border","UnSelected")
+            Object.style().polish(Object)
+        else:
+            ClothesWidget.SelectedWidgets.append(Object)
+            Object.setProperty("Border","Selected")
+            Object.style().polish(Object)
+    for ClothID in Globals.SolClothes:
+        try:
+            if pathlib.Path.is_file( pathlib.Path() / "Resources" / "Clothes" / f"{ClothID}.png" ):
+                Label = QLabel()
+                Label.setMinimumSize(64,64)
+                Label.setMaximumSize(64,64)
+                Label.setPixmap(QPixmap( os.path.abspath( pathlib.Path() / "Resources" / "Clothes" / f"{ClothID}.png" ) ))
+                Label.setScaledContents(True)
+                AddClickFunction(Label, LC, Label)
+                Label.ClothID = ClothID
+                ListPicker.addWidget(Label)
+        except:
+            ""
+
+
+
+    return ClothesWidget
+
+def AddClickFunction(Object, Function, *args):
+    Object.mouseReleaseEvent = lambda event: Function(*args)
+
+
 
 def Initialize(self, Reference):
     Globals.References["SoLFunctions"] = Reference

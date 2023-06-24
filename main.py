@@ -160,6 +160,9 @@ class MainWindow(QMainWindow):
                 QLabel[Border = "None"]{
                     border:none;
                     }
+                QLabel[Border = "Selected"]{
+                    border: 1px solid yellow;
+                    }
 
             QLineEdit{
                 font-size: 14pt;
