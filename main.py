@@ -271,136 +271,165 @@ class MainWindow(QMainWindow):
                     Log(4, "ERROR INITIALIZE FILES", e, File)
 
         # IMPORTS THE MODS
-        ModsPath = os.path.abspath( pathlib.Path() / "SoL" / "Mods" )
-        # ModsPath = CurrentPath + "\\SoL\\Mods"
-        if ModsPath not in sys.path:
-            sys.path.insert(0, ModsPath)
-        # FileList = os.listdir("SoL/Mods")
-        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Mods" ))
-        for File in FileList:
-            try:
-                if File.endswith(".py") and File != "BasicMod.py":
-                    Reference = __import__(File[:-3])
-                    Globals.References[File[:-3]] = Reference
-                    Reference.Initialize(self, Reference)
-            except Exception as e:
-                Log(3, "ERROR INITIALIZE Mods", e, File)
-
-        # IMPORTS THE LOCATIONS
-        LocationsPath = os.path.abspath( pathlib.Path() / "SoL" / "Locations" )
-        # LocationsPath = CurrentPath + "\\SoL\\Locations"
-        if LocationsPath not in sys.path:
-            sys.path.insert(0, LocationsPath)
-        # FileList = os.listdir("SoL/Locations")
-        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Locations" ))
-        for File in FileList:
-            try:
-                if File.endswith(".py"):
-                    Reference = __import__(File[:-3])
-                    Globals.References[File[:-3]] = Reference
-                    Reference.Initialize(self, Reference)
-            except Exception as e:
-                Log(2, "ERROR INITIALIZE Locations", e, File)
-
-
-        # IMPORTS THE COMMANDS
-        CommandsPath = os.path.abspath( pathlib.Path() / "SoL" / "Commands" )
-        # CommandsPath = CurrentPath + "\\SoL\\Commands"
-        if CommandsPath not in sys.path:
-            sys.path.insert(0, CommandsPath)
-        # FileList = os.listdir("SoL/Commands")
-        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Commands" ))
-        for File in FileList:
-            try:
-                if File.endswith(".py"):
-                    Reference = __import__(File[:-3])
-                    Globals.References[File[:-3]] = Reference
-                    Reference.Initialize(self, Reference)
-            except Exception as e:
-                Log(2, "ERROR INITIALIZE Commands", e, File)
-
-        # IMPORTS THE ABILITIES
-        AbilitiesPath = os.path.abspath( pathlib.Path() / "SoL" / "Abilities" )
-        # AbilitiesPath = CurrentPath + "\\SoL\\Abilities"
-        if AbilitiesPath not in sys.path:
-            sys.path.insert(0, AbilitiesPath)
-        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Abilities" ))
-        for File in FileList:
-            try:
-                if File.endswith(".py"):
-                    Reference = __import__(File[:-3])
-                    Globals.References[File[:-3]] = Reference
-                    Reference.Initialize(self, Reference)
-            except Exception as e:
-                Log(2, "ERROR INITIALIZE Abilities", e, File)
-
-        # IMPORTS THE TRAITS
-        TraitsPath = os.path.abspath( pathlib.Path() / "SoL" / "Traits" )
-        # TraitsPath = CurrentPath + "\\SoL\\Traits"
-        if TraitsPath not in sys.path:
-            sys.path.insert(0, TraitsPath)
-        # FileList = os.listdir("SoL/Traits")
-        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Traits" ))
-        for File in FileList:
-            try:
-                if File.endswith(".py"):
-                    Reference = __import__(File[:-3])
-                    Globals.References[File[:-3]] = Reference
-                    Reference.Initialize(self, Reference)
-            except Exception as e:
-                Log(2, "ERROR INITIALIZE Traits", e, File)
-
-        # IMPORTS THE PERSONALITIES
-        PersonalitiesPath = os.path.abspath( pathlib.Path() / "SoL" / "Personalities" )
-        # PersonalitiesPath = CurrentPath + "\\SoL\\Personalities"
-        if PersonalitiesPath not in sys.path:
-            sys.path.insert(0, PersonalitiesPath)
-        # FileList = os.listdir("SoL/Personalities")
-        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Personalities" ))
-        for File in FileList:
-            try:
-                if File.endswith(".py"):
-                    Reference = __import__(File[:-3])
-                    Globals.References[File[:-3]] = Reference
-                    Reference.Initialize(self, Reference)
-            except Exception as e:
-                Log(2, "ERROR INITIALIZE Personalities", e, File)
-
-        # IMPORTS THE CLOTHES
-        ClothesPath = os.path.abspath( pathlib.Path() / "SoL" / "Clothes" )
-        # ClothesPath = CurrentPath + "\\SoL\\Clothes"
-        if ClothesPath not in sys.path:
-            sys.path.insert(0, ClothesPath)
-        # FileList = os.listdir("SoL/Clothes")
-        FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Clothes" ))
-        for File in FileList:
-            try:
-                if File.endswith(".py"):
-                    Reference = __import__(File[:-3])
-                    Globals.References[File[:-3]] = Reference
-                    Reference.Initialize(self, Reference)
-            except Exception as e:
-                Log(2, "ERROR INITIALIZE Clothes", e, File)
-
-
-        # IMPORTS THE NPC FUNCTIONS
-        for NPCFullID in os.listdir("NPCData"):
-            # if os.path.isdir("NPCData/" + NPCFullID):
-            if pathlib.Path.is_dir( pathlib.Path() / "NPCData" / NPCFullID ):
+        try:
+            ModsPath = os.path.abspath( pathlib.Path() / "SoL" / "Mods" )
+            # ModsPath = CurrentPath + "\\SoL\\Mods"
+            if ModsPath not in sys.path:
+                sys.path.insert(0, ModsPath)
+            # FileList = os.listdir("SoL/Mods")
+            FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Mods" ))
+            for File in FileList:
                 try:
-                    # FilesList = os.listdir(f"NPCData/{NPCFullID}")
-                    FilesList = os.listdir(os.path.abspath( pathlib.Path() / "NPCData" / NPCFullID ))
-                    if f"{NPCFullID}Functions.py" in FilesList:
-                        # Path = f'''{CurrentPath}\\NPCData\\{NPCFullID}'''
-                        Path = os.path.abspath( pathlib.Path() / "NPCData" / NPCFullID )
-                        if Path not in sys.path:
-                            sys.path.insert(0, Path)
-                        File = f"{NPCFullID}Functions.py"
+                    if File.endswith(".py") and File != "BasicMod.py":
                         Reference = __import__(File[:-3])
                         Globals.References[File[:-3]] = Reference
                         Reference.Initialize(self, Reference)
                 except Exception as e:
-                    Log(2, "ERROR INITIALIZE NPCFunctions", e, File)
+                    Log(3, "ERROR INITIALIZE Mods", e, File)
+        except Exception as e:
+            Log(4, "ERROR INITIALIZE Mods", e)
+
+        # IMPORTS THE LOCATIONS
+        try:
+            LocationsPath = os.path.abspath( pathlib.Path() / "SoL" / "Locations" )
+            # LocationsPath = CurrentPath + "\\SoL\\Locations"
+            if LocationsPath not in sys.path:
+                sys.path.insert(0, LocationsPath)
+            # FileList = os.listdir("SoL/Locations")
+            FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Locations" ))
+            for File in FileList:
+                try:
+                    if File.endswith(".py"):
+                        Reference = __import__(File[:-3])
+                        Globals.References[File[:-3]] = Reference
+                        Reference.Initialize(self, Reference)
+                except Exception as e:
+                    Log(2, "ERROR INITIALIZE Locations", e, File)
+        except Exception as e:
+            Log(4, "ERROR INITIALIZE Locations", e)
+
+
+
+        # IMPORTS THE COMMANDS
+        try:
+            CommandsPath = os.path.abspath( pathlib.Path() / "SoL" / "Commands" )
+            # CommandsPath = CurrentPath + "\\SoL\\Commands"
+            if CommandsPath not in sys.path:
+                sys.path.insert(0, CommandsPath)
+            # FileList = os.listdir("SoL/Commands")
+            FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Commands" ))
+            for File in FileList:
+                try:
+                    if File.endswith(".py"):
+                        Reference = __import__(File[:-3])
+                        Globals.References[File[:-3]] = Reference
+                        Reference.Initialize(self, Reference)
+                except Exception as e:
+                    Log(2, "ERROR INITIALIZE Commands", e, File)
+        except Exception as e:
+            Log(4, "ERROR INITIALIZE Commands", e)
+
+
+        # IMPORTS THE ABILITIES
+        try:
+            AbilitiesPath = os.path.abspath( pathlib.Path() / "SoL" / "Abilities" )
+            # AbilitiesPath = CurrentPath + "\\SoL\\Abilities"
+            if AbilitiesPath not in sys.path:
+                sys.path.insert(0, AbilitiesPath)
+            FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Abilities" ))
+            for File in FileList:
+                try:
+                    if File.endswith(".py"):
+                        Reference = __import__(File[:-3])
+                        Globals.References[File[:-3]] = Reference
+                        Reference.Initialize(self, Reference)
+                except Exception as e:
+                    Log(2, "ERROR INITIALIZE Abilities", e, File)
+        except Exception as e:
+            Log(4, "ERROR INITIALIZE Abilities", e)
+
+
+        # IMPORTS THE TRAITS
+        try:
+            TraitsPath = os.path.abspath( pathlib.Path() / "SoL" / "Traits" )
+            # TraitsPath = CurrentPath + "\\SoL\\Traits"
+            if TraitsPath not in sys.path:
+                sys.path.insert(0, TraitsPath)
+            # FileList = os.listdir("SoL/Traits")
+            FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Traits" ))
+            for File in FileList:
+                try:
+                    if File.endswith(".py"):
+                        Reference = __import__(File[:-3])
+                        Globals.References[File[:-3]] = Reference
+                        Reference.Initialize(self, Reference)
+                except Exception as e:
+                    Log(2, "ERROR INITIALIZE Traits", e, File)
+        except Exception as e:
+            Log(4, "ERROR INITIALIZE Traits", e)
+
+        # IMPORTS THE PERSONALITIES
+        try:
+            PersonalitiesPath = os.path.abspath( pathlib.Path() / "SoL" / "Personalities" )
+            # PersonalitiesPath = CurrentPath + "\\SoL\\Personalities"
+            if PersonalitiesPath not in sys.path:
+                sys.path.insert(0, PersonalitiesPath)
+            # FileList = os.listdir("SoL/Personalities")
+            FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Personalities" ))
+            for File in FileList:
+                try:
+                    if File.endswith(".py"):
+                        Reference = __import__(File[:-3])
+                        Globals.References[File[:-3]] = Reference
+                        Reference.Initialize(self, Reference)
+                except Exception as e:
+                    Log(2, "ERROR INITIALIZE Personalities", e, File)
+        except Exception as e:
+            Log(4, "ERROR INITIALIZE Personalities", e)
+
+
+        # IMPORTS THE CLOTHES
+        try:
+            ClothesPath = os.path.abspath( pathlib.Path() / "SoL" / "Clothes" )
+            # ClothesPath = CurrentPath + "\\SoL\\Clothes"
+            if ClothesPath not in sys.path:
+                sys.path.insert(0, ClothesPath)
+            # FileList = os.listdir("SoL/Clothes")
+            FileList = os.listdir(os.path.abspath( pathlib.Path() / "SoL" / "Clothes" ))
+            for File in FileList:
+                try:
+                    if File.endswith(".py"):
+                        Reference = __import__(File[:-3])
+                        Globals.References[File[:-3]] = Reference
+                        Reference.Initialize(self, Reference)
+                except Exception as e:
+                    Log(2, "ERROR INITIALIZE Clothes", e, File)
+        except Exception as e:
+            Log(4, "ERROR INITIALIZE Clothes", e)
+
+
+        # IMPORTS THE NPC FUNCTIONS
+        try:
+            for NPCFullID in os.listdir("NPCData"):
+                # if os.path.isdir("NPCData/" + NPCFullID):
+                if pathlib.Path.is_dir( pathlib.Path() / "NPCData" / NPCFullID ):
+                    try:
+                        # FilesList = os.listdir(f"NPCData/{NPCFullID}")
+                        FilesList = os.listdir(os.path.abspath( pathlib.Path() / "NPCData" / NPCFullID ))
+                        if f"{NPCFullID}Functions.py" in FilesList:
+                            # Path = f'''{CurrentPath}\\NPCData\\{NPCFullID}'''
+                            Path = os.path.abspath( pathlib.Path() / "NPCData" / NPCFullID )
+                            if Path not in sys.path:
+                                sys.path.insert(0, Path)
+                            File = f"{NPCFullID}Functions.py"
+                            Reference = __import__(File[:-3])
+                            Globals.References[File[:-3]] = Reference
+                            Reference.Initialize(self, Reference)
+                    except Exception as e:
+                        Log(2, "ERROR INITIALIZE NPCFunctions", e, File)
+        except Exception as e:
+            Log(4, "ERROR INITIALIZE NPCFunctions", e)
+
 
         if DisclaimerAgreed == 0:
             self.gotoLayout("DisclaimerUI")
