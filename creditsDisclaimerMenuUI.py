@@ -80,6 +80,7 @@ www.game-icons.net
 www.flaticon.com
 www.patreon.com
 www.discord.com
+www.github.com
         '''
         self.LabelContent.setText(Text)
 

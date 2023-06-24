@@ -686,8 +686,9 @@ def Refresh(self):
                     NPCList.append(i)
 
             for NPCID in self.FormNPC.WigetsDict:
-                if NPCID not in NPCList:
-                    self.FormNPC.WigetsDict[NPCID]["Widget"].hide()
+                self.FormNPC.WigetsDict[NPCID]["Widget"].hide()
+                if NPCID in NPCList and NPCID != PCID:
+                    self.FormNPC.WigetsDict[NPCID]["Widget"].show()
 
             if PCID in NPCList: NPCList.remove(PCID)
 
