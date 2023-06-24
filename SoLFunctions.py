@@ -593,6 +593,7 @@ def GetFlavorText(self):
     FlavorText = ""
     PCID = Globals.SoLPCData["ID"]
     PCLocation = Globals.SoLNPCData[PCID]["Actions"]["CurrentTask"]["Location"]
+    Target = Globals.SoLPCData["Targeting"]
 
 
     # SETS UP THE TEXT FOR THE LOCATION
@@ -645,7 +646,7 @@ def GetFlavorText(self):
             FlavorText += "<br/>"
 
         for NPCOther in Globals.SoLEnviorementData["Locations"][PCLocation]["inHere"]:
-            if NPCOther != PCID:
+            if NPCOther != PCID and NPCOther != Target:
                 if Globals.SoLNPCData[NPCOther]["Actions"]["CurrentTask"]["Task"][1]["LongFluff"] != "":
                     FlavorText += Globals.SoLNPCData[NPCOther]["Actions"]["CurrentTask"]["Task"][1]["LongFluff"]
                     FlavorText += "<br/>"
@@ -904,9 +905,9 @@ def Refresh(self):
             self.labelStatus.setText(f'''{Hour}            {Day} {Globals.SoLEnviorementData["DateData"]["Day"]}  {Month} {Year}''')
 
             FlavorText = GetFlavorText(self)
-            ResetFlavorText(self)
-
             self.labelMain.setText(FlavorText)
+
+            ResetFlavorText(self)
 
         except Exception as e:
             Log(3, "ERROR SOL REFRESH labelMain", e)
